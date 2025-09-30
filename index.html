@@ -48,7 +48,7 @@
   }
   header h1 { font-size: 2em; margin: 0; }
 
-  /* Hauptbereich: Infosäule + Unterpunkte hierarchisch */
+  /* Hauptbereich: Infosäule + Unterpunkte */
   .announcement-container {
     display: flex;
     flex-direction: column;
@@ -57,51 +57,48 @@
     flex: 1;
     width: 100%;
     text-align: center;
-    margin-top: 50px;
+    margin-top: 20px; /* weiter nach oben verschoben */
     animation: fadeInScale 1.5s ease forwards;
   }
 
-  /* Haupttitel */
+  /* Haupttitel mit Leerzeichen zwischen Buchstaben */
   .announcement-container h1 {
     font-size: 6vw;
     line-height: 1.2;
     color: #ffffff; 
     text-shadow: 1px 1px 8px rgba(0,0,0,0.5);
-    margin-bottom: 40px;
+    margin-bottom: 30px;
+    letter-spacing: 0.5em; /* Leerzeichen zwischen Buchstaben */
     animation: slideInDown 1.5s ease forwards;
   }
 
-  /* Unterpunkte hierarchisch */
+  /* Untertexte alle gleich groß */
   .announcement-container ul {
     list-style: none;
     padding: 0;
     margin: 0;
+    font-size: 2.2vw;
+    line-height: 2.8vw;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.05em;
+    color: rgba(255,255,255,0.95);
   }
 
   .announcement-container ul li {
-    margin: 12px 0;
     opacity: 0;
     transform: translateY(30px);
+    margin: 10px 0;
     animation: fadeInUp 1s ease forwards;
   }
-
-  .announcement-container ul li.tier1 { font-size: 2.5vw; color: #ffffff; font-weight: bold; }
-  .announcement-container ul li.tier2 { font-size: 2vw; color: rgba(255,255,255,0.9); }
-  .announcement-container ul li.tier3 { font-size: 1.7vw; color: rgba(255,255,255,0.8); }
-
   .announcement-container ul li:nth-child(1) { animation-delay: 1.2s; }
   .announcement-container ul li:nth-child(2) { animation-delay: 1.6s; }
   .announcement-container ul li:nth-child(3) { animation-delay: 2s; }
   .announcement-container ul li:nth-child(4) { animation-delay: 2.4s; }
-  .announcement-container ul li:nth-child(5) { animation-delay: 2.8s; }
-  .announcement-container ul li:nth-child(6) { animation-delay: 3.2s; }
 
   /* Hai GIF */
   .shark-gif {
     position: absolute;
-    bottom: 20px;
+    bottom: 10px; /* noch weiter nach unten verschoben */
     width: 350px;
     height: 350px;
     background: url('HCI.gif') no-repeat center;
@@ -128,18 +125,14 @@
   /* Responsive */
   @media (max-width: 1920px) {
     .announcement-container h1 { font-size: 8vw; }
-    .announcement-container ul li.tier1 { font-size: 3vw; }
-    .announcement-container ul li.tier2 { font-size: 2.5vw; }
-    .announcement-container ul li.tier3 { font-size: 2vw; }
-    .shark-gif { width: 300px; height: 300px; bottom: 15px; }
+    .announcement-container ul { font-size: 2.5vw; line-height: 3vw; }
+    .shark-gif { width: 300px; height: 300px; bottom: 5px; }
   }
 
   @media (max-width: 768px) {
     .announcement-container h1 { font-size: 12vw; }
-    .announcement-container ul li.tier1 { font-size: 5vw; }
-    .announcement-container ul li.tier2 { font-size: 4vw; }
-    .announcement-container ul li.tier3 { font-size: 3.5vw; }
-    .shark-gif { width: 180px; height: 180px; bottom: 10px; }
+    .announcement-container ul { font-size: 5vw; line-height: 6vw; }
+    .shark-gif { width: 180px; height: 180px; bottom: 5px; }
   }
 
   /* Signature */
@@ -168,12 +161,12 @@
   </header>
 
   <div class="announcement-container">
-    <h1>Infosäule</h1>
+    <h1>I N F O S Ä U L E</h1>
     <ul>
-      <li class="tier1">Eisplan 2025/26</li>
-      <li class="tier2">Organigramm</li>
-      <li class="tier2">Heimspiele & Veranstaltungen</li>
-      <li class="tier3">Medien & Fotoshop</li>
+      <li>Eisplan 2025/26</li>
+      <li>Organigramm</li>
+      <li>Heimspiele & Veranstaltungen</li>
+      <li>Medien & Fotoshop</li>
     </ul>
   </div>
 
