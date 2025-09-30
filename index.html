@@ -57,6 +57,7 @@
     background: transparent; 
     position: relative; 
     z-index: 1;
+    transition: opacity 0.5s ease;
   }
 
   .link-container { display: flex; justify-content: center; gap: 30px; margin: 30px 0 50px; font-size: 1.1em; flex-wrap: wrap; }
@@ -90,7 +91,7 @@
 </header>
 
 <div class="calendar-container">
-  <iframe src="https://calendar.google.com/calendar/embed?height=900&wkst=2&ctz=Europe%2FVienna&showTitle=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t" allowfullscreen></iframe>
+  <iframe id="displayFrame" src="https://calendar.google.com/calendar/embed?height=900&wkst=2&ctz=Europe%2FVienna&showTitle=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t" allowfullscreen></iframe>
 </div>
 
 <div class="link-container">
@@ -101,6 +102,26 @@
 </div>
 
 <div class="signature">Designed by MS</div>
+
+<script>
+const iframe = document.getElementById('displayFrame');
+
+const sources = [
+  "https://calendar.google.com/calendar/embed?height=900&wkst=2&ctz=Europe%2FVienna&showTitle=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t", // Google Kalender
+  "ORGANISATION.pdf" // PDF-Datei
+];
+
+let index = 0;
+
+setInterval(() => {
+  index = (index + 1) % sources.length;
+  iframe.style.opacity = 0;
+  setTimeout(() => {
+    iframe.src = sources[index];
+    iframe.onload = () => iframe.style.opacity = 1;
+  }, 500);
+}, 10000); // alle 10 Sekunden wechseln
+</script>
 
 </body>
 </html>
