@@ -52,6 +52,7 @@
   /* Hauptbereich: Infosäule */
   .announcement-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     flex: 1;
@@ -60,15 +61,38 @@
     animation: fadeInScale 1.5s ease forwards;
   }
 
+  /* Titel */
   .announcement-container h1 {
     font-size: 6vw;
     line-height: 1.2;
-    background: linear-gradient(90deg, #fff, rgba(255,255,255,0.6));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #ffffff; /* Weiß */
     text-shadow: 1px 1px 8px rgba(0,0,0,0.5);
+    margin-bottom: 30px;
     animation: slideInDown 1.5s ease forwards;
   }
+
+  /* Unterpunkte */
+  .announcement-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 2.2vw;
+    line-height: 2.8vw;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.9);
+  }
+
+  .announcement-container ul li {
+    opacity: 0;
+    transform: translateY(30px);
+    margin: 10px 0;
+    animation: fadeInUp 1s ease forwards;
+  }
+  .announcement-container ul li:nth-child(1) { animation-delay: 1.2s; }
+  .announcement-container ul li:nth-child(2) { animation-delay: 1.6s; }
+  .announcement-container ul li:nth-child(3) { animation-delay: 2s; }
+  .announcement-container ul li:nth-child(4) { animation-delay: 2.4s; }
 
   /* Animationen */
   @keyframes fadeInScale {
@@ -81,13 +105,20 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* Responsiv für TV/Screen */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Responsive */
   @media (max-width: 1920px) {
     .announcement-container h1 { font-size: 8vw; }
+    .announcement-container ul { font-size: 2.5vw; line-height: 3vw; }
   }
 
   @media (max-width: 768px) {
     .announcement-container h1 { font-size: 12vw; }
+    .announcement-container ul { font-size: 5vw; line-height: 6vw; }
   }
 
   /* Signature */
@@ -117,6 +148,12 @@
 
   <div class="announcement-container">
     <h1>Infosäule</h1>
+    <ul>
+      <li>Eisplan 2025/26</li>
+      <li>Organigramm & Teamstruktur</li>
+      <li>Heimspiele & Veranstaltungen</li>
+      <li>Medien & Fotoshop</li>
+    </ul>
   </div>
 
   <div class="signature">Designed by MS</div>
