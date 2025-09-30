@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<title>HC TIWAG Innsbruck Juniors - Infosäule</title>
+<title>HC TIWAG Innsbruck Juniors - Infosäule & Eisplan</title>
 <style>
   body {
     margin: 0;
@@ -17,170 +17,80 @@
     overflow: hidden;
   }
 
-  /* Logo oben */
-  .logo-container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    gap: 60px;
-    margin: 20px 0 10px;
-  }
-  .logo-container img {
-    opacity: 0;
-    transform: translateY(-20px);
-    transition: transform 1s ease, opacity 1s ease;
-    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.6));
-  }
-  .logo-container.loaded img { opacity: 1; transform: translateY(0); }
-  .logo-container img:first-child { max-height: 100px; transform: translateX(-10%) translateY(-20px); }
-  .logo-container.loaded img:first-child { transform: translateX(-10%) translateY(0); }
-  .logo-container img:last-child { max-height: 50px; transform: translateX(-20%) translateY(-25px); }
-  .logo-container.loaded img:last-child { transform: translateX(-20%) translateY(-5px); }
-
-  /* Header */
-  header {
-    text-align: center;
-    padding: 10px 0;
-    background: transparent;
-  }
-  .title-block {
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
-  }
-  header h1 {
-    font-size: 2.4em;
-    margin: 0 0 5px 0;
-  }
-
-  /* Hauptbereich: Untertitel + Liste */
-  .announcement-container {
+  /* Allgemeines Fade-Element */
+  .fade-section {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
-    flex: 1;
-    width: 100%;
     text-align: center;
-    margin-top: 10px;
-    animation: fadeInScale 1.5s ease forwards;
-  }
-
-  /* Untertitel (INFOSÄULE) */
-  .announcement-container h1 {
-    font-size: 3vw;
-    line-height: 1.2;
-    color: #ffffff; 
-    text-shadow: 1px 1px 8px rgba(0,0,0,0.6);
-    margin: 10px 0 25px;
-    letter-spacing: 0.18em;
-    font-weight: 600;
-    animation: slideInDown 1.5s ease forwards;
-  }
-
-  /* Liste */
-  .announcement-container ul {
-    list-style: none;
-    padding: 0;
-    margin: 0 auto;
-    font-size: 1.8vw;
-    line-height: 2.6vw;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: rgba(255,255,255,0.95);
-    max-width: 80%;
-  }
-
-  .announcement-container ul li {
-    opacity: 0;
-    transform: translateY(30px);
-    margin: 10px 0;
-    animation: fadeInUp 1s ease forwards;
-  }
-  .announcement-container ul li:nth-child(1) { animation-delay: 1.2s; }
-  .announcement-container ul li:nth-child(2) { animation-delay: 1.6s; }
-  .announcement-container ul li:nth-child(3) { animation-delay: 2s; }
-  .announcement-container ul li:nth-child(4) { animation-delay: 2.4s; }
-
-  /* Hai GIF */
-  .shark-gif {
-    position: absolute;
-    bottom: 20px;
-    width: 350px;
-    height: 350px;
-    background: url('HCI.gif') no-repeat center;
-    background-size: contain;
-    opacity: 1;
-  }
-
-  /* iFrame Eisplan */
-  .iframe-container {
-    display: none;
-    margin-top: 20px;
-    width: 90%;
-    height: 600px;
-    opacity: 0;
+    justify-content: flex-start;
     transition: opacity 1s ease;
   }
 
-  .iframe-container.show {
-    display: block;
-    opacity: 1;
+  .hidden {
+    opacity: 0;
+    pointer-events: none;
   }
 
-  /* Animationen */
-  @keyframes fadeInScale {
-    from { opacity: 0; transform: scale(0.8); }
-    to { opacity: 1; transform: scale(1); }
+  /* INFOSÄULE Section */
+  #infosaule h1 {
+    font-size: 6vw;
+    color: #fff;
+    text-shadow: 1px 1px 8px rgba(0,0,0,0.5);
+    margin: 50px 0 30px 0;
+    letter-spacing: 0.25em;
   }
 
-  @keyframes slideInDown {
-    from { opacity: 0; transform: translateY(-50px); }
-    to { opacity: 1; transform: translateY(0); }
+  #infosaule ul {
+    list-style: none;
+    padding: 0;
+    font-size: 2.2vw;
+    line-height: 2.8vw;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(255,255,255,0.95);
   }
 
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+  #infosaule ul li {
+    margin: 10px 0;
+  }
+
+  /* Kalender Section */
+  #calendar-section header {
+    margin-top: 20px;
+    font-size: 3em;
+    font-weight: 700;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+  }
+
+  #calendar-section iframe {
+    width: 90%;
+    max-width: 1200px;
+    height: 80vh;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    margin-top: 20px;
   }
 
   /* Responsive */
-  @media (max-width: 1920px) {
-    .announcement-container h1 { font-size: 5vw; }
-    .announcement-container ul { font-size: 2.5vw; line-height: 3vw; }
-    .shark-gif { width: 300px; height: 300px; bottom: 10px; }
-  }
-
   @media (max-width: 768px) {
-    .announcement-container h1 { font-size: 9vw; }
-    .announcement-container ul { font-size: 5vw; line-height: 6vw; }
-    .shark-gif { width: 180px; height: 180px; bottom: 5px; }
-  }
-
-  /* Signature */
-  .signature {
-    position: fixed;
-    bottom: 10px;
-    right: 15px;
-    font-size: 0.9em;
-    color: rgba(255,255,255,0.5);
-    font-weight: normal;
-    font-family: "Areno Serif", serif;
-    pointer-events: none;
+    #infosaule h1 { font-size: 12vw; }
+    #infosaule ul { font-size: 5vw; line-height: 6vw; }
+    #calendar-section header { font-size: 2em; }
+    #calendar-section iframe { height: 60vh; }
   }
 </style>
 </head>
 <body>
-  <div class="logo-container">
-    <img src="HAI.png" alt="HAI Logo">
-    <img src="TIWAG.jpg" alt="TIWAG Logo">
-  </div>
 
-  <header>
-    <div class="title-block">
-      <h1>HC TIWAG Innsbruck Juniors</h1>
-    </div>
-  </header>
-
-  <div class="announcement-container">
+  <!-- INFOSÄULE Section -->
+  <div id="infosaule" class="fade-section">
     <h1>I N F O S Ä U L E</h1>
     <ul>
       <li>Eisplan 2025/26</li>
@@ -190,31 +100,33 @@
     </ul>
   </div>
 
-  <div class="shark-gif"></div>
-
-  <div class="iframe-container">
+  <!-- Kalender Section -->
+  <div id="calendar-section" class="fade-section hidden">
+    <header>HC TIWAG Innsbruck Juniors</header>
     <iframe 
-      src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe/Vienna&showTitle=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmU5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZDU3OWRjY2M2MTNhZTI0YzZlNjY1NmE5ZGIyOWM0MDRlNDk5NjNhZjFiZDYyNjY0NGQwZGE5OTVhNTUzNmUxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzBiZDg4YjUxNmVlNGRmNGFjMmZkMWU2NGJhOWQ4MzBlMjViY2VlZjc4YjM4MmM5N2FhZWZmZWU1NmY5NjlmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YjQ5M2RhNTY5NDg5NTA2MDQ0YWE2MmVmYTA5ODIyODM0MmQ0NjRhMzQ4MzY5MGYyNTU1NTE0Yzg0Y2ZmNDI0NEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YWQ4ZjNlMmRiODQ1YjZiNmM5ZTZkYmIyZDkyNGY1NTliNjVhNjI3YTNlNWEzMmYwYzQ0YmRhZTA1NzMxNGMwOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6&color=%23c0ca33&color=%230b8043&color=%233f51b5&color=%238e24aa&color=%23616161&color=%23ad1457&color=%23e4c441" 
-      style="border:0" 
-      width="100%" 
-      height="100%" 
-      frameborder="0" 
-      scrolling="no">
+      src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe/Vienna&showTitle=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmU5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZDU3OWRjY2M2MTNhZTI0YzZlNjY1NmE5ZGIyOWM0MDRlNDk5NjNhZjFiZDYyNjY0NGQwZGE5OTVhNTUzNmUxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzBiZDg4YjUxNmVlNGRmNGFjMmZkMWU2NGJhOWQ4MzBlMjViY2VlZjc4YjM4MmM5N2FhZWZmZWU1NmY5NjlmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YjQ5M2RhNTY5NDg5NTA2MDQ0YWE2MmVmYTA5ODIyODM0MmQ0NjRhMzQ4MzY5MGYyNTU1NTE0Yzg0Y2ZmNDI0NEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YWQ4ZjNlMmRiODQ1YjZiNmM5ZTZkYmIyZDkyNGY1NTliNjVhNjI3YTNlNWEzMmYwYzQ0YmRhZTA1NzMxNGMwOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6&color=%23c0ca33&color=%230b8043&color=%233f51b5&color=%238e24aa&color=%23616161&color=%23ad1457&color=%23e4c441">
     </iframe>
   </div>
 
-  <div class="signature">Designed by MS</div>
-
 <script>
-  // Logo Animation
-  window.addEventListener('DOMContentLoaded', () => {
-    document.querySelector('.logo-container').classList.add('loaded');
-  });
-
-  // Eisplan iFrame nach 5 Sekunden einblenden
+  // Nach 5 Sekunden: fade out Infosäule, fade in Kalender
   setTimeout(() => {
-    const iframe = document.querySelector('.iframe-container');
-    iframe.classList.add('show');
+    const infos = document.getElementById('infosaule');
+    const calendar = document.getElementById('calendar-section');
+    
+    infos.style.transition = 'opacity 1s ease';
+    infos.style.opacity = 0;
+
+    setTimeout(() => {
+      infos.classList.add('hidden');
+      calendar.classList.remove('hidden');
+      calendar.style.opacity = 0;
+      calendar.style.transition = 'opacity 1s ease';
+      setTimeout(() => {
+        calendar.style.opacity = 1;
+      }, 50);
+    }, 1000);
+
   }, 5000);
 </script>
 </body>
