@@ -17,7 +17,19 @@
     overflow: hidden;
   }
 
-  /* Gemeinsame Logo-Einstellungen */
+  .page {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+  .page.active { opacity: 1; z-index: 1; }
+
+  /* Logos */
   .logo-container {
     display: flex;
     justify-content: center;
@@ -26,41 +38,30 @@
     margin: 20px 0 10px;
   }
   .logo-container img {
+    max-height: 100px;
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.6));
     opacity: 0;
     transform: translateY(-20px);
     transition: transform 1s ease, opacity 1s ease;
-    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.6));
   }
-  .logo-container.loaded img { opacity: 1; transform: translateY(0); }
-  .logo-container img:first-child { max-height: 100px; transform: translateX(-10%) translateY(-20px); }
-  .logo-container.loaded img:first-child { transform: translateX(-10%) translateY(0); }
-  .logo-container img:last-child { max-height: 50px; transform: translateX(-20%) translateY(-25px); }
-  .logo-container.loaded img:last-child { transform: translateX(-20%) translateY(-5px); }
+  .logo-container img:last-child { max-height: 50px; transform: translateY(-25px); }
 
   header {
     text-align: center;
     padding: 10px 0;
-    background: transparent;
   }
-  .title-block {
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
-  }
-  header h1 {
-    font-size: 2.4em;
-    margin: 0 0 5px 0;
-  }
+  .title-block { text-shadow: 2px 2px 8px rgba(0,0,0,0.8); }
+  header h1 { font-size: 2.4em; margin: 0 0 5px 0; }
 
-  /* Hauptbereich Infosäule */
+  /* Infosäule */
   .announcement-container {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    flex: 1;
     width: 100%;
     text-align: center;
     margin-top: 10px;
-    animation: fadeInScale 1.5s ease forwards;
   }
   .announcement-container h1 {
     font-size: 3vw;
@@ -70,7 +71,6 @@
     margin: 10px 0 25px;
     letter-spacing: 0.18em;
     font-weight: 600;
-    animation: slideInDown 1.5s ease forwards;
   }
   .announcement-container ul {
     list-style: none;
@@ -87,14 +87,9 @@
     opacity: 0;
     transform: translateY(30px);
     margin: 10px 0;
-    animation: fadeInUp 1s ease forwards;
+    transition: all 1s ease;
   }
-  .announcement-container ul li:nth-child(1) { animation-delay: 1.2s; }
-  .announcement-container ul li:nth-child(2) { animation-delay: 1.6s; }
-  .announcement-container ul li:nth-child(3) { animation-delay: 2s; }
-  .announcement-container ul li:nth-child(4) { animation-delay: 2.4s; }
 
-  /* Hai GIF */
   .shark-gif {
     position: absolute;
     bottom: 20px;
@@ -102,18 +97,9 @@
     height: 350px;
     background: url('HCI.gif') no-repeat center;
     background-size: contain;
-    opacity: 1;
   }
 
   /* Kalender-Seite */
-  .calendar-page {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    width: 100%;
-    flex: 1;
-  }
   .calendar-page iframe {
     border: 0;
     width: 90%;
@@ -123,33 +109,6 @@
     box-shadow: 0 0 20px rgba(0,0,0,0.6);
   }
 
-  /* Animationen */
-  @keyframes fadeInScale {
-    from { opacity: 0; transform: scale(0.8); }
-    to { opacity: 1; transform: scale(1); }
-  }
-  @keyframes slideInDown {
-    from { opacity: 0; transform: translateY(-50px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* Responsive */
-  @media (max-width: 1920px) {
-    .announcement-container h1 { font-size: 5vw; }
-    .announcement-container ul { font-size: 2.5vw; line-height: 3vw; }
-    .shark-gif { width: 300px; height: 300px; bottom: 10px; }
-  }
-  @media (max-width: 768px) {
-    .announcement-container h1 { font-size: 9vw; }
-    .announcement-container ul { font-size: 5vw; line-height: 6vw; }
-    .shark-gif { width: 180px; height: 180px; bottom: 5px; }
-    .calendar-page iframe { height: 400px; }
-  }
-
   .signature {
     position: fixed;
     bottom: 10px;
@@ -157,64 +116,102 @@
     font-size: 0.9em;
     color: rgba(255,255,255,0.5);
     font-weight: normal;
-    font-family: "Areno Serif", serif;
     pointer-events: none;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .announcement-container h1 { font-size: 9vw; }
+    .announcement-container ul { font-size: 5vw; line-height: 6vw; }
+    .calendar-page iframe { height: 400px; }
+    .shark-gif { width: 180px; height: 180px; bottom: 5px; }
   }
 </style>
 </head>
 <body>
-  <!-- Seite 1: Infosäule -->
-  <div class="page page-1">
-    <div class="logo-container">
-      <img src="HAI.png" alt="HAI Logo">
-      <img src="TIWAG.jpg" alt="TIWAG Logo">
-    </div>
-    <header>
-      <div class="title-block">
-        <h1>HC TIWAG Innsbruck Juniors</h1>
-      </div>
-    </header>
-    <div class="announcement-container">
-      <h1>I N F O S Ä U L E</h1>
-      <ul>
-        <li>Eisplan 2025/26</li>
-        <li>Organigramm</li>
-        <li>Heimspiele & Veranstaltungen</li>
-        <li>Medien & Fotoshop</li>
-      </ul>
-    </div>
-    <div class="shark-gif"></div>
-  </div>
 
-  <!-- Seite 2: Kalender -->
-  <div class="page calendar-page page-2">
-    <div class="logo-container loaded">
-      <img src="HAI.png" alt="HAI Logo">
-      <img src="TIWAG.jpg" alt="TIWAG Logo">
-    </div>
-    <header>
-      <div class="title-block">
-        <h1>HC TIWAG Innsbruck Juniors</h1>
-      </div>
-    </header>
-    <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showTitle=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZDU3OWRjY2M2MTNhZTI0YzZlNjY1NmE5ZGIyOWM0MDRlNDk5NjNhZjFiZDYyNjY0NGQwZGE5OTVhNTUzNmUxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzBiZDg4YjUxNmVlNGRmNGFjMmZkMWU2NGJhOWQ4MzBlMjViY2VlZjc4YjM4MmM5N2FhZWZmZWU1NmY5NjlmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YjQ5M2RhNTY5NDg5NTA2MDQ0YWE2MmVmYTA5ODIyODM0MmQ0NjRhMzQ4MzY5MGYyNTU1NTE0Yzg0Y2ZmNDI0NEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YWQ4ZjNlMmRiODQ1YjZiNmM5ZTZkYmIyZDkyNGY1NTliNjVhNjI3YTNlNWEzMmYwYzQ0YmRhZTA1NzMxNGMwOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6&color=%23c0ca33&color=%230b8043&color=%233f51b5&color=%238e24aa&color=%23616161&color=%23ad1457&color=%23e4c441"></iframe>
+<!-- Seite 1: Infosäule -->
+<div class="page page-1 active">
+  <div class="logo-container">
+    <img src="HAI.png" alt="HAI Logo">
+    <img src="TIWAG.jpg" alt="TIWAG Logo">
   </div>
+  <header>
+    <div class="title-block">
+      <h1>HC TIWAG Innsbruck Juniors</h1>
+    </div>
+  </header>
+  <div class="announcement-container">
+    <h1>I N F O S Ä U L E</h1>
+    <ul>
+      <li>Eisplan 2025/26</li>
+      <li>Organigramm</li>
+      <li>Heimspiele & Veranstaltungen</li>
+      <li>Medien & Fotoshop</li>
+    </ul>
+  </div>
+  <div class="shark-gif"></div>
+</div>
 
-  <div class="signature">Designed by MS</div>
+<!-- Seite 2: Kalender -->
+<div class="page calendar-page page-2">
+  <div class="logo-container">
+    <img src="HAI.png" alt="HAI Logo" style="opacity:1; transform:translateY(0)">
+    <img src="TIWAG.jpg" alt="TIWAG Logo" style="opacity:1; transform:translateY(0)">
+  </div>
+  <header>
+    <div class="title-block">
+      <h1>HC TIWAG Innsbruck Juniors</h1>
+    </div>
+  </header>
+  <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showTitle=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6"></iframe>
+</div>
+
+<div class="signature">Designed by MS</div>
 
 <script>
-  window.addEventListener('DOMContentLoaded', () => {
-    document.querySelector('.logo-container').classList.add('loaded');
+window.addEventListener('DOMContentLoaded', () => {
+  const pages = document.querySelectorAll('.page');
+  let current = 0;
 
-    // Kioskmodus: Seitenwechsel alle 5 Sekunden
-    const pages = document.querySelectorAll('.page');
-    let current = 0;
-    setInterval(() => {
-      pages[current].style.display = 'none';
-      current = (current + 1) % pages.length;
-      pages[current].style.display = 'flex';
-    }, 5000);
-  });
+  function showPage(index) {
+    pages.forEach((p, i) => {
+      if(i === index) p.classList.add('active');
+      else p.classList.remove('active');
+    });
+
+    // Reset Animationen nur für Seite 1 (Infosäule)
+    if(pages[index].classList.contains('page-1')){
+      const logos = pages[index].querySelectorAll('.logo-container img');
+      logos.forEach((img, i) => {
+        img.style.opacity = 0;
+        img.style.transform = i===0?'translateX(-10%) translateY(-20px)':'translateX(-20%) translateY(-25px)';
+        void img.offsetWidth;
+        img.style.transition = 'transform 1s ease, opacity 1s ease';
+        img.style.opacity = 1;
+        img.style.transform = 'translate(0,0)';
+      });
+
+      const items = pages[index].querySelectorAll('.announcement-container ul li');
+      items.forEach((li, i) => {
+        li.style.opacity = 0;
+        li.style.transform = 'translateY(30px)';
+        void li.offsetWidth;
+        li.style.transition = `all 1s ease ${1.2 + i*0.4}s`;
+        li.style.opacity = 1;
+        li.style.transform = 'translateY(0)';
+      });
+    }
+  }
+
+  setInterval(() => {
+    current = (current + 1) % pages.length;
+    showPage(current);
+  }, 5000);
+
+  // Initial Animation starten
+  showPage(0);
+});
 </script>
 </body>
 </html>
