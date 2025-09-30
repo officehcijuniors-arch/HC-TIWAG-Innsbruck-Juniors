@@ -41,8 +41,14 @@
   .announcement-container ul { list-style:none; padding:0; margin:0 auto; font-size:2.5vw; line-height:3vw; text-transform:uppercase; letter-spacing:0.08em; color:rgba(255,255,255,0.95); max-width:80%; }
   .announcement-container ul li { opacity:0; transform:translateY(30px); margin:10px 0; transition:all 1s ease; }
 
-  .shark-gif { position:absolute; bottom:20px; width:350px; height:350px; background:url('HCI.gif') no-repeat center; background-size:contain; pointer-events:none; }
-  .calendar-page .shark-gif { opacity:0.2; width:250px; height:250px; bottom:50px; z-index:2; }
+  .shark-gif {
+    position:absolute; bottom:20px; width:350px; height:350px;
+    background:url('HCI.gif') no-repeat center; background-size:contain;
+    pointer-events:none; opacity:1;
+  }
+  .calendar-page .shark-gif {
+    opacity:0.2; width:350px; height:350px; bottom:20px; z-index:2;
+  }
 
   .calendar-page iframe { border:0; width:90%; height:600px; margin-top:50px; border-radius:10px; box-shadow:0 0 20px rgba(0,0,0,0.6); }
 
