@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<title>HC TIWAG Innsbruck Juniors - Infosäule & Eisplan</title>
+<title>HC TIWAG Innsbruck Juniors - Infosäule & Kalender</title>
 <style>
   body {
     margin: 0;
@@ -45,9 +45,9 @@
   .title-block {
     text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
   }
-  header h1 { font-size: 2em; margin: 0; }
+  header h1 { font-size: 2.4em; margin: 0 0 5px 0; }
 
-  /* Hauptbereich: Infosäule */
+  /* Hauptbereich */
   .content-container {
     width: 100%;
     display: flex;
@@ -55,57 +55,53 @@
     align-items: center;
     flex-direction: column;
     margin-top: 20px;
+    position: relative;
   }
 
+  /* Infosäule */
   .announcement-container {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
     text-align: center;
-    animation: fadeInScale 1.5s ease forwards;
+    transition: opacity 1s ease;
   }
 
   .announcement-container h1 {
-    font-size: 6vw;
+    font-size: 3vw;
     line-height: 1.2;
     color: #ffffff; 
-    text-shadow: 1px 1px 8px rgba(0,0,0,0.5);
-    margin-bottom: 30px;
-    letter-spacing: 0.25em;
-    animation: slideInDown 1.5s ease forwards;
+    text-shadow: 1px 1px 8px rgba(0,0,0,0.6);
+    margin: 10px 0 25px;
+    letter-spacing: 0.18em;
+    font-weight: 600;
   }
 
   .announcement-container ul {
     list-style: none;
     padding: 0;
-    margin: 0;
-    font-size: 2.2vw;
-    line-height: 2.8vw;
+    margin: 0 auto;
+    font-size: 1.8vw;
+    line-height: 2.6vw;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
     color: rgba(255,255,255,0.95);
+    max-width: 80%;
   }
 
   .announcement-container ul li {
-    opacity: 0;
-    transform: translateY(30px);
     margin: 10px 0;
-    animation: fadeInUp 1s ease forwards;
   }
-  .announcement-container ul li:nth-child(1) { animation-delay: 1.2s; }
-  .announcement-container ul li:nth-child(2) { animation-delay: 1.6s; }
-  .announcement-container ul li:nth-child(3) { animation-delay: 2s; }
-  .announcement-container ul li:nth-child(4) { animation-delay: 2.4s; }
 
   /* Hai GIF */
   .shark-gif {
     position: absolute;
-    bottom: 20px;
+    bottom: -50px;
     width: 350px;
     height: 350px;
     background: url('HCI.gif') no-repeat center;
     background-size: contain;
-    opacity: 1;
     transition: opacity 1s ease;
   }
 
@@ -114,7 +110,7 @@
     display: none;
     flex-direction: column;
     align-items: center;
-    margin-top: 30px;
+    margin-top: 20px;
     width: 90%;
     max-width: 1200px;
     transition: opacity 1s ease;
@@ -129,26 +125,6 @@
     box-shadow: 0 10px 25px rgba(0,0,0,0.5);
   }
 
-  /* Animationen */
-  @keyframes fadeInScale {
-    from { opacity: 0; transform: scale(0.8); }
-    to { opacity: 1; transform: scale(1); }
-  }
-  @keyframes slideInDown {
-    from { opacity: 0; transform: translateY(-50px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @media (max-width: 768px) {
-    .announcement-container h1 { font-size: 12vw; }
-    .announcement-container ul { font-size: 5vw; line-height: 6vw; }
-    .calendar-container iframe { height: 60vh; }
-  }
-
   /* Signature */
   .signature {
     position: fixed;
@@ -160,9 +136,17 @@
     font-family: "Areno Serif", serif;
     pointer-events: none;
   }
+
+  @media (max-width: 768px) {
+    .announcement-container h1 { font-size: 9vw; }
+    .announcement-container ul { font-size: 5vw; line-height: 6vw; }
+    .shark-gif { width: 180px; height: 180px; bottom: -35px; }
+    .calendar-container iframe { height: 60vh; }
+  }
 </style>
 </head>
 <body>
+
   <div class="logo-container">
     <img src="HAI.png" alt="HAI Logo">
     <img src="TIWAG.jpg" alt="TIWAG Logo">
@@ -175,7 +159,6 @@
   </header>
 
   <div class="content-container">
-    <!-- INFOSÄULE -->
     <div class="announcement-container" id="infosaule">
       <h1>I N F O S Ä U L E</h1>
       <ul>
@@ -185,13 +168,11 @@
         <li>Medien & Fotoshop</li>
       </ul>
     </div>
-
     <div class="shark-gif" id="shark"></div>
 
-    <!-- Kalender -->
     <div class="calendar-container" id="calendar">
       <iframe 
-        src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe/Vienna&showTitle=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmU5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6">
+        src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe/Vienna&showTitle=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmU5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6">
       </iframe>
     </div>
   </div>
@@ -199,28 +180,40 @@
   <div class="signature">Designed by MS</div>
 
 <script>
-  window.addEventListener('DOMContentLoaded', () => {
-    document.querySelector('.logo-container').classList.add('loaded');
+window.addEventListener('DOMContentLoaded', () => {
+  document.querySelector('.logo-container').classList.add('loaded');
 
-    // Nach 5 Sekunden: Fade-Out der Infosäule und Hai-GIF, Fade-In Kalender
-    setTimeout(() => {
-      const infos = document.getElementById('infosaule');
-      const shark = document.getElementById('shark');
-      const calendar = document.getElementById('calendar');
+  const infos = document.getElementById('infosaule');
+  const shark = document.getElementById('shark');
+  const calendar = document.getElementById('calendar');
 
-      infos.style.transition = 'opacity 1s ease';
-      shark.style.transition = 'opacity 1s ease';
+  let showCalendar = false;
+
+  setInterval(() => {
+    if(!showCalendar) {
+      // Fade Out Infosäule + Hai
       infos.style.opacity = 0;
       shark.style.opacity = 0;
-
       setTimeout(() => {
         infos.style.display = 'none';
         shark.style.display = 'none';
-        calendar.classList.add('show');
+        calendar.style.display = 'flex';
+        calendar.style.opacity = 0;
+        setTimeout(() => { calendar.style.opacity = 1; }, 50);
       }, 1000);
-
-    }, 5000);
-  });
+    } else {
+      // Fade Out Kalender
+      calendar.style.opacity = 0;
+      setTimeout(() => {
+        calendar.style.display = 'none';
+        infos.style.display = 'flex';
+        shark.style.display = 'block';
+        setTimeout(() => { infos.style.opacity = 1; shark.style.opacity = 1; }, 50);
+      }, 1000);
+    }
+    showCalendar = !showCalendar;
+  }, 5000);
+});
 </script>
 
 </body>
