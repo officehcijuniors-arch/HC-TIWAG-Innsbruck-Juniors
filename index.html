@@ -17,7 +17,7 @@
     overflow: hidden;
   }
 
-  /* Logo oben */
+  /* Gemeinsame Logo-Einstellungen */
   .logo-container {
     display: flex;
     justify-content: center;
@@ -37,7 +37,6 @@
   .logo-container img:last-child { max-height: 50px; transform: translateX(-20%) translateY(-25px); }
   .logo-container.loaded img:last-child { transform: translateX(-20%) translateY(-5px); }
 
-  /* Header */
   header {
     text-align: center;
     padding: 10px 0;
@@ -51,7 +50,7 @@
     margin: 0 0 5px 0;
   }
 
-  /* Hauptbereich: Untertitel + Liste */
+  /* Hauptbereich Infosäule */
   .announcement-container {
     display: flex;
     flex-direction: column;
@@ -63,8 +62,6 @@
     margin-top: 10px;
     animation: fadeInScale 1.5s ease forwards;
   }
-
-  /* Untertitel (INFOSÄULE) */
   .announcement-container h1 {
     font-size: 3vw;
     line-height: 1.2;
@@ -75,8 +72,6 @@
     font-weight: 600;
     animation: slideInDown 1.5s ease forwards;
   }
-
-  /* Liste */
   .announcement-container ul {
     list-style: none;
     padding: 0;
@@ -88,7 +83,6 @@
     color: rgba(255,255,255,0.95);
     max-width: 80%;
   }
-
   .announcement-container ul li {
     opacity: 0;
     transform: translateY(30px);
@@ -103,7 +97,7 @@
   /* Hai GIF */
   .shark-gif {
     position: absolute;
-    bottom: 20px;   /* höher als zuvor */
+    bottom: 20px;
     width: 350px;
     height: 350px;
     background: url('HCI.gif') no-repeat center;
@@ -111,17 +105,33 @@
     opacity: 1;
   }
 
+  /* Kalender-Seite */
+  .calendar-page {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    flex: 1;
+  }
+  .calendar-page iframe {
+    border: 0;
+    width: 90%;
+    height: 600px;
+    margin-top: 50px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+  }
+
   /* Animationen */
   @keyframes fadeInScale {
     from { opacity: 0; transform: scale(0.8); }
     to { opacity: 1; transform: scale(1); }
   }
-
   @keyframes slideInDown {
     from { opacity: 0; transform: translateY(-50px); }
     to { opacity: 1; transform: translateY(0); }
   }
-
   @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: translateY(0); }
@@ -131,16 +141,15 @@
   @media (max-width: 1920px) {
     .announcement-container h1 { font-size: 5vw; }
     .announcement-container ul { font-size: 2.5vw; line-height: 3vw; }
-    .shark-gif { width: 300px; height: 300px; bottom: 10px; } /* höher */
+    .shark-gif { width: 300px; height: 300px; bottom: 10px; }
   }
-
   @media (max-width: 768px) {
     .announcement-container h1 { font-size: 9vw; }
     .announcement-container ul { font-size: 5vw; line-height: 6vw; }
-    .shark-gif { width: 180px; height: 180px; bottom: 5px; } /* höher */
+    .shark-gif { width: 180px; height: 180px; bottom: 5px; }
+    .calendar-page iframe { height: 400px; }
   }
 
-  /* Signature */
   .signature {
     position: fixed;
     bottom: 10px;
@@ -154,34 +163,57 @@
 </style>
 </head>
 <body>
-  <div class="logo-container">
-    <img src="HAI.png" alt="HAI Logo">
-    <img src="TIWAG.jpg" alt="TIWAG Logo">
-  </div>
-
-  <header>
-    <div class="title-block">
-      <h1>HC TIWAG Innsbruck Juniors</h1>
+  <!-- Seite 1: Infosäule -->
+  <div class="page page-1">
+    <div class="logo-container">
+      <img src="HAI.png" alt="HAI Logo">
+      <img src="TIWAG.jpg" alt="TIWAG Logo">
     </div>
-  </header>
-
-  <div class="announcement-container">
-    <h1>I N F O S Ä U L E</h1>
-    <ul>
-      <li>Eisplan 2025/26</li>
-      <li>Organigramm</li>
-      <li>Heimspiele & Veranstaltungen</li>
-      <li>Medien & Fotoshop</li>
-    </ul>
+    <header>
+      <div class="title-block">
+        <h1>HC TIWAG Innsbruck Juniors</h1>
+      </div>
+    </header>
+    <div class="announcement-container">
+      <h1>I N F O S Ä U L E</h1>
+      <ul>
+        <li>Eisplan 2025/26</li>
+        <li>Organigramm</li>
+        <li>Heimspiele & Veranstaltungen</li>
+        <li>Medien & Fotoshop</li>
+      </ul>
+    </div>
+    <div class="shark-gif"></div>
   </div>
 
-  <div class="shark-gif"></div>
+  <!-- Seite 2: Kalender -->
+  <div class="page calendar-page page-2">
+    <div class="logo-container loaded">
+      <img src="HAI.png" alt="HAI Logo">
+      <img src="TIWAG.jpg" alt="TIWAG Logo">
+    </div>
+    <header>
+      <div class="title-block">
+        <h1>HC TIWAG Innsbruck Juniors</h1>
+      </div>
+    </header>
+    <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showTitle=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZDU3OWRjY2M2MTNhZTI0YzZlNjY1NmE5ZGIyOWM0MDRlNDk5NjNhZjFiZDYyNjY0NGQwZGE5OTVhNTUzNmUxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzBiZDg4YjUxNmVlNGRmNGFjMmZkMWU2NGJhOWQ4MzBlMjViY2VlZjc4YjM4MmM5N2FhZWZmZWU1NmY5NjlmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YjQ5M2RhNTY5NDg5NTA2MDQ0YWE2MmVmYTA5ODIyODM0MmQ0NjRhMzQ4MzY5MGYyNTU1NTE0Yzg0Y2ZmNDI0NEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YWQ4ZjNlMmRiODQ1YjZiNmM5ZTZkYmIyZDkyNGY1NTliNjVhNjI3YTNlNWEzMmYwYzQ0YmRhZTA1NzMxNGMwOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6&color=%23c0ca33&color=%230b8043&color=%233f51b5&color=%238e24aa&color=%23616161&color=%23ad1457&color=%23e4c441"></iframe>
+  </div>
 
   <div class="signature">Designed by MS</div>
 
 <script>
   window.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.logo-container').classList.add('loaded');
+
+    // Kioskmodus: Seitenwechsel alle 5 Sekunden
+    const pages = document.querySelectorAll('.page');
+    let current = 0;
+    setInterval(() => {
+      pages[current].style.display = 'none';
+      current = (current + 1) % pages.length;
+      pages[current].style.display = 'flex';
+    }, 5000);
   });
 </script>
 </body>
