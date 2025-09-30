@@ -47,7 +47,7 @@
   }
   header h1 { font-size: 2.4em; margin: 0 0 5px 0; }
 
-  /* Hauptbereich */
+  /* Content Container */
   .content-container {
     width: 100%;
     display: flex;
@@ -97,7 +97,7 @@
   /* Hai GIF */
   .shark-gif {
     position: absolute;
-    bottom: -50px;
+    bottom: 20px;
     width: 350px;
     height: 350px;
     background: url('HCI.gif') no-repeat center;
@@ -140,7 +140,7 @@
   @media (max-width: 768px) {
     .announcement-container h1 { font-size: 9vw; }
     .announcement-container ul { font-size: 5vw; line-height: 6vw; }
-    .shark-gif { width: 180px; height: 180px; bottom: -35px; }
+    .shark-gif { width: 180px; height: 180px; bottom: 5px; }
     .calendar-container iframe { height: 60vh; }
   }
 </style>
@@ -159,6 +159,7 @@
   </header>
 
   <div class="content-container">
+    <!-- Infosäule -->
     <div class="announcement-container" id="infosaule">
       <h1>I N F O S Ä U L E</h1>
       <ul>
@@ -168,8 +169,11 @@
         <li>Medien & Fotoshop</li>
       </ul>
     </div>
+
+    <!-- Hai GIF -->
     <div class="shark-gif" id="shark"></div>
 
+    <!-- Kalender -->
     <div class="calendar-container" id="calendar">
       <iframe 
         src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe/Vienna&showTitle=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmU5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6">
