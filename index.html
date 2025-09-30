@@ -28,7 +28,7 @@
   .calendar-container { 
     width: 95%;
     max-width: 1600px;
-    height: 900px;
+    height: 90vh;
     background: rgba(255,255,255,0.06); 
     border-radius: 30px; 
     overflow: hidden; 
@@ -69,7 +69,7 @@
   .signature { position: fixed; bottom: 10px; right: 15px; font-size: 0.9em; color: rgba(255,255,255,0.5); font-weight: normal; font-family: "Areno Serif", serif; pointer-events: none; }
 
   @media (max-width: 768px) { 
-    .calendar-container { height: 750px; }
+    .calendar-container { height: 80vh; }
     .calendar-container::before { width: 350px; height: 350px; }
     .logo-container img:first-child { max-height: 70px; } 
     .logo-container img:last-child { max-height: 35px; } 
@@ -106,9 +106,10 @@
 <script>
 const iframe = document.getElementById('displayFrame');
 
+// URLs für Wechsel: Google Kalender + PDF von GitHub
 const sources = [
-  "https://calendar.google.com/calendar/embed?height=900&wkst=2&ctz=Europe%2FVienna&showTitle=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t", // Google Kalender
-  "ORGANISATION.pdf" // PDF-Datei
+  "https://calendar.google.com/calendar/embed?height=900&wkst=2&ctz=Europe%2FVienna&showTitle=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t",
+  "https://github.com/<USERNAME>/<REPO>/raw/main/ORG.pdf#view=FitH" // PDF direkt anzeigen (ersetze <USERNAME>/<REPO>)
 ];
 
 let index = 0;
