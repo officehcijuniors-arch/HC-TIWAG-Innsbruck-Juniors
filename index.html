@@ -7,9 +7,9 @@
   body {
     margin: 0;
     font-family: "Areno Serif", serif;
-    background: linear-gradient(135deg, #003789 40%, #d42323 60%);
-    overflow: hidden;
     color: #fff;
+    overflow: hidden;
+    background: linear-gradient(135deg, #003789 40%, #d42323 60%); /* CI Farben */
   }
 
   .page {
@@ -21,6 +21,7 @@
     justify-content: flex-start;
     opacity: 0;
     transition: opacity 1s ease;
+    background: transparent; /* Body-Hintergrund sichtbar */
   }
   .page.active { opacity: 1; z-index: 1; }
 
@@ -45,7 +46,7 @@
   .title-block { text-shadow: 2px 2px 8px rgba(0,0,0,0.8); }
   header h1 { font-size: 2.4em; margin: 0 0 5px 0; }
 
-  /* Infosäule größer und prominent */
+  /* Infosäule */
   .announcement-container {
     display: flex;
     flex-direction: column;
@@ -55,7 +56,7 @@
     margin-top: 10px;
   }
   .announcement-container h1 {
-    font-size: 5vw; /* größer */
+    font-size: 5vw; /* größer für TV-Kiosk */
     line-height: 1.2;
     color: #fff;
     text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
@@ -67,7 +68,7 @@
     list-style: none;
     padding: 0;
     margin: 0 auto;
-    font-size: 2.5vw; /* größer */
+    font-size: 2.5vw; /* größer für TV */
     line-height: 3vw;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -81,6 +82,7 @@
     transition: all 1s ease;
   }
 
+  /* Hai-GIF */
   .shark-gif {
     position: absolute;
     bottom: 20px;
@@ -88,15 +90,15 @@
     height: 350px;
     background: url('HCI.gif') no-repeat center;
     background-size: contain;
+    pointer-events: none;
   }
 
-  /* GIF auf Kalender-Seite transparent */
+  /* GIF transparent auf Kalender-Seite */
   .calendar-page .shark-gif {
     opacity: 0.2;
-    bottom: 50px;
     width: 250px;
     height: 250px;
-    pointer-events: none;
+    bottom: 50px;
     z-index: 2;
   }
 
