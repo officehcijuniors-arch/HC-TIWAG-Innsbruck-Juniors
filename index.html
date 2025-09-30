@@ -11,7 +11,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
     min-height: 100vh;
     color: #fff;
     overflow: hidden;
@@ -46,10 +45,7 @@
   .title-block {
     text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
   }
-  header h1 {
-    font-size: 2.4em;
-    margin: 0 0 5px 0;
-  }
+  header h1 { font-size: 2em; margin: 0; }
 
   /* Hauptbereich: Infosäule */
   .content-container {
@@ -59,7 +55,6 @@
     align-items: center;
     flex-direction: column;
     margin-top: 20px;
-    transition: opacity 1s ease;
   }
 
   .announcement-container {
@@ -111,9 +106,10 @@
     background: url('HCI.gif') no-repeat center;
     background-size: contain;
     opacity: 1;
+    transition: opacity 1s ease;
   }
 
-  /* Kalender Section */
+  /* Kalender */
   .calendar-container {
     display: none;
     flex-direction: column;
@@ -123,11 +119,7 @@
     max-width: 1200px;
     transition: opacity 1s ease;
   }
-
-  .calendar-container.show {
-    display: flex;
-    opacity: 1;
-  }
+  .calendar-container.show { display: flex; opacity: 1; }
 
   .calendar-container iframe {
     width: 100%;
@@ -142,18 +134,15 @@
     from { opacity: 0; transform: scale(0.8); }
     to { opacity: 1; transform: scale(1); }
   }
-
   @keyframes slideInDown {
     from { opacity: 0; transform: translateY(-50px); }
     to { opacity: 1; transform: translateY(0); }
   }
-
   @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* Responsive */
   @media (max-width: 768px) {
     .announcement-container h1 { font-size: 12vw; }
     .announcement-container ul { font-size: 5vw; line-height: 6vw; }
@@ -202,7 +191,7 @@
     <!-- Kalender -->
     <div class="calendar-container" id="calendar">
       <iframe 
-        src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe/Vienna&showTitle=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmU5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZDU3OWRjY2M2MTNhZTI0YzZlNjY1NmE5ZGIyOWM0MDRlNDk5NjNhZjFiZDYyNjY0NGQwZGE5OTVhNTUzNmUxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzBiZDg4YjUxNmVlNGRmNGFjMmZkMWU2NGJhOWQ4MzBlMjViY2VlZjc4YjM4MmM5N2FhZWZmZWU1NmY5NjlmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YjQ5M2RhNTY5NDg5NTA2MDQ0YWE2MmVmYTA5ODIyODM0MmQ0NjRhMzQ4MzY5MGYyNTU1NTE0Yzg0Y2ZmNDI0NEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YWQ4ZjNlMmRiODQ1YjZiNmM5ZTZkYmIyZDkyNGY1NTliNjVhNjI3YTNlNWEzMmYwYzQ0YmRhZTA1NzMxNGMwOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6&color=%23c0ca33&color=%230b8043&color=%233f51b5&color=%238e24aa&color=%23616161&color=%23ad1457&color=%23e4c441">
+        src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe/Vienna&showTitle=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmU5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6">
       </iframe>
     </div>
   </div>
@@ -213,7 +202,7 @@
   window.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.logo-container').classList.add('loaded');
 
-    // Nach 5 Sekunden: Infosäule ausblenden, Kalender einblenden
+    // Nach 5 Sekunden: Fade-Out der Infosäule und Hai-GIF, Fade-In Kalender
     setTimeout(() => {
       const infos = document.getElementById('infosaule');
       const shark = document.getElementById('shark');
