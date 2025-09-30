@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<title>HC TIWAG Innsbruck – Infosäule</title>
+<title>HC TIWAG Innsbruck Juniors</title>
 <style>
   body {
     margin: 0;
@@ -36,51 +36,113 @@
   .logo-container.loaded img:last-child { transform: translateX(-20%) translateY(-5px); }
   .logo-container img:hover { transform: scale(1.05); }
 
-  header { text-align: center; padding: 15px 10px; background: transparent; }
-  .title-block { text-shadow: 2px 2px 8px rgba(0,0,0,0.8); }
+  header {
+    text-align: center;
+    padding: 15px 10px;
+    background: transparent;
+  }
+  .title-block {
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+  }
   header h1 { font-size: 2em; margin: 0; }
   header h2 { font-size: 1.3em; margin: 0; font-weight: normal; }
 
-  .content-container { 
-    width: 90%;          
-    max-width: 1600px;   
-    min-height: 700px;
-    background: rgba(255,255,255,0.06); 
-    border-radius: 30px; 
-    overflow: hidden; 
-    box-shadow: 0 25px 70px rgba(0,0,0,0.75); 
-    border: 1px solid rgba(255,255,255,0.2); 
-    position: relative;
+  .main-content {
     display: flex;
-    align-items: center;
     justify-content: center;
-    padding: 40px;
-    transition: opacity 0.5s ease;
+    align-items: center;
+    width: 90%;
+    max-width: 1200px;
+    margin-top: 50px;
+    border-radius: 30px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.05);
+    box-shadow: 0 25px 70px rgba(0,0,0,0.75);
+    position: relative;
+    animation: fadeInScale 1.5s ease forwards;
   }
 
-  .content {
+  .info-column {
     width: 100%;
-    text-align: center;
-    display: none;
-    font-size: 2em;
-  }
-  .content.active { display: block; }
-
-  .content img {
-    max-width: 100%;
-    max-height: 600px;
-    height: auto;
-    border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    padding: 40px 50px;
+    background: linear-gradient(145deg, rgba(0,55,137,0.8), rgba(212,35,35,0.8));
+    border-radius: 30px;
+    text-align: left;
+    color: #fff;
+    font-family: "Areno Serif", serif;
+    text-shadow: 1px 1px 6px rgba(0,0,0,0.7);
+    animation: slideIn 1.2s ease forwards;
   }
 
-  .link-container { display: flex; justify-content: center; gap: 30px; margin: 30px 0 50px; font-size: 1.1em; flex-wrap: wrap; }
-  .link-container a { text-decoration: none; display: flex; align-items: center; gap: 10px; font-weight: bold; color: #fff; transition: transform 0.3s ease, color 0.3s ease; }
-  .link-container a span { font-size: 1.5em; transition: transform 0.3s ease; }
-  .link-container a:hover { transform: scale(1.1); color: #003789; }
-  .link-container a:hover span { transform: scale(1.3) rotate(-10deg); }
+  .info-column h1 {
+    font-size: 2.5em;
+    margin-bottom: 15px;
+    background: linear-gradient(90deg, #fff, rgba(255,255,255,0.5));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 
-  .signature { position: fixed; bottom: 10px; right: 15px; font-size: 0.9em; color: rgba(255,255,255,0.5); font-weight: normal; font-family: "Areno Serif", serif; pointer-events: none; }
+  .info-column .subtitle {
+    font-size: 1.4em;
+    margin-bottom: 25px;
+  }
+
+  .info-column ul {
+    list-style: none;
+    padding: 0;
+    line-height: 2em;
+    font-size: 1.2em;
+  }
+  .info-column ul li {
+    margin-bottom: 15px;
+    position: relative;
+    padding-left: 30px;
+    animation: fadeInUp 1s ease forwards;
+  }
+  .info-column ul li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #fff;
+    font-size: 1.5em;
+    line-height: 1em;
+    text-shadow: 0 0 5px rgba(0,0,0,0.5);
+  }
+
+  .signature {
+    position: fixed;
+    bottom: 10px;
+    right: 15px;
+    font-size: 0.9em;
+    color: rgba(255,255,255,0.5);
+    font-weight: normal;
+    font-family: "Areno Serif", serif;
+    pointer-events: none;
+  }
+
+  @keyframes fadeInScale {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(-50px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 768px) {
+    .main-content { width: 95%; margin-top: 30px; }
+    .info-column { padding: 30px 25px; text-align: center; }
+    .info-column h1 { font-size: 2em; }
+    .info-column .subtitle { font-size: 1.2em; }
+    .info-column ul { font-size: 1em; }
+  }
 </style>
 </head>
 <body>
@@ -92,43 +154,24 @@
 
 <header>
   <div class="title-block">
-    <h1>HC TIWAG Innsbruck</h1>
+    <h1>HC TIWAG Innsbruck Juniors</h1>
     <h2>Infosäule</h2>
   </div>
 </header>
 
-<div class="content-container">
-  <!-- Inhalt 1: Infosäule -->
-  <div class="content active" id="infosaeule">
-    <h2>Infosäule</h2>
-    <p>Willkommen bei HC TIWAG Innsbruck – hier erscheinen aktuelle Informationen.</p>
+<div class="main-content">
+  <div class="info-column">
+    <h1>HC TIWAG Innsbruck Juniors</h1>
+    <p class="subtitle">Alles auf einen Blick</p>
+    <ul>
+      <li>🏒 Teams: U7 - U20 + ICE</li>
+      <li>👨‍🏫 Trainer: Max Mustermann & Staff</li>
+      <li>📍 Spielstätte: Olympiahalle Innsbruck</li>
+      <li>📅 Nächste Spiele & Events</li>
+      <li>📷 Fotoshop & Medien</li>
+      <li>🌐 Web & Social Media</li>
+    </ul>
   </div>
-
-  <!-- Inhalt 2: Eisplan -->
-  <div class="content" id="eisplan">
-    <img src="ORG.png" alt="Eisplan">
-  </div>
-
-  <!-- Inhalt 3: Organigramm -->
-  <div class="content" id="organigramm">
-    <img src="organigramm-placeholder.png" alt="Organigramm">
-    <p>Organigramm des Vereins</p>
-  </div>
-
-  <!-- Inhalt 4: Fotoshop -->
-  <div class="content" id="fotoshop">
-    <a href="https://www.pictrs.com/hci" target="_blank">
-      <span style="font-size:3em;">📷</span><br>
-      Zum Fotoshop
-    </a>
-  </div>
-</div>
-
-<div class="link-container">
-  <a href="https://www.hcinnsbruck.at" target="_blank"><span>🌐</span> www.hcinnsbruck.at</a>
-  <a href="https://www.instagram.com/hcijuniors/?hl=de" target="_blank"><span>📱</span> Instagram</a>
-  <a href="https://www.facebook.com/hcijuniors/?locale=de_DE" target="_blank"><span>📘</span> Facebook</a>
-  <a href="https://www.pictrs.com/hci" target="_blank"><span>📷</span> Foto Shop</a>
 </div>
 
 <div class="signature">Designed by MS</div>
@@ -137,15 +180,6 @@
 window.addEventListener('DOMContentLoaded', () => {
   document.querySelector('.logo-container').classList.add('loaded');
 });
-
-const sections = ["infosaeule", "eisplan", "organigramm", "fotoshop"];
-let current = 0;
-
-setInterval(() => {
-  document.getElementById(sections[current]).classList.remove("active");
-  current = (current + 1) % sections.length;
-  document.getElementById(sections[current]).classList.add("active");
-}, 10000); // 10 Sekunden
 </script>
 </body>
 </html>
