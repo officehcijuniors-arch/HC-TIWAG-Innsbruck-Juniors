@@ -15,6 +15,7 @@
     min-height: 100vh;
     color: #fff;
     overflow: hidden;
+    position: relative;
   }
 
   /* Logo oben */
@@ -48,16 +49,15 @@
   }
   header h1 { font-size: 2em; margin: 0; }
 
-  /* Hauptbereich: Infosäule + Unterpunkte */
+  /* Hauptbereich: Infosäule */
   .announcement-container {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center; /* vertikal zentriert */
     align-items: center;
     flex: 1;
     width: 100%;
     text-align: center;
-    margin-top: 20px;
     animation: fadeInScale 1.5s ease forwards;
   }
 
@@ -68,7 +68,7 @@
     color: #ffffff; 
     text-shadow: 1px 1px 8px rgba(0,0,0,0.5);
     margin-bottom: 30px;
-    letter-spacing: 0.25em; /* halbierter Abstand zwischen Buchstaben */
+    letter-spacing: 0.25em;
     animation: slideInDown 1.5s ease forwards;
   }
 
@@ -95,10 +95,10 @@
   .announcement-container ul li:nth-child(3) { animation-delay: 2s; }
   .announcement-container ul li:nth-child(4) { animation-delay: 2.4s; }
 
-  /* Hai GIF weiter nach unten */
+  /* Hai GIF unten */
   .shark-gif {
     position: absolute;
-    bottom: -50px; /* weiter nach unten */
+    bottom: -50px;
     width: 350px;
     height: 350px;
     background: url('HCI.gif') no-repeat center;
