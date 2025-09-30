@@ -2,176 +2,98 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<title>HC TIWAG Innsbruck Juniors - Infosäule</title>
+<title>HC TIWAG Innsbruck Juniors - Informationsplattform</title>
 <style>
+  /* Basis */
   body {
     margin: 0;
     font-family: "Areno Serif", serif;
     background: linear-gradient(135deg, #003789 40%, #d42323 60%);
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    height: 100vh;
     color: #fff;
-    overflow-x: hidden;
-  }
-
-  /* Logo oben */
-  .logo-container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    gap: 60px;
-    margin: 20px 0 10px;
-  }
-  .logo-container img {
-    opacity: 0;
-    transform: translateY(-20px);
-    transition: transform 1s ease, opacity 1s ease;
-    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.6));
-  }
-  .logo-container.loaded img { opacity: 1; transform: translateY(0); }
-  .logo-container img:first-child { max-height: 100px; transform: translateX(-10%) translateY(-20px); }
-  .logo-container.loaded img:first-child { transform: translateX(-10%) translateY(0); }
-  .logo-container img:last-child { max-height: 50px; transform: translateX(-20%) translateY(-25px); }
-  .logo-container.loaded img:last-child { transform: translateX(-20%) translateY(-5px); }
-
-  header {
-    text-align: center;
-    padding: 15px 10px;
-    background: transparent;
-  }
-  .title-block {
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
-  }
-  header h1 { font-size: 2em; margin: 0; }
-  header h2 { font-size: 1.3em; margin: 0; font-weight: normal; }
-
-  /* Hauptbereich Infosäule */
-  .main-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 90%;
-    max-width: 1200px;
-    margin-top: 50px;
-    border-radius: 30px;
     overflow: hidden;
-    background: rgba(255,255,255,0.05);
-    box-shadow: 0 25px 70px rgba(0,0,0,0.75);
-    position: relative;
-    animation: fadeInScale 1.5s ease forwards;
   }
 
-  .info-column {
-    width: 100%;
-    padding: 40px 50px;
-    background: linear-gradient(145deg, rgba(0,55,137,0.8), rgba(212,35,35,0.8));
-    border-radius: 30px;
-    text-align: left;
-    color: #fff;
-    font-family: "Areno Serif", serif;
-    text-shadow: 1px 1px 6px rgba(0,0,0,0.7);
-    animation: slideIn 1.2s ease forwards;
+  /* Container für die Ankündigung */
+  .announcement-container {
+    text-align: center;
+    animation: fadeInScale 1.8s ease forwards;
   }
 
-  .info-column h1 {
-    font-size: 2.5em;
-    margin-bottom: 15px;
-    background: linear-gradient(90deg, #fff, rgba(255,255,255,0.5));
+  /* Haupttitel */
+  .announcement-container h1 {
+    font-size: 5vw;
+    margin: 0 0 20px 0;
+    line-height: 1.2;
+    background: linear-gradient(90deg, #fff, rgba(255,255,255,0.6));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    animation: slideInDown 1.5s ease forwards;
   }
 
-  .info-column .subtitle {
-    font-size: 1.4em;
-    margin-bottom: 25px;
-  }
-
-  .info-column ul {
+  /* Untertitel / Liste der Inhalte */
+  .announcement-container ul {
     list-style: none;
     padding: 0;
-    line-height: 2em;
-    font-size: 1.2em;
+    margin: 0;
+    font-size: 2.2vw;
+    line-height: 2.5vw;
+    text-transform: uppercase;
+    letter-spacing: 1px;
   }
-  .info-column ul li {
-    margin-bottom: 15px;
-    position: relative;
-    padding-left: 30px;
+
+  .announcement-container ul li {
+    opacity: 0;
+    transform: translateY(30px);
+    margin: 10px 0;
     animation: fadeInUp 1s ease forwards;
   }
-  .info-column ul li::before {
-    content: "•";
-    position: absolute;
-    left: 0;
-    top: 0;
-    color: #fff;
-    font-size: 1.5em;
-    line-height: 1em;
-    text-shadow: 0 0 5px rgba(0,0,0,0.5);
-  }
+
+  .announcement-container ul li:nth-child(1) { animation-delay: 1.5s; }
+  .announcement-container ul li:nth-child(2) { animation-delay: 2s; }
+  .announcement-container ul li:nth-child(3) { animation-delay: 2.5s; }
+  .announcement-container ul li:nth-child(4) { animation-delay: 3s; }
 
   /* Animationen */
   @keyframes fadeInScale {
-    from { opacity: 0; transform: scale(0.9); }
+    from { opacity: 0; transform: scale(0.8); }
     to { opacity: 1; transform: scale(1); }
   }
 
-  @keyframes slideIn {
-    from { opacity: 0; transform: translateX(-50px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
+  @keyframes slideInDown {
+    from { opacity: 0; transform: translateY(-50px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* Responsiv */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Responsive für TV/Screen */
+  @media (max-width: 1920px) {
+    .announcement-container h1 { font-size: 6vw; }
+    .announcement-container ul { font-size: 2.5vw; line-height: 3vw; }
+  }
+
   @media (max-width: 768px) {
-    .main-content { width: 95%; margin-top: 30px; }
-    .info-column { padding: 30px 25px; text-align: center; }
-    .info-column h1 { font-size: 2em; }
-    .info-column .subtitle { font-size: 1.2em; }
-    .info-column ul { font-size: 1em; }
+    .announcement-container h1 { font-size: 10vw; }
+    .announcement-container ul { font-size: 5vw; line-height: 6vw; }
   }
 </style>
 </head>
 <body>
-
-<div class="logo-container">
-  <img src="HAI.png" alt="HAI Logo">
-  <img src="TIWAG.jpg" alt="TIWAG Logo">
-</div>
-
-<header>
-  <div class="title-block">
-    <h1>HC TIWAG Innsbruck Juniors</h1>
-    <h2>Infosäule</h2>
-  </div>
-</header>
-
-<div class="main-content">
-  <div class="info-column">
-    <h1>HC TIWAG Innsbruck Juniors</h1>
-    <p class="subtitle">Alles auf einen Blick</p>
+  <div class="announcement-container">
+    <h1>Infosäule HC TIWAG Innsbruck Juniors</h1>
     <ul>
-      <li>🏒 Teams: U7 - U20 + ICE</li>
-      <li>👨‍🏫 Trainer: Max Mustermann & Staff</li>
-      <li>📍 Spielstätte: Olympiahalle Innsbruck</li>
-      <li>📅 Nächste Spiele & Events</li>
-      <li>📷 Fotoshop & Medien</li>
-      <li>🌐 Web & Social Media</li>
+      <li>Eisplan 2025/26</li>
+      <li>Organigramm & Teamstruktur</li>
+      <li>Heimspiele & Veranstaltungen</li>
+      <li>Medien & Fotoshop</li>
     </ul>
   </div>
-</div>
-
-<div class="signature">Designed by MS</div>
-
-<script>
-window.addEventListener('DOMContentLoaded', () => {
-  document.querySelector('.logo-container').classList.add('loaded');
-});
-</script>
 </body>
 </html>
