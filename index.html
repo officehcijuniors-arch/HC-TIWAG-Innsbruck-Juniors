@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<title>HC TIWAG Innsbruck Eisplan 2025/26</title>
+<title>HC TIWAG Innsbruck – Infosäule</title>
 <style>
   body {
     margin: 0;
@@ -16,8 +16,19 @@
     overflow-x: hidden;
   }
 
-  .logo-container { display: flex; justify-content: center; align-items: flex-end; gap: 60px; margin: 20px 0 10px; }
-  .logo-container img { opacity: 0; transform: translateY(-20px); transition: transform 1s ease, opacity 1s ease; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.6)); }
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 60px;
+    margin: 20px 0 10px;
+  }
+  .logo-container img {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: transform 1s ease, opacity 1s ease;
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.6));
+  }
   .logo-container.loaded img { opacity: 1; transform: translateY(0); }
   .logo-container img:first-child { max-height: 100px; transform: translateX(-10%) translateY(-20px); }
   .logo-container.loaded img:first-child { transform: translateX(-10%) translateY(0); }
@@ -30,24 +41,37 @@
   header h1 { font-size: 2em; margin: 0; }
   header h2 { font-size: 1.3em; margin: 0; font-weight: normal; }
 
-  .calendar-container { 
+  .content-container { 
     width: 90%;          
     max-width: 1600px;   
-    height: auto;       
+    min-height: 700px;
     background: rgba(255,255,255,0.06); 
     border-radius: 30px; 
     overflow: hidden; 
     box-shadow: 0 25px 70px rgba(0,0,0,0.75); 
     border: 1px solid rgba(255,255,255,0.2); 
     position: relative;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease; 
-    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    transition: opacity 0.5s ease;
   }
-  .calendar-container img { 
-    width: 100%; 
-    height: auto; 
-    display: block; 
+
+  .content {
+    width: 100%;
+    text-align: center;
+    display: none;
+    font-size: 2em;
+  }
+  .content.active { display: block; }
+
+  .content img {
+    max-width: 100%;
+    max-height: 600px;
+    height: auto;
     border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
   }
 
   .link-container { display: flex; justify-content: center; gap: 30px; margin: 30px 0 50px; font-size: 1.1em; flex-wrap: wrap; }
@@ -57,12 +81,6 @@
   .link-container a:hover span { transform: scale(1.3) rotate(-10deg); }
 
   .signature { position: fixed; bottom: 10px; right: 15px; font-size: 0.9em; color: rgba(255,255,255,0.5); font-weight: normal; font-family: "Areno Serif", serif; pointer-events: none; }
-
-  @media (max-width: 768px) { 
-    .calendar-container { width: 95%; } 
-    .logo-container img:first-child { max-height: 70px; } 
-    .logo-container img:last-child { max-height: 35px; } 
-  }
 </style>
 </head>
 <body>
@@ -75,12 +93,35 @@
 <header>
   <div class="title-block">
     <h1>HC TIWAG Innsbruck</h1>
-    <h2>Eisplan 2025/26</h2>
+    <h2>Infosäule</h2>
   </div>
 </header>
 
-<div class="calendar-container">
-  <img src="ORG.png" alt="Organisationsplan">
+<div class="content-container">
+  <!-- Inhalt 1: Infosäule -->
+  <div class="content active" id="infosaeule">
+    <h2>Infosäule</h2>
+    <p>Willkommen bei HC TIWAG Innsbruck – hier erscheinen aktuelle Informationen.</p>
+  </div>
+
+  <!-- Inhalt 2: Eisplan -->
+  <div class="content" id="eisplan">
+    <img src="ORG.png" alt="Eisplan">
+  </div>
+
+  <!-- Inhalt 3: Organigramm -->
+  <div class="content" id="organigramm">
+    <img src="organigramm-placeholder.png" alt="Organigramm">
+    <p>Organigramm des Vereins</p>
+  </div>
+
+  <!-- Inhalt 4: Fotoshop -->
+  <div class="content" id="fotoshop">
+    <a href="https://www.pictrs.com/hci" target="_blank">
+      <span style="font-size:3em;">📷</span><br>
+      Zum Fotoshop
+    </a>
+  </div>
 </div>
 
 <div class="link-container">
@@ -96,6 +137,15 @@
 window.addEventListener('DOMContentLoaded', () => {
   document.querySelector('.logo-container').classList.add('loaded');
 });
+
+const sections = ["infosaeule", "eisplan", "organigramm", "fotoshop"];
+let current = 0;
+
+setInterval(() => {
+  document.getElementById(sections[current]).classList.remove("active");
+  current = (current + 1) % sections.length;
+  document.getElementById(sections[current]).classList.add("active");
+}, 10000); // 10 Sekunden
 </script>
 </body>
 </html>
