@@ -8,13 +8,8 @@
     margin: 0;
     font-family: "Areno Serif", serif;
     background: linear-gradient(135deg, #003789 40%, #d42323 60%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    min-height: 100vh;
-    color: #fff;
     overflow: hidden;
+    color: #fff;
   }
 
   .page {
@@ -46,38 +41,34 @@
   }
   .logo-container img:last-child { max-height: 50px; transform: translateY(-25px); }
 
-  header {
-    text-align: center;
-    padding: 10px 0;
-  }
+  header { text-align: center; padding: 10px 0; }
   .title-block { text-shadow: 2px 2px 8px rgba(0,0,0,0.8); }
   header h1 { font-size: 2.4em; margin: 0 0 5px 0; }
 
-  /* Infosäule */
+  /* Infosäule größer und prominent */
   .announcement-container {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
     width: 100%;
     text-align: center;
     margin-top: 10px;
   }
   .announcement-container h1 {
-    font-size: 3vw;
+    font-size: 5vw; /* größer */
     line-height: 1.2;
-    color: #ffffff; 
-    text-shadow: 1px 1px 8px rgba(0,0,0,0.6);
-    margin: 10px 0 25px;
+    color: #fff;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+    margin: 20px 0 30px;
     letter-spacing: 0.18em;
-    font-weight: 600;
+    font-weight: 700;
   }
   .announcement-container ul {
     list-style: none;
     padding: 0;
     margin: 0 auto;
-    font-size: 1.8vw;
-    line-height: 2.6vw;
+    font-size: 2.5vw; /* größer */
+    line-height: 3vw;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: rgba(255,255,255,0.95);
@@ -99,7 +90,17 @@
     background-size: contain;
   }
 
-  /* Kalender-Seite */
+  /* GIF auf Kalender-Seite transparent */
+  .calendar-page .shark-gif {
+    opacity: 0.2;
+    bottom: 50px;
+    width: 250px;
+    height: 250px;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* Kalender */
   .calendar-page iframe {
     border: 0;
     width: 90%;
@@ -115,7 +116,6 @@
     right: 15px;
     font-size: 0.9em;
     color: rgba(255,255,255,0.5);
-    font-weight: normal;
     pointer-events: none;
   }
 
@@ -155,7 +155,7 @@
 
 <!-- Seite 2: Kalender -->
 <div class="page calendar-page page-2">
-  <div class="logo-container">
+  <div class="logo-container" style="opacity:1; transform:translateY(0)">
     <img src="HAI.png" alt="HAI Logo" style="opacity:1; transform:translateY(0)">
     <img src="TIWAG.jpg" alt="TIWAG Logo" style="opacity:1; transform:translateY(0)">
   </div>
@@ -164,7 +164,8 @@
       <h1>HC TIWAG Innsbruck Juniors</h1>
     </div>
   </header>
-  <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showTitle=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6"></iframe>
+  <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showTitle=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6"></iframe>
+  <div class="shark-gif"></div>
 </div>
 
 <div class="signature">Designed by MS</div>
@@ -175,41 +176,39 @@ window.addEventListener('DOMContentLoaded', () => {
   let current = 0;
 
   function showPage(index) {
-    pages.forEach((p, i) => {
-      if(i === index) p.classList.add('active');
-      else p.classList.remove('active');
+    pages.forEach((p,i)=>{
+      p.classList.remove('active');
+      if(i===index) p.classList.add('active');
     });
 
-    // Reset Animationen nur für Seite 1 (Infosäule)
     if(pages[index].classList.contains('page-1')){
       const logos = pages[index].querySelectorAll('.logo-container img');
-      logos.forEach((img, i) => {
-        img.style.opacity = 0;
-        img.style.transform = i===0?'translateX(-10%) translateY(-20px)':'translateX(-20%) translateY(-25px)';
+      logos.forEach((img,i)=>{
+        img.style.opacity=0;
+        img.style.transform=i===0?'translateX(-10%) translateY(-20px)':'translateX(-20%) translateY(-25px)';
         void img.offsetWidth;
-        img.style.transition = 'transform 1s ease, opacity 1s ease';
-        img.style.opacity = 1;
-        img.style.transform = 'translate(0,0)';
+        img.style.transition='transform 1s ease, opacity 1s ease';
+        img.style.opacity=1;
+        img.style.transform='translate(0,0)';
       });
 
       const items = pages[index].querySelectorAll('.announcement-container ul li');
-      items.forEach((li, i) => {
-        li.style.opacity = 0;
-        li.style.transform = 'translateY(30px)';
+      items.forEach((li,i)=>{
+        li.style.opacity=0;
+        li.style.transform='translateY(30px)';
         void li.offsetWidth;
-        li.style.transition = `all 1s ease ${1.2 + i*0.4}s`;
-        li.style.opacity = 1;
-        li.style.transform = 'translateY(0)';
+        li.style.transition=`all 1s ease ${1.2 + i*0.4}s`;
+        li.style.opacity=1;
+        li.style.transform='translateY(0)';
       });
     }
   }
 
-  setInterval(() => {
-    current = (current + 1) % pages.length;
+  setInterval(()=>{
+    current=(current+1)%pages.length;
     showPage(current);
-  }, 5000);
+  },5000);
 
-  // Initial Animation starten
   showPage(0);
 });
 </script>
