@@ -103,11 +103,26 @@
   /* Hai GIF */
   .shark-gif {
     position: absolute;
-    bottom: 20px;   /* höher als zuvor */
+    bottom: 20px;
     width: 350px;
     height: 350px;
     background: url('HCI.gif') no-repeat center;
     background-size: contain;
+    opacity: 1;
+  }
+
+  /* iFrame Eisplan */
+  .iframe-container {
+    display: none;
+    margin-top: 20px;
+    width: 90%;
+    height: 600px;
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+
+  .iframe-container.show {
+    display: block;
     opacity: 1;
   }
 
@@ -131,13 +146,13 @@
   @media (max-width: 1920px) {
     .announcement-container h1 { font-size: 5vw; }
     .announcement-container ul { font-size: 2.5vw; line-height: 3vw; }
-    .shark-gif { width: 300px; height: 300px; bottom: 10px; } /* höher */
+    .shark-gif { width: 300px; height: 300px; bottom: 10px; }
   }
 
   @media (max-width: 768px) {
     .announcement-container h1 { font-size: 9vw; }
     .announcement-container ul { font-size: 5vw; line-height: 6vw; }
-    .shark-gif { width: 180px; height: 180px; bottom: 5px; } /* höher */
+    .shark-gif { width: 180px; height: 180px; bottom: 5px; }
   }
 
   /* Signature */
@@ -177,12 +192,30 @@
 
   <div class="shark-gif"></div>
 
+  <div class="iframe-container">
+    <iframe 
+      src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe/Vienna&showTitle=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmU5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZDU3OWRjY2M2MTNhZTI0YzZlNjY1NmE5ZGIyOWM0MDRlNDk5NjNhZjFiZDYyNjY0NGQwZGE5OTVhNTUzNmUxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzBiZDg4YjUxNmVlNGRmNGFjMmZkMWU2NGJhOWQ4MzBlMjViY2VlZjc4YjM4MmM5N2FhZWZmZWU1NmY5NjlmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YjQ5M2RhNTY5NDg5NTA2MDQ0YWE2MmVmYTA5ODIyODM0MmQ0NjRhMzQ4MzY5MGYyNTU1NTE0Yzg0Y2ZmNDI0NEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YWQ4ZjNlMmRiODQ1YjZiNmM5ZTZkYmIyZDkyNGY1NTliNjVhNjI3YTNlNWEzMmYwYzQ0YmRhZTA1NzMxNGMwOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6&color=%23c0ca33&color=%230b8043&color=%233f51b5&color=%238e24aa&color=%23616161&color=%23ad1457&color=%23e4c441" 
+      style="border:0" 
+      width="100%" 
+      height="100%" 
+      frameborder="0" 
+      scrolling="no">
+    </iframe>
+  </div>
+
   <div class="signature">Designed by MS</div>
 
 <script>
+  // Logo Animation
   window.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.logo-container').classList.add('loaded');
   });
+
+  // Eisplan iFrame nach 5 Sekunden einblenden
+  setTimeout(() => {
+    const iframe = document.querySelector('.iframe-container');
+    iframe.classList.add('show');
+  }, 5000);
 </script>
 </body>
 </html>
