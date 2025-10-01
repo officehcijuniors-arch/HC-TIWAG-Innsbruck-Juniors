@@ -59,7 +59,7 @@
   .calendar-page iframe { 
     border:0; 
     width:90%; 
-    height:800px; 
+    height:calc(100vh - 150px); /* volle Höhe minus Platz für Header und Logos */
     margin-top:10px; 
     border-radius:10px; 
     box-shadow:0 0 20px rgba(0,0,0,0.6); 
@@ -101,7 +101,7 @@
   @media(max-width:768px){
     .announcement-container h1{ font-size:9vw; }
     .announcement-container ul{ font-size:5vw; line-height:6vw; }
-    .calendar-page iframe{ height:600px; margin-top:5px; }
+    .calendar-page iframe{ height:60vh; margin-top:5px; }
     .shark-gif{ width:180px; height:180px; bottom:5px; }
   }
 </style>
@@ -212,6 +212,17 @@ window.addEventListener('DOMContentLoaded', ()=>{
   },5000);
 
   showPage(0);
+
+  // Kalenderhöhe dynamisch anpassen
+  function resizeCalendar() {
+    const iframe = document.getElementById('calendar');
+    const headerHeight = document.querySelector('.calendar-page header').offsetHeight;
+    const logoHeight = document.querySelector('.calendar-page .logo-container').offsetHeight;
+    iframe.style.height = (window.innerHeight - headerHeight - logoHeight - 20) + 'px';
+  }
+
+  window.addEventListener('resize', resizeCalendar);
+  window.addEventListener('DOMContentLoaded', resizeCalendar);
 });
 </script>
 </body>
