@@ -65,13 +65,11 @@
     box-shadow:0 0 20px rgba(0,0,0,0.6); 
   }
 
-  .org-page, .video-page, .iframe-page {
+  .org-page, .video-page {
     background: linear-gradient(135deg, #003789 40%, #d42323 60%);
     justify-content:center; 
     align-items:center;
-    overflow:hidden;
   }
-
   .org-page img {
     width:100%;
     height:100%;
@@ -80,7 +78,10 @@
     transform:scale(0.95);
     transition:opacity 1.5s ease, transform 1.5s ease;
   }
-  .org-page.active img { opacity:1; transform:scale(1); }
+  .org-page.active img {
+    opacity:1;
+    transform:scale(1);
+  }
 
   .video-page video.zoom-video {
     width:100%;
@@ -90,17 +91,10 @@
     transform:scale(0.97);
     transition:opacity 1.5s ease, transform 3s ease;
   }
-  .video-page.active video.zoom-video { opacity:1; transform:scale(1); }
-
-  .iframe-page iframe {
-    transition:opacity 1.5s ease;
-    opacity:0;
-    width:90%;
-    height:800px;
-    border-radius:10px;
-    box-shadow:0 0 20px rgba(0,0,0,0.6);
+  .video-page.active video.zoom-video {
+    opacity:1;
+    transform:scale(1);
   }
-  .iframe-page.active iframe { opacity:1; }
 
   .signature { position:fixed; bottom:10px; right:15px; font-size:0.9em; color:rgba(255,255,255,0.5); pointer-events:none; }
 
@@ -108,7 +102,6 @@
     .announcement-container h1{ font-size:9vw; }
     .announcement-container ul{ font-size:5vw; line-height:6vw; }
     .calendar-page iframe{ height:600px; margin-top:5px; }
-    .iframe-page iframe{ height:600px; margin-top:5px; }
     .shark-gif{ width:180px; height:180px; bottom:5px; }
   }
 </style>
@@ -158,14 +151,6 @@
   <video autoplay loop muted playsinline class="zoom-video">
     <source src="Fotos.mp4" type="video/mp4">
   </video>
-</div>
-
-<!-- Seite 5 -->
-<div class="page iframe-page page-5">
-  <iframe 
-    src="https://www.eishockey.at/gamecenter/u13?seasonID=13497" 
-    frameborder="0" style="border:none;">
-  </iframe>
 </div>
 
 <div class="signature">Designed by MS</div>
@@ -218,6 +203,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
     } else if(pages[index].classList.contains('calendar-page')){
       animatePage2();
     }
+    // Seite 3 & 4 Animationen erfolgen automatisch über CSS-Transitions
   }
 
   setInterval(()=>{
