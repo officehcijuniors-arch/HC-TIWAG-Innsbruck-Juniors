@@ -6,19 +6,37 @@
 <style>
   /* ======= Grundlayout ======= */
   body { 
-    margin:0; font-family:"Areno Serif", serif; color:#fff; overflow:hidden; 
+    margin:0; 
+    font-family:"Areno Serif", serif; 
+    color:#fff; 
+    overflow:hidden;
   }
+
+  /* ======= Jede Seite ======= */
   .page {
     position:absolute; top:0; left:0; width:100%; height:100%;
     display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
-    opacity:0; transition:opacity 1s ease;
+    opacity:0;
+    transition:opacity 1s ease;
     background: linear-gradient(135deg, #003789 40%, #d42323 60%);
   }
   .page.active { opacity:1; z-index:1; }
 
   /* ======= Logos oben ======= */
-  .logo-container { display:flex; justify-content:center; align-items:flex-end; gap:60px; margin:20px 0 10px; }
-  .logo-container img { max-height:100px; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.6)); opacity:0; transform:translateY(-20px); transition:transform 1s ease, opacity 1s ease; }
+  .logo-container { 
+    display:flex; 
+    justify-content:center; 
+    align-items:flex-end; 
+    gap:60px; 
+    margin:20px 0 10px; 
+  }
+  .logo-container img { 
+    max-height:100px; 
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.6)); 
+    opacity:0; 
+    transform:translateY(-20px); 
+    transition:transform 1s ease, opacity 1s ease; 
+  }
   .logo-container img:last-child { max-height:50px; transform:translateY(-25px); }
 
   /* ======= Überschrift ======= */
@@ -27,44 +45,78 @@
   header h1 { font-size:2.4em; margin:0 0 5px 0; }
 
   /* ======= Ankündigungen (Seite 1) ======= */
-  .announcement-container { display:flex; flex-direction:column; align-items:center; width:100%; text-align:center; margin-top:10px; }
+  .announcement-container { 
+    display:flex; flex-direction:column; align-items:center; 
+    width:100%; text-align:center; margin-top:10px; 
+  }
   .announcement-container h1 {
-    font-size:5vw; color:#fff; text-shadow:2px 2px 8px rgba(0,0,0,0.6);
-    margin:20px 0 30px; letter-spacing:0.18em; font-weight:700;
+    font-size:5vw;
+    color:#fff;
+    text-shadow:2px 2px 8px rgba(0,0,0,0.6);
+    margin:20px 0 30px;
+    letter-spacing:0.18em;
+    font-weight:700;
     animation: glowPulse 2s ease-in-out infinite alternate;
   }
   @keyframes glowPulse {
-    0% { text-shadow:0 0 10px rgba(255,255,255,0.6);}
-    50% { text-shadow:0 0 40px rgba(255,255,255,0.8);}
-    100% { text-shadow:0 0 10px rgba(255,255,255,0.6);}
+    0% { text-shadow: 0 0 10px rgba(255,255,255,0.6); }
+    50% { text-shadow: 0 0 40px rgba(255,255,255,0.8); }
+    100% { text-shadow: 0 0 10px rgba(255,255,255,0.6); }
   }
-  .announcement-container ul { list-style:none; padding:0; margin:0 auto; font-size:2.5vw; line-height:3vw; text-transform:uppercase; color:rgba(255,255,255,0.95); max-width:80%; }
-  .announcement-container ul li { opacity:0; transform:translateY(30px); margin:10px 0; transition:all 1s ease; }
+  .announcement-container ul { 
+    list-style:none; padding:0; margin:0 auto; 
+    font-size:2.5vw; line-height:3vw; text-transform:uppercase; 
+    color:rgba(255,255,255,0.95); max-width:80%; 
+  }
+  .announcement-container ul li { 
+    opacity:0; transform:translateY(30px); margin:10px 0; 
+    transition:all 1s ease; 
+  }
 
   /* ======= Hai-GIF ======= */
-  .shark-gif { position:absolute; bottom:20px; width:350px; height:350px; background:url('HCI.gif') no-repeat center; background-size:contain; pointer-events:none; opacity:1; }
-  .calendar-page .shark-gif { opacity:0.15; }
+  .shark-gif {
+    position:absolute; bottom:20px; width:350px; height:350px;
+    background:url('HCI.gif') no-repeat center; background-size:contain;
+    pointer-events:none; opacity:1;
+  }
 
   /* ======= Kalender-Seite (Seite 2) ======= */
-  .calendar-page iframe { border:0; width:90%; height:calc(100vh - 150px); margin-top:10px; border-radius:10px; box-shadow:0 0 20px rgba(0,0,0,0.6); }
+  .calendar-page .shark-gif { opacity:0.15; }
+  .calendar-page iframe { 
+    border:0; 
+    width:90%; 
+    height:calc(100vh - 150px);
+    margin-top:10px; 
+    border-radius:10px; 
+    box-shadow:0 0 20px rgba(0,0,0,0.6); 
+  }
 
   /* ======= Organigramm-Seite (Seite 3) ======= */
-  .org-page, .video-page { background: linear-gradient(135deg, #003789 40%, #d42323 60%); justify-content:center; align-items:center; }
-  .org-page img { width:100%; height:100%; object-fit:contain; opacity:0; transform:scale(0.95); transition:opacity 1.5s ease, transform 1.5s ease; }
+  .org-page, .video-page {
+    background: linear-gradient(135deg, #003789 40%, #d42323 60%);
+    justify-content:center; align-items:center;
+  }
+  .org-page img {
+    width:100%; height:100%; object-fit:contain;
+    opacity:0; transform:scale(0.95);
+    transition:opacity 1.5s ease, transform 1.5s ease;
+  }
   .org-page.active img { opacity:1; transform:scale(1); }
 
   /* ======= Video-Seite (Seite 4) ======= */
-  .video-page video.zoom-video { width:100%; height:100%; object-fit:contain; opacity:0; transform:scale(0.97); transition:opacity 1.5s ease, transform 3s ease; }
+  .video-page video.zoom-video {
+    width:100%; height:100%; object-fit:contain;
+    opacity:0; transform:scale(0.97);
+    transition:opacity 1.5s ease, transform 3s ease;
+  }
   .video-page.active video.zoom-video { opacity:1; transform:scale(1); }
 
-  /* ======= Admin-Seite (nur für Admin sichtbar) ======= */
-  .settings-page { display:none; justify-content:center; align-items:center; flex-direction:column; background:rgba(0,0,0,0.9);}
-  .settings-page header h1 { color:#ffeb3b; margin-bottom:20px; }
-  .settings-box { background:rgba(255,255,255,0.1); padding:20px; border-radius:10px; }
-  .settings-box label { display:block; margin:10px 0; font-size:1.2em; }
-
   /* ======= Signatur ======= */
-  .signature { position:fixed; bottom:10px; right:15px; font-size:0.9em; color:rgba(255,255,255,0.5); pointer-events:none; }
+  .signature { 
+    position:fixed; bottom:10px; right:15px; 
+    font-size:0.9em; color:rgba(255,255,255,0.5); 
+    pointer-events:none; 
+  }
 
   /* ======= Responsive ======= */
   @media(max-width:768px){
@@ -72,6 +124,17 @@
     .announcement-container ul{ font-size:5vw; line-height:6vw; }
     .calendar-page iframe{ height:60vh; margin-top:5px; }
     .shark-gif{ width:180px; height:180px; bottom:5px; }
+  }
+
+  /* ======= Admin-Seite ======= */
+  .settings-page {
+    position:absolute; top:0; left:0; width:100%; height:100%;
+    display:none; flex-direction:column; align-items:center; justify-content:flex-start;
+    background: rgba(0,0,0,0.9);
+    z-index:999;
+    color:#fff;
+    padding:20px;
+    overflow:auto;
   }
 </style>
 </head>
@@ -103,7 +166,12 @@
     <img src="TIWAG.jpg" alt="TIWAG Logo">
   </div>
   <header><div class="title-block"><h1>HC TIWAG Innsbruck Juniors</h1></div></header>
-  <iframe id="calendar" src="HIER DEIN GOOGLE KALENDER LINK" frameborder="0" scrolling="no"></iframe>
+
+  <!-- Neuer Kalender-iframe -->
+  <iframe id="calendar" 
+    src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showPrint=0&showTitle=0&mode=WEEK&showTz=0&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZDU3OWRjY2M2MTNhZTI0YzZlNjY1NmE5ZGIyOWM0MDRlNDk5NjNhZjFiZDYyNjY0NGQwZGE5OTVhNTUzNmUxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzBiZDg4YjUxNmVlNGRmNGFjMmZkMWU2NGJhOWQ4MzBlMjViY2VlZjc4YjM4MmM5N2FhZWZmZWU1NmY5NjlmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YjQ5M2RhNTY5NDg5NTA2MDQ0YWE2MmVmYTA5ODIyODM0MmQ0NjRhMzQ4MzY5MGYyNTU1NTE0Yzg0Y2ZmNDI0NEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YWQ4ZjNlMmRiODQ1YjZiNmM5ZTZkYmIyZDkyNGY1NTliNjVhNjI3YTNlNWEzMmYwYzQ0YmRhZTA1NzMxNGMwOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6&color=%23c0ca33&color=%230b8043&color=%233f51b5&color=%238e24aa&color=%23616161&color=%23ad1457&color=%23e4c441"
+    frameborder="0" scrolling="no"></iframe>
+
   <div class="shark-gif"></div>
 </div>
 
@@ -119,18 +187,14 @@
   </video>
 </div>
 
-<!-- ======= Admin-Seite (nur für dich) ======= -->
-<div class="page settings-page page-5">
-  <header><h1>Admin Einstellungen</h1></header>
-  <div class="settings-box">
-    <label><input type="checkbox" class="page-toggle" data-page="1" checked> Seite 1: Startseite</label>
-    <label><input type="checkbox" class="page-toggle" data-page="2" checked> Seite 2: Kalender</label>
-    <label><input type="checkbox" class="page-toggle" data-page="3" checked> Seite 3: Organigramm</label>
-    <label><input type="checkbox" class="page-toggle" data-page="4" checked> Seite 4: Fotos/Videos</label>
-  </div>
-  <p style="margin-top:20px; color:#ccc; font-size:0.9em;">Halte <strong>M</strong> 5 Sek. → Admin-Modus.<br><strong>ESC drücken → zurück zur Rotation</strong></p>
+<!-- ======= Admin-Seite (Einstellungen) ======= -->
+<div class="settings-page" id="adminPanel">
+  <h2>Admin-Bereich</h2>
+  <p>Hier kannst du Hinweise und Einstellungen sehen.</p>
+  <p>Drücke <strong>ESC</strong>, um zurück zu gehen.</p>
 </div>
 
+<!-- ======= Signatur unten rechts ======= -->
 <div class="signature">Designed by MS</div>
 
 <script>
@@ -138,7 +202,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
   const pages=document.querySelectorAll('.page');
   let current=0;
 
-  // ======= Animation Seite 1 =======
+  /* ======= Seite 1 Animation ======= */
   function animatePage1(){
     const logos=document.querySelectorAll('.page-1 .logo-container img');
     logos.forEach((img,i)=>{
@@ -161,85 +225,63 @@ window.addEventListener('DOMContentLoaded', ()=>{
     });
   }
 
-  // ======= Kalender neu laden bei Seite 2 =======
+  /* ======= Seite 2 Animation (Kalender neu laden) ======= */
   function animatePage2(){
     const iframe=document.getElementById('calendar');
     iframe.src = iframe.src;
   }
 
-  // ======= Admin Seitensteuerung =======
-  function getActivePages(){
-    const toggles=document.querySelectorAll('.page-toggle');
-    let active=[];
-    toggles.forEach(t=>{
-      if(t.checked){ active.push(parseInt(t.dataset.page,10)-1); }
-    });
-    return active;
-  }
-
+  /* ======= Seite anzeigen ======= */
   function showPage(index){
-    pages.forEach(p=>p.classList.remove('active'));
-    pages[index].classList.add('active');
-    if(pages[index].classList.contains('page-1')) animatePage1();
-    if(pages[index].classList.contains('calendar-page')) animatePage2();
+    pages.forEach((p,i)=>{
+      p.classList.remove('active');
+      if(i===index) p.classList.add('active');
+    });
+
+    if(pages[index].classList.contains('page-1')){
+      animatePage1();
+    } else if(pages[index].classList.contains('calendar-page')){
+      animatePage2();
+    }
   }
 
-  // ======= Rotation alle 5 Sekunden =======
+  /* ======= Automatisches Wechseln alle 5 Sekunden ======= */
   setInterval(()=>{
-    const active=getActivePages();
-    if(active.length===0) return;
-    const pos=active.indexOf(current);
-    const next=active[(pos+1)%active.length];
-    current=next;
+    current=(current+1)%pages.length;
     showPage(current);
   },5000);
 
   showPage(0);
 
-  // ======= Kalenderhöhe dynamisch =======
+  /* ======= Kalenderhöhe dynamisch ======= */
   function resizeCalendar() {
-    const iframe=document.getElementById('calendar');
-    if(!iframe) return;
-    const headerHeight=document.querySelector('.calendar-page header').offsetHeight;
-    const logoHeight=document.querySelector('.calendar-page .logo-container').offsetHeight;
-    iframe.style.height=(window.innerHeight - headerHeight - logoHeight - 20)+'px';
+    const iframe = document.getElementById('calendar');
+    if (!iframe) return;
+    const headerHeight = document.querySelector('.calendar-page header').offsetHeight;
+    const logoHeight = document.querySelector('.calendar-page .logo-container').offsetHeight;
+    iframe.style.height = (window.innerHeight - headerHeight - logoHeight - 20) + 'px';
   }
   window.addEventListener('resize', resizeCalendar);
   resizeCalendar();
 
-  // ======= Adminmodus per 5 Sek. Taste M =======
-  let mKeyTimer=null, mKeyStart=0;
-  window.addEventListener('keydown',(e)=>{
-    if(e.key.toLowerCase()==="m" && !mKeyTimer){
-      mKeyStart=Date.now();
-      mKeyTimer=setInterval(()=>{
-        if(Date.now()-mKeyStart>=5000){
-          clearInterval(mKeyTimer); mKeyTimer=null;
-          pages.forEach(p=>p.classList.remove('active'));
-          const admin=document.querySelector('.settings-page');
-          admin.style.display="flex"; admin.classList.add('active');
-          current=pages.length-1;
-        }
-      },100);
+  /* ======= Admin-Seite: M-Taste 5 Sek. halten ======= */
+  let mTimer;
+  document.addEventListener('keydown', e=>{
+    if(e.key.toLowerCase() === 'm'){
+      if(!mTimer) mTimer=setTimeout(()=>{ document.getElementById('adminPanel').style.display='flex'; },5000);
     }
-    if(e.key==="Escape"){
-      const admin=document.querySelector('.settings-page');
-      admin.classList.remove('active'); admin.style.display="none";
-      const active=getActivePages();
-      if(active.length>0){ current=active[0]; showPage(current); }
+    if(e.key === 'Escape'){
+      document.getElementById('adminPanel').style.display='none';
     }
   });
-  window.addEventListener('keyup',(e)=>{ if(e.key.toLowerCase()==="m" && mKeyTimer){ clearInterval(mKeyTimer); mKeyTimer=null; } });
-
-  // ======= Admin-Häkchen ändern Seiten =======
-  document.querySelectorAll('.page-toggle').forEach(cb=>{
-    cb.addEventListener('change', ()=>{
-      const active=getActivePages();
-      if(active.length>0){ current=active[0]; showPage(current); }
-    });
+  document.addEventListener('keyup', e=>{
+    if(e.key.toLowerCase() === 'm'){
+      clearTimeout(mTimer);
+      mTimer=null;
+    }
   });
-
 });
 </script>
+
 </body>
 </html>
