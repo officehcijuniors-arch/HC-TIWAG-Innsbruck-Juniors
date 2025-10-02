@@ -40,7 +40,8 @@ header h1 { font-size:2.4em; margin:0 0 5px 0; }
 .settings-inner { max-width:900px; width:100%; }
 .settings-inner h2 { margin:0 0 10px 0; color:#ffeb3b; }
 .settings-box { background:rgba(255,255,255,0.04); padding:16px; border-radius:8px; margin-top:12px; }
-.settings-box label { display:block; margin:8px 0; font-size:1.05rem; cursor:pointer; }
+.settings-box label { display:flex; align-items:center; gap:8px; margin:8px 0; font-size:1.05rem; cursor:pointer; }
+.settings-box input[type="number"] { width:60px; padding:2px 5px; border-radius:4px; border:1px solid #ccc; }
 .admin-hint { margin-top:14px; color:#ddd; font-size:0.95rem; }
 
 .signature { position:fixed; bottom:10px; right:15px; font-size:0.9em; color:rgba(255,255,255,0.5); pointer-events:none; }
@@ -109,10 +110,22 @@ header h1 { font-size:2.4em; margin:0 0 5px 0; }
   <div class="settings-inner">
     <h2>Admin-Einstellungen</h2>
     <div class="settings-box">
-      <label><input type="checkbox" class="page-toggle" data-page="1" checked> Seite 1: Startseite</label>
-      <label><input type="checkbox" class="page-toggle" data-page="2" checked> Seite 2: Kalender</label>
-      <label><input type="checkbox" class="page-toggle" data-page="3" checked> Seite 3: Organigramm</label>
-      <label><input type="checkbox" class="page-toggle" data-page="4" checked> Seite 4: Fotos/Videos</label>
+      <label>
+        <input type="checkbox" class="page-toggle" data-page="1" checked> Seite 1: Startseite
+        <input type="number" class="page-duration" data-page="1" min="1" value="1"> Minuten
+      </label>
+      <label>
+        <input type="checkbox" class="page-toggle" data-page="2" checked> Seite 2: Kalender
+        <input type="number" class="page-duration" data-page="2" min="1" value="1"> Minuten
+      </label>
+      <label>
+        <input type="checkbox" class="page-toggle" data-page="3" checked> Seite 3: Organigramm
+        <input type="number" class="page-duration" data-page="3" min="1" value="1"> Minuten
+      </label>
+      <label>
+        <input type="checkbox" class="page-toggle" data-page="4" checked> Seite 4: Fotos/Videos
+        <input type="number" class="page-duration" data-page="4" min="1" value="1"> Minuten
+      </label>
     </div>
     <p class="admin-hint">
       Halte <strong>M</strong> 2 Sek. → Admin-Modus öffnen.<br>
@@ -124,12 +137,12 @@ header h1 { font-size:2.4em; margin:0 0 5px 0; }
 <div class="signature">Designed by MS</div>
 
 <script>
-// Originales Skript für Rotation und Animationen bleibt unverändert
 window.addEventListener('DOMContentLoaded', ()=>{
   const pages=document.querySelectorAll('.page');
   const adminPanel=document.getElementById('adminPanel');
   const checkboxes=document.querySelectorAll('.page-toggle');
-  let current=0, rotationInterval=null, adminOpen=false;
+  const durationInputs=document.querySelectorAll('.page-duration');
+  let current=0, rotationTimer=null, adminOpen=false;
 
   function getActivePageIndexes(){
     const active=[];
@@ -165,7 +178,6 @@ window.addEventListener('DOMContentLoaded', ()=>{
   }
 
   function animatePage2(){
-    // Logos wie auf Seite 1 animieren
     const logos=document.querySelectorAll('.page-2 .logo-container img');
     logos.forEach((img,i)=>{
       img.style.opacity=0;
@@ -176,26 +188,37 @@ window.addEventListener('DOMContentLoaded', ()=>{
       img.style.transform='translate(0,0)';
     });
 
-    // Kalender-iframe neu laden
     const iframe=document.getElementById('calendar');
     if(iframe) iframe.src=iframe.src;
   }
 
   function startRotation(){
-    if(rotationInterval) return;
-    rotationInterval=setInterval(()=>{
+    if(rotationTimer) return;
+
+    function rotate(){
       if(adminOpen) return;
       const active=getActivePageIndexes();
       if(active.length===0) return;
+
       let pos=active.indexOf(current);
       if(pos===-1) pos=0;
       const next=active[(pos+1)%active.length];
       current=next;
       showPage(current);
-    },5000);
+
+      // Dauer in ms auslesen
+      const durationInput = document.querySelector(`.page-duration[data-page="${current+1}"]`);
+      const durationMinutes = durationInput ? parseFloat(durationInput.value) : 1;
+      const durationMs = durationMinutes * 60 * 1000;
+
+      rotationTimer=setTimeout(rotate, durationMs);
+    }
+
+    // Start sofort
+    rotate();
   }
 
-  function stopRotation(){ if(rotationInterval){ clearInterval(rotationInterval); rotationInterval=null; } }
+  function stopRotation(){ if(rotationTimer){ clearTimeout(rotationTimer); rotationTimer=null; } }
 
   (function initStart(){
     const active=getActivePageIndexes();
@@ -206,8 +229,16 @@ window.addEventListener('DOMContentLoaded', ()=>{
 
   checkboxes.forEach(cb=>{ cb.addEventListener('change',()=>{
     const active=getActivePageIndexes();
-    if(active.length>0){ current=active[0]; showPage(current); }
+    if(active.length>0){ current=active[0]; showPage(current); stopRotation(); startRotation(); }
   }); });
+
+  durationInputs.forEach(input=>{
+    input.addEventListener('change',()=>{
+      if(parseFloat(input.value)<1) input.value=1;
+      stopRotation();
+      startRotation();
+    });
+  });
 
   function resizeCalendar(){
     const iframe=document.getElementById('calendar');
