@@ -166,12 +166,9 @@
     <img src="TIWAG.jpg" alt="TIWAG Logo">
   </div>
   <header><div class="title-block"><h1>HC TIWAG Innsbruck Juniors</h1></div></header>
-
-  <!-- Neuer Kalender-iframe -->
   <iframe id="calendar" 
-    src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showPrint=0&showTitle=0&mode=WEEK&showTz=0&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZDU3OWRjY2M2MTNhZTI0YzZlNjY1NmE5ZGIyOWM0MDRlNDk5NjNhZjFiZDYyNjY0NGQwZGE5OTVhNTUzNmUxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzBiZDg4YjUxNmVlNGRmNGFjMmZkMWU2NGJhOWQ4MzBlMjViY2VlZjc4YjM4MmM5N2FhZWZmZWU1NmY5NjlmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YjQ5M2RhNTY5NDg5NTA2MDQ0YWE2MmVmYTA5ODIyODM0MmQ0NjRhMzQ4MzY5MGYyNTU1NTE0Yzg0Y2ZmNDI0NEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YWQ4ZjNlMmRiODQ1YjZiNmM5ZTZkYmIyZDkyNGY1NTliNjVhNjI3YTNlNWEzMmYwYzQ0YmRhZTA1NzMxNGMwOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6&color=%23c0ca33&color=%230b8043&color=%233f51b5&color=%238e24aa&color=%23616161&color=%23ad1457&color=%23e4c441"
+    src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showPrint=0&showTitle=0&mode=WEEK&showTz=0&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6&color=%23c0ca33&color=%230b8043&color=%233f51b5&color=%238e24aa&color=%23616161&color=%23ad1457&color=%23e4c441"
     frameborder="0" scrolling="no"></iframe>
-
   <div class="shark-gif"></div>
 </div>
 
@@ -187,14 +184,14 @@
   </video>
 </div>
 
-<!-- ======= Admin-Seite (Einstellungen) ======= -->
+<!-- ======= Admin-Seite ======= -->
 <div class="settings-page" id="adminPanel">
   <h2>Admin-Bereich</h2>
   <p>Hier kannst du Hinweise und Einstellungen sehen.</p>
   <p>Drücke <strong>ESC</strong>, um zurück zu gehen.</p>
 </div>
 
-<!-- ======= Signatur unten rechts ======= -->
+<!-- ======= Signatur ======= -->
 <div class="signature">Designed by MS</div>
 
 <script>
@@ -202,7 +199,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
   const pages=document.querySelectorAll('.page');
   let current=0;
 
-  /* ======= Seite 1 Animation ======= */
+  /* Seite 1 Animation */
   function animatePage1(){
     const logos=document.querySelectorAll('.page-1 .logo-container img');
     logos.forEach((img,i)=>{
@@ -213,7 +210,6 @@ window.addEventListener('DOMContentLoaded', ()=>{
       img.style.opacity=1;
       img.style.transform='translate(0,0)';
     });
-
     const items=document.querySelectorAll('.page-1 .announcement-container ul li');
     items.forEach((li,i)=>{
       li.style.opacity=0;
@@ -225,27 +221,23 @@ window.addEventListener('DOMContentLoaded', ()=>{
     });
   }
 
-  /* ======= Seite 2 Animation (Kalender neu laden) ======= */
+  /* Kalender neu laden */
   function animatePage2(){
     const iframe=document.getElementById('calendar');
     iframe.src = iframe.src;
   }
 
-  /* ======= Seite anzeigen ======= */
+  /* Seite anzeigen */
   function showPage(index){
     pages.forEach((p,i)=>{
       p.classList.remove('active');
       if(i===index) p.classList.add('active');
     });
-
-    if(pages[index].classList.contains('page-1')){
-      animatePage1();
-    } else if(pages[index].classList.contains('calendar-page')){
-      animatePage2();
-    }
+    if(pages[index].classList.contains('page-1')) animatePage1();
+    else if(pages[index].classList.contains('calendar-page')) animatePage2();
   }
 
-  /* ======= Automatisches Wechseln alle 5 Sekunden ======= */
+  /* Automatisches Wechseln */
   setInterval(()=>{
     current=(current+1)%pages.length;
     showPage(current);
@@ -253,7 +245,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
 
   showPage(0);
 
-  /* ======= Kalenderhöhe dynamisch ======= */
+  /* Kalenderhöhe dynamisch */
   function resizeCalendar() {
     const iframe = document.getElementById('calendar');
     if (!iframe) return;
@@ -264,11 +256,11 @@ window.addEventListener('DOMContentLoaded', ()=>{
   window.addEventListener('resize', resizeCalendar);
   resizeCalendar();
 
-  /* ======= Admin-Seite: M-Taste 5 Sek. halten ======= */
+  /* Admin: M-Taste 2 Sekunden halten */
   let mTimer;
   document.addEventListener('keydown', e=>{
     if(e.key.toLowerCase() === 'm'){
-      if(!mTimer) mTimer=setTimeout(()=>{ document.getElementById('adminPanel').style.display='flex'; },5000);
+      if(!mTimer) mTimer=setTimeout(()=>{ document.getElementById('adminPanel').style.display='flex'; },2000);
     }
     if(e.key === 'Escape'){
       document.getElementById('adminPanel').style.display='none';
