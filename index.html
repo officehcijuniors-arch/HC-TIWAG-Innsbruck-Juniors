@@ -35,6 +35,21 @@
   .announcement-container ul { list-style:none; padding:0; margin:0 auto; font-size:2.5vw; line-height:3vw; text-transform:uppercase; color:rgba(255,255,255,0.95); max-width:80%; }
   .announcement-container ul li { opacity:0; transform:translateY(30px); margin:10px 0; transition:all 1s ease; }
 
+  /* ======= kleiner Text Eisplan auf Kalenderseite ======= */
+  .calendar-title {
+    font-size:4vw;
+    color:#fff;
+    text-shadow:1px 1px 5px rgba(0,0,0,0.6);
+    margin: 15px 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 1s ease;
+  }
+  .page-2.active .calendar-title {
+    opacity:1;
+    transform: translateY(0);
+  }
+
   /* ======= Shark GIF ======= */
   .shark-gif { position:absolute; bottom:20px; width:350px; height:350px; background:url('HCI.gif') no-repeat center; background-size:contain; pointer-events:none; opacity:1; }
   .calendar-page .shark-gif { opacity:0.15; }
@@ -69,6 +84,7 @@
     .calendar-page iframe{ height:60vh; margin-top:5px; }
     .shark-gif{ width:180px; height:180px; bottom:5px; }
     .settings-inner { padding:0 10px; }
+    .calendar-title { font-size:6vw; }
   }
 </style>
 </head>
@@ -99,7 +115,14 @@
     <img src="HAI.png" alt="HAI Logo">
     <img src="TIWAG.jpg" alt="TIWAG Logo">
   </div>
-  <header><div class="title-block"><h1>HC TIWAG Innsbruck Juniors</h1></div></header>
+  <header>
+    <div class="title-block"><h1>HC TIWAG Innsbruck Juniors</h1></div>
+  </header>
+
+  <!-- Neuer Text über dem Kalender -->
+  <div class="announcement-container">
+    <h2 class="calendar-title">Eisplan</h2>
+  </div>
 
   <!-- Kalender-iframe (wichtig: id="calendar" beibehalten) -->
   <iframe id="calendar" 
@@ -206,9 +229,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
       if(adminOpen) return; // Pause, wenn Admin offen
       const active = getActivePageIndexes();
       if(active.length === 0) return;
-      // bestimme Position des aktuellen index innerhalb active[]
       let pos = active.indexOf(current);
-      // wenn current nicht in active (z.B. wurde deaktiviert) -> starte bei 0
       if(pos === -1) pos = 0;
       const next = active[(pos + 1) % active.length];
       current = next;
@@ -220,7 +241,6 @@ window.addEventListener('DOMContentLoaded', ()=>{
   }
 
   /* ===== Initialisieren ===== */
-  // setze current auf erste aktive Seite (Standard: 1)
   (function initStart(){
     const active = getActivePageIndexes();
     current = active.length > 0 ? active[0] : 0;
@@ -262,7 +282,6 @@ window.addEventListener('DOMContentLoaded', ()=>{
     adminOpen = false;
     adminPanel.style.display = 'none';
     adminPanel.setAttribute('aria-hidden','true');
-    // wieder zur ersten aktiven Seite springen
     const active = getActivePageIndexes();
     if(active.length > 0){
       current = active[0];
@@ -274,7 +293,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
   document.addEventListener('keydown', (e)=>{
     if(e.key.toLowerCase() === 'm'){
       if(!mTimer){
-        mTimer = setTimeout(()=>{ openAdmin(); mTimer = null; }, 2000); // 2000 ms = 2 Sekunden
+        mTimer = setTimeout(()=>{ openAdmin(); mTimer = null; }, 2000);
       }
     }
     if(e.key === 'Escape'){
@@ -291,4 +310,3 @@ window.addEventListener('DOMContentLoaded', ()=>{
 </script>
 </body>
 </html>
-
