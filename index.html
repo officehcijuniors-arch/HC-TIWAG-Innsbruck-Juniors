@@ -194,7 +194,12 @@ window.addEventListener('DOMContentLoaded', ()=>{
 
   (function initStart(){
     const active=getActivePageIndexes();
-    current=active.length>0?active[0]:0;
+    // Immer mit Seite 1 starten, wenn aktiv
+    if(active.includes(0)){
+      current=0;
+    } else {
+      current=active.length>0?active[0]:0;
+    }
     showPage(current);
     startRotation();
   })();
@@ -210,6 +215,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
   document.addEventListener('keydown',(e)=>{ if(e.key.toLowerCase()==='m'){ if(!mTimer){ mTimer=setTimeout(()=>{ openAdmin(); mTimer=null; },2000); } } if(e.key==='Escape'){ if(adminOpen) closeAdmin(); } });
   document.addEventListener('keyup',(e)=>{ if(e.key.toLowerCase()==='m'){ if(mTimer){ clearTimeout(mTimer); mTimer=null; } } });
 
+  // Animationen original beibehalten
   function animatePage1(){
     const logos=document.querySelectorAll('.page-1 .logo-container img');
     logos.forEach((img,i)=>{
