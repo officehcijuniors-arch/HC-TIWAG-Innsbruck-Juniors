@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <title>HC TIWAG Innsbruck Juniors - Infosäule</title>
 <style>
+  /* ==================== Grundlayout ==================== */
   body { margin:0; font-family:"Areno Serif", serif; color:#fff; overflow:hidden; }
   .page {
     position:absolute; top:0; left:0; width:100%; height:100%;
@@ -13,89 +14,70 @@
   }
   .page.active { opacity:1; z-index:1; }
 
+  /* ==================== Logos ==================== */
   .logo-container { display:flex; justify-content:center; align-items:flex-end; gap:60px; margin:20px 0 10px; }
   .logo-container img { max-height:100px; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.6)); opacity:0; transform:translateY(-20px); transition:transform 1s ease, opacity 1s ease; }
   .logo-container img:last-child { max-height:50px; transform:translateY(-25px); }
 
+  /* ==================== Header ==================== */
   header { text-align:center; padding:10px 0; }
   .title-block { text-shadow:2px 2px 8px rgba(0,0,0,0.8); }
   header h1 { font-size:2.4em; margin:0 0 5px 0; }
 
+  /* ==================== Startseite/Announcements ==================== */
   .announcement-container { display:flex; flex-direction:column; align-items:center; width:100%; text-align:center; margin-top:10px; }
   .announcement-container h1 {
-    font-size:5vw;
-    line-height:1.2;
-    color:#fff;
+    font-size:5vw; line-height:1.2; color:#fff;
     text-shadow:2px 2px 8px rgba(0,0,0,0.6);
-    margin:20px 0 30px;
-    letter-spacing:0.18em;
-    font-weight:700;
+    margin:20px 0 30px; letter-spacing:0.18em; font-weight:700;
     animation: glowPulse 2s ease-in-out infinite alternate;
   }
   @keyframes glowPulse {
-    0% { text-shadow: 0 0 10px rgba(255,255,255,0.6), 0 0 20px rgba(255,255,255,0.4), 0 0 30px rgba(255,255,255,0.3); }
-    50% { text-shadow: 0 0 20px rgba(255,255,255,0.8), 0 0 40px rgba(255,255,255,0.6), 0 0 60px rgba(255,255,255,0.4); }
-    100% { text-shadow: 0 0 10px rgba(255,255,255,0.6), 0 0 20px rgba(255,255,255,0.4), 0 0 30px rgba(255,255,255,0.3); }
+    0% { text-shadow:0 0 10px rgba(255,255,255,0.6), 0 0 20px rgba(255,255,255,0.4), 0 0 30px rgba(255,255,255,0.3);}
+    50% { text-shadow:0 0 20px rgba(255,255,255,0.8),0 0 40px rgba(255,255,255,0.6),0 0 60px rgba(255,255,255,0.4);}
+    100% { text-shadow:0 0 10px rgba(255,255,255,0.6),0 0 20px rgba(255,255,255,0.4),0 0 30px rgba(255,255,255,0.3);}
   }
-
   .announcement-container ul { list-style:none; padding:0; margin:0 auto; font-size:2.5vw; line-height:3vw; text-transform:uppercase; letter-spacing:0.08em; color:rgba(255,255,255,0.95); max-width:80%; }
   .announcement-container ul li { opacity:0; transform:translateY(30px); margin:10px 0; transition:all 1s ease; }
 
+  /* ==================== Shark GIF ==================== */
   .shark-gif {
     position:absolute; bottom:20px; width:350px; height:350px;
     background:url('HCI.gif') no-repeat center; background-size:contain;
     pointer-events:none; opacity:1;
   }
+  .calendar-page .shark-gif { opacity:0.15; width:350px; height:350px; bottom:20px; z-index:2; pointer-events:none; }
 
-  .calendar-page .shark-gif {
-    opacity:0.15; 
-    width:350px;
-    height:350px;
-    bottom:20px;
-    z-index:2;
-    pointer-events:none;
-  }
-
+  /* ==================== Kalender ==================== */
   .calendar-page iframe { 
-    border:0; 
-    width:90%; 
-    height:calc(100vh - 150px); /* volle Höhe minus Platz für Header und Logos */
-    margin-top:10px; 
-    border-radius:10px; 
-    box-shadow:0 0 20px rgba(0,0,0,0.6); 
+    border:0; width:90%; height:calc(100vh - 150px); /* volle Höhe minus Header + Logos */
+    margin-top:10px; border-radius:10px; box-shadow:0 0 20px rgba(0,0,0,0.6); 
   }
 
-  .org-page, .video-page {
-    background: linear-gradient(135deg, #003789 40%, #d42323 60%);
-    justify-content:center; 
+  /* ==================== Organigramm & Video ==================== */
+  .org-page, .video-page { justify-content:center; align-items:center; background:linear-gradient(135deg, #003789 40%, #d42323 60%);}
+  .org-page img { width:100%; height:100%; object-fit:contain; opacity:0; transform:scale(0.95); transition:opacity 1.5s ease, transform 1.5s ease;}
+  .org-page.active img { opacity:1; transform:scale(1);}
+  .video-page video.zoom-video { width:100%; height:100%; object-fit:contain; opacity:0; transform:scale(0.97); transition:opacity 1.5s ease, transform 3s ease;}
+  .video-page.active video.zoom-video { opacity:1; transform:scale(1);}
+
+  /* ==================== Admin-Seite ==================== */
+  .settings-page {
+    display:none; /* unsichtbar bis Admin aktiviert */
+    justify-content:center;
     align-items:center;
+    flex-direction:column;
+    background:rgba(0,0,0,0.9);
   }
-  .org-page img {
-    width:100%;
-    height:100%;
-    object-fit:contain;
-    opacity:0;
-    transform:scale(0.95);
-    transition:opacity 1.5s ease, transform 1.5s ease;
+  .settings-page header h1 { color:#ffeb3b; }
+  .settings-box {
+    background:rgba(255,255,255,0.1);
+    padding:20px;
+    border-radius:10px;
   }
-  .org-page.active img {
-    opacity:1;
-    transform:scale(1);
-  }
+  .settings-box label { display:block; margin:10px 0; font-size:1.2em; }
 
-  .video-page video.zoom-video {
-    width:100%;
-    height:100%;
-    object-fit:contain;
-    opacity:0;
-    transform:scale(0.97);
-    transition:opacity 1.5s ease, transform 3s ease;
-  }
-  .video-page.active video.zoom-video {
-    opacity:1;
-    transform:scale(1);
-  }
-
+  /* ==================== Signature ==================== */
   .signature { position:fixed; bottom:10px; right:15px; font-size:0.9em; color:rgba(255,255,255,0.5); pointer-events:none; }
 
   @media(max-width:768px){
@@ -108,7 +90,7 @@
 </head>
 <body>
 
-<!-- Seite 1 -->
+<!-- ==================== Seite 1: Startseite ==================== -->
 <div class="page page-1 active">
   <div class="logo-container">
     <img src="HAI.png" alt="HAI Logo">
@@ -127,30 +109,44 @@
   <div class="shark-gif"></div>
 </div>
 
-<!-- Seite 2 -->
+<!-- ==================== Seite 2: Kalender ==================== -->
 <div class="page calendar-page page-2">
-  <div class="logo-container" style="opacity:1; transform:translateY(0)">
-    <img src="HAI.png" alt="HAI Logo" style="opacity:1; transform:translateY(0)">
-    <img src="TIWAG.jpg" alt="TIWAG Logo" style="opacity:1; transform:translateY(0)">
+  <div class="logo-container">
+    <img src="HAI.png" alt="HAI Logo">
+    <img src="TIWAG.jpg" alt="TIWAG Logo">
   </div>
   <header><div class="title-block"><h1>HC TIWAG Innsbruck Juniors</h1></div></header>
   <iframe id="calendar" 
-    src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showPrint=0&showTitle=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZDU3OWRjY2M2MTNhZTI0YzZlNjY1NmE5ZGIyOWM0MDRlNDk5NjNhZjFiZDYyNjY0NGQwZGE5OTVhNTUzNmUxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzBiZDg4YjUxNmVlNGRmNGFjMmZkMWU2NGJhOWQ4MzBlMjViY2VlZjc4YjM4MmM5N2FhZWZmZWU1NmY5NjlmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YjQ5M2RhNTY5NDg5NTA2MDQ0YWE2MmVmYTA5ODIyODM0MmQ0NjRhMzQ4MzY5MGYyNTU1NTE0Yzg0Y2ZmNDI0NEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YWQ4ZjNlMmRiODQ1YjZiNmM5ZTZkYmIyZDkyNGY1NTliNjVhNjI3YTNlNWEzMmYwYzQ0YmRhZTA1NzMxNGMwOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6&color=%23c0ca33&color=%230b8043&color=%233f51b5&color=%238e24aa&color=%23616161&color=%23ad1457&color=%23e4c441" 
-    style="border-width:0" width="800" height="600" frameborder="0" scrolling="no">
-  </iframe>
+    src="DEIN_KALENDER_LINK" 
+    frameborder="0" scrolling="no"></iframe>
   <div class="shark-gif"></div>
 </div>
 
-<!-- Seite 3 -->
+<!-- ==================== Seite 3: Organigramm ==================== -->
 <div class="page org-page page-3">
   <img src="ORG.png" alt="Organigramm Vollbild">
 </div>
 
-<!-- Seite 4 -->
+<!-- ==================== Seite 4: Video/Fotos ==================== -->
 <div class="page video-page page-4">
   <video autoplay loop muted playsinline class="zoom-video">
     <source src="Fotos.mp4" type="video/mp4">
   </video>
+</div>
+
+<!-- ==================== Seite 5: Admin Einstellungen ==================== -->
+<div class="page settings-page page-5">
+  <header><div class="title-block"><h1>Admin Einstellungen</h1></div></header>
+  <div class="settings-box">
+    <label><input type="checkbox" class="page-toggle" data-page="1" checked> Seite 1: Startseite</label>
+    <label><input type="checkbox" class="page-toggle" data-page="2" checked> Seite 2: Kalender</label>
+    <label><input type="checkbox" class="page-toggle" data-page="3" checked> Seite 3: Organigramm</label>
+    <label><input type="checkbox" class="page-toggle" data-page="4" checked> Seite 4: Fotos/Videos</label>
+  </div>
+  <p style="margin-top:20px; color:#ccc; font-size:0.9em;">
+    Halte <strong>M</strong> 5 Sek. → Admin-Modus.<br>
+    <strong>ESC drücken → zurück zur normalen Rotation</strong>
+  </p>
 </div>
 
 <div class="signature">Designed by MS</div>
@@ -160,69 +156,97 @@ window.addEventListener('DOMContentLoaded', ()=>{
   const pages=document.querySelectorAll('.page');
   let current=0;
 
-  function animatePage1(){
-    const logos=document.querySelectorAll('.page-1 .logo-container img');
-    logos.forEach((img,i)=>{
-      img.style.opacity=0;
-      img.style.transform=i===0?'translateX(-10%) translateY(-20px)':'translateX(-20%) translateY(-25px)';
-      void img.offsetWidth;
-      img.style.transition='transform 1s ease, opacity 1s ease';
-      img.style.opacity=1;
-      img.style.transform='translate(0,0)';
+  // ==================== Funktionen ====================
+  function getActivePages(){
+    const toggles=document.querySelectorAll('.page-toggle');
+    let active=[];
+    toggles.forEach(t=>{
+      if(t.checked){
+        const pageIndex=parseInt(t.dataset.page,10);
+        active.push(pageIndex-1);
+      }
     });
-
-    const items=document.querySelectorAll('.page-1 .announcement-container ul li');
-    items.forEach((li,i)=>{
-      li.style.opacity=0;
-      li.style.transform='translateY(30px)';
-      void li.offsetWidth;
-      li.style.transition=`all 1s ease ${1.2 + i*0.4}s`;
-      li.style.opacity=1;
-      li.style.transform='translateY(0)';
-    });
-
-    const glow=document.querySelector('.page-1 .announcement-container h1');
-    glow.style.animation='none';
-    void glow.offsetWidth;
-    glow.style.animation='glowPulse 2s ease-in-out infinite alternate';
-  }
-
-  function animatePage2(){
-    const iframe=document.getElementById('calendar');
-    iframe.src = iframe.src; // Kalender neu laden
+    return active;
   }
 
   function showPage(index){
-    pages.forEach((p,i)=>{
-      p.classList.remove('active');
-      if(i===index) p.classList.add('active');
-    });
-
-    if(pages[index].classList.contains('page-1')){
-      animatePage1();
-    } else if(pages[index].classList.contains('calendar-page')){
-      animatePage2();
-    }
-    // Seite 3 & 4 Animationen erfolgen automatisch über CSS-Transitions
+    pages.forEach(p=>p.classList.remove('active'));
+    pages[index].classList.add('active');
   }
 
+  // ==================== Automatische Rotation ====================
   setInterval(()=>{
-    current=(current+1)%pages.length;
+    const activePages=getActivePages();
+    if(activePages.length===0) return;
+    const pos=activePages.indexOf(current);
+    const next=activePages[(pos+1)%activePages.length];
+    current=next;
     showPage(current);
   },5000);
 
-  showPage(0);
+  const activePages=getActivePages();
+  current=activePages.length>0?activePages[0]:0;
+  showPage(current);
 
-  // Kalenderhöhe dynamisch anpassen
+  document.querySelectorAll('.page-toggle').forEach(cb=>{
+    cb.addEventListener('change', ()=>{
+      const active=getActivePages();
+      if(active.length>0){
+        current=active[0];
+        showPage(current);
+      }
+    });
+  });
+
+  // ==================== Kalendergröße ====================
   function resizeCalendar() {
     const iframe = document.getElementById('calendar');
+    if (!iframe) return;
     const headerHeight = document.querySelector('.calendar-page header').offsetHeight;
     const logoHeight = document.querySelector('.calendar-page .logo-container').offsetHeight;
     iframe.style.height = (window.innerHeight - headerHeight - logoHeight - 20) + 'px';
   }
-
   window.addEventListener('resize', resizeCalendar);
-  window.addEventListener('DOMContentLoaded', resizeCalendar);
+  resizeCalendar();
+
+  // ==================== Admin-Seite per 5 Sek. Taste M ====================
+  let mKeyTimer=null;
+  let mKeyStart=0;
+
+  window.addEventListener('keydown',(e)=>{
+    if(e.key.toLowerCase()==="m" && !mKeyTimer){
+      mKeyStart=Date.now();
+      mKeyTimer=setInterval(()=>{
+        if(Date.now()-mKeyStart>=5000){
+          clearInterval(mKeyTimer);
+          mKeyTimer=null;
+          pages.forEach(p=>p.classList.remove('active'));
+          const adminPage=document.querySelector('.settings-page');
+          adminPage.style.display="flex";
+          adminPage.classList.add('active');
+          current=pages.length-1;
+        }
+      },100);
+    }
+    if(e.key==="Escape"){
+      // ESC → zurück zur Rotation
+      const adminPage=document.querySelector('.settings-page');
+      adminPage.classList.remove('active');
+      adminPage.style.display="none";
+      const active=getActivePages();
+      if(active.length>0){
+        current=active[0];
+        showPage(current);
+      }
+    }
+  });
+
+  window.addEventListener('keyup',(e)=>{
+    if(e.key.toLowerCase()==="m" && mKeyTimer){
+      clearInterval(mKeyTimer);
+      mKeyTimer=null;
+    }
+  });
 });
 </script>
 </body>
