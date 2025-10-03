@@ -17,15 +17,33 @@ header { text-align:center; padding:10px 0; }
 header h1 { font-size:2.4em; margin:0 0 5px 0; }
 
 .announcement-container { display:flex; flex-direction:column; align-items:center; width:100%; text-align:center; margin-top:10px; }
-.announcement-container h1 { font-size:5vw; color:#fff; text-shadow:2px 2px 8px rgba(0,0,0,0.6); margin:20px 0 30px; letter-spacing:0.18em; font-weight:700; animation: glowPulse 2s ease-in-out infinite alternate; }
-@keyframes glowPulse { 0%{text-shadow:0 0 10px rgba(255,255,255,0.6);} 50%{text-shadow:0 0 40px rgba(255,255,255,0.8);} 100%{text-shadow:0 0 10px rgba(255,255,255,0.6);} }
-.announcement-container ul { list-style:none; padding:0; margin:0 auto; font-size:2.5vw; line-height:3vw; text-transform:uppercase; color:rgba(255,255,255,0.95); max-width:80%; }
-.announcement-container ul li { opacity:0; transform:translateY(30px); margin:10px 0; transition:all 1s ease; }
+.announcement-container .infosaule {
+  font-size: 7vw;
+  font-weight: 800;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  text-shadow: 0 0 20px rgba(255,255,255,0.9),
+               0 0 40px rgba(255,255,255,0.7);
+  animation: glowPulse 2s ease-in-out infinite alternate;
+  margin-top: 5vh;
+}
+@keyframes glowPulse {
+  0%{text-shadow:0 0 10px rgba(255,255,255,0.6);}
+  50%{text-shadow:0 0 40px rgba(255,255,255,0.8);}
+  100%{text-shadow:0 0 10px rgba(255,255,255,0.6);}
+}
 
 .calendar-title { font-size:1.7em; color:#fff; text-shadow:1px 1px 5px rgba(0,0,0,0.6); margin:10px 0 20px 0; opacity:0; transform:translateY(10px); transition:all 1s ease; }
 .page-2.active .calendar-title { opacity:1; transform:translateY(0); }
 
 .shark-gif { position:absolute; bottom:20px; width:350px; height:350px; background:url('HCI.gif') no-repeat center; background-size:contain; pointer-events:none; opacity:1; }
+.page-1 .shark-gif {
+  bottom:5%;
+  width:280px;
+  height:280px;
+  opacity:0.85;
+  filter: drop-shadow(0 0 25px rgba(0,0,0,0.6));
+}
 .calendar-page .shark-gif { opacity:0.15; }
 
 .calendar-page iframe { border:0; width:90%; height:calc(100vh - 200px); margin-top:10px; border-radius:10px; box-shadow:0 0 20px rgba(0,0,0,0.6); }
@@ -47,8 +65,7 @@ header h1 { font-size:2.4em; margin:0 0 5px 0; }
 .signature { position:fixed; bottom:10px; right:15px; font-size:0.9em; color:rgba(255,255,255,0.5); pointer-events:none; }
 
 @media(max-width:768px){
-  .announcement-container h1{ font-size:9vw; }
-  .announcement-container ul{ font-size:5vw; line-height:6vw; }
+  .announcement-container .infosaule { font-size:12vw; }
   .calendar-page iframe{ height:60vh; margin-top:5px; }
   .shark-gif{ width:180px; height:180px; bottom:5px; }
   .settings-inner { padding:0 10px; }
@@ -64,15 +81,13 @@ header h1 { font-size:2.4em; margin:0 0 5px 0; }
     <img src="HAI.png" alt="HAI Logo">
     <img src="TIWAG.jpg" alt="TIWAG Logo">
   </div>
-  <header><div class="title-block"><h1>HC TIWAG Innsbruck Juniors</h1></div></header>
+  <header>
+    <div class="title-block">
+      <h1>HC TIWAG Innsbruck Juniors</h1>
+    </div>
+  </header>
   <div class="announcement-container">
-    <h1>I N F O S Ä U L E</h1>
-    <ul>
-      <li>Eisplan 2025/26</li>
-      <li>Organigramm</li>
-      <li>Heimspiele & Veranstaltungen</li>
-      <li>Medien & Fotoshop</li>
-    </ul>
+    <h1 class="infosaule">I N F O S Ä U L E</h1>
   </div>
   <div class="shark-gif"></div>
 </div>
@@ -158,7 +173,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
     const durations={};
     durationInputs.forEach(inp=>{
       const sec=parseInt(inp.value)||5;
-      durations[parseInt(inp.dataset.page)-1]=sec*1000; // ms
+      durations[parseInt(inp.dataset.page)-1]=sec*1000;
     });
     return durations;
   }
@@ -194,7 +209,6 @@ window.addEventListener('DOMContentLoaded', ()=>{
 
   (function initStart(){
     const active=getActivePageIndexes();
-    // Immer mit Seite 1 starten, wenn aktiv
     if(active.includes(0)){
       current=0;
     } else {
@@ -215,7 +229,6 @@ window.addEventListener('DOMContentLoaded', ()=>{
   document.addEventListener('keydown',(e)=>{ if(e.key.toLowerCase()==='m'){ if(!mTimer){ mTimer=setTimeout(()=>{ openAdmin(); mTimer=null; },2000); } } if(e.key==='Escape'){ if(adminOpen) closeAdmin(); } });
   document.addEventListener('keyup',(e)=>{ if(e.key.toLowerCase()==='m'){ if(mTimer){ clearTimeout(mTimer); mTimer=null; } } });
 
-  // Animationen original beibehalten
   function animatePage1(){
     const logos=document.querySelectorAll('.page-1 .logo-container img');
     logos.forEach((img,i)=>{
@@ -225,15 +238,6 @@ window.addEventListener('DOMContentLoaded', ()=>{
       img.style.transition='transform 1s ease, opacity 1s ease';
       img.style.opacity=1;
       img.style.transform='translate(0,0)';
-    });
-    const items=document.querySelectorAll('.page-1 .announcement-container ul li');
-    items.forEach((li,i)=>{
-      li.style.opacity=0;
-      li.style.transform='translateY(30px)';
-      void li.offsetWidth;
-      li.style.transition=`all 1s ease ${1.2 + i*0.4}s`;
-      li.style.opacity=1;
-      li.style.transform='translateY(0)';
     });
   }
 
