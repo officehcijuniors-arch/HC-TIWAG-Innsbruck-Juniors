@@ -15,7 +15,7 @@ body { margin:0; font-family:"Areno Serif", serif; color:#fff; overflow:hidden; 
   opacity:0; transition:opacity 1s ease;
   background: linear-gradient(135deg, #003789 40%, #d42323 60%);
 }
-.page.active { opacity:1; z-index:1; }
+.page.active { opacity:1; z-index:1 }
 
 /* Logo-Bereich oben */
 .logo-container { display:flex; justify-content:center; align-items:flex-end; gap:60px; margin:20px 0 10px; }
@@ -101,10 +101,11 @@ header h1 { font-size:2.4em; margin:0 0 5px 0; }
   <header><div class="title-block"><h1>HC TIWAG Innsbruck Juniors</h1></div></header>
   <div class="announcement-container"><h2 class="calendar-title">Eisplan</h2></div>
 
-  <!-- >>> HIER kannst du einfach den Google-Kalender-Link austauschen <<< -->
-  <iframe id="<iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showPrint=0&showTitle=0&showTabs=0&showCalendars=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZDU3OWRjY2M2MTNhZTI0YzZlNjY1NmE5ZGIyOWM0MDRlNDk5NjNhZjFiZDYyNjY0NGQwZGE5OTVhNTUzNmUxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzBiZDg4YjUxNmVlNGRmNGFjMmZkMWU2NGJhOWQ4MzBlMjViY2VlZjc4YjM4MmM5N2FhZWZmZWU1NmY5NjlmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YjQ5M2RhNTY5NDg5NTA2MDQ0YWE2MmVmYTA5ODIyODM0MmQ0NjRhMzQ4MzY5MGYyNTU1NTE0Yzg0Y2ZmNDI0NEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YWQ4ZjNlMmRiODQ1YjZiNmM5ZTZkYmIyZDkyNGY1NTliNjVhNjI3YTNlNWEzMmYwYzQ0YmRhZTA1NzMxNGMwOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6&color=%23c0ca33&color=%230b8043&color=%233f51b5&color=%238e24aa&color=%23616161&color=%23ad1457&color=%23e4c441" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>"
-    src="DEIN-NEUER-KALENDER-LINK-HIER"
-    frameborder="0" scrolling="no"></iframe>
+  <!-- >>> GOOGLE KALENDER <<< -->
+  <iframe
+    src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showPrint=0&showTitle=0&showTabs=0&showCalendars=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZDU3OWRjY2M2MTNhZTI0YzZlNjY1NmE5ZGIyOWM0MDRlNDk5NjNhZjFiZDYyNjY0NGQwZGE5OTVhNTUzNmUxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzBiZDg4YjUxNmVlNGRmNGFjMmZkMWU2NGJhOWQ4MzBlMjViY2VlZjc4YjM4MmM5N2FhZWZmZWU1NmY5NjlmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YjQ5M2RhNTY5NDg5NTA2MDQ0YWE2MmVmYTA5ODIyODM0MmQ0NjRhMzQ4MzY5MGYyNTU1NTE0Yzg0Y2ZmNDI0NEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YWQ4ZjNlMmRiODQ1YjZiNmM5ZTZkYmIyZDkyNGY1NTliNjVhNjI3YTNlNWEzMmYwYzQ0YmRhZTA1NzMxNGMwOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6&color=%23c0ca33&color=%230b8043&color=%233f51b5&color=%238e24aa&color=%23616161&color=%23ad1457&color=%23e4c441"
+    style="border-width:0" width="800" height="600" frameborder="0" scrolling="no">
+  </iframe>
 
   <div class="shark-gif"></div>
 </div>
@@ -162,14 +163,12 @@ window.addEventListener('DOMContentLoaded', ()=>{
   const durationInputs=document.querySelectorAll('.page-duration');
   let current=0, rotationTimeout=null, adminOpen=false;
 
-  // aktive Seiten (Checkboxen)
   function getActivePageIndexes(){
     const active=[];
     checkboxes.forEach(cb=>{ if(cb.checked) active.push(parseInt(cb.dataset.page)-1); });
     return active;
   }
 
-  // Dauer jeder Seite
   function getDurations(){
     const durations={};
     durationInputs.forEach(inp=>{
@@ -179,18 +178,15 @@ window.addEventListener('DOMContentLoaded', ()=>{
     return durations;
   }
 
-  // Seite anzeigen
   function showPage(index){
     pages.forEach((p,i)=>p.classList.toggle('active',i===index));
   }
 
-  // Rotation starten
   function startRotation(){
     if(rotationTimeout) return;
     rotateToNext();
   }
 
-  // Nächste Seite anzeigen
   function rotateToNext(){
     if(adminOpen) return;
     const active=getActivePageIndexes();
@@ -204,10 +200,8 @@ window.addEventListener('DOMContentLoaded', ()=>{
     rotationTimeout=setTimeout(()=>{ rotationTimeout=null; rotateToNext(); }, durations[current] || 5000);
   }
 
-  // Rotation stoppen
   function stopRotation(){ if(rotationTimeout){ clearTimeout(rotationTimeout); rotationTimeout=null; } }
 
-  // Start
   (function initStart(){
     const active=getActivePageIndexes();
     current=active.length>0?active[0]:0;
@@ -215,13 +209,11 @@ window.addEventListener('DOMContentLoaded', ()=>{
     startRotation();
   })();
 
-  // Checkboxen reagieren
   checkboxes.forEach(cb=>cb.addEventListener('change',()=>{
     const active=getActivePageIndexes();
     if(active.length>0){ current=active[0]; showPage(current); }
   }));
 
-  // Admin öffnen/schließen
   let mTimer=null;
   function openAdmin(){ adminOpen=true; stopRotation(); adminPanel.style.display='flex'; }
   function closeAdmin(){ adminOpen=false; adminPanel.style.display='none'; startRotation(); }
@@ -232,4 +224,3 @@ window.addEventListener('DOMContentLoaded', ()=>{
 
 </body>
 </html>
-
