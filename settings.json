@@ -2,9 +2,9 @@
   "pages": {
     "1": { "enabled": true, "duration": 3 },
     "2": { "enabled": true, "duration": 3 },
-    "3": { "enabled": false, "duration": 3 },
+    "3": { "enabled": true, "duration": 3 },
     "4": { "enabled": true, "duration": 3 },
-    "5": { "enabled": true, "duration": 8 },
+    "5": { "enabled": true, "duration": 3 },
     "6": { "enabled": false, "duration": 8 },
     "7": { "enabled": false, "duration": 8 },
     "8": { "enabled": false, "duration": 8 },
@@ -12,6 +12,7 @@
   },
   "reload": 1
 }
+
 
 
 
