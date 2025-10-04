@@ -182,34 +182,27 @@ window.addEventListener('DOMContentLoaded', ()=>{
       if(!settings.pages[inp.dataset.page]) settings.pages[inp.dataset.page]={};
       settings.pages[inp.dataset.page].duration=parseInt(inp.value)||5;
     });
-    localStorage.setItem("infosauleSettings",JSON.stringify(settings));
+    localStorage.setItem('adminSettings', JSON.stringify(settings));
   }
 
   function loadSettings(){
-    const raw=localStorage.getItem("infosauleSettings");
-    if(!raw) return;
-    try{
-      const settings=JSON.parse(raw);
-      if(settings.pages){
-        checkboxes.forEach(cb=>{
-          if(settings.pages[cb.dataset.page]){
-            cb.checked=!!settings.pages[cb.dataset.page].enabled;
-          }
-        });
-        durationInputs.forEach(inp=>{
-          if(settings.pages[inp.dataset.page] && settings.pages[inp.dataset.page].duration){
-            inp.value=settings.pages[inp.dataset.page].duration;
-          }
-        });
-      }
-      if(typeof settings.reload==="number"){ reloadInput.value=settings.reload; }
-    }catch(e){ console.warn("Fehler beim Laden der Einstellungen",e); }
+    const saved=JSON.parse(localStorage.getItem('adminSettings')||'{}');
+    if(saved.pages){
+      checkboxes.forEach(cb=>{
+        if(saved.pages[cb.dataset.page] && typeof saved.pages[cb.dataset.page].enabled!=='undefined') cb.checked=saved.pages[cb.dataset.page].enabled;
+      });
+      durationInputs.forEach(inp=>{
+        if(saved.pages[inp.dataset.page] && typeof saved.pages[inp.dataset.page].duration!=='undefined') inp.value=saved.pages[inp.dataset.page].duration;
+      });
+    }
+    if(saved.reload!==undefined) reloadInput.value=saved.reload;
   }
+
   loadSettings();
-  /* --- Ende Einstellungen --- */
 
   function getActivePageIndexes(){
-    const active=[]; checkboxes.forEach(cb=>{ if(cb.checked) active.push(parseInt(cb.dataset.page)-1); });
+    const active=[];
+    checkboxes.forEach(cb=>{ if(cb.checked) active.push(parseInt(cb.dataset.page)-1); });
     return active;
   }
 
@@ -222,9 +215,14 @@ window.addEventListener('DOMContentLoaded', ()=>{
     return durations;
   }
 
-  function showPage(index){ pages.forEach((p,i)=>p.classList.toggle('active',i===index)); }
+  function showPage(index){
+    pages.forEach((p,i)=>p.classList.toggle('active',i===index));
+  }
 
-  function startRotation(){ if(rotationTimeout) return; rotateToNext(); }
+  function startRotation(){
+    if(rotationTimeout) return;
+    rotateToNext();
+  }
 
   function rotateToNext(){
     if(adminOpen) return;
@@ -241,7 +239,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
 
   function stopRotation(){ if(rotationTimeout){ clearTimeout(rotationTimeout); rotationTimeout=null; } }
 
-  // Reload-Logik
+  // --- Reload-Logik ---
   function startReloadTimer() {
     if(reloadTimer){ clearInterval(reloadTimer); reloadTimer=null; }
     const mins=parseInt(reloadInput.value)||0;
@@ -249,7 +247,10 @@ window.addEventListener('DOMContentLoaded', ()=>{
       reloadTimer=setInterval(()=>{ location.reload(); }, mins*60*1000);
     }
   }
-  reloadInput.addEventListener('input', ()=>{ saveSettings(); startReloadTimer(); });
+  reloadInput.addEventListener('input', ()=>{
+    startReloadTimer();
+    saveSettings();
+  });
   startReloadTimer();
 
   (function initStart(){
@@ -259,21 +260,28 @@ window.addEventListener('DOMContentLoaded', ()=>{
     startRotation();
   })();
 
-  checkboxes.forEach(cb=>cb.addEventListener('change',()=>{ saveSettings();
-    const active=getActivePageIndexes();
-    if(active.length>0){ current=active[0]; showPage(current); }
-  }));
-  durationInputs.forEach(inp=>inp.addEventListener('input', saveSettings));
+  checkboxes.forEach(cb=>{
+    cb.addEventListener('change',()=>{
+      saveSettings();
+      const active=getActivePageIndexes();
+      if(active.length>0){ current=active[0]; showPage(current); }
+    });
+  });
+
+  durationInputs.forEach(inp=>{
+    inp.addEventListener('input', saveSettings);
+  });
 
   let mTimer=null;
   function openAdmin(){ adminOpen=true; stopRotation(); adminPanel.style.display='flex'; }
   function closeAdmin(){ adminOpen=false; adminPanel.style.display='none'; startRotation(); }
-  document.addEventListener('keydown',(e)=>{ if(e.key.toLowerCase()==='m'){ if(!mTimer){ mTimer=setTimeout(()=>{ openAdmin(); mTimer=null; },2000); } } if(e.key==='Escape'){ if(adminOpen) closeAdmin(); } });
+  document.addEventListener('keydown',(e)=>{
+    if(e.key.toLowerCase()==='m'){ if(!mTimer){ mTimer=setTimeout(()=>{ openAdmin(); mTimer=null; },2000); } }
+    if(e.key==='Escape'){ if(adminOpen) closeAdmin(); }
+  });
   document.addEventListener('keyup',(e)=>{ if(e.key.toLowerCase()==='m'){ if(mTimer){ clearTimeout(mTimer); mTimer=null; } } });
 });
 </script>
 
 </body>
 </html>
-
-
