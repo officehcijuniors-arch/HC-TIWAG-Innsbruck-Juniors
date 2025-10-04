@@ -145,6 +145,16 @@ header h1 { font-size:2.4em; margin:0 0 5px 0; }
       <label><input type="checkbox" class="page-toggle" data-page="8" checked> Seite 8: Video-Platzhalter <input type="number" class="page-duration" data-page="8" value="8" min="3"> sec</label>
       <label><input type="checkbox" class="page-toggle" data-page="9" checked> Seite 9: Video-Platzhalter <input type="number" class="page-duration" data-page="9" value="8" min="3"> sec</label>
     </div>
+
+    <!-- NEU: Reload-Einstellung -->
+    <div class="settings-box">
+      <label>
+        Automatischer Reload:
+        <input type="number" id="reload-interval" value="0" min="0"> Minuten
+      </label>
+      <small>(0 = deaktiviert)</small>
+    </div>
+
     <p class="admin-hint">
       <strong>M gedrückt halten (2 Sek.)</strong> → Admin öffnen<br>
       <strong>ESC</strong> → zurück zur normalen Rotation
@@ -161,7 +171,8 @@ window.addEventListener('DOMContentLoaded', ()=>{
   const adminPanel=document.getElementById('adminPanel');
   const checkboxes=document.querySelectorAll('.page-toggle');
   const durationInputs=document.querySelectorAll('.page-duration');
-  let current=0, rotationTimeout=null, adminOpen=false;
+  const reloadInput=document.getElementById('reload-interval');
+  let current=0, rotationTimeout=null, adminOpen=false, reloadTimer=null;
 
   function getActivePageIndexes(){
     const active=[];
@@ -201,6 +212,17 @@ window.addEventListener('DOMContentLoaded', ()=>{
   }
 
   function stopRotation(){ if(rotationTimeout){ clearTimeout(rotationTimeout); rotationTimeout=null; } }
+
+  // === NEU: Reload-Logik ===
+  function startReloadTimer() {
+    if(reloadTimer){ clearInterval(reloadTimer); reloadTimer=null; }
+    const mins=parseInt(reloadInput.value)||0;
+    if(mins>0){
+      reloadTimer=setInterval(()=>{ location.reload(); }, mins*60*1000);
+    }
+  }
+  reloadInput.addEventListener('input', startReloadTimer);
+  startReloadTimer();
 
   (function initStart(){
     const active=getActivePageIndexes();
