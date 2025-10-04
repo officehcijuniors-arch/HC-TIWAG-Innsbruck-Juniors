@@ -5,125 +5,171 @@
 <title>HC TIWAG Innsbruck Juniors - Infosäule</title>
 
 <style>
-/* ========== GRUNDSTIL ========== */
-body { margin:0; font-family:"Areno Serif", serif; color:#fff; overflow:hidden; }
+/* ================= GRUNDSTIL ================= */
+/* Basisstil für die gesamte Seite */
+body { 
+  margin:0;                     /* Kein Abstand um die Seite */
+  font-family:"Areno Serif", serif;  /* Schriftart */
+  color:#fff;                   /* Weißer Text */
+  overflow:hidden;              /* Kein Scrollen */
+}
 
-/* Jede Seite (1–9) hat den rot-blauen Hintergrund */
+/* ================= SEITEN-STYLE ================= */
+/* Jede Seite (page) nimmt den gesamten Bildschirm ein */
 .page {
   position:absolute; top:0; left:0; width:100%; height:100%;
   display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
-  opacity:0; transition:opacity 1s ease;
-  background: linear-gradient(135deg, #003789 40%, #d42323 60%);
+  opacity:0;                    /* Start unsichtbar */
+  transition:opacity 1s ease;   /* Weiches Einblenden */
+  background: linear-gradient(135deg, #003789 40%, #d42323 60%); /* Rot-blauer Hintergrund */
 }
-.page.active { opacity:1; z-index:1 }
 
-/* Logo-Bereich oben */
-.logo-container { display:flex; justify-content:center; align-items:flex-end; gap:60px; margin:20px 0 10px; }
-.logo-container img { max-height:100px; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.6)); }
+/* Aktive Seite sichtbar */
+.page.active { 
+  opacity:1; 
+  z-index:1;  /* Immer vorne */
+}
 
-/* Kopfzeile mit Clubname */
+/* ================= LOGOS OBEN ================= */
+.logo-container { 
+  display:flex; justify-content:center; align-items:flex-end; gap:60px; margin:20px 0 10px; 
+}
+.logo-container img { 
+  max-height:100px; 
+  filter: drop-shadow(0 5px 15px rgba(0,0,0,0.6)); /* Schatten unter Logos */
+}
+
+/* ================= KOPFZEILE ================= */
 header { text-align:center; padding:10px 0; }
 .title-block { text-shadow:2px 2px 8px rgba(0,0,0,0.8); }
 header h1 { font-size:2.4em; margin:0 0 5px 0; }
 
-/* Startseiten-Text "INFOSÄULE" */
+/* ================= STARTSEITE "INFOSÄULE" ================= */
 .announcement-container { display:flex; flex-direction:column; align-items:center; margin-top:10px; }
 .announcement-container .infosaule {
-  font-size: 7vw; font-weight: 800; letter-spacing: 0.25em; text-transform: uppercase;
-  text-shadow: 0 0 20px rgba(255,255,255,0.9), 0 0 40px rgba(255,255,255,0.7);
-  animation: glowPulse 2s ease-in-out infinite alternate;
+  font-size: 7vw;                /* Größe in Abhängigkeit der Bildschirmbreite */
+  font-weight: 800;               /* Fett */
+  letter-spacing: 0.25em;         /* Abstand zwischen Buchstaben */
+  text-transform: uppercase;      /* Großbuchstaben */
+  text-shadow: 0 0 20px rgba(255,255,255,0.9), 0 0 40px rgba(255,255,255,0.7); /* Leuchten */
+  animation: glowPulse 2s ease-in-out infinite alternate; /* Leuchtanimation */
   margin-top: 5vh;
 }
+
+/* Animation für den "Leuchteffekt" */
 @keyframes glowPulse {
   0%{text-shadow:0 0 10px rgba(255,255,255,0.6);}
   50%{text-shadow:0 0 40px rgba(255,255,255,0.8);}
   100%{text-shadow:0 0 10px rgba(255,255,255,0.6);}
 }
 
-/* Kalender-Titel */
+/* ================= KALENDER ================= */
 .calendar-title { font-size:1.7em; color:#fff; text-shadow:1px 1px 5px rgba(0,0,0,0.6); margin:10px 0 20px 0; }
 
-/* Hai-GIF */
+/* ================= HAI-GIF ================= */
 .shark-gif {
   position:absolute; bottom:5%; width:280px; height:280px;
   background:url('HCI.gif') no-repeat center; background-size:contain;
-  pointer-events:none; filter: drop-shadow(0 0 25px rgba(0,0,0,0.6));
+  pointer-events:none; /* Nicht anklickbar */
+  filter: drop-shadow(0 0 25px rgba(0,0,0,0.6));
 }
+.page-1 .shark-gif { opacity:0.85; } /* Startseite etwas sichtbarer */
+.calendar-page .shark-gif { opacity:0.3; } /* Kalender-Seite transparent */
 
-/* GIF für Seite 1 (Startseite) */
-.page-1 .shark-gif { opacity:0.85; }
-
-/* GIF für Seite 2 (Kalender) – viel transparenter */
-.calendar-page .shark-gif { opacity:0.3; }
-
-/* Kalender (Google Iframe) */
+/* ================= GOOGLE KALENDER ================= */
 .calendar-page iframe {
-  border:0; width:90%; height:calc(100vh - 200px);
+  border:0; width:90%; height:calc(100vh - 200px); /* fast Vollbild */
   margin-top:10px; border-radius:10px;
   box-shadow:0 0 20px rgba(0,0,0,0.6);
 }
 
-/* Organigramm Bild */
+/* ================= ORGANIGRAMM ================= */
 .org-page img { width:100%; height:100%; object-fit:contain; }
 
-/* Video-Seiten */
+/* ================= VIDEOS ================= */
 .video-page video.zoom-video { width:100%; height:100%; object-fit:contain; }
 
-.signature { position:fixed; bottom:10px; right:15px; font-size:0.9em; color:rgba(255,255,255,0.5); pointer-events:none; }
+/* ================= SIGNATUR ================= */
+.signature { 
+  position:fixed; bottom:10px; right:15px; 
+  font-size:0.9em; color:rgba(255,255,255,0.5); pointer-events:none; 
+}
 </style>
 </head>
 <body>
 
-<!-- ========== SEITE 1: STARTSEITE ========== -->
+<!-- ================= SEITE 1: STARTSEITE ================= -->
 <div class="page page-1 active">
+  <!-- Logos oben -->
   <div class="logo-container">
     <img src="HAI.png" alt="HAI Logo">
     <img src="TIWAG.jpg" alt="TIWAG Logo">
   </div>
-  <header><div class="title-block"><h1>HC TIWAG Innsbruck Juniors</h1></div></header>
-  <div class="announcement-container"><h1 class="infosaule">I N F O S Ä U L E</h1></div>
+  <!-- Titel -->
+  <header>
+    <div class="title-block">
+      <h1>HC TIWAG Innsbruck Juniors</h1>
+    </div>
+  </header>
+  <!-- Leuchttext "INFOSÄULE" -->
+  <div class="announcement-container">
+    <h1 class="infosaule">I N F O S Ä U L E</h1>
+  </div>
+  <!-- Hai-GIF unten -->
   <div class="shark-gif"></div>
 </div>
 
-<!-- ========== SEITE 2: KALENDER ========== -->
+<!-- ================= SEITE 2: KALENDER ================= -->
 <div class="page calendar-page page-2">
   <div class="logo-container">
     <img src="HAI.png" alt="HAI Logo">
     <img src="TIWAG.jpg" alt="TIWAG Logo">
   </div>
-  <header><div class="title-block"><h1>HC TIWAG Innsbruck Juniors</h1></div></header>
+  <header>
+    <div class="title-block"><h1>HC TIWAG Innsbruck Juniors</h1></div>
+  </header>
   <div class="announcement-container"><h2 class="calendar-title">Eisplan</h2></div>
+  <!-- Google Kalender Iframe -->
   <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showPrint=0&showTitle=0&showTabs=0&showCalendars=0&showTz=0&mode=WEEK" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
   <div class="shark-gif"></div>
 </div>
 
-<!-- ========== SEITE 3: ORGANIGRAMM ========== -->
+<!-- ================= SEITE 3: ORGANIGRAMM ================= -->
 <div class="page org-page page-3">
   <img src="ORG.png" alt="Organigramm Vollbild">
 </div>
 
-<!-- ========== SEITE 4: FOTOS/VIDEOS ========== -->
+<!-- ================= SEITE 4: FOTOS/VIDEOS ================= -->
 <div class="page video-page page-4">
   <video autoplay loop muted playsinline class="zoom-video">
     <source src="Fotos.mp4" type="video/mp4">
   </video>
 </div>
 
-<!-- ========== SEITE 5–9: LEERE PLATZHALTER ========== -->
-<div class="page video-page page-5"></div>
+<!-- ================= SEITE 5: FANSHOP VIDEO ================= -->
+<div class="page video-page page-5">
+  <video autoplay loop muted playsinline class="zoom-video">
+    <source src="FANSHOP.mp4" type="video/mp4">
+  </video>
+</div>
+
+<!-- ================= SEITE 6–9: LEERE PLATZHALTER ================= -->
 <div class="page video-page page-6"></div>
 <div class="page video-page page-7"></div>
 <div class="page video-page page-8"></div>
 <div class="page video-page page-9"></div>
 
+<!-- ================= SIGNATUR ================= -->
 <div class="signature">Designed by MS</div>
 
+<!-- ================= JAVASCRIPT: SEITENROTATION ================= -->
 <script>
 window.addEventListener('DOMContentLoaded', async () => {
-  const pages = document.querySelectorAll('.page');
+  const pages = document.querySelectorAll('.page'); // Alle Seiten
   let current = 0;
   let rotationTimeout = null;
 
+  // Einstellungen von GitHub laden
   const settingsUrl = 'https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/settings.json';
   let settings;
 
@@ -135,6 +181,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     return;
   }
 
+  // Welche Seiten sind aktiviert?
   function getActivePageIndexes() {
     const active = [];
     for (let i = 1; i <= 9; i++) {
@@ -143,6 +190,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     return active;
   }
 
+  // Wie lange jede Seite angezeigt wird
   function getDurations() {
     const durations = {};
     for (let i = 1; i <= 9; i++) {
@@ -151,10 +199,12 @@ window.addEventListener('DOMContentLoaded', async () => {
     return durations;
   }
 
+  // Zeige eine bestimmte Seite
   function showPage(index) {
     pages.forEach((p, i) => p.classList.toggle('active', i === index));
   }
 
+  // Gehe zur nächsten aktiven Seite
   function rotateToNext() {
     const active = getActivePageIndexes();
     const durations = getDurations();
@@ -167,11 +217,13 @@ window.addEventListener('DOMContentLoaded', async () => {
     rotationTimeout = setTimeout(() => rotateToNext(), durations[current] || 5000);
   }
 
+  // Start
   const activePages = getActivePageIndexes();
   current = activePages.length > 0 ? activePages[0] : 0;
   showPage(current);
   rotateToNext();
 
+  // Automatischer Reload, falls eingestellt
   if (settings.reload && settings.reload > 0) {
     setInterval(() => location.reload(), settings.reload * 60 * 1000);
   }
