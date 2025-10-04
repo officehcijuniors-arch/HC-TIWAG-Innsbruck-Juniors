@@ -4,8 +4,9 @@
 <meta charset="utf-8">
 <title>HC TIWAG Innsbruck Juniors - Infosäule</title>
 <style>
+/* ========== GRUNDSTIL ========== */
 body { margin:0; font-family:"Areno Serif", serif; color:#fff; overflow:hidden; }
-.page { position:absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; opacity:0; transition:opacity 1s ease; background: linear-gradient(135deg, #003789 40%, #d42323 60%);}
+.page { position:absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; opacity:0; transition:opacity 1s ease; background: linear-gradient(135deg, #003789 40%, #d42323 60%); }
 .page.active { opacity:1; z-index:1 }
 .logo-container { display:flex; justify-content:center; align-items:flex-end; gap:60px; margin:20px 0 10px; }
 .logo-container img { max-height:100px; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.6)); }
@@ -13,20 +14,12 @@ header { text-align:center; padding:10px 0; }
 .title-block { text-shadow:2px 2px 8px rgba(0,0,0,0.8); }
 header h1 { font-size:2.4em; margin:0 0 5px 0; }
 .announcement-container { display:flex; flex-direction:column; align-items:center; margin-top:10px; }
-.announcement-container .infosaule {
-  font-size: 7vw; font-weight: 800; letter-spacing: 0.25em; text-transform: uppercase;
-  text-shadow: 0 0 20px rgba(255,255,255,0.9), 0 0 40px rgba(255,255,255,0.7);
-  animation: glowPulse 2s ease-in-out infinite alternate; margin-top:5vh;
-}
-@keyframes glowPulse {
-  0%{text-shadow:0 0 10px rgba(255,255,255,0.6);}
-  50%{text-shadow:0 0 40px rgba(255,255,255,0.8);}
-  100%{text-shadow:0 0 10px rgba(255,255,255,0.6);}
-}
+.announcement-container .infosaule { font-size: 7vw; font-weight: 800; letter-spacing: 0.25em; text-transform: uppercase; text-shadow: 0 0 20px rgba(255,255,255,0.9), 0 0 40px rgba(255,255,255,0.7); animation: glowPulse 2s ease-in-out infinite alternate; margin-top: 5vh; }
+@keyframes glowPulse { 0%{text-shadow:0 0 10px rgba(255,255,255,0.6);} 50%{text-shadow:0 0 40px rgba(255,255,255,0.8);} 100%{text-shadow:0 0 10px rgba(255,255,255,0.6);} }
 .calendar-title { font-size:1.7em; color:#fff; text-shadow:1px 1px 5px rgba(0,0,0,0.6); margin:10px 0 20px 0; }
 .shark-gif { position:absolute; bottom:5%; width:280px; height:280px; background:url('HCI.gif') no-repeat center; background-size:contain; pointer-events:none; filter: drop-shadow(0 0 25px rgba(0,0,0,0.6)); }
 .page-1 .shark-gif { opacity:0.85; }
-.calendar-page .shark-gif { opacity:0.15; }
+.calendar-page .shark-gif { opacity:0.15; } /* transparenter als vorher */
 .calendar-page iframe { border:0; width:90%; height:calc(100vh - 200px); margin-top:10px; border-radius:10px; box-shadow:0 0 20px rgba(0,0,0,0.6); }
 .org-page img { width:100%; height:100%; object-fit:contain; }
 .video-page video.zoom-video { width:100%; height:100%; object-fit:contain; }
@@ -41,96 +34,143 @@ header h1 { font-size:2.4em; margin:0 0 5px 0; }
 </head>
 <body>
 
-<!-- Startseite -->
+<!-- ========== SEITE 1: STARTSEITE ========== -->
 <div class="page page-1 active">
-  <div class="logo-container"><img src="HAI.png"><img src="TIWAG.jpg"></div>
+  <div class="logo-container">
+    <img src="HAI.png" alt="HAI Logo">
+    <img src="TIWAG.jpg" alt="TIWAG Logo">
+  </div>
   <header><div class="title-block"><h1>HC TIWAG Innsbruck Juniors</h1></div></header>
   <div class="announcement-container"><h1 class="infosaule">I N F O S Ä U L E</h1></div>
   <div class="shark-gif"></div>
 </div>
 
-<!-- Kalender -->
+<!-- ========== SEITE 2: KALENDER ========== -->
 <div class="page calendar-page page-2">
-  <div class="logo-container"><img src="HAI.png"><img src="TIWAG.jpg"></div>
+  <div class="logo-container">
+    <img src="HAI.png" alt="HAI Logo">
+    <img src="TIWAG.jpg" alt="TIWAG Logo">
+  </div>
   <header><div class="title-block"><h1>HC TIWAG Innsbruck Juniors</h1></div></header>
   <div class="announcement-container"><h2 class="calendar-title">Eisplan</h2></div>
-  <iframe src="https://calendar.google.com/calendar/embed?..."></iframe>
+  <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showPrint=0&showTitle=0&showTabs=0&showCalendars=0&showTz=0&mode=WEEK" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
   <div class="shark-gif"></div>
 </div>
 
-<!-- Organigramm -->
-<div class="page org-page page-3">
-  <img src="ORG.png">
-</div>
+<!-- ========== SEITE 3–9 ========== -->
+<div class="page org-page page-3"><img src="ORG.png" alt="Organigramm Vollbild"></div>
+<div class="page video-page page-4"><video autoplay loop muted playsinline class="zoom-video"><source src="Fotos.mp4" type="video/mp4"></video></div>
+<div class="page video-page page-5"></div>
+<div class="page video-page page-6"></div>
+<div class="page video-page page-7"></div>
+<div class="page video-page page-8"></div>
+<div class="page video-page page-9"></div>
 
-<!-- Fotos/Videos -->
-<div class="page video-page page-4">
-  <video autoplay loop muted playsinline class="zoom-video">
-    <source src="Fotos.mp4" type="video/mp4">
-  </video>
-</div>
-
-<!-- Admin -->
-<div class="settings-page" id="adminPanel">
+<!-- ========== ADMIN-BEREICH ========== -->
+<div class="settings-page" id="adminPanel" aria-hidden="true">
   <div class="settings-inner">
     <h2>Admin-Einstellungen</h2>
     <div class="settings-box">
-      <label><input type="checkbox" class="page-toggle" data-page="1"> Seite 1 <input type="number" class="page-duration" data-page="1" min="3"> sec</label>
-      <label><input type="checkbox" class="page-toggle" data-page="2"> Seite 2 <input type="number" class="page-duration" data-page="2" min="3"> sec</label>
-      <label><input type="checkbox" class="page-toggle" data-page="3"> Seite 3 <input type="number" class="page-duration" data-page="3" min="3"> sec</label>
-      <label><input type="checkbox" class="page-toggle" data-page="4"> Seite 4 <input type="number" class="page-duration" data-page="4" min="3"> sec</label>
+      <label><input type="checkbox" class="page-toggle" data-page="1"> Seite 1: Startseite <input type="number" class="page-duration" data-page="1" value="8" min="3"> sec</label>
+      <label><input type="checkbox" class="page-toggle" data-page="2"> Seite 2: Kalender <input type="number" class="page-duration" data-page="2" value="10" min="3"> sec</label>
+      <label><input type="checkbox" class="page-toggle" data-page="3"> Seite 3: Organigramm <input type="number" class="page-duration" data-page="3" value="8" min="3"> sec</label>
+      <label><input type="checkbox" class="page-toggle" data-page="4"> Seite 4: Fotos/Videos <input type="number" class="page-duration" data-page="4" value="12" min="3"> sec</label>
+      <label><input type="checkbox" class="page-toggle" data-page="5"> Seite 5: Video-Platzhalter <input type="number" class="page-duration" data-page="5" value="8" min="3"> sec</label>
+      <label><input type="checkbox" class="page-toggle" data-page="6"> Seite 6: Video-Platzhalter <input type="number" class="page-duration" data-page="6" value="8" min="3"> sec</label>
+      <label><input type="checkbox" class="page-toggle" data-page="7"> Seite 7: Video-Platzhalter <input type="number" class="page-duration" data-page="7" value="8" min="3"> sec</label>
+      <label><input type="checkbox" class="page-toggle" data-page="8"> Seite 8: Video-Platzhalter <input type="number" class="page-duration" data-page="8" value="8" min="3"> sec</label>
+      <label><input type="checkbox" class="page-toggle" data-page="9"> Seite 9: Video-Platzhalter <input type="number" class="page-duration" data-page="9" value="8" min="3"> sec</label>
     </div>
+
     <div class="settings-box">
-      <label>Automatischer Reload (Minuten):
-        <input type="number" id="reload-interval" disabled>
-      </label>
-      <small>(Nur Anzeige, aus JSON)</small>
+      <label>Automatischer Reload: <input type="number" id="reload-interval" value="15" min="0"> Minuten</label>
+      <small>(0 = deaktiviert)</small>
     </div>
-    <p class="admin-hint"><strong>M gedrückt halten (2 Sek.)</strong> → Admin öffnen<br><strong>ESC</strong> → zurück</p>
+
+    <p class="admin-hint"><strong>M gedrückt halten (2 Sek.)</strong> → Admin öffnen<br><strong>ESC</strong> → zurück zur normalen Rotation</p>
   </div>
 </div>
 
 <div class="signature">Designed by MS</div>
 
 <script>
-const fileId='1SI5hHIhs0XA3cUDwztM_LtHCFftwTTuZ';
-const pages=document.querySelectorAll('.page');
-const adminPanel=document.getElementById('adminPanel');
-const checkboxes=document.querySelectorAll('.page-toggle');
-const durationInputs=document.querySelectorAll('.page-duration');
-let current=0, rotationTimeout=null, adminOpen=false, reloadTimer=null;
+window.addEventListener('DOMContentLoaded', async ()=>{
+  const pages=document.querySelectorAll('.page');
+  const adminPanel=document.getElementById('adminPanel');
+  const checkboxes=document.querySelectorAll('.page-toggle');
+  const durationInputs=document.querySelectorAll('.page-duration');
+  const reloadInput=document.getElementById('reload-interval');
+  let current=0, rotationTimeout=null, adminOpen=false, reloadTimer=null;
 
-async function loadSettingsFromDrive(){
-  const url=`https://drive.google.com/uc?export=download&id=${fileId}`;
-  try{
-    const res=await fetch(url);
-    const settings=await res.json();
+  const settingsUrl='https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/settings.json';
 
-    checkboxes.forEach(cb=>{ const page=settings.pages[cb.dataset.page]; if(page) cb.checked=page.enabled; });
-    durationInputs.forEach(inp=>{ const page=settings.pages[inp.dataset.page]; if(page) inp.value=page.duration; });
-    document.getElementById('reload-interval').value=settings.reload;
+  // --- Globale Einstellungen laden ---
+  async function loadGlobalSettings(){
+    try{
+      const res = await fetch(settingsUrl);
+      const data = await res.json();
+      for(let page in data.pages){
+        const cb = document.querySelector(`.page-toggle[data-page="${page}"]`);
+        const inp = document.querySelector(`.page-duration[data-page="${page}"]`);
+        if(cb) cb.checked = data.pages[page].enabled;
+        if(inp) inp.value = data.pages[page].duration;
+      }
+      if(data.reload!==undefined) reloadInput.value = data.reload;
+    }catch(err){ console.warn('Fehler beim Laden globaler Einstellungen:',err); }
+  }
 
-    startAutoReload(settings.reload);
-    startRotation();
-  }catch(err){ console.error('Fehler beim Laden der Einstellungen:',err); }
-}
+  // --- Lokale Einstellungen ---
+  function saveSettings(){
+    const settings={ pages:{}, reload:parseInt(reloadInput.value)||0 };
+    checkboxes.forEach(cb=>{ settings.pages[cb.dataset.page]={enabled:cb.checked}; });
+    durationInputs.forEach(inp=>{
+      if(!settings.pages[inp.dataset.page]) settings.pages[inp.dataset.page]={};
+      settings.pages[inp.dataset.page].duration=parseInt(inp.value)||5;
+    });
+    localStorage.setItem('adminSettings', JSON.stringify(settings));
+  }
 
-function getActivePageIndexes(){ const active=[]; checkboxes.forEach(cb=>{ if(cb.checked) active.push(parseInt(cb.dataset.page)-1); }); return active; }
-function getDurations(){ const dur={}; durationInputs.forEach(inp=>{ dur[parseInt(inp.dataset.page)-1]=parseInt(inp.value)*1000; }); return dur; }
-function showPage(idx){ pages.forEach((p,i)=>p.classList.toggle('active',i===idx)); }
-function rotateToNext(){ if(adminOpen) return; const active=getActivePageIndexes(); const dur=getDurations(); if(active.length===0) return; let pos=active.indexOf(current); if(pos===-1) pos=0; const next=active[(pos+1)%active.length]; current=next; showPage(current); rotationTimeout=setTimeout(rotateToNext,dur[current]||5000); }
-function startRotation(){ rotateToNext(); }
-function stopRotation(){ clearTimeout(rotationTimeout); rotationTimeout=null; }
-function startAutoReload(mins){ if(reloadTimer) clearTimeout(reloadTimer); if(mins>0) reloadTimer=setTimeout(()=>location.reload(),mins*60*1000); }
+  function loadLocalSettings(){
+    const saved=JSON.parse(localStorage.getItem('adminSettings')||'{}');
+    if(saved.pages){
+      checkboxes.forEach(cb=>{ if(saved.pages[cb.dataset.page] && typeof saved.pages[cb.dataset.page].enabled!=='undefined') cb.checked=saved.pages[cb.dataset.page].enabled; });
+      durationInputs.forEach(inp){ if(saved.pages[inp.dataset.page] && typeof saved.pages[inp.dataset.page].duration!=='undefined') inp.value=saved.pages[inp.dataset.page].duration; }
+    }
+    if(saved.reload!==undefined) reloadInput.value=saved.reload;
+  }
 
-let mTimer=null;
-function openAdmin(){ adminOpen=true; stopRotation(); adminPanel.style.display='flex'; }
-function closeAdmin(){ adminOpen=false; adminPanel.style.display='none'; startRotation(); }
-document.addEventListener('keydown',e=>{ if(e.key.toLowerCase()==='m'){ if(!mTimer){ mTimer=setTimeout(openAdmin,2000); } } if(e.key==='Escape'){ if(adminOpen) closeAdmin(); } });
-document.addEventListener('keyup',e=>{ if(e.key.toLowerCase()==='m'){ if(mTimer){ clearTimeout(mTimer); mTimer=null; } } });
+  await loadGlobalSettings();
+  loadLocalSettings();
 
-window.addEventListener('DOMContentLoaded', loadSettingsFromDrive);
+  function getActivePageIndexes(){ const active=[]; checkboxes.forEach(cb=>{ if(cb.checked) active.push(parseInt(cb.dataset.page)-1); }); return active; }
+  function getDurations(){ const durations={}; durationInputs.forEach(inp=>{ durations[parseInt(inp.dataset.page)-1]=parseInt(inp.value)*1000; }); return durations; }
+  function showPage(index){ pages.forEach((p,i)=>p.classList.toggle('active',i===index)); }
+  function rotateToNext(){ if(adminOpen) return; const active=getActivePageIndexes(); const durations=getDurations(); if(active.length===0) return; let pos=active.indexOf(current); if(pos===-1) pos=0; const next=active[(pos+1)%active.length]; current=next; showPage(current); rotationTimeout=setTimeout(()=>{ rotationTimeout=null; rotateToNext(); }, durations[current] || 5000); }
+  function stopRotation(){ if(rotationTimeout){ clearTimeout(rotationTimeout); rotationTimeout=null; } }
+  function startRotation(){ if(rotationTimeout) return; rotateToNext(); }
+
+  // --- Reload ---
+  function startReloadTimer(){
+    if(reloadTimer){ clearInterval(reloadTimer); reloadTimer=null; }
+    const mins=parseInt(reloadInput.value)||0;
+    if(mins>0){ reloadTimer=setInterval(()=>{ location.reload(); }, mins*60*1000); }
+  }
+  reloadInput.addEventListener('input', ()=>{ startReloadTimer(); saveSettings(); });
+  startReloadTimer();
+
+  // --- Initialisierung ---
+  const active=getActivePageIndexes(); current=active.length>0?active[0]:0; showPage(current); startRotation();
+
+  checkboxes.forEach(cb=>{ cb.addEventListener('change',()=>{ saveSettings(); const active=getActivePageIndexes(); if(active.length>0){ current=active[0]; showPage(current); } }); });
+  durationInputs.forEach(inp=>{ inp.addEventListener('input', saveSettings); });
+
+  // --- Admin Steuerung ---
+  let mTimer=null;
+  function openAdmin(){ adminOpen=true; stopRotation(); adminPanel.style.display='flex'; }
+  function closeAdmin(){ adminOpen=false; adminPanel.style.display='none'; startRotation(); }
+  document.addEventListener('keydown',(e)=>{ if(e.key.toLowerCase()==='m'){ if(!mTimer){ mTimer=setTimeout(()=>{ openAdmin(); mTimer=null; },2000); } } if(e.key==='Escape'){ if(adminOpen) closeAdmin(); } });
+  document.addEventListener('keyup',(e)=>{ if(e.key.toLowerCase()==='m'){ if(mTimer){ clearTimeout(mTimer); mTimer=null; } } });
+});
 </script>
-
 </body>
 </html>
