@@ -1,0 +1,14 @@
+{
+  "pages": {
+    "1": {"enabled": true, "duration": 8},
+    "2": {"enabled": true, "duration": 10},
+    "3": {"enabled": true, "duration": 8},
+    "4": {"enabled": true, "duration": 12},
+    "5": {"enabled": true, "duration": 8},
+    "6": {"enabled": true, "duration": 8},
+    "7": {"enabled": true, "duration": 8},
+    "8": {"enabled": true, "duration": 8},
+    "9": {"enabled": true, "duration": 8}
+  },
+  "reload": 15
+}
