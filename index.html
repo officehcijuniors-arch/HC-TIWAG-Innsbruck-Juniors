@@ -47,8 +47,14 @@ header h1 { font-size:2.4em; margin:0 0 5px 0; }
 .shark-gif {
   position:absolute; bottom:5%; width:280px; height:280px;
   background:url('HCI.gif') no-repeat center; background-size:contain;
-  pointer-events:none; opacity:0.85; filter: drop-shadow(0 0 25px rgba(0,0,0,0.6));
+  pointer-events:none; filter: drop-shadow(0 0 25px rgba(0,0,0,0.6));
 }
+
+/* GIF für Seite 1 (Startseite) */
+.page-1 .shark-gif { opacity:0.85; }
+
+/* GIF für Seite 2 (Kalender) – viel transparenter */
+.calendar-page .shark-gif { opacity:0.3; }
 
 /* Kalender (Google Iframe) */
 .calendar-page iframe {
