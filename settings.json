@@ -1,6 +1,6 @@
 {
   "pages": {
-    "1": { "enabled": true, "duration": 3 },
+    "1": { "enabled": true, "duration": 3 }, // Infosäule
     "2": { "enabled": true, "duration": 3 },
     "3": { "enabled": true, "duration": 3 },
     "4": { "enabled": true, "duration": 3 },
@@ -12,6 +12,7 @@
   },
   "reload": 1
 }
+
 
 
 
