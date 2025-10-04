@@ -3,85 +3,49 @@
 <head>
 <meta charset="utf-8">
 <title>HC TIWAG Innsbruck Juniors - Infosäule</title>
-
 <style>
 /* ========== GRUNDSTIL ========== */
 body { margin:0; font-family:"Areno Serif", serif; color:#fff; overflow:hidden; }
-
-/* Jede Seite (1–9) hat den rot-blauen Hintergrund */
-.page {
-  position:absolute; top:0; left:0; width:100%; height:100%;
-  display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
-  opacity:0; transition:opacity 1s ease;
-  background: linear-gradient(135deg, #003789 40%, #d42323 60%);
-}
+.page { position:absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; opacity:0; transition:opacity 1s ease; background: linear-gradient(135deg, #003789 40%, #d42323 60%);}
 .page.active { opacity:1; z-index:1 }
-
-/* Logo-Bereich oben */
+/* Logo-Bereich */
 .logo-container { display:flex; justify-content:center; align-items:flex-end; gap:60px; margin:20px 0 10px; }
 .logo-container img { max-height:100px; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.6)); }
-
-/* Kopfzeile mit Clubname */
+/* Kopfzeile */
 header { text-align:center; padding:10px 0; }
 .title-block { text-shadow:2px 2px 8px rgba(0,0,0,0.8); }
 header h1 { font-size:2.4em; margin:0 0 5px 0; }
-
-/* Startseiten-Text "INFOSÄULE" */
+/* Startseite Text */
 .announcement-container { display:flex; flex-direction:column; align-items:center; margin-top:10px; }
 .announcement-container .infosaule {
   font-size: 7vw; font-weight: 800; letter-spacing: 0.25em; text-transform: uppercase;
   text-shadow: 0 0 20px rgba(255,255,255,0.9), 0 0 40px rgba(255,255,255,0.7);
-  animation: glowPulse 2s ease-in-out infinite alternate;
-  margin-top: 5vh;
+  animation: glowPulse 2s ease-in-out infinite alternate; margin-top:5vh;
 }
 @keyframes glowPulse {
   0%{text-shadow:0 0 10px rgba(255,255,255,0.6);}
   50%{text-shadow:0 0 40px rgba(255,255,255,0.8);}
   100%{text-shadow:0 0 10px rgba(255,255,255,0.6);}
 }
-
 /* Kalender-Titel */
 .calendar-title { font-size:1.7em; color:#fff; text-shadow:1px 1px 5px rgba(0,0,0,0.6); margin:10px 0 20px 0; }
-
 /* Hai-GIF */
-.shark-gif {
-  position:absolute; bottom:5%; width:280px; height:280px;
-  background:url('HCI.gif') no-repeat center; background-size:contain;
-  pointer-events:none; filter: drop-shadow(0 0 25px rgba(0,0,0,0.6));
-}
-
-/* GIF für Seite 1 (Startseite) */
+.shark-gif { position:absolute; bottom:5%; width:280px; height:280px; background:url('HCI.gif') no-repeat center; background-size:contain; pointer-events:none; filter: drop-shadow(0 0 25px rgba(0,0,0,0.6)); }
 .page-1 .shark-gif { opacity:0.85; }
-
-/* GIF für Seite 2 (Kalender) – viel transparenter */
-.calendar-page .shark-gif { opacity:0.3; }
-
-/* Kalender (Google Iframe) */
-.calendar-page iframe {
-  border:0; width:90%; height:calc(100vh - 200px);
-  margin-top:10px; border-radius:10px;
-  box-shadow:0 0 20px rgba(0,0,0,0.6);
-}
-
-/* Organigramm Bild */
+.calendar-page .shark-gif { opacity:0.15; }
+/* Kalender */
+.calendar-page iframe { border:0; width:90%; height:calc(100vh - 200px); margin-top:10px; border-radius:10px; box-shadow:0 0 20px rgba(0,0,0,0.6); }
+/* Organigramm */
 .org-page img { width:100%; height:100%; object-fit:contain; }
-
-/* Video-Seiten */
+/* Video */
 .video-page video.zoom-video { width:100%; height:100%; object-fit:contain; }
-
-/* Admin-Seite */
-.settings-page {
-  position:fixed; top:0; left:0; width:100%; height:100%;
-  display:none; flex-direction:column; align-items:center; justify-content:flex-start;
-  background: rgba(0,0,0,0.92); z-index:9999; color:#fff;
-  padding:30px; box-sizing:border-box; overflow:auto;
-}
+/* Admin */
+.settings-page { position:fixed; top:0; left:0; width:100%; height:100%; display:none; flex-direction:column; align-items:center; justify-content:flex-start; background: rgba(0,0,0,0.92); z-index:9999; color:#fff; padding:30px; box-sizing:border-box; overflow:auto; }
 .settings-inner { max-width:900px; width:100%; }
 .settings-box { background:rgba(255,255,255,0.04); padding:16px; border-radius:8px; margin-top:12px; }
 .settings-box label { display:block; margin:8px 0; font-size:1.05rem; }
 .settings-box input[type=number]{ margin-left:10px; width:60px; }
 .admin-hint { margin-top:14px; color:#ddd; font-size:0.95rem; }
-
 .signature { position:fixed; bottom:10px; right:15px; font-size:0.9em; color:rgba(255,255,255,0.5); pointer-events:none; }
 </style>
 </head>
@@ -89,10 +53,7 @@ header h1 { font-size:2.4em; margin:0 0 5px 0; }
 
 <!-- ========== SEITE 1: STARTSEITE ========== -->
 <div class="page page-1 active">
-  <div class="logo-container">
-    <img src="HAI.png" alt="HAI Logo">
-    <img src="TIWAG.jpg" alt="TIWAG Logo">
-  </div>
+  <div class="logo-container"><img src="HAI.png" alt="HAI Logo"><img src="TIWAG.jpg" alt="TIWAG Logo"></div>
   <header><div class="title-block"><h1>HC TIWAG Innsbruck Juniors</h1></div></header>
   <div class="announcement-container"><h1 class="infosaule">I N F O S Ä U L E</h1></div>
   <div class="shark-gif"></div>
@@ -100,19 +61,10 @@ header h1 { font-size:2.4em; margin:0 0 5px 0; }
 
 <!-- ========== SEITE 2: KALENDER ========== -->
 <div class="page calendar-page page-2">
-  <div class="logo-container">
-    <img src="HAI.png" alt="HAI Logo">
-    <img src="TIWAG.jpg" alt="TIWAG Logo">
-  </div>
+  <div class="logo-container"><img src="HAI.png" alt="HAI Logo"><img src="TIWAG.jpg" alt="TIWAG Logo"></div>
   <header><div class="title-block"><h1>HC TIWAG Innsbruck Juniors</h1></div></header>
   <div class="announcement-container"><h2 class="calendar-title">Eisplan</h2></div>
-
-  <!-- >>> NEUER GOOGLE KALENDER <<< -->
-  <iframe
-    src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showPrint=0&showTitle=0&showTabs=0&showCalendars=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZDU3OWRjY2M2MTNhZTI0YzZlNjY1NmE5ZGIyOWM0MDRlNDk5NjNhZjFiZDYyNjY0NGQwZGE5OTVhNTUzNmUxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzBiZDg4YjUxNmVlNGRmNGFjMmZkMWU2NGJhOWQ4MzBlMjViY2VlZjc4YjM4MmM5N2FhZWZmZWU1NmY5NjlmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YjQ5M2RhNTY5NDg5NTA2MDQ0YWE2MmVmYTA5ODIyODM0MmQ0NjRhMzQ4MzY5MGYyNTU1NTE0Yzg0Y2ZmNDI0NEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YWQ4ZjNlMmRiODQ1YjZiNmM5ZTZkYmIyZDkyNGY1NTliNjVhNjI3YTNlNWEzMmYwYzQ0YmRhZTA1NzMxNGMwOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6&color=%23c0ca33&color=%230b8043&color=%233f51b5&color=%238e24aa&color=%23616161&color=%23ad1457&color=%23e4c441"
-    style="border-width:0" width="800" height="600" frameborder="0" scrolling="no">
-  </iframe>
-
+  <iframe src="https://calendar.google.com/calendar/embed?..."></iframe>
   <div class="shark-gif"></div>
 </div>
 
@@ -128,14 +80,7 @@ header h1 { font-size:2.4em; margin:0 0 5px 0; }
   </video>
 </div>
 
-<!-- ========== SEITE 5–9: LEERE PLATZHALTER ========== -->
-<div class="page video-page page-5"></div>
-<div class="page video-page page-6"></div>
-<div class="page video-page page-7"></div>
-<div class="page video-page page-8"></div>
-<div class="page video-page page-9"></div>
-
-<!-- ========== ADMIN-BEREICH (EINSTELLUNGEN) ========== -->
+<!-- ========== ADMIN-BEREICH ========== -->
 <div class="settings-page" id="adminPanel" aria-hidden="true">
   <div class="settings-inner">
     <h2>Admin-Einstellungen</h2>
@@ -144,17 +89,12 @@ header h1 { font-size:2.4em; margin:0 0 5px 0; }
       <label><input type="checkbox" class="page-toggle" data-page="2" checked> Seite 2: Kalender <input type="number" class="page-duration" data-page="2" value="10" min="3"> sec</label>
       <label><input type="checkbox" class="page-toggle" data-page="3" checked> Seite 3: Organigramm <input type="number" class="page-duration" data-page="3" value="8" min="3"> sec</label>
       <label><input type="checkbox" class="page-toggle" data-page="4" checked> Seite 4: Fotos/Videos <input type="number" class="page-duration" data-page="4" value="12" min="3"> sec</label>
-      <label><input type="checkbox" class="page-toggle" data-page="5" checked> Seite 5: Video-Platzhalter <input type="number" class="page-duration" data-page="5" value="8" min="3"> sec</label>
-      <label><input type="checkbox" class="page-toggle" data-page="6" checked> Seite 6: Video-Platzhalter <input type="number" class="page-duration" data-page="6" value="8" min="3"> sec</label>
-      <label><input type="checkbox" class="page-toggle" data-page="7" checked> Seite 7: Video-Platzhalter <input type="number" class="page-duration" data-page="7" value="8" min="3"> sec</label>
-      <label><input type="checkbox" class="page-toggle" data-page="8" checked> Seite 8: Video-Platzhalter <input type="number" class="page-duration" data-page="8" value="8" min="3"> sec</label>
-      <label><input type="checkbox" class="page-toggle" data-page="9" checked> Seite 9: Video-Platzhalter <input type="number" class="page-duration" data-page="9" value="8" min="3"> sec</label>
     </div>
 
     <div class="settings-box">
       <label>
-        Automatischer Reload:
-        <input type="number" id="reload-interval" value="0" min="0"> Minuten
+        Automatischer Reload (Minuten):
+        <input type="number" id="reload-interval" value="15" min="0" disabled>
       </label>
       <small>(0 = deaktiviert)</small>
     </div>
@@ -169,124 +109,92 @@ header h1 { font-size:2.4em; margin:0 0 5px 0; }
 <div class="signature">Designed by MS</div>
 
 <script>
-/* ========== JAVASCRIPT: SEITENROTATION & ADMIN-STEUERUNG ========== */
-window.addEventListener('DOMContentLoaded', ()=>{
-  const pages=document.querySelectorAll('.page');
-  const adminPanel=document.getElementById('adminPanel');
-  const checkboxes=document.querySelectorAll('.page-toggle');
-  const durationInputs=document.querySelectorAll('.page-duration');
-  const reloadInput=document.getElementById('reload-interval');
-  let current=0, rotationTimeout=null, adminOpen=false, reloadTimer=null;
+/* ======== KONSTANTEN ======== */
+const fileId = '1SI5hHIhs0XA3cUDwztM_LtHCFftwTTuZ'; // Google Drive JSON
 
-  /* --- Einstellungen speichern/laden --- */
-  function saveSettings(){
-    const settings={ pages:{}, reload:parseInt(reloadInput.value)||0 };
+/* ======== SEITEN & ADMIN ======== */
+const pages = document.querySelectorAll('.page');
+const adminPanel = document.getElementById('adminPanel');
+const checkboxes = document.querySelectorAll('.page-toggle');
+const durationInputs = document.querySelectorAll('.page-duration');
+let current=0, rotationTimeout=null, adminOpen=false, reloadTimer=null;
+
+/* ======== SETTINGS LADEN ======== */
+async function loadSettingsFromDrive() {
+  const url = `https://drive.google.com/uc?export=download&id=${fileId}`;
+  try {
+    const res = await fetch(url);
+    const settings = await res.json();
+
+    // Seiten aktivieren/deaktivieren + Dauer
     checkboxes.forEach(cb=>{
-      settings.pages[cb.dataset.page]={enabled:cb.checked};
+      const page=settings.pages[cb.dataset.page];
+      if(page) cb.checked=page.enabled;
     });
     durationInputs.forEach(inp=>{
-      if(!settings.pages[inp.dataset.page]) settings.pages[inp.dataset.page]={};
-      settings.pages[inp.dataset.page].duration=parseInt(inp.value)||5;
+      const page=settings.pages[inp.dataset.page];
+      if(page) inp.value=page.duration;
     });
-    localStorage.setItem('adminSettings', JSON.stringify(settings));
-  }
 
-  function loadSettings(){
-    const saved=JSON.parse(localStorage.getItem('adminSettings')||'{}');
-    if(saved.pages){
-      checkboxes.forEach(cb=>{
-        if(saved.pages[cb.dataset.page] && typeof saved.pages[cb.dataset.page].enabled!=='undefined') cb.checked=saved.pages[cb.dataset.page].enabled;
-      });
-      durationInputs.forEach(inp=>{
-        if(saved.pages[inp.dataset.page] && typeof saved.pages[inp.dataset.page].duration!=='undefined') inp.value=saved.pages[inp.dataset.page].duration;
-      });
-    }
-    if(saved.reload!==undefined) reloadInput.value=saved.reload;
-  }
+    // Reload-Zeit setzen
+    const reloadInput=document.getElementById('reload-interval');
+    reloadInput.value=settings.reload;
+    startAutoReload(settings.reload);
 
-  loadSettings();
-
-  function getActivePageIndexes(){
-    const active=[];
-    checkboxes.forEach(cb=>{ if(cb.checked) active.push(parseInt(cb.dataset.page)-1); });
-    return active;
-  }
-
-  function getDurations(){
-    const durations={};
-    durationInputs.forEach(inp=>{
-      const sec=parseInt(inp.value)||5;
-      durations[parseInt(inp.dataset.page)-1]=sec*1000;
-    });
-    return durations;
-  }
-
-  function showPage(index){
-    pages.forEach((p,i)=>p.classList.toggle('active',i===index));
-  }
-
-  function startRotation(){
-    if(rotationTimeout) return;
-    rotateToNext();
-  }
-
-  function rotateToNext(){
-    if(adminOpen) return;
-    const active=getActivePageIndexes();
-    const durations=getDurations();
-    if(active.length===0) return;
-    let pos=active.indexOf(current);
-    if(pos===-1) pos=0;
-    const next=active[(pos+1)%active.length];
-    current=next;
-    showPage(current);
-    rotationTimeout=setTimeout(()=>{ rotationTimeout=null; rotateToNext(); }, durations[current] || 5000);
-  }
-
-  function stopRotation(){ if(rotationTimeout){ clearTimeout(rotationTimeout); rotationTimeout=null; } }
-
-  // --- Reload-Logik ---
-  function startReloadTimer() {
-    if(reloadTimer){ clearInterval(reloadTimer); reloadTimer=null; }
-    const mins=parseInt(reloadInput.value)||0;
-    if(mins>0){
-      reloadTimer=setInterval(()=>{ location.reload(); }, mins*60*1000);
-    }
-  }
-  reloadInput.addEventListener('input', ()=>{
-    startReloadTimer();
-    saveSettings();
-  });
-  startReloadTimer();
-
-  (function initStart(){
-    const active=getActivePageIndexes();
-    current=active.length>0?active[0]:0;
-    showPage(current);
     startRotation();
-  })();
 
-  checkboxes.forEach(cb=>{
-    cb.addEventListener('change',()=>{
-      saveSettings();
-      const active=getActivePageIndexes();
-      if(active.length>0){ current=active[0]; showPage(current); }
-    });
-  });
+  } catch(err) {
+    console.error('Fehler beim Laden der Einstellungen:', err);
+  }
+}
 
+/* ======== SEITENROTATION ======== */
+function getActivePageIndexes(){
+  const active=[];
+  checkboxes.forEach(cb=>{ if(cb.checked) active.push(parseInt(cb.dataset.page)-1); });
+  return active;
+}
+function getDurations(){
+  const durations={};
   durationInputs.forEach(inp=>{
-    inp.addEventListener('input', saveSettings);
+    durations[parseInt(inp.dataset.page)-1]=parseInt(inp.value)*1000;
   });
+  return durations;
+}
+function showPage(index){
+  pages.forEach((p,i)=>p.classList.toggle('active',i===index));
+}
+function rotateToNext(){
+  if(adminOpen) return;
+  const active=getActivePageIndexes();
+  const durations=getDurations();
+  if(active.length===0) return;
+  let pos=active.indexOf(current); if(pos===-1) pos=0;
+  const next=active[(pos+1)%active.length]; current=next;
+  showPage(current);
+  rotationTimeout=setTimeout(()=>{ rotateToNext(); }, durations[current]||5000);
+}
+function startRotation(){ rotateToNext(); }
+function stopRotation(){ clearTimeout(rotationTimeout); rotationTimeout=null; }
 
-  let mTimer=null;
-  function openAdmin(){ adminOpen=true; stopRotation(); adminPanel.style.display='flex'; }
-  function closeAdmin(){ adminOpen=false; adminPanel.style.display='none'; startRotation(); }
-  document.addEventListener('keydown',(e)=>{
-    if(e.key.toLowerCase()==='m'){ if(!mTimer){ mTimer=setTimeout(()=>{ openAdmin(); mTimer=null; },2000); } }
-    if(e.key==='Escape'){ if(adminOpen) closeAdmin(); }
-  });
-  document.addEventListener('keyup',(e)=>{ if(e.key.toLowerCase()==='m'){ if(mTimer){ clearTimeout(mTimer); mTimer=null; } } });
+/* ======== AUTOMATISCHER RELOAD ======== */
+function startAutoReload(minutes){
+  if(reloadTimer) clearTimeout(reloadTimer);
+  if(minutes>0) reloadTimer=setTimeout(()=>{ location.reload(); }, minutes*60*1000);
+}
+
+/* ======== ADMIN ÖFFNEN/SCHLIESSEN ======== */
+let mTimer=null;
+function openAdmin(){ adminOpen=true; stopRotation(); adminPanel.style.display='flex'; }
+function closeAdmin(){ adminOpen=false; adminPanel.style.display='none'; startRotation(); }
+document.addEventListener('keydown',(e)=>{
+  if(e.key.toLowerCase()==='m'){ if(!mTimer){ mTimer=setTimeout(openAdmin,2000); } }
+  if(e.key==='Escape'){ if(adminOpen) closeAdmin(); }
 });
+document.addEventListener('keyup',(e)=>{ if(e.key.toLowerCase()==='m'){ if(mTimer){ clearTimeout(mTimer); mTimer=null; } } });
+
+/* ======== INIT ======== */
+window.addEventListener('DOMContentLoaded', loadSettingsFromDrive);
 </script>
 
 </body>
