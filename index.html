@@ -5,29 +5,76 @@
 <title>HC TIWAG Innsbruck Juniors - Infosäule</title>
 
 <style>
+/* ========== GRUNDSTIL ========== */
 body { margin:0; font-family:"Areno Serif", serif; color:#fff; overflow:hidden; }
-.page { position:absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; opacity:0; transition:opacity 1s ease; background: linear-gradient(135deg, #003789 40%, #d42323 60%); }
+
+/* Jede Seite (1–9) hat den rot-blauen Hintergrund */
+.page {
+  position:absolute; top:0; left:0; width:100%; height:100%;
+  display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
+  opacity:0; transition:opacity 1s ease;
+  background: linear-gradient(135deg, #003789 40%, #d42323 60%);
+}
 .page.active { opacity:1; z-index:1 }
+
+/* Logo-Bereich oben */
 .logo-container { display:flex; justify-content:center; align-items:flex-end; gap:60px; margin:20px 0 10px; }
 .logo-container img { max-height:100px; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.6)); }
+
+/* Kopfzeile mit Clubname */
 header { text-align:center; padding:10px 0; }
 .title-block { text-shadow:2px 2px 8px rgba(0,0,0,0.8); }
 header h1 { font-size:2.4em; margin:0 0 5px 0; }
+
+/* Startseiten-Text "INFOSÄULE" */
 .announcement-container { display:flex; flex-direction:column; align-items:center; margin-top:10px; }
-.announcement-container .infosaule { font-size: 7vw; font-weight: 800; letter-spacing: 0.25em; text-transform: uppercase; text-shadow: 0 0 20px rgba(255,255,255,0.9), 0 0 40px rgba(255,255,255,0.7); animation: glowPulse 2s ease-in-out infinite alternate; margin-top: 5vh; }
-@keyframes glowPulse { 0%{text-shadow:0 0 10px rgba(255,255,255,0.6);} 50%{text-shadow:0 0 40px rgba(255,255,255,0.8);} 100%{text-shadow:0 0 10px rgba(255,255,255,0.6);} }
+.announcement-container .infosaule {
+  font-size: 7vw; font-weight: 800; letter-spacing: 0.25em; text-transform: uppercase;
+  text-shadow: 0 0 20px rgba(255,255,255,0.9), 0 0 40px rgba(255,255,255,0.7);
+  animation: glowPulse 2s ease-in-out infinite alternate;
+  margin-top: 5vh;
+}
+@keyframes glowPulse {
+  0%{text-shadow:0 0 10px rgba(255,255,255,0.6);}
+  50%{text-shadow:0 0 40px rgba(255,255,255,0.8);}
+  100%{text-shadow:0 0 10px rgba(255,255,255,0.6);}
+}
+
+/* Kalender-Titel */
 .calendar-title { font-size:1.7em; color:#fff; text-shadow:1px 1px 5px rgba(0,0,0,0.6); margin:10px 0 20px 0; }
-.shark-gif { position:absolute; bottom:5%; width:280px; height:280px; background:url('HCI.gif') no-repeat center; background-size:contain; pointer-events:none; filter: drop-shadow(0 0 25px rgba(0,0,0,0.6)); }
+
+/* Hai-GIF */
+.shark-gif {
+  position:absolute; bottom:5%; width:280px; height:280px;
+  background:url('HCI.gif') no-repeat center; background-size:contain;
+  pointer-events:none; filter: drop-shadow(0 0 25px rgba(0,0,0,0.6));
+}
+
+/* GIF für Seite 1 (Startseite) */
 .page-1 .shark-gif { opacity:0.85; }
-.calendar-page .shark-gif { opacity:0.15; } /* sehr transparent */
-.calendar-page iframe { border:0; width:90%; height:calc(100vh - 200px); margin-top:10px; border-radius:10px; box-shadow:0 0 20px rgba(0,0,0,0.6); }
+
+/* GIF für Seite 2 (Kalender) – viel transparenter */
+.calendar-page .shark-gif { opacity:0.3; }
+
+/* Kalender (Google Iframe) */
+.calendar-page iframe {
+  border:0; width:90%; height:calc(100vh - 200px);
+  margin-top:10px; border-radius:10px;
+  box-shadow:0 0 20px rgba(0,0,0,0.6);
+}
+
+/* Organigramm Bild */
 .org-page img { width:100%; height:100%; object-fit:contain; }
+
+/* Video-Seiten */
 .video-page video.zoom-video { width:100%; height:100%; object-fit:contain; }
+
 .signature { position:fixed; bottom:10px; right:15px; font-size:0.9em; color:rgba(255,255,255,0.5); pointer-events:none; }
 </style>
 </head>
 <body>
 
+<!-- ========== SEITE 1: STARTSEITE ========== -->
 <div class="page page-1 active">
   <div class="logo-container">
     <img src="HAI.png" alt="HAI Logo">
@@ -38,6 +85,7 @@ header h1 { font-size:2.4em; margin:0 0 5px 0; }
   <div class="shark-gif"></div>
 </div>
 
+<!-- ========== SEITE 2: KALENDER ========== -->
 <div class="page calendar-page page-2">
   <div class="logo-container">
     <img src="HAI.png" alt="HAI Logo">
@@ -45,12 +93,23 @@ header h1 { font-size:2.4em; margin:0 0 5px 0; }
   </div>
   <header><div class="title-block"><h1>HC TIWAG Innsbruck Juniors</h1></div></header>
   <div class="announcement-container"><h2 class="calendar-title">Eisplan</h2></div>
-  <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&mode=WEEK" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+  <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showPrint=0&showTitle=0&showTabs=0&showCalendars=0&showTz=0&mode=WEEK" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
   <div class="shark-gif"></div>
 </div>
 
-<div class="page org-page page-3"><img src="ORG.png" alt="Organigramm Vollbild"></div>
-<div class="page video-page page-4"><video autoplay loop muted playsinline class="zoom-video"><source src="Fotos.mp4" type="video/mp4"></video></div>
+<!-- ========== SEITE 3: ORGANIGRAMM ========== -->
+<div class="page org-page page-3">
+  <img src="ORG.png" alt="Organigramm Vollbild">
+</div>
+
+<!-- ========== SEITE 4: FOTOS/VIDEOS ========== -->
+<div class="page video-page page-4">
+  <video autoplay loop muted playsinline class="zoom-video">
+    <source src="Fotos.mp4" type="video/mp4">
+  </video>
+</div>
+
+<!-- ========== SEITE 5–9: LEERE PLATZHALTER ========== -->
 <div class="page video-page page-5"></div>
 <div class="page video-page page-6"></div>
 <div class="page video-page page-7"></div>
@@ -60,56 +119,61 @@ header h1 { font-size:2.4em; margin:0 0 5px 0; }
 <div class="signature">Designed by MS</div>
 
 <script>
-window.addEventListener('DOMContentLoaded', async ()=>{
-  const pages=document.querySelectorAll('.page');
-  let current=0, rotationTimeout=null, reloadTimer=null;
+window.addEventListener('DOMContentLoaded', async () => {
+  const pages = document.querySelectorAll('.page');
+  let current = 0;
+  let rotationTimeout = null;
 
-  const settingsUrl='https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/settings.json';
+  const settingsUrl = 'https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/settings.json';
   let settings;
 
   try {
     const res = await fetch(settingsUrl);
     settings = await res.json();
-  } catch(err){
+  } catch(err) {
     console.error('Fehler beim Laden der globalen Einstellungen:', err);
     return;
   }
 
-  function getActivePageIndexes(){
-    const active=[];
-    for(let i=1;i<=9;i++){ if(settings.pages[i] && settings.pages[i].enabled) active.push(i-1); }
+  function getActivePageIndexes() {
+    const active = [];
+    for (let i = 1; i <= 9; i++) {
+      if (settings.pages[i] && settings.pages[i].enabled) active.push(i - 1);
+    }
     return active;
   }
 
-  function getDurations(){
-    const durations={};
-    for(let i=1;i<=9;i++){ if(settings.pages[i]) durations[i-1] = settings.pages[i].duration*1000; }
+  function getDurations() {
+    const durations = {};
+    for (let i = 1; i <= 9; i++) {
+      if (settings.pages[i]) durations[i - 1] = settings.pages[i].duration * 1000;
+    }
     return durations;
   }
 
-  function showPage(index){
-    pages.forEach((p,i)=>p.classList.toggle('active',i===index));
+  function showPage(index) {
+    pages.forEach((p, i) => p.classList.toggle('active', i === index));
   }
 
-  function rotateToNext(){
-    const active=getActivePageIndexes();
-    const durations=getDurations();
-    if(active.length===0) return;
-    let pos=active.indexOf(current);
-    if(pos===-1) pos=0;
-    const next=active[(pos+1)%active.length];
-    current=next;
+  function rotateToNext() {
+    const active = getActivePageIndexes();
+    const durations = getDurations();
+    if (active.length === 0) return;
+    let pos = active.indexOf(current);
+    if (pos === -1) pos = 0;
+    const next = active[(pos + 1) % active.length];
+    current = next;
     showPage(current);
-    rotationTimeout=setTimeout(()=>{ rotateToNext(); }, durations[current] || 5000);
+    rotationTimeout = setTimeout(() => rotateToNext(), durations[current] || 5000);
   }
 
-  const active=getActivePageIndexes();
-  current = active.length>0 ? active[0] : 0;
+  const activePages = getActivePageIndexes();
+  current = activePages.length > 0 ? activePages[0] : 0;
   showPage(current);
   rotateToNext();
 
-  if(settings.reload && settings.reload>0){
-    reloadTimer=setInterval(()=>{ location.reload(); }, settings.reload*60*1000);
+  if (settings.reload && settings.reload > 0) {
+    setInterval(() => location.reload(), settings.reload * 60 * 1000);
   }
 });
 </script>
