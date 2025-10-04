@@ -1,6 +1,6 @@
 {
   "pages": {
-    "1": { "enabled": false, "duration": 3, "note": "Startseite / Infosäule" },
+    "1": { "enabled": true, "duration": 3, "note": "Startseite / Infosäule" },
     "2": { "enabled": true, "duration": 3, "note": "Kalender / Eisplan" },
     "3": { "enabled": true, "duration": 3, "note": "Organigramm" },
     "4": { "enabled": true, "duration": 3, "note": "Fotos/Video" },
