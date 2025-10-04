@@ -1,9 +1,9 @@
 {
   "pages": {
-    "1": { "enabled": true, "duration": 8 },
-    "2": { "enabled": true, "duration": 10 },
-    "3": { "enabled": true, "duration": 8 },
-    "4": { "enabled": true, "duration": 12 },
+    "1": { "enabled": true, "duration": 3 },
+    "2": { "enabled": true, "duration": 3 },
+    "3": { "enabled": true, "duration": 3 },
+    "4": { "enabled": true, "duration": 3 },
     "5": { "enabled": false, "duration": 8 },
     "6": { "enabled": false, "duration": 8 },
     "7": { "enabled": false, "duration": 8 },
@@ -12,4 +12,5 @@
   },
   "reload": 1
 }
+
 
