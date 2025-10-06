@@ -1,238 +1,209 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="utf-8">
-<title>HC TIWAG Innsbruck Juniors - Infosäule</title>
-
-<style>
-/* ================= GRUNDSTIL ================= */
-/* Basisstil für die gesamte Seite */
-body { 
-  margin:0;                     /* Kein Abstand um die Seite */
-  font-family:"Areno Serif", serif;  /* Schriftart */
-  color:#fff;                   /* Weißer Text */
-  overflow:hidden;              /* Kein Scrollen */
-}
-
-/* ================= SEITEN-STYLE ================= */
-/* Jede Seite (page) nimmt den gesamten Bildschirm ein */
-.page {
-  position:absolute; top:0; left:0; width:100%; height:100%;
-  display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
-  opacity:0;                    /* Start unsichtbar */
-  transition:opacity 1s ease;   /* Weiches Einblenden */
-  background: linear-gradient(135deg, #003789 40%, #d42323 60%); /* Rot-blauer Hintergrund */
-}
-
-/* Aktive Seite sichtbar */
-.page.active { 
-  opacity:1; 
-  z-index:1;  /* Immer vorne */
-}
-
-/* ================= LOGOS OBEN ================= */
-.logo-container { 
-  display:flex; justify-content:center; align-items:flex-end; gap:60px; margin:20px 0 10px; 
-}
-.logo-container img { 
-  max-height:100px; 
-  filter: drop-shadow(0 5px 15px rgba(0,0,0,0.6)); /* Schatten unter Logos */
-}
-
-/* ================= KOPFZEILE ================= */
-header { text-align:center; padding:10px 0; }
-.title-block { text-shadow:2px 2px 8px rgba(0,0,0,0.8); }
-header h1 { font-size:2.4em; margin:0 0 5px 0; }
-
-/* ================= STARTSEITE "INFOSÄULE" ================= */
-.announcement-container { display:flex; flex-direction:column; align-items:center; margin-top:10px; }
-.announcement-container .infosaule {
-  font-size: 7vw;                /* Größe in Abhängigkeit der Bildschirmbreite */
-  font-weight: 800;               /* Fett */
-  letter-spacing: 0.25em;         /* Abstand zwischen Buchstaben */
-  text-transform: uppercase;      /* Großbuchstaben */
-  text-shadow: 0 0 20px rgba(255,255,255,0.9), 0 0 40px rgba(255,255,255,0.7); /* Leuchten */
-  animation: glowPulse 2s ease-in-out infinite alternate; /* Leuchtanimation */
-  margin-top: 5vh;
-}
-
-/* Animation für den "Leuchteffekt" */
-@keyframes glowPulse {
-  0%{text-shadow:0 0 10px rgba(255,255,255,0.6);}
-  50%{text-shadow:0 0 40px rgba(255,255,255,0.8);}
-  100%{text-shadow:0 0 10px rgba(255,255,255,0.6);}
-}
-
-/* ================= KALENDER ================= */
-.calendar-title { font-size:1.7em; color:#fff; text-shadow:1px 1px 5px rgba(0,0,0,0.6); margin:10px 0 20px 0; }
-
-/* ================= HAI-GIF ================= */
-.shark-gif {
-  position:absolute; bottom:5%; width:280px; height:280px;
-  background:url('HCI.gif') no-repeat center; background-size:contain;
-  pointer-events:none; /* Nicht anklickbar */
-  filter: drop-shadow(0 0 25px rgba(0,0,0,0.6));
-}
-.page-1 .shark-gif { opacity:0.85; } /* Startseite etwas sichtbarer */
-.calendar-page .shark-gif { opacity:0.3; } /* Kalender-Seite transparent */
-
-/* ================= GOOGLE KALENDER ================= */
-.calendar-page iframe {
-  border:0; width:90%; height:calc(100vh - 200px); /* fast Vollbild */
-  margin-top:10px; border-radius:10px;
-  box-shadow:0 0 20px rgba(0,0,0,0.6);
-}
-
-/* ================= ORGANIGRAMM ================= */
-.org-page img { width:100%; height:100%; object-fit:contain; }
-
-/* ================= VIDEOS ================= */
-.video-page video.zoom-video { width:100%; height:100%; object-fit:contain; }
-
-/* ================= SIGNATUR ================= */
-.signature { 
-  position:fixed; bottom:10px; right:15px; 
-  font-size:0.9em; color:rgba(255,255,255,0.5); pointer-events:none; 
-}
-</style>
+  <meta charset="UTF-8">
+  <title>HC TIWAG Innsbruck Juniors Infosäule</title>
+  <style>
+    body,html{margin:0;padding:0;width:100%;height:100%;overflow:hidden;font-family:Arial,sans-serif;background:linear-gradient(135deg,#004080,#e60000);color:white;}
+    .page{display:none;justify-content:center;align-items:center;width:100%;height:100%;}
+    .page.active{display:flex;}
+    .start-page{flex-direction:column;text-align:center;}
+    .start-page h1{font-size:4em;text-shadow:2px 2px 5px black;}
+    .logo-row{display:flex;justify-content:space-around;align-items:center;width:100%;}
+    .logo-row img{max-height:120px;}
+    .glow{font-size:3em;color:white;text-shadow:0 0 20px #fff,0 0 30px #ff0000,0 0 40px #ff0000;animation:glow 2s ease-in-out infinite alternate;}
+    @keyframes glow{from{text-shadow:0 0 10px #fff,0 0 20px #ff0000;}to{text-shadow:0 0 20px #fff,0 0 40px #ff0000;}}
+    iframe{border:0;width:90%;height:90%;}
+    .org-page img{width:100%;height:100%;object-fit:cover;} /* <-- geändert */
+    .video-page video{width:90%;height:auto;}
+    .admin-panel{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);color:white;display:none;flex-direction:column;padding:20px;overflow:auto;z-index:9999;}
+    .admin-panel h2{margin-top:0;}
+    .admin-panel label{display:block;margin:5px 0;}
+    .admin-panel input[type=number]{width:60px;}
+    .close-btn{margin-top:20px;padding:10px;background:#e60000;border:none;color:white;cursor:pointer;}
+  </style>
 </head>
 <body>
-
-<!-- ================= SEITE 1: STARTSEITE ================= -->
-<div class="page page-1 active">
-  <!-- Logos oben -->
-  <div class="logo-container">
-    <img src="HAI.png" alt="HAI Logo">
-    <img src="TIWAG.jpg" alt="TIWAG Logo">
-  </div>
-  <!-- Titel -->
-  <header>
-    <div class="title-block">
-      <h1>HC TIWAG Innsbruck Juniors</h1>
+  <div class="page start-page page-1 active">
+    <div class="logo-row">
+      <img src="logo1.png" alt="Logo1">
+      <img src="logo2.png" alt="Logo2">
     </div>
-  </header>
-  <!-- Leuchttext "INFOSÄULE" -->
-  <div class="announcement-container">
-    <h1 class="infosaule">I N F O S Ä U L E</h1>
+    <h1 class="glow">INFOSÄULE</h1>
+    <img src="hai.gif" alt="Hai" style="max-height:200px;">
   </div>
-  <!-- Hai-GIF unten -->
-  <div class="shark-gif"></div>
-</div>
 
-<!-- ================= SEITE 2: KALENDER ================= -->
-<div class="page calendar-page page-2">
-  <div class="logo-container">
-    <img src="HAI.png" alt="HAI Logo">
-    <img src="TIWAG.jpg" alt="TIWAG Logo">
+  <div class="page cal-page page-2">
+    <iframe src="https://calendar.google.com/calendar/embed?src=de.austrian%23holiday%40group.v.calendar.google.com&ctz=Europe%2FVienna"></iframe>
   </div>
-  <header>
-    <div class="title-block"><h1>HC TIWAG Innsbruck Juniors</h1></div>
-  </header>
-  <div class="announcement-container"><h2 class="calendar-title">Eisplan</h2></div>
-  <!-- Google Kalender Iframe aktualisiert -->
-  <iframe
-    src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showPrint=0&showTitle=0&showTabs=0&showCalendars=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZDU3OWRjY2M2MTNhZTI0YzZlNjY1NmE5ZGIyOWM0MDRlNDk5NjNhZjFiZDYyNjY0NGQwZGE5OTVhNTUzNmUxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzBiZDg4YjUxNmVlNGRmNGFjMmZkMWU2NGJhOWQ4MzBlMjViY2VlZjc4YjM4MmM5N2FhZWZmZWU1NmY5NjlmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YjQ5M2RhNTY5NDg5NTA2MDQ0YWE2MmVmYTA5ODIyODM0MmQ0NjRhMzQ4MzY5MGYyNTU1NTE0Yzg0Y2ZmNDI0NEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YWQ4ZjNlMmRiODQ1YjZiNmM5ZTZkYmIyZDkyNGY1NTliNjVhNjI3YTNlNWEzMmYwYzQ0YmRhZTA1NzMxNGMwOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6&color=%23c0ca33&color=%230b8043&color=%233f51b5&color=%238e24aa&color=%23616161&color=%23ad1457&color=%23e4c441"
-    style="border-width:0" width="800" height="600" frameborder="0" scrolling="no">
-  </iframe>
-  <div class="shark-gif"></div>
-</div>
 
-<!-- ================= SEITE 3: ORGANIGRAMM ================= -->
-<div class="page org-page page-3">
-  <img src="ORG.png" alt="Organigramm Vollbild">
-</div>
+  <div class="page org-page page-3">
+    <img src="ORG.png" alt="Organigramm Vollbild">
+  </div>
 
-<!-- ================= SEITE 4: FOTOS/VIDEOS ================= -->
-<div class="page video-page page-4">
-  <video autoplay loop muted playsinline class="zoom-video">
-    <source src="Fotos.mp4" type="video/mp4">
-  </video>
-</div>
+  <div class="page video-page page-4">
+    <video src="video.mp4" controls autoplay loop></video>
+  </div>
 
-<!-- ================= SEITE 5: FANSHOP VIDEO ================= -->
-<div class="page video-page page-5">
-  <video autoplay loop muted playsinline class="zoom-video">
-    <source src="FANSHOP.mp4" type="video/mp4">
-  </video>
-</div>
+  <div class="page page-5"><h1>Video/Fotos Platzhalter 5</h1></div>
+  <div class="page page-6"><h1>Platzhalter 6</h1></div>
+  <div class="page page-7"><h1>Platzhalter 7</h1></div>
+  <div class="page page-8"><h1>Platzhalter 8</h1></div>
+  <div class="page page-9"><h1>Platzhalter 9</h1></div>
 
-<!-- ================= SEITE 6–9: LEERE PLATZHALTER ================= -->
-<div class="page video-page page-6"></div>
-<div class="page video-page page-7"></div>
-<div class="page video-page page-8"></div>
-<div class="page video-page page-9"></div>
+  <div class="admin-panel" id="adminPanel">
+    <h2>Admin Einstellungen</h2>
+    <div>
+      <h3>Seiten aktivieren/deaktivieren</h3>
+      <label><input type="checkbox" data-page="1" checked> Startseite</label>
+      <label><input type="checkbox" data-page="2" checked> Kalender</label>
+      <label><input type="checkbox" data-page="3" checked> Organigramm</label>
+      <label><input type="checkbox" data-page="4" checked> Video</label>
+      <label><input type="checkbox" data-page="5" checked> Seite 5</label>
+      <label><input type="checkbox" data-page="6" checked> Seite 6</label>
+      <label><input type="checkbox" data-page="7" checked> Seite 7</label>
+      <label><input type="checkbox" data-page="8" checked> Seite 8</label>
+      <label><input type="checkbox" data-page="9" checked> Seite 9</label>
+    </div>
+    <div>
+      <h3>Anzeigedauer pro Seite (Sekunden)</h3>
+      <label>Seite 1: <input type="number" data-page="1" value="5"></label>
+      <label>Seite 2: <input type="number" data-page="2" value="5"></label>
+      <label>Seite 3: <input type="number" data-page="3" value="5"></label>
+      <label>Seite 4: <input type="number" data-page="4" value="5"></label>
+      <label>Seite 5: <input type="number" data-page="5" value="5"></label>
+      <label>Seite 6: <input type="number" data-page="6" value="5"></label>
+      <label>Seite 7: <input type="number" data-page="7" value="5"></label>
+      <label>Seite 8: <input type="number" data-page="8" value="5"></label>
+      <label>Seite 9: <input type="number" data-page="9" value="5"></label>
+    </div>
+    <div>
+      <h3>Automatischer Reload (Minuten, 0=aus)</h3>
+      <input type="number" id="reloadInterval" value="0">
+    </div>
+    <button class="close-btn" onclick="document.getElementById('adminPanel').style.display='none'">Schließen</button>
+  </div>
 
-<!-- ================= SIGNATUR ================= -->
-<div class="signature">Designed by MS</div>
-
-<!-- ================= JAVASCRIPT: SEITENROTATION ================= -->
 <script>
-window.addEventListener('DOMContentLoaded', async () => {
-  const pages = document.querySelectorAll('.page'); // Alle Seiten
-  let current = 0;
-  let rotationTimeout = null;
+document.addEventListener('DOMContentLoaded',()=>{
+  const pages=document.querySelectorAll('.page');
+  let current=0;
+  let rotationTimeout=null;
+  let reloadTimer=null;
+  const adminPanel=document.getElementById('adminPanel');
+  let adminOpen=false;
+  const checkboxes=adminPanel.querySelectorAll('input[type=checkbox]');
+  const durationInputs=adminPanel.querySelectorAll('input[type=number][data-page]');
+  const reloadInput=document.getElementById('reloadInterval');
 
-  // Einstellungen von GitHub laden
-  const settingsUrl = 'https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/settings.json';
-  let settings;
-
-  try {
-    const res = await fetch(settingsUrl);
-    settings = await res.json();
-  } catch(err) {
-    console.error('Fehler beim Laden der globalen Einstellungen:', err);
-    return;
+  function saveSettings(){
+    const settings={pages:{},reload:parseInt(reloadInput.value)||0};
+    checkboxes.forEach(cb=>{
+      if(!settings.pages[cb.dataset.page]) settings.pages[cb.dataset.page]={};
+      settings.pages[cb.dataset.page].enabled=cb.checked;
+    });
+    durationInputs.forEach(inp=>{
+      if(!settings.pages[inp.dataset.page]) settings.pages[inp.dataset.page]={};
+      settings.pages[inp.dataset.page].duration=parseInt(inp.value)||5;
+    });
+    localStorage.setItem('adminSettings', JSON.stringify(settings));
   }
 
-  // Welche Seiten sind aktiviert?
-  function getActivePageIndexes() {
-    const active = [];
-    for (let i = 1; i <= 9; i++) {
-      if (settings.pages[i] && settings.pages[i].enabled) active.push(i - 1);
+  function loadSettings(){
+    const saved=JSON.parse(localStorage.getItem('adminSettings')||'{}');
+    if(saved.pages){
+      checkboxes.forEach(cb=>{
+        if(saved.pages[cb.dataset.page] && typeof saved.pages[cb.dataset.page].enabled!=='undefined') cb.checked=saved.pages[cb.dataset.page].enabled;
+      });
+      durationInputs.forEach(inp=>{
+        if(saved.pages[inp.dataset.page] && typeof saved.pages[inp.dataset.page].duration!=='undefined') inp.value=saved.pages[inp.dataset.page].duration;
+      });
     }
+    if(saved.reload!==undefined) reloadInput.value=saved.reload;
+  }
+
+  loadSettings();
+
+  function getActivePageIndexes(){
+    const active=[];
+    checkboxes.forEach(cb=>{ if(cb.checked) active.push(parseInt(cb.dataset.page)-1); });
     return active;
   }
 
-  // Wie lange jede Seite angezeigt wird
-  function getDurations() {
-    const durations = {};
-    for (let i = 1; i <= 9; i++) {
-      if (settings.pages[i]) durations[i - 1] = settings.pages[i].duration * 1000;
-    }
+  function getDurations(){
+    const durations={};
+    durationInputs.forEach(inp=>{
+      const sec=parseInt(inp.value)||5;
+      durations[parseInt(inp.dataset.page)-1]=sec*1000;
+    });
     return durations;
   }
 
-  // Zeige eine bestimmte Seite
-  function showPage(index) {
-    pages.forEach((p, i) => p.classList.toggle('active', i === index));
+  function showPage(index){
+    pages.forEach((p,i)=>p.classList.toggle('active',i===index));
   }
 
-  // Gehe zur nächsten aktiven Seite
-  function rotateToNext() {
-    const active = getActivePageIndexes();
-    const durations = getDurations();
-    if (active.length === 0) return;
-    let pos = active.indexOf(current);
-    if (pos === -1) pos = 0;
-    const next = active[(pos + 1) % active.length];
-    current = next;
+  function startRotation(){
+    if(rotationTimeout) return;
+    rotateToNext();
+  }
+
+  function rotateToNext(){
+    if(adminOpen) return;
+    const active=getActivePageIndexes();
+    const durations=getDurations();
+    if(active.length===0) return;
+    let pos=active.indexOf(current);
+    if(pos===-1) pos=0;
+    const next=active[(pos+1)%active.length];
+    current=next;
     showPage(current);
-    rotationTimeout = setTimeout(() => rotateToNext(), durations[current] || 5000);
+    rotationTimeout=setTimeout(()=>{ rotationTimeout=null; rotateToNext(); }, durations[current] || 5000);
   }
 
-  // Start
-  const activePages = getActivePageIndexes();
-  current = activePages.length > 0 ? activePages[0] : 0;
-  showPage(current);
-  rotateToNext();
+  function stopRotation(){ if(rotationTimeout){ clearTimeout(rotationTimeout); rotationTimeout=null; } }
 
-  // Automatischer Reload, falls eingestellt
-  if (settings.reload && settings.reload > 0) {
-    setInterval(() => location.reload(), settings.reload * 60 * 1000);
+  function startReloadTimer() {
+    if(reloadTimer){ clearInterval(reloadTimer); reloadTimer=null; }
+    const mins=parseInt(reloadInput.value)||0;
+    if(mins>0){
+      reloadTimer=setInterval(()=>{ location.reload(); }, mins*60*1000);
+    }
   }
+  reloadInput.addEventListener('input', ()=>{
+    startReloadTimer();
+    saveSettings();
+  });
+  startReloadTimer();
+
+  (function initStart(){
+    const active=getActivePageIndexes();
+    current=active.length>0?active[0]:0;
+    showPage(current);
+    startRotation();
+  })();
+
+  checkboxes.forEach(cb=>{
+    cb.addEventListener('change',()=>{
+      saveSettings();
+      const active=getActivePageIndexes();
+      if(active.length>0){ current=active[0]; showPage(current); }
+    });
+  });
+
+  durationInputs.forEach(inp=>{
+    inp.addEventListener('input', saveSettings);
+  });
+
+  let mTimer=null;
+  function openAdmin(){ adminOpen=true; stopRotation(); adminPanel.style.display='flex'; }
+  function closeAdmin(){ adminOpen=false; adminPanel.style.display='none'; startRotation(); }
+  document.addEventListener('keydown',(e)=>{
+    if(e.key.toLowerCase()==='m'){ if(!mTimer){ mTimer=setTimeout(()=>{ openAdmin(); mTimer=null; },2000); } }
+    if(e.key==='Escape'){ if(adminOpen) closeAdmin(); }
+  });
+  document.addEventListener('keyup',(e)=>{ if(e.key.toLowerCase()==='m'){ if(mTimer){ clearTimeout(mTimer); mTimer=null; } } });
 });
 </script>
-
 </body>
 </html>
-
