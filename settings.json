@@ -1,13 +1,13 @@
 {
   "pages": {
-    "1": { "enabled": true,  "duration": 10, "note": "Startseite" },
-    "2": { "enabled": true,  "duration": 15, "note": "Kalender" },
-    "3": { "enabled": true,  "duration": 10, "note": "Organigramm" },
-    "4": { "enabled": true,  "duration": 20, "note": "Fotos-Video" },
-    "5": { "enabled": true,  "duration": 20, "note": "FANSHOP-Video" },
-    "6": { "enabled": true,  "duration": 10, "note": "HCI-NW Präsentation Video" },
-    "7": { "enabled": false, "duration": 10, "note": "Platzhalter" },
-    "8": { "enabled": false, "duration": 10, "note": "Platzhalter" },
+    "1": { "enabled": true,  "duration": 3, "note": "Startseite" },
+    "2": { "enabled": true,  "duration": 3, "note": "Kalender" },
+    "3": { "enabled": true,  "duration": 3, "note": "Organigramm" },
+    "4": { "enabled": true,  "duration": 3, "note": "Fotos-Video" },
+    "5": { "enabled": true,  "duration": 3, "note": "FANSHOP-Video" },
+    "6": { "enabled": true,  "duration": 3, "note": "HCI-NW Präsentation Video" },
+    "7": { "enabled": false, "duration": 3, "note": "Platzhalter" },
+    "8": { "enabled": false, "duration": 3, "note": "Platzhalter" },
     "9": { "enabled": false, "duration": 10, "note": "Platzhalter" }
   },
   "videoVersions": {
@@ -17,4 +17,5 @@
   },
   "reload": 0
 }
+
 
