@@ -1,19 +1,19 @@
 {
   "pages": {
-    "1": { "enabled": true,  "duration": 10 },  // Startseite
-    "2": { "enabled": true,  "duration": 15 },  // Kalender
-    "3": { "enabled": true,  "duration": 10 },  // Organigramm
-    "4": { "enabled": true,  "duration": 20 },  // Fotos-Video
-    "5": { "enabled": true,  "duration": 20 },  // FANSHOP-Video
-    "6": { "enabled": true,  "duration": 10 },  // HCI-NW Präsentation Video
-    "7": { "enabled": false, "duration": 10 },  // Platzhalter
-    "8": { "enabled": false, "duration": 10 },  // Platzhalter
-    "9": { "enabled": false, "duration": 10 }   // Platzhalter
+    "1": { "enabled": true,  "duration": 10, "note": "Startseite" },
+    "2": { "enabled": true,  "duration": 15, "note": "Kalender" },
+    "3": { "enabled": true,  "duration": 10, "note": "Organigramm" },
+    "4": { "enabled": true,  "duration": 20, "note": "Fotos-Video" },
+    "5": { "enabled": true,  "duration": 20, "note": "FANSHOP-Video" },
+    "6": { "enabled": true,  "duration": 20, "note": "HCI-NW Präsentation Video" },
+    "7": { "enabled": false, "duration": 10, "note": "Platzhalter" },
+    "8": { "enabled": false, "duration": 10, "note": "Platzhalter" },
+    "9": { "enabled": false, "duration": 10, "note": "Platzhalter" }
   },
   "videoVersions": {
-    "Fotos": 1,          // Hier die Versionsnummer anpassen, wenn das Video ersetzt wird
-    "FANSHOP": 1,        // Version bei neuem Video erhöhen
-    "HCINWSPPräs": 1     // Version bei neuem Video erhöhen
+    "Fotos": 1,
+    "FANSHOP": 1,
+    "HCINWSPPräs": 1
   },
-  "reload": 0  // Zeit in Minuten bis automatische Seitenaktualisierung (0 = aus)
+  "reload": 0
 }
