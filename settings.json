@@ -5,11 +5,12 @@
     "3": { "enabled": true, "duration": 3, "note": "Organigramm" },
     "4": { "enabled": true, "duration": 3, "note": "Fotos/Video" },
     "5": { "enabled": true, "duration": 3, "note": "FANSHOP Video" },
-    "6": { "enabled": false, "duration": 8, "note": "Platzhalter 6" },
+    "6": { "enabled": true, "duration": 5, "note": "CANVA Spielankündigungen Juniors" },
     "7": { "enabled": false, "duration": 8, "note": "Platzhalter 7" },
     "8": { "enabled": false, "duration": 8, "note": "Platzhalter 8" },
     "9": { "enabled": false, "duration": 8, "note": "Platzhalter 9" }
   },
   "reload": 1
 }
+
 
