@@ -174,7 +174,7 @@
     <main class="announcement-container">
       <h2 class="calendar-title">Eisplan</h2>
     </main>
-    <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showPrint=0&showTitle=0&showTabs=0&showCalendars=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZDU3OWRjY2M2MTNhZTI0YzZlNjY1NmE5ZGIyOWM0MDRlNDk5NjNhZjFiZDYyNjY0NGQwZGE5OTVhNTUzNmUxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzBiZDg4YjUxNmVlNGRmNGFjMmZkMWU2NGJhOWQ4MzBlMjViY2VlZjc4YjM4MmM5N2FhZWZmZWU1NmY5NjlmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YjQ5M2RhNTY5NDg5NTA2MDQ0YWE2MmVmYTA5ODIyODM0MmQ0NjRhMzQ4MzY5MGYyNTU1NTE0Yzg0Y2ZmNDI0NEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YWQ4ZjNlMmRiODQ1YjZiNmM5ZTZkYmIyZDkyNGY1NTliNjVhNjI3YTNlNWEzMmYwYzQ0YmRhZTA1NzMxNGMwOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6&color=%23c0ca33&color=%230b8043&color=%233f51b5&color=%238e24aa&color=%23616161&color=%23ad1457&color=%23e4c441" frameborder="0" scrolling="no"></iframe>
+    <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showPrint=0&showTitle=0&showTabs=0&showCalendars=0&showTz=0&mode=WEEK&src=..." frameborder="0" scrolling="no"></iframe>
     <div class="shark-gif"></div>
   </section>
 
@@ -186,29 +186,23 @@
   </section>
 
   <!-- =====================
-       SEITE 4: FOTOS/VIDEOS
+       SEITE 4–6: VIDEOS
        ===================== -->
   <section class="page video-page page-4">
     <video autoplay loop muted playsinline class="zoom-video">
-      <source src="Fotos.mp4" type="video/mp4">
+      <source data-name="Fotos" type="video/mp4">
     </video>
   </section>
 
-  <!-- =====================
-       SEITE 5: FANSHOP VIDEO
-       ===================== -->
   <section class="page video-page page-5">
     <video autoplay loop muted playsinline class="zoom-video">
-      <source src="FANSHOP.mp4" type="video/mp4">
+      <source data-name="FANSHOP" type="video/mp4">
     </video>
   </section>
 
-  <!-- =====================
-       SEITE 6: HCI-NW PRÄSENTATION VIDEO
-       ===================== -->
   <section class="page video-page page-6">
     <video autoplay loop muted playsinline class="zoom-video">
-      <source src="HCINWSPPräs.mp4" type="video/mp4">
+      <source data-name="HCINWSPPräs" type="video/mp4">
     </video>
   </section>
 
@@ -225,7 +219,7 @@
   <footer class="signature">Designed by MS</footer>
 
   <!-- =====================
-       JAVASCRIPT: SEITENROTATION
+       JAVASCRIPT: SEITENROTATION + VIDEO VERSIONING
        ===================== -->
   <script>
     window.addEventListener('DOMContentLoaded', async () => {
@@ -242,6 +236,8 @@
         console.error('❌ Fehler beim Laden der globalen Einstellungen:', err);
         return;
       }
+
+      const videoVersions = settings.videoVersions || {};
 
       function getActivePageIndexes() {
         const active = [];
@@ -264,10 +260,15 @@
           const isActive = i === index;
           p.classList.toggle('active', isActive);
 
-          // Video neu starten, wenn Seite aktiv und Video vorhanden
           if (isActive) {
+            // Alle Videos neu starten
             const videos = p.querySelectorAll('video');
             videos.forEach(video => {
+              const source = video.querySelector('source');
+              const name = source.dataset.name;
+              const version = videoVersions[name] || 1;
+              source.src = `${name}.mp4?v=${version}`;
+              video.load();
               video.currentTime = 0;
               video.play();
             });
