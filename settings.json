@@ -1,22 +1,18 @@
 {
   "pages": {
-    "1": { "enabled": true,  "duration": 3, "note": "Startseite" },
-    "2": { "enabled": true,  "duration": 3, "note": "Kalender" },
-    "3": { "enabled": true,  "duration": 3, "note": "Organigramm" },
-    "4": { "enabled": true,  "duration": 3, "note": "Fotos-Video" },
-    "5": { "enabled": true,  "duration": 3, "note": "FANSHOP-Video" },
-    "6": { "enabled": true,  "duration": 10, "note": "HCI-NW Präsentation Video" },
-    "7": { "enabled": false, "duration": 3, "note": "Platzhalter" },
-    "8": { "enabled": false, "duration": 3, "note": "Platzhalter" },
-    "9": { "enabled": false, "duration": 3, "note": "Platzhalter" }
+    "1": { "enabled": true, "duration": 3, "note": "Startseite / Infosäule" },
+    "2": { "enabled": true, "duration": 3, "note": "Kalender / Eisplan" },
+    "3": { "enabled": true, "duration": 3, "note": "Organigramm" },
+    "4": { "enabled": true, "duration": 3, "note": "Fotos/Video" },
+    "5": { "enabled": true, "duration": 3, "note": "FANSHOP Video" },
+    "6": { "enabled": true, "duration": 10, "note": "CANVA Spielankündigungen Juniors" },
+    "7": { "enabled": false, "duration": 8, "note": "Platzhalter 7" },
+    "8": { "enabled": false, "duration": 8, "note": "Platzhalter 8" },
+    "9": { "enabled": false, "duration": 8, "note": "Platzhalter 9" }
   },
-  "videoVersions": {
-    "Fotos": 1,
-    "FANSHOP": 1,
-    "HCINWSPPräs": 1
-  },
-  "reload": 0
+  "reload": 1
 }
+
 
 
 
