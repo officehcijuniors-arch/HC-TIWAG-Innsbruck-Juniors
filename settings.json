@@ -1,18 +1,19 @@
 {
   "pages": {
-    "1": { "enabled": true, "duration": 3, "note": "Startseite / Infosäule" },
-    "2": { "enabled": true, "duration": 3, "note": "Kalender / Eisplan" },
-    "3": { "enabled": true, "duration": 3, "note": "Organigramm" },
-    "4": { "enabled": true, "duration": 3, "note": "Fotos/Video" },
-    "5": { "enabled": true, "duration": 3, "note": "FANSHOP Video" },
-    "6": { "enabled": true, "duration": 10, "note": "CANVA Spielankündigungen Juniors" },
-    "7": { "enabled": false, "duration": 8, "note": "Platzhalter 7" },
-    "8": { "enabled": false, "duration": 8, "note": "Platzhalter 8" },
-    "9": { "enabled": false, "duration": 8, "note": "Platzhalter 9" }
+    "1": { "enabled": true,  "duration": 10 },  // Startseite
+    "2": { "enabled": true,  "duration": 15 },  // Kalender
+    "3": { "enabled": true,  "duration": 10 },  // Organigramm
+    "4": { "enabled": true,  "duration": 20 },  // Fotos-Video
+    "5": { "enabled": true,  "duration": 20 },  // FANSHOP-Video
+    "6": { "enabled": true,  "duration": 10 },  // HCI-NW Präsentation Video
+    "7": { "enabled": false, "duration": 10 },  // Platzhalter
+    "8": { "enabled": false, "duration": 10 },  // Platzhalter
+    "9": { "enabled": false, "duration": 10 }   // Platzhalter
   },
-  "reload": 1
+  "videoVersions": {
+    "Fotos": 1,          // Hier die Versionsnummer anpassen, wenn das Video ersetzt wird
+    "FANSHOP": 1,        // Version bei neuem Video erhöhen
+    "HCINWSPPräs": 1     // Version bei neuem Video erhöhen
+  },
+  "reload": 0  // Zeit in Minuten bis automatische Seitenaktualisierung (0 = aus)
 }
-
-
-
-
