@@ -5,7 +5,7 @@
     "3": { "enabled": true,  "duration": 10, "note": "Organigramm" },
     "4": { "enabled": true,  "duration": 20, "note": "Fotos-Video" },
     "5": { "enabled": true,  "duration": 20, "note": "FANSHOP-Video" },
-    "6": { "enabled": true,  "duration": 20, "note": "HCI-NW Präsentation Video" },
+    "6": { "enabled": true,  "duration": 10, "note": "HCI-NW Präsentation Video" },
     "7": { "enabled": false, "duration": 10, "note": "Platzhalter" },
     "8": { "enabled": false, "duration": 10, "note": "Platzhalter" },
     "9": { "enabled": false, "duration": 10, "note": "Platzhalter" }
@@ -17,3 +17,4 @@
   },
   "reload": 0
 }
+
