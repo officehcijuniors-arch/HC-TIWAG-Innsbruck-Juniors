@@ -3,21 +3,24 @@
 <head>
   <meta charset="utf-8">
   <title>HC TIWAG Innsbruck Juniors - Infosäule</title>
+  
+  <!-- =====================
+       GLOBALES STYLING
+       ===================== -->
   <style>
-    /* ================= GRUNDSTIL ================= */
+    /* ====== BASIS ====== */
     body {
       margin: 0;
       font-family: "Areno Serif", serif;
       color: #fff;
       overflow: hidden;
+      background: #000; /* Fallback Hintergrund */
     }
 
+    /* ====== SEITENLAYOUT ====== */
     .page {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      inset: 0; /* ersetzt top/left/width/height */
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -32,6 +35,7 @@
       z-index: 1;
     }
 
+    /* ====== HEADER & LOGO ====== */
     .logo-container {
       display: flex;
       justify-content: center;
@@ -45,6 +49,7 @@
       filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.6));
     }
 
+    /* Kleinere Logovariante für Seite 1 + 2 */
     .page-1 .logo-container img:nth-child(2),
     .page-2 .logo-container img:nth-child(2) {
       max-height: 50px;
@@ -55,15 +60,13 @@
       padding: 10px 0;
     }
 
-    .title-block {
-      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
-    }
-
     header h1 {
       font-size: 2.4em;
       margin: 0 0 5px 0;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
     }
 
+    /* ====== INFOSÄULE TITEL ====== */
     .announcement-container {
       display: flex;
       flex-direction: column;
@@ -71,7 +74,7 @@
       margin-top: 10px;
     }
 
-    .announcement-container .infosaule {
+    .infosaule {
       font-size: 7vw;
       font-weight: 800;
       letter-spacing: 0.25em;
@@ -82,36 +85,19 @@
       margin-top: 5vh;
     }
 
+    /* Leucht-Effekt für "Infosäule" */
     @keyframes glowPulse {
       0%   { text-shadow: 0 0 10px rgba(255, 255, 255, 0.6); }
       50%  { text-shadow: 0 0 40px rgba(255, 255, 255, 0.8); }
       100% { text-shadow: 0 0 10px rgba(255, 255, 255, 0.6); }
     }
 
+    /* ====== KALENDER-SEITE ====== */
     .calendar-title {
       font-size: 1.7em;
       color: #fff;
       text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
       margin: 10px 0 20px;
-    }
-
-    .shark-gif {
-      position: absolute;
-      bottom: 5%;
-      width: 280px;
-      height: 280px;
-      background: url('HCI.gif') no-repeat center;
-      background-size: contain;
-      pointer-events: none;
-      filter: drop-shadow(0 0 25px rgba(0, 0, 0, 0.6));
-    }
-
-    .page-1 .shark-gif {
-      opacity: 0.85;
-    }
-
-    .calendar-page .shark-gif {
-      opacity: 0.3;
     }
 
     .calendar-page iframe {
@@ -123,6 +109,22 @@
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
     }
 
+    /* ====== HINTERGRUND-GIF ====== */
+    .shark-gif {
+      position: absolute;
+      bottom: 5%;
+      width: 280px;
+      height: 280px;
+      background: url('HCI.gif') no-repeat center;
+      background-size: contain;
+      pointer-events: none;
+      filter: drop-shadow(0 0 25px rgba(0, 0, 0, 0.6));
+    }
+
+    .page-1 .shark-gif { opacity: 0.85; }
+    .calendar-page .shark-gif { opacity: 0.3; }
+
+    /* ====== ORGANIGRAMM ====== */
     .org-page img {
       position: absolute;
       inset: 0;
@@ -131,12 +133,14 @@
       object-fit: contain;
     }
 
+    /* ====== VIDEO-SEITEN ====== */
     .video-page video.zoom-video {
       width: 100%;
       height: 100%;
       object-fit: contain;
     }
 
+    /* ====== SIGNATUR ====== */
     .signature {
       position: fixed;
       bottom: 10px;
@@ -149,80 +153,100 @@
   </style>
 </head>
 <body>
-  <!-- ================= SEITE 1: STARTSEITE ================= -->
-  <div class="page page-1 active">
+  <!-- =====================
+       SEITE 1: STARTSEITE
+       ===================== -->
+  <section class="page page-1 active">
     <div class="logo-container">
       <img src="HAI.png" alt="HAI Logo">
       <img src="TIWAG.jpg" alt="TIWAG Logo">
     </div>
     <header>
-      <div class="title-block">
-        <h1>HC TIWAG Innsbruck Juniors</h1>
-      </div>
+      <h1>HC TIWAG Innsbruck Juniors</h1>
     </header>
-    <div class="announcement-container">
+    <main class="announcement-container">
       <h1 class="infosaule">I N F O S Ä U L E</h1>
-    </div>
+    </main>
     <div class="shark-gif"></div>
-  </div>
+  </section>
 
-  <!-- ================= SEITE 2: KALENDER ================= -->
-  <div class="page calendar-page page-2">
+  <!-- =====================
+       SEITE 2: KALENDER
+       ===================== -->
+  <section class="page calendar-page page-2">
     <div class="logo-container">
       <img src="HAI.png" alt="HAI Logo">
       <img src="TIWAG.jpg" alt="TIWAG Logo">
     </div>
     <header>
-      <div class="title-block">
-        <h1>HC TIWAG Innsbruck Juniors</h1>
-      </div>
+      <h1>HC TIWAG Innsbruck Juniors</h1>
     </header>
-    <div class="announcement-container">
+    <main class="announcement-container">
       <h2 class="calendar-title">Eisplan</h2>
-    </div>
-    <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showPrint=0&showTitle=0&showTabs=0&showCalendars=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZDU3OWRjY2M2MTNhZTI0YzZlNjY1NmE5ZGIyOWM0MDRlNDk5NjNhZjFiZDYyNjY0NGQwZGE5OTVhNTUzNmUxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzBiZDg4YjUxNmVlNGRmNGFjMmZkMWU2NGJhOWQ4MzBlMjViY2VlZjc4YjM4MmM5N2FhZWZmZWU1NmY5NjlmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YjQ5M2RhNTY5NDg5NTA2MDQ0YWE2MmVmYTA5ODIyODM0MmQ0NjRhMzQ4MzY5MGYyNTU1NTE0Yzg0Y2ZmNDI0NEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YWQ4ZjNlMmRiODQ1YjZiNmM5ZTZkYmIyZDkyNGY1NTliNjVhNjI3YTNlNWEzMmYwYzQ0YmRhZTA1NzMxNGMwOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6&color=%23c0ca33&color=%230b8043&color=%233f51b5&color=%238e24aa&color=%23616161&color=%23ad1457&color=%23e4c441" 
-            style="border-width:0" frameborder="0" scrolling="no"></iframe>
+    </main>
+    <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showPrint=0&showTitle=0&showTabs=0&showCalendars=0&showTz=0&mode=WEEK&src=..." frameborder="0" scrolling="no"></iframe>
     <div class="shark-gif"></div>
-  </div>
+  </section>
 
-  <!-- ================= SEITE 3: ORGANIGRAMM ================= -->
-  <div class="page org-page page-3">
+  <!-- =====================
+       SEITE 3: ORGANIGRAMM
+       ===================== -->
+  <section class="page org-page page-3">
     <img src="ORG.png" alt="Organigramm Vollbild">
-  </div>
+  </section>
 
-  <!-- ================= SEITE 4: FOTOS/VIDEOS ================= -->
-  <div class="page video-page page-4">
+  <!-- =====================
+       SEITE 4: FOTOS/VIDEOS
+       ===================== -->
+  <section class="page video-page page-4">
     <video autoplay loop muted playsinline class="zoom-video">
       <source src="Fotos.mp4" type="video/mp4">
     </video>
-  </div>
+  </section>
 
-  <!-- ================= SEITE 5: FANSHOP VIDEO ================= -->
-  <div class="page video-page page-5">
+  <!-- =====================
+       SEITE 5: FANSHOP VIDEO
+       ===================== -->
+  <section class="page video-page page-5">
     <video autoplay loop muted playsinline class="zoom-video">
       <source src="FANSHOP.mp4" type="video/mp4">
     </video>
-  </div>
+  </section>
 
-  <!-- ================= SEITE 6: HEIMSPIELE JUNIORS (nur Canva) ================= -->
-  <div class="page page-6">
+  <!-- =====================
+       SEITE 6: HEIMSPIELE (Canva)
+       ===================== -->
+  <section class="page page-6">
     <iframe loading="lazy"
       src="https://www.canva.com/design/DAGyZLbH_UY/EmEqkwW_U2ZYeFFYsZLpJA/view?embed"
-      style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; margin: 0; padding: 0;"
-      allowfullscreen="allowfullscreen" allow="fullscreen">
+      style="position: absolute; inset: 0; width: 100%; height: 100%; border: none;"
+      allowfullscreen>
     </iframe>
-  </div>
+  </section>
 
-  <!-- ================= SEITE 7–9: PLATZHALTER ================= -->
-  <div class="page video-page page-7"></div>
-  <div class="page video-page page-8"></div>
-  <div class="page video-page page-9"></div>
+  <!-- =====================
+       SEITEN 7–9: PLATZHALTER
+       ===================== -->
+  <section class="page video-page page-7"></section>
+  <section class="page video-page page-8"></section>
+  <section class="page video-page page-9"></section>
 
-  <!-- ================= SIGNATUR ================= -->
-  <div class="signature">Designed by MS</div>
+  <!-- =====================
+       SIGNATUR
+       ===================== -->
+  <footer class="signature">Designed by MS</footer>
 
-  <!-- ================= JAVASCRIPT ================= -->
+  <!-- =====================
+       JAVASCRIPT: SEITENROTATION
+       ===================== -->
   <script>
+    /**
+     * Ablauf:
+     * - Lädt die Einstellungen aus settings.json
+     * - Aktiviert nur die Seiten, die freigegeben sind
+     * - Wechselt automatisch nach Ablauf der Dauer zur nächsten Seite
+     * - Optional: Reload nach bestimmter Zeit
+     */
     window.addEventListener('DOMContentLoaded', async () => {
       const pages = document.querySelectorAll('.page');
       let current = 0;
@@ -230,14 +254,16 @@
       const settingsUrl = 'https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/settings.json';
       let settings;
 
+      // --- Einstellungen laden ---
       try {
         const res = await fetch(settingsUrl);
         settings = await res.json();
       } catch (err) {
-        console.error('Fehler beim Laden der globalen Einstellungen:', err);
+        console.error('❌ Fehler beim Laden der globalen Einstellungen:', err);
         return;
       }
 
+      // --- Helferfunktionen ---
       function getActivePageIndexes() {
         const active = [];
         for (let i = 1; i <= 9; i++) {
@@ -273,11 +299,13 @@
         rotationTimeout = setTimeout(() => rotateToNext(), durations[current] || 5000);
       }
 
+      // --- Start ---
       const activePages = getActivePageIndexes();
       current = activePages.length > 0 ? activePages[0] : 0;
       showPage(current);
       rotateToNext();
 
+      // --- Automatischer Reload nach X Minuten ---
       if (settings.reload && settings.reload > 0) {
         setInterval(() => location.reload(), settings.reload * 60 * 1000);
       }
