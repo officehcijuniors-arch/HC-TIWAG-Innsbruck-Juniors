@@ -116,22 +116,25 @@
       object-fit: contain;
     }
 
+    /* ===================== SIGNATUR ===================== */
     .signature {
       position: fixed;
       bottom: 10px;
       right: 15px;
       font-size: 0.9em;
-      color: rgba(255, 255, 255, 0.4);
+      font-weight: bold;
+      color: rgba(255, 255, 255, 0.35);
       pointer-events: none;
       z-index: 9999;
-      text-shadow: 0 0 8px rgba(255, 255, 255, 0.6), 0 0 15px rgba(255, 255, 255, 0.3);
-      animation: shine 2.5s ease-in-out infinite alternate;
+      background: linear-gradient(120deg, rgba(255,255,255,0.6), rgba(255,255,255,0.1), rgba(255,255,255,0.6));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shine 3s linear infinite;
     }
 
     @keyframes shine {
-      0%   { text-shadow: 0 0 4px rgba(255,255,255,0.3), 0 0 10px rgba(255,255,255,0.2); }
-      50%  { text-shadow: 0 0 10px rgba(255,255,255,0.6), 0 0 20px rgba(255,255,255,0.3); }
-      100% { text-shadow: 0 0 4px rgba(255,255,255,0.3), 0 0 10px rgba(255,255,255,0.2); }
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
     }
   </style>
 </head>
@@ -200,7 +203,7 @@
   <section class="page video-page page-9"></section>
 
   <!-- ===================== SIGNATUR ===================== -->
-  <footer class="signature">Designed by MS</footer>
+  <footer class="signature">MS</footer>
 
   <!-- ===================== JAVASCRIPT ===================== -->
   <script>
