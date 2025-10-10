@@ -280,11 +280,12 @@
         const page = pages[index];
         const pageSettings = settings.pages[index+1];
 
-        if(pageSettings && page.querySelector){
+        // ✅ Nur Video-Seiten neu laden
+        if(pageSettings && page.classList.contains("video-page")){
           const videoEl = page.querySelector('video');
           if(videoEl){
             const src = videoEl.querySelector('source').getAttribute('src');
-            videoEl.src = src + '?t=' + new Date().getTime();
+            videoEl.src = src;
             videoEl.load();
             videoEl.play();
           }
