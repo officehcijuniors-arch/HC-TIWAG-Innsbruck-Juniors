@@ -10,8 +10,9 @@
     "8": { "enabled": false, "duration": 8, "note": "Platzhalter 8" },
     "9": { "enabled": false, "duration": 8, "note": "Platzhalter 9" }
   },
-  "reload": 1
+  "reload": 20
 }
+
 
 
 
