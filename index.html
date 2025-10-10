@@ -197,34 +197,25 @@
     </video>
   </section>
 
-  <!-- ===================== SEITE 7: U13 Tabelle ===================== -->
-  <section class="page table-page page-7">
-    <div class="logo-container">
-      <img src="HAI.png" alt="HAI Logo">
-      <img src="TIWAG.jpg" alt="TIWAG Logo">
-    </div>
-    <header>
-      <h1>HC TIWAG Innsbruck Juniors - U13 Tabelle</h1>
-    </header>
-    <main class="announcement-container">
-      <div id="table-container"></div>
-    </main>
-    <div class="shark-gif"></div>
+  <!-- Seite 7: U13 Tabelle -->
+<div class="page table-page" id="page7">
+  <h1>HC TIWAG Innsbruck Juniors – U13 Tabelle</h1>
+  <div id="table-container"></div>
+</div>
 
-    <!-- Hockeydata Widget Script -->
-    <script type="module">
-      import { Widget } from 'https://cdn.prod.website-files.com/65ce0995c4a7c7f85f6c9275/hockeydata.util.Widget.js';
+<!-- Hockeydata Widget laden -->
+<script src="https://cdn.prod.website-files.com/65ce0995c4a7c7f85f6c9275/hockeydata.util.Widget.js"></script>
+<script>
+  new Widget({
+    $domNode: document.querySelector("#table-container"),
+    widgetName: "hockeydata.los.Standings",
+    apiKey: "738aba5a0c15ea7da496e1cda6922ff1",
+    divisionId: "oehv-u13-gd", // evtl. anpassen falls falsche Gruppe
+    sport: "icehockey",
+    columnSet: "long"
+  });
+</script>
 
-      const widget = new Widget({
-        $domNode: document.querySelector('#table-container'),
-        widgetName: 'hockeydata.los.Standings',
-        apiKey: '738aba5a0c15ea7da496e1cda6922ff1',
-        divisionId: 'oehv-u13-gd',
-        sport: 'icehockey',
-        columnSet: 'long'
-      });
-    </script>
-  </section>
 
   <!-- ===================== SEITEN 8–9: PLATZHALTER ===================== -->
   <section class="page video-page page-8"></section>
@@ -311,3 +302,4 @@
   </script>
 </body>
 </html>
+
