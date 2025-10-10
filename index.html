@@ -116,17 +116,6 @@
       object-fit: contain;
     }
 
-    .table-page {
-      overflow-y: auto;
-      justify-content: flex-start;
-      padding-top: 20px;
-    }
-
-    #table-container {
-      width: 90%;
-      margin: 0 auto;
-    }
-
     .signature {
       position: fixed;
       bottom: 10px;
@@ -135,6 +124,18 @@
       color: rgba(255, 255, 255, 0.5);
       pointer-events: none;
       z-index: 9999;
+    }
+
+    /* Tabelle */
+    .table-page {
+      background: #fff;
+      color: #000;
+      padding: 20px;
+      overflow-y: auto;
+    }
+    .table-page h1 {
+      color: #003789;
+      margin-bottom: 20px;
     }
   </style>
 </head>
@@ -197,25 +198,11 @@
     </video>
   </section>
 
-  <!-- Seite 7: U13 Tabelle -->
-<div class="page table-page" id="page7">
-  <h1>HC TIWAG Innsbruck Juniors – U13 Tabelle</h1>
-  <div id="table-container"></div>
-</div>
-
-<!-- Hockeydata Widget laden -->
-<script src="https://cdn.prod.website-files.com/65ce0995c4a7c7f85f6c9275/hockeydata.util.Widget.js"></script>
-<script>
-  new Widget({
-    $domNode: document.querySelector("#table-container"),
-    widgetName: "hockeydata.los.Standings",
-    apiKey: "738aba5a0c15ea7da496e1cda6922ff1",
-    divisionId: "oehv-u13-gd", // evtl. anpassen falls falsche Gruppe
-    sport: "icehockey",
-    columnSet: "long"
-  });
-</script>
-
+  <!-- ===================== SEITE 7: TABELLE ===================== -->
+  <section class="page table-page page-7">
+    <h1>U13 Tabelle</h1>
+    <div id="table-container"></div>
+  </section>
 
   <!-- ===================== SEITEN 8–9: PLATZHALTER ===================== -->
   <section class="page video-page page-8"></section>
@@ -263,7 +250,7 @@
 
         pages.forEach((p, i) => p.classList.toggle('active', i === index));
 
-        // Videos automatisch laden mit Cache-Buster
+        // Videos automatisch laden
         if (pageSettings && page.querySelector) {
           const videoEl = page.querySelector('video');
           if (videoEl) {
@@ -300,6 +287,18 @@
       }
     });
   </script>
+
+  <!-- Hockeydata Widget -->
+  <script src="https://cdn.prod.website-files.com/65ce0995c4a7c7f85f6c9275/hockeydata.util.Widget.js"></script>
+  <script>
+    new Widget({
+      $domNode: document.querySelector("#table-container"),
+      widgetName: "hockeydata.los.Standings",
+      apiKey: "738aba5a0c15ea7da496e1cda6922ff1",
+      divisionId: "oehv-u13-gd",
+      sport: "icehockey",
+      columnSet: "long"
+    });
+  </script>
 </body>
 </html>
-
