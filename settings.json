@@ -1,7 +1,7 @@
 {
   "pages": {
-    "1": { "enabled": true, "duration": 6, "note": "Startseite / Infosäule" },
-    "2": { "enabled": false, "duration": 6, "note": "Kalender / Eisplan" },
+    "1": { "enabled": true, "duration": 10, "note": "Startseite / Infosäule" },
+    "2": { "enabled": true, "duration": 60, "note": "Kalender / Eisplan" },
     "3": { "enabled": false, "duration": 6, "note": "Organigramm" },
     "4": { "enabled": false, "duration": 6, "note": "Fotos/Video" },
     "5": { "enabled": false, "duration": 6, "note": "FANSHOP Video" },
@@ -12,6 +12,7 @@
   },
   "reload": 1
 }
+
 
 
 
