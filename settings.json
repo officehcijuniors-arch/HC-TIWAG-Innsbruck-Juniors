@@ -2,7 +2,7 @@
   "pages": {
     "1": { "enabled": true, "duration": 10, "note": "Startseite / Infosäule" },
     "2": { "enabled": true, "duration": 60, "note": "Kalender / Eisplan" },
-    "3": { "enabled": false, "duration": 6, "note": "Organigramm" },
+    "3": { "enabled": true, "duration": 30, "note": "Organigramm" },
     "4": { "enabled": false, "duration": 6, "note": "Fotos/Video" },
     "5": { "enabled": false, "duration": 6, "note": "FANSHOP Video" },
     "6": { "enabled": false, "duration": 6, "note": "CANVA Spielankündigungen Juniors" },
@@ -12,6 +12,7 @@
   },
   "reload": 1
 }
+
 
 
 
