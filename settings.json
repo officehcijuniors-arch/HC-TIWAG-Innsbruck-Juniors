@@ -2,9 +2,9 @@
   "pages": {
     "1": { "enabled": true, "duration": 20, "note": "Startseite / Infosäule" },
     "2": { "enabled": true, "duration": 3, "note": "Kalender / Eisplan" },
-    "3": { "enabled": true, "duration": 3, "note": "Organigramm" },
-    "4": { "enabled": true, "duration": 3, "note": "Fotos/Video" },
-    "5": { "enabled": true, "duration": 3, "note": "FANSHOP Video" },
+    "3": { "enabled": false, "duration": 3, "note": "Organigramm" },
+    "4": { "enabled": false, "duration": 3, "note": "Fotos/Video" },
+    "5": { "enabled": false, "duration": 3, "note": "FANSHOP Video" },
     "6": { "enabled": true, "duration": 10, "note": "CANVA Spielankündigungen Juniors" },
     "7": { "enabled": true, "duration": 8, "note": "Platzhalter 7" },
     "8": { "enabled": false, "duration": 8, "note": "Platzhalter 8" },
@@ -12,6 +12,7 @@
   },
   "reload": 1
 }
+
 
 
 
