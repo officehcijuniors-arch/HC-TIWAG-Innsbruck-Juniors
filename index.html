@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8">
   <title>HC TIWAG Innsbruck Juniors - Infosäule</title>
-  
   <style>
     body {
       margin: 0;
@@ -12,7 +11,6 @@
       overflow: hidden;
       background: #000;
     }
-
     .page {
       position: absolute;
       inset: 0;
@@ -24,44 +22,41 @@
       transition: opacity 1s ease;
       background: linear-gradient(135deg, #003789 40%, #d42323 60%);
     }
-
-    .page.active { opacity: 1; z-index: 1; }
-
-    header { text-align: center; padding: 10px 0; }
-
+    .page.active {
+      opacity: 1;
+      z-index: 1;
+    }
     header h1 {
       font-size: 2.4em;
       margin: 0 0 5px 0;
       text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
     }
-
-    .announcement-container { display: flex; flex-direction: column; align-items: center; margin-top: 10px; }
-
-    .infosaule {
-      font-size: 6vw;
-      font-weight: 900;
-      text-align: center;
-      line-height: 1.2;
-      text-transform: uppercase;
-      text-shadow: 0 0 30px rgba(255, 255, 255, 0.9),
-                   0 0 70px rgba(255, 255, 255, 0.7);
-      margin-top: 25vh;
-      animation: glowPulse 3s ease-in-out infinite alternate;
+    .announcement-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 10px;
     }
-
+    .infosaule {
+      font-size: 7vw;
+      font-weight: 800;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.9), 0 0 40px rgba(255, 255, 255, 0.7);
+      animation: glowPulse 2s ease-in-out infinite alternate;
+      margin-top: 15vh; /* weiter nach oben */
+    }
     @keyframes glowPulse {
       0%   { text-shadow: 0 0 10px rgba(255, 255, 255, 0.6); }
-      50%  { text-shadow: 0 0 40px rgba(255, 255, 255, 0.9); }
+      50%  { text-shadow: 0 0 40px rgba(255, 255, 255, 0.8); }
       100% { text-shadow: 0 0 10px rgba(255, 255, 255, 0.6); }
     }
-
     .calendar-title {
       font-size: 1.7em;
       color: #fff;
       text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
       margin: 10px 0 20px;
     }
-
     .calendar-page iframe {
       border: 0;
       width: 90%;
@@ -70,21 +65,6 @@
       border-radius: 10px;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
     }
-
-    .shark-gif {
-      position: absolute;
-      bottom: 5%;
-      width: 280px;
-      height: 280px;
-      background: url('HCI.gif') no-repeat center;
-      background-size: contain;
-      pointer-events: none;
-      filter: drop-shadow(0 0 25px rgba(0, 0, 0, 0.6));
-    }
-
-    .page-1 .shark-gif { opacity: 0.85; }
-    .calendar-page .shark-gif { opacity: 0.3; }
-
     .org-page img {
       position: absolute;
       inset: 0;
@@ -92,13 +72,11 @@
       height: 100%;
       object-fit: contain;
     }
-
     .video-page video.zoom-video {
       width: 100%;
       height: 100%;
       object-fit: contain;
     }
-
     .signature {
       position: fixed;
       bottom: 10px;
@@ -108,19 +86,13 @@
       pointer-events: none;
       z-index: 9999;
     }
-
-    /* Neues Footer-Video auf Seite 1 */
-    .footer-video {
+    /* Video unten auf Seite 1 */
+    .hai-video {
       position: absolute;
       bottom: 0;
       left: 0;
       width: 100%;
-      height: 22vh;
-      object-fit: cover;
-      opacity: 0.6;                
-      filter: drop-shadow(0 -5px 25px rgba(0,0,0,0.8));
-      pointer-events: none;
-      border-top: 2px solid rgba(255,255,255,0.2);
+      height: auto;
     }
   </style>
 </head>
@@ -129,12 +101,12 @@
   <!-- ===================== SEITE 1: STARTSEITE ===================== -->
   <section class="page page-1 active">
     <main class="announcement-container">
-      <h1 class="infosaule">HC TIWAG Innsbruck Juniors<br>Infosäule</h1>
+      <h1 class="infosaule">I N F O S Ä U L E</h1>
     </main>
 
-    <!-- Video als eleganter Footer -->
-    <video autoplay loop muted playsinline class="footer-video">
-      <source src="hai.mp4" type="video/mp4">
+    <!-- Neues Video unten -->
+    <video autoplay loop muted playsinline class="hai-video">
+      <source src="HAI.mp4" type="video/mp4">
     </video>
   </section>
 
@@ -150,8 +122,8 @@
     <main class="announcement-container">
       <h2 class="calendar-title">Eisplan</h2>
     </main>
+    <!-- iframe exakt unverändert -->
     <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showPrint=0&showTitle=0&showTabs=0&showCalendars=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZDU3OWRjY2M2MTNhZTI0YzZlNjY1NmE5ZGIyOWM0MDRlNDk5NjNhZjFiZDYyNjY0NGQwZGE5OTVhNTUzNmUxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzBiZDg4YjUxNmVlNGRmNGFjMmZkMWU2NGJhOWQ4MzBlMjViY2VlZjc4YjM4MmM5N2FhZWZmZWU1NmY5NjlmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YjQ5M2RhNTY5NDg5NTA2MDQ0YWE2MmVmYTA5ODIyODM0MmQ0NjRhMzQ4MzY5MGYyNTU1NTE0Yzg0Y2ZmNDI0NEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YWQ4ZjNlMmRiODQ1YjZiNmM5ZTZkYmIyZDkyNGY1NTliNjVhNjI3YTNlNWEzMmYwYzQ0YmRhZTA1NzMxNGMwOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6&color=%23c0ca33&color=%230b8043&color=%233f51b5&color=%238e24aa&color=%23616161&color=%23ad1457&color=%23e4c441" frameborder="0" scrolling="no"></iframe>
-    <div class="shark-gif"></div>
   </section>
 
   <!-- ===================== SEITE 3: ORGANIGRAMM ===================== -->
@@ -194,9 +166,9 @@
       const pages = document.querySelectorAll('.page');
       let current = 0;
       let rotationTimeout = null;
+
       const settingsUrl = 'https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/settings.json';
       let settings;
-
       try {
         const res = await fetch(settingsUrl);
         settings = await res.json();
@@ -224,7 +196,6 @@
       function showPage(index) {
         const page = pages[index];
         const pageSettings = settings.pages[index + 1];
-
         pages.forEach((p, i) => p.classList.toggle('active', i === index));
 
         // Videos automatisch laden mit Cache-Buster
@@ -243,14 +214,11 @@
         const active = getActivePageIndexes();
         const durations = getDurations();
         if (active.length === 0) return;
-
         let pos = active.indexOf(current);
         if (pos === -1) pos = 0;
-
         const next = active[(pos + 1) % active.length];
         current = next;
         showPage(current);
-
         rotationTimeout = setTimeout(() => rotateToNext(), durations[current] || 5000);
       }
 
