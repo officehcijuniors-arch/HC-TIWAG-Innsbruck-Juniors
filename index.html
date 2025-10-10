@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>HC TIWAG Innsbruck Juniors - Infosäule</title>
+  
   <style>
     /* ===================== Grundlegendes Styling ===================== */
     body {
@@ -21,20 +22,15 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      opacity: 0;
-      z-index: 0;
+      opacity: 0; /* Unsichtbar, bis sie aktiv wird */
       transition: opacity 1s ease;
+      /* Animierter Hintergrund nur in CI-Farben Blau und Rot */
       background: linear-gradient(135deg, #003789 50%, #d42323 50%);
       background-size: 200% 200%;
-      animation: gradientShift 15s ease infinite;
-      pointer-events: none; /* deaktiviert Interaktion bei inaktiver Seite */
+      animation: gradientShift 15s ease infinite; /* sanfte Bewegung */
     }
 
-    .page.active {
-      opacity: 1;
-      z-index: 1;
-      pointer-events: all; /* aktive Seite wieder interaktiv */
-    }
+    .page.active { opacity: 1; z-index: 1; }
 
     @keyframes gradientShift {
       0% { background-position: 0% 50%; }
@@ -64,22 +60,29 @@
       max-height: 50px;
     }
 
-    @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
 
     /* ===================== Header ===================== */
     header { text-align: center; padding: 10px 0; }
+
     header h1 {
       font-size: 2.4em;
       margin: 0 0 5px 0;
       text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
       opacity: 0;
       transform: scale(0.95);
-      animation: fadeInScale 1s forwards 0.5s;
+      animation: fadeInScale 1s forwards 0.5s; /* leicht verzögert */
     }
-    @keyframes fadeInScale { to { opacity: 1; transform: scale(1); } }
+
+    @keyframes fadeInScale {
+      to { opacity: 1; transform: scale(1); }
+    }
 
     /* ===================== Infosäule ===================== */
     .announcement-container { display: flex; flex-direction: column; align-items: center; margin-top: 10px; }
+
     .infosaule {
       font-size: 7vw;
       font-weight: 800;
@@ -89,7 +92,11 @@
       animation: glowPulse 2s ease-in-out infinite alternate;
       margin-top: 5vh;
     }
-    @keyframes glowPulse { 0%,100% { text-shadow:0 0 15px rgba(255,255,255,0.6); } 50% { text-shadow:0 0 60px rgba(255,255,255,0.85); } }
+
+    @keyframes glowPulse {
+      0%,100% { text-shadow: 0 0 15px rgba(255,255,255,0.6); }
+      50% { text-shadow: 0 0 60px rgba(255,255,255,0.85); }
+    }
 
     /* ===================== Kalender ===================== */
     .calendar-page iframe {
@@ -99,11 +106,18 @@
       width: 90%;
       height: calc(100vh - 100px);
       margin-top: 10px;
+      opacity: 0;
+      animation: fadeIn 1s forwards;
       transform: scale(0.97);
       transition: transform 0.5s ease, box-shadow 0.5s ease;
-      opacity: 1 !important; /* iframe sofort sichtbar */
     }
-    .calendar-page iframe:hover { transform: scale(1); box-shadow: 0 20px 40px rgba(0,0,0,0.7); }
+
+    .calendar-page iframe:hover {
+      transform: scale(1);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+    }
+
+    @keyframes fadeIn { to { opacity: 1; } }
 
     /* ===================== Shark-GIF ===================== */
     .shark-gif {
@@ -117,15 +131,30 @@
       filter: drop-shadow(0 0 25px rgba(0,0,0,0.6));
       animation: float 4s ease-in-out infinite;
     }
-    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
     .page-1 .shark-gif { opacity: 0.85; }
     .calendar-page .shark-gif { opacity: 0.3; }
 
     /* ===================== Organigramm ===================== */
-    .org-page img { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; }
+    .org-page img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
 
     /* ===================== Videos ===================== */
-    .video-page video.zoom-video { width:100%; height:100%; object-fit:contain; opacity:1 !important; }
+    .video-page video.zoom-video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
 
     /* ===================== Signatur ===================== */
     .signature {
@@ -142,18 +171,24 @@
       -webkit-text-fill-color: transparent;
       animation: shine 3s linear infinite;
     }
-    @keyframes shine { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+
+    @keyframes shine {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
   </style>
 </head>
 <body>
 
-  <!-- ===================== SEITE 1: START ===================== -->
+  <!-- ===================== SEITE 1: STARTSEITE ===================== -->
   <section class="page page-1 active">
     <div class="logo-container">
       <img src="HAI.png" alt="HAI Logo">
       <img src="TIWAG.jpg" alt="TIWAG Logo">
     </div>
-    <header><h1>HC TIWAG Innsbruck Juniors</h1></header>
+    <header>
+      <h1>HC TIWAG Innsbruck Juniors</h1>
+    </header>
     <main class="announcement-container">
       <h1 class="infosaule">I N F O S Ä U L E</h1>
     </main>
@@ -166,30 +201,65 @@
       <img src="HAI.png" alt="HAI Logo">
       <img src="TIWAG.jpg" alt="TIWAG Logo">
     </div>
-    <header><h1>HC TIWAG Innsbruck Juniors</h1></header>
+    <header>
+      <h1>HC TIWAG Innsbruck Juniors</h1>
+    </header>
     <main class="announcement-container">
+      <!-- Optionaler Beschreibungstext -->
       <p>Hier siehst du den aktuellen Trainings- und Spielplan.</p>
     </main>
-    <!-- ORIGINAL KALENDER IFRAME unverändert -->
+    <!-- ===================== ORIGINAL KALENDER IFRAME ===================== -->
     <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showPrint=0&showTitle=0&showTabs=0&showCalendars=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZDU3OWRjY2M2MTNhZTI0YzZlNjY1NmE5ZGIyOWM0MDRlNDk5NjNhZjFiZDYyNjY0NGQwZGE5OTVhNTUzNmUxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzBiZDg4YjUxNmVlNGRmNGFjMmZkMWU2NGJhOWQ4MzBlMjViY2VlZjc4YjM4MmM5N2FhZWZmZWU1NmY5NjlmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YjQ5M2RhNTY5NDg5NTA2MDQ0YWE2MmVmYTA5ODIyODM0MmQ0NjRhMzQ4MzY5MGYyNTU1NTE0Yzg0Y2ZmNDI0NEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YWQ4ZjNlMmRiODQ1YjZiNmM5ZTZkYmIyZDkyNGY1NTliNjVhNjI3YTNlNWEzMmYwYzQ0YmRhZTA1NzMxNGMwOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6&color=%23c0ca33&color=%230b8043&color=%233f51b5&color=%238e24aa&color=%23616161&color=%23ad1457&color=%23e4c441" frameborder="0" scrolling="no"></iframe>
     <div class="shark-gif"></div>
   </section>
 
-  <!-- ===================== Weitere Seiten: Org, Videos, Platzhalter ===================== -->
-  <!-- identisch wie zuvor -->
+  <!-- ===================== SEITE 3: ORGANIGRAMM ===================== -->
+  <section class="page org-page page-3">
+    <img src="ORG.png" alt="Organigramm Vollbild">
+  </section>
 
+  <!-- ===================== SEITE 4–6: VIDEOS ===================== -->
+  <section class="page video-page page-4">
+    <video autoplay loop muted playsinline class="zoom-video">
+      <source src="Fotos.mp4" type="video/mp4">
+    </video>
+  </section>
+  <section class="page video-page page-5">
+    <video autoplay loop muted playsinline class="zoom-video">
+      <source src="FANSHOP.mp4" type="video/mp4">
+    </video>
+  </section>
+  <section class="page video-page page-6">
+    <video autoplay loop muted playsinline class="zoom-video">
+      <source src="HCINWSPPräs.mp4" type="video/mp4">
+    </video>
+  </section>
+
+  <!-- ===================== PLATZHALTER ===================== -->
+  <section class="page video-page page-7"></section>
+  <section class="page video-page page-8"></section>
+  <section class="page video-page page-9"></section>
+
+  <!-- ===================== SIGNATUR ===================== -->
   <footer class="signature">MS</footer>
 
+  <!-- ===================== JAVASCRIPT: Seitenrotation ===================== -->
   <script>
     window.addEventListener('DOMContentLoaded', async () => {
       const pages = document.querySelectorAll('.page');
       let current = 0;
       let rotationTimeout = null;
+
       const settingsUrl = 'https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/settings.json';
       let settings;
 
-      try { const res = await fetch(settingsUrl); settings = await res.json(); }
-      catch (err) { console.error('❌ Fehler beim Laden der Einstellungen:', err); return; }
+      try {
+        const res = await fetch(settingsUrl);
+        settings = await res.json();
+      } catch (err) {
+        console.error('❌ Fehler beim Laden der Einstellungen:', err);
+        return;
+      }
 
       function getActivePageIndexes() {
         const active = [];
@@ -208,12 +278,16 @@
       function showPage(index) {
         pages.forEach((p,i) => p.classList.toggle('active', i===index));
         const page = pages[index];
-        const videoEl = page.querySelector('video');
-        if(videoEl){
-          const src = videoEl.querySelector('source').getAttribute('src');
-          videoEl.src = src + '?t=' + new Date().getTime();
-          videoEl.load();
-          videoEl.play();
+        const pageSettings = settings.pages[index+1];
+
+        if(pageSettings && page.querySelector){
+          const videoEl = page.querySelector('video');
+          if(videoEl){
+            const src = videoEl.querySelector('source').getAttribute('src');
+            videoEl.src = src + '?t=' + new Date().getTime();
+            videoEl.load();
+            videoEl.play();
+          }
         }
       }
 
@@ -221,8 +295,11 @@
         const active = getActivePageIndexes();
         const durations = getDurations();
         if(active.length===0) return;
-        let pos = active.indexOf(current); if(pos===-1) pos=0;
-        current = active[(pos+1)%active.length];
+
+        let pos = active.indexOf(current);
+        if(pos===-1) pos = 0;
+        const next = active[(pos+1)%active.length];
+        current = next;
         showPage(current);
         rotationTimeout = setTimeout(rotateToNext, durations[current] || 5000);
       }
