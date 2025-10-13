@@ -34,7 +34,7 @@ body {
     justify-content: flex-start; 
     opacity: 0; 
     transition: opacity 1s ease; 
-    pointer-events: none; /* unsichtbare Seiten reagieren nicht */
+    pointer-events: none;
 }
 .page.active { 
     opacity: 1; 
@@ -132,17 +132,6 @@ header h1 {
     object-fit: contain; 
 }
 
-/* ===================== GALLERY ===================== */
-.page-7 { display: flex; justify-content: center; align-items: center; overflow: hidden; }
-.gallery-container { position: relative; width: 100%; height: 100%; }
-.gallery-container img { 
-    position: absolute; 
-    border-radius: 15px; 
-    box-shadow: 0 10px 25px rgba(0,0,0,0.6); 
-    opacity: 0; 
-    transition: all 0.7s ease; 
-}
-
 /* ===================== SIGNATUR ===================== */
 .signature { 
     position: fixed; bottom: 10px; right: 15px; font-size: 0.9em; font-weight: bold; color: rgba(255,255,255,0.35); pointer-events: none; z-index: 9999; 
@@ -171,7 +160,7 @@ header h1 {
 
 <!-- =================== SEITE 2: KALENDER =================== -->
 <section class="page calendar-page page-2">
-  <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showPrint=0&showTitle=0&showTabs=0&showCalendars=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZDU3OWRjY2M2MTNhZTI0YzZlNjY1NmE5ZGIyOWM0MDRlNDk5NjNhZjFiZDYyNjY0NGQwZGE5OTVhNTUzNmUxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzBiZDg4YjUxNmVlNGRmNGFjMmZkMWU2NGJhOWQ4MzBlMjViY2VlZjc4YjM4MmM5N2FhZWZmZWU1NmY5NjlmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YjQ5M2RhNTY5NDg5NTA2MDQ0YWE2MmVmYTA5ODIyODM0MmQ0NjRhMzQ4MzY5MGYyNTU1NTE0Yzg0Y2ZmNDI0NEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YWQ4ZjNlMmRiODQ1YjZiNmM5ZTZkYmIyZDkyNGY1NTliNjVhNjI3YTNlNWEzMmYwYzQ0YmRhZTA1NzMxNGMwOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6&color=%23c0ca33&color=%230b8043&color=%233f51b5&color=%238e24aa&color=%23616161&color=%23ad1457&color=%23e4c441" frameborder="0" scrolling="no"></iframe>
+  <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showPrint=0&showTitle=0&showTabs=0&showCalendars=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t" frameborder="0" scrolling="no"></iframe>
   <div class="shark-gif"></div>
 </section>
 
@@ -191,11 +180,8 @@ header h1 {
   <video autoplay loop muted playsinline preload="none" class="zoom-video" data-src="HCINWSPPräs.mp4"></video>
 </section>
 
-<!-- =================== SEITE 7: GALERIE =================== -->
-<section class="page page-7">
-  <div class="gallery-container" id="gallery"></div>
-  <div class="shark-gif"></div>
-</section>
+<!-- =================== SEITE 7: PLATZHALTER =================== -->
+<section class="page video-page page-7"></section>
 
 <!-- =================== SEITE 8-9: PLATZHALTER =================== -->
 <section class="page video-page page-8"></section>
@@ -209,7 +195,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const pages = document.querySelectorAll('.page');
   let current = 0;
 
-  // URL zu den Einstellungen auf GitHub
   const settingsUrl = 'https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/settings.json';
   let settings;
   try { 
@@ -220,21 +205,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     return; 
   }
 
-  // Welche Seiten sind aktiv
   function getActivePages() {
     const arr = [];
     for (let i = 1; i <= 9; i++) if(settings.pages[i]?.enabled) arr.push(i-1);
     return arr;
   }
 
-  // Dauer jeder Seite in ms
   function getDurations() {
     const d = {};
     for (let i = 1; i <= 9; i++) if(settings.pages[i]) d[i-1] = settings.pages[i].duration*1000;
     return d;
   }
 
-  // Videos nur laden, wenn Seite aktiv
   function loadVideo(page){
     const video = page.querySelector('video');
     if(!video) return;
@@ -244,48 +226,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-  // Galerie Animation
-  async function startGalleryAnimation(){ 
-    const container=document.getElementById('gallery'); 
-    container.innerHTML=''; 
-    const apiUrl="https://api.github.com/repos/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/contents/SpielerFotos"; 
-    try{ 
-      const res = await fetch(apiUrl); 
-      const files = await res.json(); 
-      const images = files.filter(f => f.name.match(/\.(png|jpe?g)$/i)); 
-      images.forEach((file,i)=>{ 
-        const img = document.createElement('img'); 
-        img.src = `https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/SpielerFotos/${file.name}`; 
-        img.style.zIndex = i+1; 
-        container.appendChild(img); 
-      }); 
-      let idx = 0; 
-      function animateNext(){ 
-        const imgs = container.querySelectorAll('img'); 
-        imgs.forEach((img,i)=>{ 
-          img.style.opacity = 0; 
-          img.style.transform = `translate(${Math.random()*30-15}px,${Math.random()*30-15}px) scale(${Math.random()*0.5+0.75})`; 
-        }); 
-        if(imgs[idx]){
-          imgs[idx].style.opacity = 1; 
-          imgs[idx].style.transform = 'translate(0,0) scale(1)'; 
-          idx = (idx+1) % imgs.length;
-        }
-        setTimeout(animateNext,3500); 
-      } 
-      animateNext(); 
-    } catch(err){ console.error("❌ Fehler beim Laden der SpielerFotos:",err); } 
-  }
-
-  // Seite anzeigen
   function showPage(index){
     pages.forEach((p,i)=>p.classList.toggle('active',i===index));
     const page = pages[index];
     if(page.classList.contains('video-page')) loadVideo(page);
-    if(index === 6) startGalleryAnimation();
   }
 
-  // Rotation der Seiten
   function rotateToNext(){
     const active = getActivePages();
     const durations = getDurations();
@@ -303,7 +249,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   showPage(current);
   rotateToNext();
 
-  // Optionale automatische Seite-Neuladen
   if(settings.reload && settings.reload > 0) setInterval(()=>location.reload(), settings.reload*60*1000);
 });
 </script>
