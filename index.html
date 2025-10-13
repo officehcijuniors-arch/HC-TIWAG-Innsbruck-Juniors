@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <title>HC TIWAG Innsbruck Juniors - Infosäule</title>
+
 <style>
-/* === Schriftart === */
+/* ===================== FONTS ===================== */
 @font-face { 
     font-family: "Areno Serif"; 
     src: url("areno-serif-webfont.woff2") format("woff2"), 
@@ -14,7 +15,7 @@
     font-style: normal; 
 }
 
-/* === Grundlayout der Seite === */
+/* ===================== GRUNDLAYOUT ===================== */
 body { 
     margin: 0; 
     font-family: "Areno Serif", serif; 
@@ -23,7 +24,7 @@ body {
     background: #000; 
 }
 
-/* === Seiten-Layout === */
+/* ===================== SEITEN ===================== */
 .page { 
     position: absolute; 
     inset: 0; 
@@ -33,25 +34,15 @@ body {
     justify-content: flex-start; 
     opacity: 0; 
     transition: opacity 1s ease; 
-    background: linear-gradient(135deg, #003789 50%, #d42323 50%);
-    background-size: 200% 200%;
-    animation: gradientShift 15s ease infinite;
+    pointer-events: none; /* unsichtbare Seiten reagieren nicht */
 }
 .page.active { 
     opacity: 1; 
     z-index: 1; 
-}
-.page:not(.active) * { 
-    animation-play-state: paused !important; 
+    pointer-events: auto;
 }
 
-@keyframes gradientShift { 
-    0% { background-position: 0% 50%; } 
-    50% { background-position: 100% 50%; } 
-    100% { background-position: 0% 50%; } 
-}
-
-/* === Logo === */
+/* ===================== LOGOS ===================== */
 .logo-container { 
     display: flex; 
     justify-content: center; 
@@ -69,7 +60,7 @@ body {
 .page-1 .logo-container img:nth-child(2) { max-height: 50px; }
 @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
 
-/* === Header === */
+/* ===================== HEADER ===================== */
 header { text-align: center; padding: 10px 0; }
 header h1 { 
     font-size: 2.4em; 
@@ -81,7 +72,7 @@ header h1 {
 }
 @keyframes fadeInScale { to { opacity: 1; transform: scale(1); } }
 
-/* === Infosäule Text === */
+/* ===================== INFOSÄULE ===================== */
 .announcement-container { 
     display: flex; 
     flex-direction: column; 
@@ -99,30 +90,25 @@ header h1 {
 }
 @keyframes glowPulse { 
     0%,100% { text-shadow: 0 0 15px rgba(255,255,255,0.6); } 
-    50% { text-shadow: 0 0 60px rgba(255,255,255,0.85); } 
+    50% { text-shadow: 0 0 40px rgba(255,255,255,0.85); } 
 }
 
-/* === Kalender-Seite === */
+/* ===================== KALENDER ===================== */
 .calendar-page { justify-content: flex-start; padding-top: 15px; }
 .calendar-page iframe { 
     border-radius: 15px; 
-    box-shadow: 0 15px 30px rgba(0,0,0,0.6); 
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4); 
     border: 2px solid rgba(255,255,255,0.2); 
     width: 97%; 
     height: calc(100vh - 30px); 
     margin-top: 0; 
     opacity: 0; 
-    animation: fadeIn 1s forwards; 
     transform: scale(0.97); 
-    transition: transform 0.5s ease, box-shadow 0.5s ease; 
+    transition: transform 0.5s ease, box-shadow 0.5s ease, opacity 1s ease;
 }
-.calendar-page iframe:hover { 
-    transform: scale(1); 
-    box-shadow: 0 20px 40px rgba(0,0,0,0.7); 
-}
-@keyframes fadeIn { to { opacity: 1; } }
+.page.active .calendar-page iframe { opacity: 1; transform: scale(1); }
 
-/* === Shark GIF Animation === */
+/* ===================== SHARK GIF ===================== */
 .shark-gif { 
     position: absolute; 
     bottom: 5%; 
@@ -135,34 +121,42 @@ header h1 {
     animation: float 4s ease-in-out infinite; 
 }
 @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-.page-1 .shark-gif { opacity: 0.85; }
-.calendar-page .shark-gif { opacity: 0.3; }
 
-/* === Organigramm === */
+/* ===================== ORGANIGRAMM ===================== */
 .org-page img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
 
-/* === Videos === */
-.video-page video.zoom-video { width: 100%; height: 100%; object-fit: contain; }
+/* ===================== VIDEOS ===================== */
+.video-page video.zoom-video { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: contain; 
+}
 
-/* === Galerie SpielerFotos === */
+/* ===================== GALLERY ===================== */
 .page-7 { display: flex; justify-content: center; align-items: center; overflow: hidden; }
 .gallery-container { position: relative; width: 100%; height: 100%; }
 .gallery-container img { 
-    position: absolute; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.6); opacity: 0; transition: all 0.7s ease; 
+    position: absolute; 
+    border-radius: 15px; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.6); 
+    opacity: 0; 
+    transition: all 0.7s ease; 
 }
 
-/* === Signatur === */
+/* ===================== SIGNATUR ===================== */
 .signature { 
     position: fixed; bottom: 10px; right: 15px; font-size: 0.9em; font-weight: bold; color: rgba(255,255,255,0.35); pointer-events: none; z-index: 9999; 
     background: linear-gradient(120deg, rgba(255,255,255,0.6), rgba(255,255,255,0.1), rgba(255,255,255,0.6)); 
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 3s linear infinite; 
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+    animation: shine 3s linear infinite; 
 }
 @keyframes shine { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
 </style>
 </head>
+
 <body>
 
-<!-- =================== Seite 1: Startseite =================== -->
+<!-- =================== SEITE 1: START =================== -->
 <section class="page page-1 active">
   <div class="logo-container">
     <img src="HAI.png" alt="HAI Logo" loading="lazy">
@@ -175,138 +169,144 @@ header h1 {
   <div class="shark-gif"></div>
 </section>
 
-<!-- =================== Seite 2: Kalender =================== -->
+<!-- =================== SEITE 2: KALENDER =================== -->
 <section class="page calendar-page page-2">
-  <!-- <<< KALENDER-IFRAME UNVERÄNDERT >>> -->
   <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showPrint=0&showTitle=0&showTabs=0&showCalendars=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZDU3OWRjY2M2MTNhZTI0YzZlNjY1NmE5ZGIyOWM0MDRlNDk5NjNhZjFiZDYyNjY0NGQwZGE5OTVhNTUzNmUxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzBiZDg4YjUxNmVlNGRmNGFjMmZkMWU2NGJhOWQ4MzBlMjViY2VlZjc4YjM4MmM5N2FhZWZmZWU1NmY5NjlmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YjQ5M2RhNTY5NDg5NTA2MDQ0YWE2MmVmYTA5ODIyODM0MmQ0NjRhMzQ4MzY5MGYyNTU1NTE0Yzg0Y2ZmNDI0NEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YWQ4ZjNlMmRiODQ1YjZiNmM5ZTZkYmIyZDkyNGY1NTliNjVhNjI3YTNlNWEzMmYwYzQ0YmRhZTA1NzMxNGMwOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6&color=%23c0ca33&color=%230b8043&color=%233f51b5&color=%238e24aa&color=%23616161&color=%23ad1457&color=%23e4c441" frameborder="0" scrolling="no"></iframe>
   <div class="shark-gif"></div>
 </section>
 
-
-<!-- =================== Seite 3: Organigramm =================== -->
+<!-- =================== SEITE 3: ORGANIGRAMM =================== -->
 <section class="page org-page page-3">
   <img src="ORG.png" alt="Organigramm Vollbild" loading="lazy">
 </section>
 
-<!-- =================== Seite 4-6: Videos mit Lazy-Loading =================== -->
+<!-- =================== SEITE 4-6: VIDEOS =================== -->
 <section class="page video-page page-4">
-  <video autoplay loop muted playsinline preload="none" class="zoom-video">
-    <source data-src="Fotos.mp4" type="video/mp4">
-  </video>
+  <video autoplay loop muted playsinline preload="none" class="zoom-video" data-src="Fotos.mp4"></video>
 </section>
-
 <section class="page video-page page-5">
-  <video autoplay loop muted playsinline preload="none" class="zoom-video">
-    <source data-src="FANSHOP.mp4" type="video/mp4">
-  </video>
+  <video autoplay loop muted playsinline preload="none" class="zoom-video" data-src="FANSHOP.mp4"></video>
 </section>
-
 <section class="page video-page page-6">
-  <video autoplay loop muted playsinline preload="none" class="zoom-video">
-    <source data-src="HCINWSPPräs.mp4" type="video/mp4">
-  </video>
+  <video autoplay loop muted playsinline preload="none" class="zoom-video" data-src="HCINWSPPräs.mp4"></video>
 </section>
 
-<!-- =================== Seite 7: SpielerGalerie =================== -->
+<!-- =================== SEITE 7: GALERIE =================== -->
 <section class="page page-7">
   <div class="gallery-container" id="gallery"></div>
   <div class="shark-gif"></div>
 </section>
 
-<!-- =================== Seite 8 / 9: Platzhalter =================== -->
+<!-- =================== SEITE 8-9: PLATZHALTER =================== -->
 <section class="page video-page page-8"></section>
 <section class="page video-page page-9"></section>
 
 <footer class="signature">MS</footer>
 
 <script>
-window.addEventListener('DOMContentLoaded', async () => {
-  const pages = document.querySelectorAll('.page'); 
-  let current = 0; 
-  const settingsUrl = 'https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/settings.json'; 
-  let settings; 
-  try { const res=await fetch(settingsUrl); settings=await res.json(); } 
-  catch(err){ console.error('❌ Fehler beim Laden der Einstellungen:', err); return; } 
+/* =================== JAVASCRIPT =================== */
+document.addEventListener('DOMContentLoaded', async () => {
+  const pages = document.querySelectorAll('.page');
+  let current = 0;
 
-  function getActivePages(){
-    const arr=[];
-    for(let i=1;i<=9;i++) if(settings.pages[i] && settings.pages[i].enabled) arr.push(i-1);
+  // URL zu den Einstellungen auf GitHub
+  const settingsUrl = 'https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/settings.json';
+  let settings;
+  try { 
+    const res = await fetch(settingsUrl); 
+    settings = await res.json(); 
+  } catch(err) { 
+    console.error('❌ Fehler beim Laden der Einstellungen:', err); 
+    return; 
+  }
+
+  // Welche Seiten sind aktiv
+  function getActivePages() {
+    const arr = [];
+    for (let i = 1; i <= 9; i++) if(settings.pages[i]?.enabled) arr.push(i-1);
     return arr;
   }
 
-  function getDurations(){
-    const d={};
-    for(let i=1;i<=9;i++) if(settings.pages[i]) d[i-1]=settings.pages[i].duration*1000;
+  // Dauer jeder Seite in ms
+  function getDurations() {
+    const d = {};
+    for (let i = 1; i <= 9; i++) if(settings.pages[i]) d[i-1] = settings.pages[i].duration*1000;
     return d;
   }
 
+  // Videos nur laden, wenn Seite aktiv
   function loadVideo(page){
     const video = page.querySelector('video');
     if(!video) return;
-    const source = video.querySelector('source');
-    if(source.dataset.src){
-      source.src = source.dataset.src; 
-      video.load(); 
+    if(video.dataset.src && !video.src) {
+      video.src = video.dataset.src;
+      video.load();
     }
   }
 
+  // Galerie Animation
   async function startGalleryAnimation(){ 
     const container=document.getElementById('gallery'); 
     container.innerHTML=''; 
     const apiUrl="https://api.github.com/repos/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/contents/SpielerFotos"; 
     try{ 
-      const res=await fetch(apiUrl); 
-      const files=await res.json(); 
-      const images=files.filter(f=>f.name.match(/\.(png|jpe?g)$/i)); 
+      const res = await fetch(apiUrl); 
+      const files = await res.json(); 
+      const images = files.filter(f => f.name.match(/\.(png|jpe?g)$/i)); 
       images.forEach((file,i)=>{ 
-        const img=document.createElement('img'); 
-        img.src=`https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/SpielerFotos/${file.name}`; 
-        img.style.zIndex=i+1; 
+        const img = document.createElement('img'); 
+        img.src = `https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/SpielerFotos/${file.name}`; 
+        img.style.zIndex = i+1; 
         container.appendChild(img); 
       }); 
-      let idx=0; 
+      let idx = 0; 
       function animateNext(){ 
-        const imgs=container.querySelectorAll('img'); 
+        const imgs = container.querySelectorAll('img'); 
         imgs.forEach((img,i)=>{ 
-          img.style.opacity=0; 
-          img.style.transform=`translate(${Math.random()*30-15}px,${Math.random()*30-15}px) scale(${Math.random()*0.5+0.75})`; 
+          img.style.opacity = 0; 
+          img.style.transform = `translate(${Math.random()*30-15}px,${Math.random()*30-15}px) scale(${Math.random()*0.5+0.75})`; 
         }); 
-        const currentImg=imgs[idx]; 
-        currentImg.style.opacity=1; 
-        currentImg.style.transform='translate(0,0) scale(1)'; 
-        idx=(idx+1)%imgs.length; 
+        if(imgs[idx]){
+          imgs[idx].style.opacity = 1; 
+          imgs[idx].style.transform = 'translate(0,0) scale(1)'; 
+          idx = (idx+1) % imgs.length;
+        }
         setTimeout(animateNext,3500); 
       } 
       animateNext(); 
     } catch(err){ console.error("❌ Fehler beim Laden der SpielerFotos:",err); } 
   }
 
+  // Seite anzeigen
   function showPage(index){
     pages.forEach((p,i)=>p.classList.toggle('active',i===index));
-    if(index===6) startGalleryAnimation(); 
     const page = pages[index];
-    if(page.classList.contains('video-page')) loadVideo(page); 
+    if(page.classList.contains('video-page')) loadVideo(page);
+    if(index === 6) startGalleryAnimation();
   }
 
+  // Rotation der Seiten
   function rotateToNext(){
-    const active=getActivePages();
-    const durations=getDurations();
-    if(active.length===0) return;
-    let pos=active.indexOf(current);
-    if(pos===-1) pos=0;
-    const next=active[(pos+1)%active.length];
-    current=next;
+    const active = getActivePages();
+    const durations = getDurations();
+    if(active.length === 0) return;
+    let pos = active.indexOf(current);
+    if(pos === -1) pos = 0;
+    const next = active[(pos+1) % active.length];
+    current = next;
     showPage(current);
-    setTimeout(rotateToNext,durations[current]||5000);
+    setTimeout(rotateToNext, durations[current] || 5000);
   }
 
-  const activePages=getActivePages(); 
-  current=activePages.length>0?activePages[0]:0; 
-  showPage(current); 
-  rotateToNext(); 
-  if(settings.reload && settings.reload>0) setInterval(()=>location.reload(),settings.reload*60*1000); 
+  const activePages = getActivePages();
+  current = activePages.length>0 ? activePages[0] : 0;
+  showPage(current);
+  rotateToNext();
+
+  // Optionale automatische Seite-Neuladen
+  if(settings.reload && settings.reload > 0) setInterval(()=>location.reload(), settings.reload*60*1000);
 });
 </script>
+
 </body>
 </html>
-
