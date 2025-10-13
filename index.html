@@ -139,28 +139,32 @@
       object-fit: contain;
     }
 
-    /* === Seite 7: SpielerFotos === */
+    /* ==============================
+       Seite 7: SpielerFotos Galerie
+       ============================== */
     .gallery-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      width: 95%;
-      padding: 40px 0 80px;
-      justify-items: center;
+      position: relative;
+      width: 90%;
+      height: 90%;
+      display: flex;
+      justify-content: center;
       align-items: center;
       z-index: 2;
     }
     .gallery-container img {
-      width: 100%;
-      max-width: 400px;
+      position: absolute;
+      max-width: 250px;
       border-radius: 15px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.6);
       opacity: 0;
       transform: scale(0.95);
-      animation: fadeZoomIn 1s forwards;
+      transition: opacity 0.6s ease, transform 0.6s ease, left 0.6s ease, top 0.6s ease;
     }
-    @keyframes fadeZoomIn {
-      to { opacity: 1; transform: scale(1); }
+    .main-image {
+      width: 400px;
+      max-width: 80%;
+      opacity: 1;
+      z-index: 3;
     }
     .page-7 .shark-gif {
       position: absolute;
@@ -205,7 +209,7 @@
     <div class="shark-gif"></div>
   </section>
 
-  <!-- Seite 2 -->
+  <!-- Seite 2: Kalender -->
   <section class="page calendar-page page-2">
     <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showPrint=0&showTitle=0&showTabs=0&showCalendars=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZDU3OWRjY2M2MTNhZTI0YzZlNjY1NmE5ZGIyOWM0MDRlNDk5NjNhZjFiZDYyNjY0NGQwZGE5OTVhNTUzNmUxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzBiZDg4YjUxNmVlNGRmNGFjMmZkMWU2NGJhOWQ4MzBlMjViY2VlZjc4YjM4MmM5N2FhZWZmZWU1NmY5NjlmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YjQ5M2RhNTY5NDg5NTA2MDQ0YWE2MmVmYTA5ODIyODM0MmQ0NjRhMzQ4MzY5MGYyNTU1NTE0Yzg0Y2ZmNDI0NEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YWQ4ZjNlMmRiODQ1YjZiNmM5ZTZkYmIyZDkyNGY1NTliNjVhNjI3YTNlNWEzMmYwYzQ0YmRhZTA1NzMxNGMwOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6&color=%23c0ca33&color=%230b8043&color=%233f51b5&color=%238e24aa&color=%23616161&color=%23ad1457&color=%23e4c441" frameborder="0" scrolling="no"></iframe>
     <div class="shark-gif"></div>
@@ -281,6 +285,11 @@
             if (playPromise !== undefined) playPromise.catch(err => console.warn("Autoplay blockiert:", err));
           }
         }
+
+        // Seite 7: Galerie neu starten
+        if (page.classList.contains('page-7')) {
+          loadGalerie();
+        }
       }
 
       function rotateToNext() {
@@ -303,23 +312,68 @@
       if (settings.reload && settings.reload > 0)
         setInterval(() => location.reload(), settings.reload * 60 * 1000);
 
-      /* === SpielerFotos automatisch laden === */
-      const galleryContainer = document.getElementById('gallery');
-      if (galleryContainer) {
+      /* === SpielerFotos Galerie für Seite 7 === */
+      async function loadGalerie() {
+        const galleryContainer = document.getElementById('gallery');
+        galleryContainer.innerHTML = ''; // Reset
+
         const apiUrl = "https://api.github.com/repos/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/contents/SpielerFotos";
+        let files = [];
         try {
           const res = await fetch(apiUrl);
-          const files = await res.json();
-          files.filter(f => f.name.match(/\.(png|jpg|jpeg)$/i)).forEach((file, i) => {
-            const img = document.createElement('img');
-            img.src = `https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/SpielerFotos/${file.name}`;
-            img.loading = "lazy";
-            img.style.animationDelay = `${i * 0.2}s`;
-            galleryContainer.appendChild(img);
-          });
+          files = await res.json();
+          files = files.filter(f => f.name.match(/\.(png|jpg|jpeg)$/i));
         } catch (err) {
           console.error("❌ Fehler beim Laden der SpielerFotos:", err);
+          return;
         }
+
+        if (files.length === 0) return;
+
+        // Hauptbild
+        const mainImg = document.createElement('img');
+        mainImg.src = `https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/SpielerFotos/${files[0].name}`;
+        mainImg.className = 'main-image';
+        galleryContainer.appendChild(mainImg);
+
+        // Restliche Bilder
+        const fadeImages = [];
+        files.slice(1).forEach((file) => {
+          const img = document.createElement('img');
+          img.src = `https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/SpielerFotos/${file.name}`;
+          galleryContainer.appendChild(img);
+          fadeImages.push(img);
+        });
+
+        let index = 0;
+        const radius = 220;
+        const centerX = galleryContainer.offsetWidth / 2;
+        const centerY = galleryContainer.offsetHeight / 2;
+        const fadeDuration = 3000;
+
+        function animateImages() {
+          if (fadeImages.length === 0) return;
+          fadeImages.forEach(img => img.style.opacity = 0);
+
+          function showNext() {
+            fadeImages.forEach(img => img.style.opacity = 0);
+            const img = fadeImages[index];
+            const angle = (2 * Math.PI / fadeImages.length) * index;
+            img.style.left = `${centerX + radius * Math.cos(angle) - img.width/2}px`;
+            img.style.top = `${centerY + radius * Math.sin(angle) - img.height/2}px`;
+            img.style.opacity = 1;
+            img.style.transform = 'scale(1)';
+            setTimeout(() => {
+              img.style.opacity = 0;
+              img.style.transform = 'scale(0.95)';
+              index = (index + 1) % fadeImages.length;
+              showNext();
+            }, fadeDuration);
+          }
+          showNext();
+        }
+
+        animateImages();
       }
     });
   </script>
