@@ -3,9 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>HC TIWAG Innsbruck Juniors - Infosäule</title>
-  
   <style>
-    /* Schriftart definieren */
     @font-face {
       font-family: "Areno Serif";
       src: url("areno-serif-webfont.woff2") format("woff2"),
@@ -15,16 +13,14 @@
       font-style: normal;
     }
 
-    /* Grundlegende Seiteinstellungen */
     body {
       margin: 0;
       font-family: "Areno Serif", serif;
       color: #fff;
-      overflow: hidden; /* Scrollen verhindern */
+      overflow: hidden;
       background: #000;
     }
 
-    /* Jede Seite als absolute Position, nur die aktive sichtbar */
     .page {
       position: absolute;
       inset: 0;
@@ -38,7 +34,6 @@
       background-size: 200% 200%;
       animation: gradientShift 15s ease infinite;
     }
-
     .page.active { opacity: 1; z-index: 1; }
     .page:not(.active) * { animation-play-state: paused !important; }
 
@@ -48,7 +43,6 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* Logo-Container */
     .logo-container {
       display: flex;
       justify-content: center;
@@ -64,13 +58,10 @@
       transform: translateY(-20px);
       animation: fadeInUp 1s forwards;
     }
-
     .page-1 .logo-container img:nth-child(2) { max-height: 50px; }
-
     @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
 
     header { text-align: center; padding: 10px 0; }
-
     header h1 {
       font-size: 2.4em;
       margin: 0 0 5px 0;
@@ -79,12 +70,10 @@
       transform: scale(0.95);
       animation: fadeInScale 1s forwards 0.5s;
     }
-
     @keyframes fadeInScale { to { opacity: 1; transform: scale(1); } }
 
     .announcement-container { display: flex; flex-direction: column; align-items: center; margin-top: 10px; }
 
-    /* Glühender Text "INFOPUNKT" */
     .infosaule {
       font-size: 7vw;
       font-weight: 800;
@@ -94,18 +83,12 @@
       animation: glowPulse 2s ease-in-out infinite alternate;
       margin-top: 5vh;
     }
-
     @keyframes glowPulse {
       0%,100% { text-shadow: 0 0 15px rgba(255,255,255,0.6); }
       50% { text-shadow: 0 0 60px rgba(255,255,255,0.85); }
     }
 
-    /* Kalender-Seite */
-    .calendar-page {
-      justify-content: flex-start;
-      padding-top: 15px;
-    }
-
+    .calendar-page { justify-content: flex-start; padding-top: 15px; }
     .calendar-page iframe {
       border-radius: 15px;
       box-shadow: 0 15px 30px rgba(0,0,0,0.6);
@@ -118,15 +101,12 @@
       transform: scale(0.97);
       transition: transform 0.5s ease, box-shadow 0.5s ease;
     }
-
     .calendar-page iframe:hover {
       transform: scale(1);
       box-shadow: 0 20px 40px rgba(0,0,0,0.7);
     }
-
     @keyframes fadeIn { to { opacity: 1; } }
 
-    /* Animation für Hai-GIF */
     .shark-gif {
       position: absolute;
       bottom: 5%;
@@ -138,16 +118,13 @@
       filter: drop-shadow(0 0 25px rgba(0,0,0,0.6));
       animation: float 4s ease-in-out infinite;
     }
-
     @keyframes float {
       0%,100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
     }
-
     .page-1 .shark-gif { opacity: 0.85; }
     .calendar-page .shark-gif { opacity: 0.3; }
 
-    /* Organigramm-Seite */
     .org-page img {
       position: absolute;
       inset: 0;
@@ -156,14 +133,45 @@
       object-fit: contain;
     }
 
-    /* Video-Seiten */
     .video-page video.zoom-video {
       width: 100%;
       height: 100%;
       object-fit: contain;
     }
 
-    /* Signatur unten rechts */
+    /* === Seite 7: SpielerFotos === */
+    .gallery-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      width: 95%;
+      padding: 40px 0 80px;
+      justify-items: center;
+      align-items: center;
+      z-index: 2;
+    }
+    .gallery-container img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+      opacity: 0;
+      transform: scale(0.95);
+      animation: fadeZoomIn 1s forwards;
+    }
+    @keyframes fadeZoomIn {
+      to { opacity: 1; transform: scale(1); }
+    }
+    .page-7 .shark-gif {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px;
+      height: 500px;
+      opacity: 0.25;
+    }
+
     .signature {
       position: fixed;
       bottom: 10px;
@@ -178,7 +186,6 @@
       -webkit-text-fill-color: transparent;
       animation: shine 3s linear infinite;
     }
-
     @keyframes shine {
       0% { background-position: -200% 0; }
       100% { background-position: 200% 0; }
@@ -187,65 +194,45 @@
 </head>
 <body>
 
-  <!-- Seite 1: Startseite mit Logos und Infosäule -->
+  <!-- Seite 1 -->
   <section class="page page-1 active">
     <div class="logo-container">
       <img src="HAI.png" alt="HAI Logo" loading="lazy">
       <img src="TIWAG.jpg" alt="TIWAG Logo" loading="lazy">
     </div>
-    <header>
-      <h1>HC TIWAG Innsbruck Juniors</h1>
-    </header>
-    <main class="announcement-container">
-      <h1 class="infosaule">I N F O P O I N T</h1>
-    </main>
+    <header><h1>HC TIWAG Innsbruck Juniors</h1></header>
+    <main class="announcement-container"><h1 class="infosaule">I N F O P O I N T</h1></main>
     <div class="shark-gif"></div>
   </section>
 
-  <!-- Seite 2: Kalender -->
+  <!-- Seite 2 -->
   <section class="page calendar-page page-2">
     <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showPrint=0&showTitle=0&showTabs=0&showCalendars=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZDU3OWRjY2M2MTNhZTI0YzZlNjY1NmE5ZGIyOWM0MDRlNDk5NjNhZjFiZDYyNjY0NGQwZGE5OTVhNTUzNmUxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzBiZDg4YjUxNmVlNGRmNGFjMmZkMWU2NGJhOWQ4MzBlMjViY2VlZjc4YjM4MmM5N2FhZWZmZWU1NmY5NjlmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YjQ5M2RhNTY5NDg5NTA2MDQ0YWE2MmVmYTA5ODIyODM0MmQ0NjRhMzQ4MzY5MGYyNTU1NTE0Yzg0Y2ZmNDI0NEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YWQ4ZjNlMmRiODQ1YjZiNmM5ZTZkYmIyZDkyNGY1NTliNjVhNjI3YTNlNWEzMmYwYzQ0YmRhZTA1NzMxNGMwOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6&color=%23c0ca33&color=%230b8043&color=%233f51b5&color=%238e24aa&color=%23616161&color=%23ad1457&color=%23e4c441" frameborder="0" scrolling="no"></iframe>
     <div class="shark-gif"></div>
   </section>
 
-  <!-- Seite 3: Organigramm -->
-  <section class="page org-page page-3">
-    <img src="ORG.png" alt="Organigramm Vollbild" loading="lazy">
+  <!-- Seite 3 -->
+  <section class="page org-page page-3"><img src="ORG.png" alt="Organigramm Vollbild" loading="lazy"></section>
+
+  <!-- Seite 4 -->
+  <section class="page video-page page-4"><video autoplay loop muted playsinline preload="none" class="zoom-video"><source data-src="Fotos.mp4" type="video/mp4"></video></section>
+
+  <!-- Seite 5 -->
+  <section class="page video-page page-5"><video autoplay loop muted playsinline preload="none" class="zoom-video"><source data-src="FANSHOP.mp4" type="video/mp4"></video></section>
+
+  <!-- Seite 6 -->
+  <section class="page video-page page-6"><video autoplay loop muted playsinline preload="none" class="zoom-video"><source data-src="HCINWSPPräs.mp4" type="video/mp4"></video></section>
+
+  <!-- Seite 7: SpielerFotos Galerie -->
+  <section class="page page-7">
+    <div class="gallery-container" id="gallery"></div>
+    <div class="shark-gif"></div>
   </section>
 
-  <!-- Seite 4: Video -->
-  <section class="page video-page page-4">
-    <video autoplay loop muted playsinline preload="none" class="zoom-video">
-      <source data-src="Fotos.mp4" type="video/mp4">
-    </video>
-  </section>
-
-  <!-- Seite 5: Video -->
-  <section class="page video-page page-5">
-    <video autoplay loop muted playsinline preload="none" class="zoom-video">
-      <source data-src="FANSHOP.mp4" type="video/mp4">
-    </video>
-  </section>
-
-  <!-- Seite 6: Video -->
-  <section class="page video-page page-6">
-    <video autoplay loop muted playsinline preload="none" class="zoom-video">
-      <source data-src="HCINWSPPräs.mp4" type="video/mp4">
-    </video>
-  </section>
-
-  <!-- Seite 7: NEUES Video "SpielerFotos.mp4" -->
-  <section class="page video-page page-7">
-    <video autoplay loop muted playsinline preload="none" class="zoom-video">
-      <source data-src="SpielerFotos.mp4" type="video/mp4">
-    </video>
-  </section>
-
-  <!-- Seite 8 und 9 bleiben leer für zukünftige Inhalte -->
+  <!-- Seite 8 / 9 -->
   <section class="page video-page page-8"></section>
   <section class="page video-page page-9"></section>
 
-  <!-- Signatur unten rechts -->
   <footer class="signature">MS</footer>
 
   <script>
@@ -271,7 +258,6 @@
           if (settings.pages[i] && settings.pages[i].enabled) active.push(i - 1);
         return active;
       }
-
       function getDurations() {
         const durations = {};
         for (let i = 1; i <= 9; i++)
@@ -284,21 +270,15 @@
         const page = pages[index];
         const pageSettings = settings.pages[index + 1];
 
-        // Videohandling: Laden und Autoplay
+        // Video
         if (pageSettings && page.classList.contains("video-page")) {
           const videoEl = page.querySelector('video');
           if (videoEl) {
             const srcEl = videoEl.querySelector('source');
-            if (!videoEl.src && srcEl && srcEl.dataset.src) {
-              videoEl.src = srcEl.dataset.src;
-            }
-            videoEl.pause();
-            videoEl.currentTime = 0;
-            videoEl.load();
+            if (!videoEl.src && srcEl && srcEl.dataset.src) videoEl.src = srcEl.dataset.src;
+            videoEl.pause(); videoEl.currentTime = 0; videoEl.load();
             const playPromise = videoEl.play();
-            if (playPromise !== undefined) {
-              playPromise.catch(err => console.warn("Autoplay blockiert:", err));
-            }
+            if (playPromise !== undefined) playPromise.catch(err => console.warn("Autoplay blockiert:", err));
           }
         }
       }
@@ -307,7 +287,6 @@
         const active = getActivePageIndexes();
         const durations = getDurations();
         if (active.length === 0) return;
-
         let pos = active.indexOf(current);
         if (pos === -1) pos = 0;
         const next = active[(pos + 1) % active.length];
@@ -323,6 +302,25 @@
 
       if (settings.reload && settings.reload > 0)
         setInterval(() => location.reload(), settings.reload * 60 * 1000);
+
+      /* === SpielerFotos automatisch laden === */
+      const galleryContainer = document.getElementById('gallery');
+      if (galleryContainer) {
+        const apiUrl = "https://api.github.com/repos/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/contents/SpielerFotos";
+        try {
+          const res = await fetch(apiUrl);
+          const files = await res.json();
+          files.filter(f => f.name.match(/\.(png|jpg|jpeg)$/i)).forEach((file, i) => {
+            const img = document.createElement('img');
+            img.src = `https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/SpielerFotos/${file.name}`;
+            img.loading = "lazy";
+            img.style.animationDelay = `${i * 0.2}s`;
+            galleryContainer.appendChild(img);
+          });
+        } catch (err) {
+          console.error("❌ Fehler beim Laden der SpielerFotos:", err);
+        }
+      }
     });
   </script>
 </body>
