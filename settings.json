@@ -3,7 +3,7 @@
     "1": { "enabled": true, "duration": 10, "note": "Startseite / Infosäule" },
     "2": { "enabled": true, "duration": 35, "note": "Kalender / Eisplan" },
     "3": { "enabled": true, "duration": 30, "note": "Organigramm" },
-    "4": { "enabled": true, "duration": 30, "note": "Fotos/Video" },
+    "4": { "enabled": true, "duration": 20, "note": "Fotoshop" },
     "5": { "enabled": true, "duration": 30, "note": "FANSHOP Video" },
     "6": { "enabled": true, "duration": 15, "note": "CANVA Spielankündigungen Juniors" },
     "7": { "enabled": false, "duration": 8, "note": "Platzhalter 7" },
@@ -12,6 +12,7 @@
   },
   "reload": 30
 }
+
 
 
 
