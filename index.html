@@ -35,11 +35,19 @@ body {
   opacity: 0; 
   transition: opacity 1s ease; 
   pointer-events: none;
+  background: linear-gradient(135deg, #003789 50%, #d42323 50%);
+  background-size: 200% 200%;
 }
-.page.active { 
-  opacity: 1; 
-  pointer-events: auto; 
+.page.active {
+  opacity: 1;
+  pointer-events: auto;
   z-index: 1;
+  animation: gradientShift 15s ease infinite;
+}
+@keyframes gradientShift { 
+  0% { background-position: 0% 50%; } 
+  50% { background-position: 100% 50%; } 
+  100% { background-position: 0% 50%; } 
 }
 
 /* ===================== LOGOS ===================== */
