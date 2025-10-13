@@ -253,7 +253,6 @@ header h1 {
 
 <footer class="signature">MS</footer>
 
-<!-- =================== JAVASCRIPT =================== -->
 <script>
 window.addEventListener('DOMContentLoaded', async () => {
   const pages = document.querySelectorAll('.page'); 
@@ -288,21 +287,31 @@ window.addEventListener('DOMContentLoaded', async () => {
   async function startGalleryAnimation(){ 
     const container = document.getElementById('gallery'); 
     container.innerHTML = '';
-
-    const maxImages = 50; 
     const images = [];
-    
-    for (let i = 1; i <= maxImages; i++) {
-      ['png','jpg','jpeg'].forEach(ext => {
-        const img = document.createElement('img');
-        img.src = `SpielerFotos/Bild${i}.${ext}?v=${Date.now()}`;
-        img.onload = () => {
-          images.push(img);
-          container.appendChild(img);
-        };
-        img.onerror = () => img.remove();
-      });
+
+    const maxImages = 16; // nur Bild1.png bis Bild16.png
+    for(let i=1;i<=maxImages;i++){
+      const img = new Image();
+      img.src = `SpielerFotos/Bild${i}.png?v=${Date.now()}`;
+      img.onload = () => {
+        img.style.position = 'absolute';
+        img.style.borderRadius = '15px';
+        img.style.boxShadow = '0 10px 25px rgba(0,0,0,0.6)';
+        img.style.transition = 'all 1s ease';
+        img.style.pointerEvents = 'none';
+        img.style.opacity = 0;
+        container.appendChild(img);
+        images.push(img);
+      };
     }
+
+    // Animation starten, wenn mindestens ein Bild geladen ist
+    const checkLoaded = setInterval(()=>{
+      if(images.length>0){
+        clearInterval(checkLoaded);
+        animate();
+      }
+    }, 200);
 
     function animate() {
       images.forEach(img => {
@@ -315,8 +324,6 @@ window.addEventListener('DOMContentLoaded', async () => {
       });
       setTimeout(animate, 3500);
     }
-
-    setTimeout(animate, 1000);
   }
 
   function showPage(index){
