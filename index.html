@@ -39,6 +39,7 @@
     }
 
     .page.active { opacity: 1; z-index: 1; }
+    /* Animationen auf inaktiven Seiten anhalten */
     .page:not(.active) * { animation-play-state: paused !important; }
 
     @keyframes gradientShift {
@@ -138,6 +139,7 @@
       pointer-events: none;
       filter: drop-shadow(0 0 25px rgba(0,0,0,0.6));
       animation: float 4s ease-in-out infinite;
+      object-fit: contain;
     }
 
     @keyframes float {
@@ -188,31 +190,34 @@
 </head>
 <body>
 
-  <!-- ===================== SEITE 1 ===================== -->
+  <!-- ===================== SEITE 1: STARTSEITE ===================== -->
   <section class="page page-1 active">
     <div class="logo-container">
       <img src="HAI.png" alt="HAI Logo" loading="lazy">
       <img src="TIWAG.jpg" alt="TIWAG Logo" loading="lazy">
     </div>
-    <header><h1>HC TIWAG Innsbruck Juniors</h1></header>
+    <header>
+      <h1>HC TIWAG Innsbruck Juniors</h1>
+    </header>
     <main class="announcement-container">
       <h1 class="infosaule">I N F O P O I N T</h1>
     </main>
-    <video autoplay loop muted playsinline preload="none" src="HCI.mp4" class="shark-gif"></video>
+    <!-- Behalte hier das GIF oder Video nach Wunsch; preload="none" reduziert Initialload -->
+    <video autoplay loop muted playsinline preload="none" class="shark-gif" src="HCI.mp4"></video>
   </section>
 
-  <!-- ===================== SEITE 2 (Kalender unverändert) ===================== -->
+  <!-- ===================== SEITE 2: KALENDER (EXAKT UNVERÄNDERT) ===================== -->
   <section class="page calendar-page page-2">
-    <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showPrint=0&showTitle=0&showTabs=0&showCalendars=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29nbGUuY29t..." frameborder="0" scrolling="no"></iframe>
-    <video autoplay loop muted playsinline preload="none" src="HCI.mp4" class="shark-gif"></video>
+    <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showPrint=0&showTitle=0&showTabs=0&showCalendars=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZDU3OWRjY2M2MTNhZTI0YzZlNjY1NmE5ZGIyOWM0MDRlNDk5NjNhZjFiZDYyNjY0NGQwZGE5OTVhNTUzNmUxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzBiZDg4YjUxNmVlNGRmNGFjMmZkMWU2NGJhOWQ4MzBlMjViY2VlZjc4YjM4MmM5N2FhZWZmZWU1NmY5NjlmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YjQ5M2RhNTY5NDg5NTA2MDQ0YWE2MmVmYTA5ODIyODM0MmQ0NjRhMzQ4MzY5MGYyNTU1NTE0Yzg0Y2ZmNDI0NEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YWQ4ZjNlMmRiODQ1YjZiNmM5ZTZkYmIyZDkyNGY1NTliNjVhNjI3YTNlNWEzMmYwYzQ0YmRhZTA1NzMxNGMwOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6&color=%23c0ca33&color=%230b8043&color=%233f51b5&color=%238e24aa&color=%23616161&color=%23ad1457&color=%23e4c441" frameborder="0" scrolling="no"></iframe>
+    <video autoplay loop muted playsinline preload="none" class="shark-gif" src="HCI.mp4"></video>
   </section>
 
-  <!-- ===================== SEITE 3 ===================== -->
+  <!-- ===================== SEITE 3: ORGANIGRAMM ===================== -->
   <section class="page org-page page-3">
     <img src="ORG.png" alt="Organigramm Vollbild" loading="lazy">
   </section>
 
-  <!-- ===================== SEITE 4–6 ===================== -->
+  <!-- ===================== SEITE 4–6: VIDEOS (QUELLEN LADEN ERST BEIM ANZEIGEN) ===================== -->
   <section class="page video-page page-4">
     <video autoplay loop muted playsinline preload="none" class="zoom-video">
       <source data-src="Fotos.mp4" type="video/mp4">
@@ -229,15 +234,15 @@
     </video>
   </section>
 
-  <!-- ===================== Platzhalter ===================== -->
+  <!-- ===================== PLATZHALTER ===================== -->
   <section class="page video-page page-7"></section>
   <section class="page video-page page-8"></section>
   <section class="page video-page page-9"></section>
 
-  <!-- ===================== Signatur ===================== -->
+  <!-- ===================== SIGNATUR ===================== -->
   <footer class="signature">MS</footer>
 
-  <!-- ===================== JS ===================== -->
+  <!-- ===================== JAVASCRIPT: Seitenrotation ===================== -->
   <script>
     window.addEventListener('DOMContentLoaded', async () => {
       const pages = document.querySelectorAll('.page');
@@ -270,39 +275,52 @@
       }
 
       function showPage(index) {
-        pages.forEach((p, i) => p.classList.toggle('active', i === index));
+        pages.forEach((p,i) => p.classList.toggle('active', i===index));
         const page = pages[index];
-        const videoEl = page.querySelector('video.zoom-video');
 
-        // Video nur laden, wenn Seite aktiv wird
+        // Videos erst dann komplett laden, wenn Seite aktiv wird
+        const videoEl = page.querySelector('video.zoom-video');
         if (videoEl && !videoEl.src) {
           const src = videoEl.querySelector('source').dataset.src;
-          videoEl.src = src;
-          videoEl.load();
-          videoEl.play();
+          if (src) {
+            videoEl.src = src;
+            videoEl.load();
+            // play() kann in manchen TV-Browsern ein Promise zurückgeben; catch ruhig Fehler
+            videoEl.play().catch(()=>{});
+          }
         }
+
+        // kleine zusätzliche Optimierung: pausieren/stoppen von Videos auf inaktiven Seiten
+        pages.forEach((p, idx) => {
+          if (idx !== index) {
+            const v = p.querySelector('video');
+            if (v && !p.classList.contains('active')) {
+              try { v.pause(); v.currentTime = 0; } catch(e){}
+            }
+          }
+        });
       }
 
       function rotateToNext() {
         const active = getActivePageIndexes();
         const durations = getDurations();
-        if (active.length === 0) return;
+        if(active.length===0) return;
 
         let pos = active.indexOf(current);
-        if (pos === -1) pos = 0;
-        const next = active[(pos + 1) % active.length];
+        if(pos===-1) pos = 0;
+        const next = active[(pos+1)%active.length];
         current = next;
         showPage(current);
         rotationTimeout = setTimeout(rotateToNext, durations[current] || 5000);
       }
 
       const activePages = getActivePageIndexes();
-      current = activePages.length > 0 ? activePages[0] : 0;
+      current = activePages.length>0 ? activePages[0] : 0;
       showPage(current);
       rotateToNext();
 
-      if (settings.reload && settings.reload > 0)
-        setInterval(() => location.reload(), settings.reload * 60 * 1000);
+      if(settings.reload && settings.reload>0)
+        setInterval(() => location.reload(), settings.reload*60*1000);
     });
   </script>
 </body>
