@@ -207,7 +207,8 @@ header h1 {
 
 <!-- Seite 2 -->
 <section class="page calendar-page page-2">
-  <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showPrint=0&showTitle=0&showTabs=0&showCalendars=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6" frameborder="0" scrolling="no"></iframe>
+  <!-- <<< KALENDER-IFRAME UNVERÄNDERT >>> -->
+  <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showPrint=0&showTitle=0&showTabs=0&showCalendars=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZDU3OWRjY2M2MTNhZTI0YzZlNjY1NmE5ZGIyOWM0MDRlNDk5NjNhZjFiZDYyNjY0NGQwZGE5OTVhNTUzNmUxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzBiZDg4YjUxNmVlNGRmNGFjMmZkMWU2NGJhOWQ4MzBlMjViY2VlZjc4YjM4MmM5N2FhZWZmZWU1NmY5NjlmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YjQ5M2RhNTY5NDg5NTA2MDQ0YWE2MmVmYTA5ODIyODM0MmQ0NjRhMzQ4MzY5MGYyNTU1NTE0Yzg0Y2ZmNDI0NEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YWQ4ZjNlMmRiODQ1YjZiNmM5ZTZkYmIyZDkyNGY1NTliNjVhNjI3YTNlNWEzMmYwYzQ0YmRhZTA1NzMxNGMwOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6&color=%23c0ca33&color=%230b8043&color=%233f51b5&color=%238e24aa&color=%23616161&color=%23ad1457&color=%23e4c441" frameborder="0" scrolling="no"></iframe>
   <div class="shark-gif"></div>
 </section>
 
@@ -223,7 +224,7 @@ header h1 {
 <!-- Seite 6 -->
 <section class="page video-page page-6"><video autoplay loop muted playsinline preload="none" class="zoom-video"><source data-src="HCINWSPPräs.mp4" type="video/mp4"></video></section>
 
-<!-- Seite 7 -->
+<!-- Seite 7: SpielerFotos Galerie -->
 <section class="page page-7">
   <div class="gallery-container" id="gallery"></div>
   <div class="shark-gif"></div>
@@ -239,34 +240,23 @@ header h1 {
 window.addEventListener('DOMContentLoaded', async () => {
   const pages = document.querySelectorAll('.page');
   let current = 0;
+  let rotationTimeout = null;
+
   const settingsUrl = 'https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/settings.json';
   let settings;
+  try { const res=await fetch(settingsUrl); settings=await res.json(); } 
+  catch(err){ console.error('❌ Fehler beim Laden der Einstellungen:', err); return; }
 
-  try { settings = await (await fetch(settingsUrl)).json(); } 
-  catch(err){ console.error('Fehler beim Laden der Einstellungen:',err); return; }
-
-  function getActivePages() {
-    const arr=[]; for(let i=1;i<=9;i++) if(settings.pages[i] && settings.pages[i].enabled) arr.push(i-1); return arr;
-  }
+  function getActivePages(){ const arr=[]; for(let i=1;i<=9;i++) if(settings.pages[i] && settings.pages[i].enabled) arr.push(i-1); return arr; }
   function getDurations(){ const d={}; for(let i=1;i<=9;i++) if(settings.pages[i]) d[i-1]=settings.pages[i].duration*1000; return d; }
 
   function showPage(index){
     pages.forEach((p,i)=>p.classList.toggle('active',i===index));
-    const page = pages[index];
-    const pageSettings = settings.pages[index+1];
-
-    if(pageSettings && page.classList.contains("video-page")){
-      const videoEl = page.querySelector('video');
-      if(videoEl){ const srcEl=videoEl.querySelector('source'); if(!videoEl.src && srcEl && srcEl.dataset.src) videoEl.src=srcEl.dataset.src; videoEl.pause(); videoEl.currentTime=0; videoEl.load(); videoEl.play().catch(()=>{}); }
-    }
-
-    if(index===6){ // Seite 7 SpielerFotos
-      startGalleryAnimation();
-    }
+    if(index===6) startGalleryAnimation();
   }
 
   function rotateToNext(){
-    const active = getActivePages(); const durations = getDurations();
+    const active=getActivePages(); const durations=getDurations();
     if(active.length===0) return;
     let pos=active.indexOf(current); if(pos===-1) pos=0;
     const next=active[(pos+1)%active.length]; current=next;
@@ -275,20 +265,15 @@ window.addEventListener('DOMContentLoaded', async () => {
   }
 
   const activePages=getActivePages(); current=activePages.length>0?activePages[0]:0;
-  showPage(current);
-  rotateToNext();
-
+  showPage(current); rotateToNext();
   if(settings.reload && settings.reload>0) setInterval(()=>location.reload(),settings.reload*60*1000);
 
-  // === SpielerFotos laden & animieren ===
   async function startGalleryAnimation(){
-    const container=document.getElementById('gallery'); 
-    container.innerHTML=''; // neu starten
+    const container=document.getElementById('gallery'); container.innerHTML='';
     const apiUrl="https://api.github.com/repos/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/contents/SpielerFotos";
     try{
-      const res = await fetch(apiUrl);
-      const files = await res.json();
-      const images = files.filter(f=>f.name.match(/\.(png|jpe?g)$/i));
+      const res=await fetch(apiUrl); const files=await res.json();
+      const images=files.filter(f=>f.name.match(/\.(png|jpe?g)$/i));
       images.forEach((file,i)=>{
         const img=document.createElement('img');
         img.src=`https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/SpielerFotos/${file.name}`;
@@ -298,19 +283,20 @@ window.addEventListener('DOMContentLoaded', async () => {
 
       let idx=0;
       function animateNext(){
-        container.querySelectorAll('img').forEach((img,i)=>{
+        const imgs=container.querySelectorAll('img');
+        imgs.forEach((img,i)=>{
           img.style.opacity=0;
           img.style.transform=`translate(${Math.random()*30-15}px,${Math.random()*30-15}px) scale(${Math.random()*0.5+0.75})`;
         });
-        const currentImg = container.querySelectorAll('img')[idx];
+        const currentImg=imgs[idx];
         currentImg.style.opacity=1;
         currentImg.style.transform='translate(0,0) scale(1)';
-        idx=(idx+1)%images.length;
-        setTimeout(animateNext, 3500); // professionelle Anzeige pro Bild ~3,5s
+        idx=(idx+1)%imgs.length;
+        setTimeout(animateNext,3500);
       }
       animateNext();
 
-    }catch(err){ console.error("Fehler beim Laden der SpielerFotos:",err); }
+    } catch(err){ console.error("❌ Fehler beim Laden der SpielerFotos:",err); }
   }
 });
 </script>
