@@ -147,7 +147,6 @@ header h1 {
   height: 100%;
   overflow: hidden;
 }
-
 .gallery-container { 
   position: absolute; 
   inset: 0; 
@@ -155,7 +154,6 @@ header h1 {
   height: 100%; 
   overflow: hidden; 
 }
-
 .gallery-container img { 
   position: absolute; 
   border-radius: 15px; 
@@ -164,7 +162,6 @@ header h1 {
   transition: all 1s ease; 
   pointer-events: none;
 }
-
 .page-7 .shark-gif {
   position: absolute;
   top: 50%;
@@ -216,24 +213,22 @@ header h1 {
   <div class="shark-gif"></div>
 </section>
 
-<!-- =================== SEITE 3: ORGANIGRAMM =================== -->
+<!-- =================== SEITE 3 =================== -->
 <section class="page org-page page-3">
   <img src="ORG.png" alt="Organigramm Vollbild" loading="lazy">
 </section>
 
-<!-- =================== SEITE 4-6: VIDEOS =================== -->
+<!-- =================== SEITE 4-6 VIDEOS =================== -->
 <section class="page video-page page-4">
   <video autoplay loop muted playsinline preload="none" class="zoom-video">
     <source data-src="Fotos.mp4" type="video/mp4">
   </video>
 </section>
-
 <section class="page video-page page-5">
   <video autoplay loop muted playsinline preload="none" class="zoom-video">
     <source data-src="FANSHOP.mp4" type="video/mp4">
   </video>
 </section>
-
 <section class="page video-page page-6">
   <video autoplay loop muted playsinline preload="none" class="zoom-video">
     <source data-src="HCINWSPPräs.mp4" type="video/mp4">
@@ -258,8 +253,13 @@ window.addEventListener('DOMContentLoaded', async () => {
   let current = 0; 
   const settingsUrl = 'https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/settings.json'; 
   let settings; 
-  try { const res=await fetch(settingsUrl); settings=await res.json(); } 
-  catch(err){ console.error('❌ Fehler beim Laden der Einstellungen:', err); return; } 
+  try { 
+    const res=await fetch(settingsUrl); 
+    settings=await res.json(); 
+  } catch(err){ 
+    console.error('❌ Fehler beim Laden der Einstellungen:', err); 
+    return; 
+  } 
 
   function getActivePages(){
     const arr=[];
@@ -278,32 +278,33 @@ window.addEventListener('DOMContentLoaded', async () => {
     if(!video) return;
     const source = video.querySelector('source');
     if(source.dataset.src){
-      source.src = source.dataset.src + "?v=" + Date.now(); 
+      source.src = source.dataset.src + "?v=" + Date.now();
       video.load(); 
     }
   }
 
-  async function startGalleryAnimation(){ 
+  function startGalleryAnimation(){ 
     const container = document.getElementById('gallery'); 
     container.innerHTML = '';
     const images = [];
-
-    const maxImages = 16; // nur Bild1.png bis Bild16.png
+    const maxImages = 16;
 
     for(let i=1;i<=maxImages;i++){
       const img = document.createElement('img');
-      img.src = `SpielerFotos/Bild${i}.png?v=${Date.now()}`;
+      img.src = `SpielerFotos/Bild${i}.png`;
       img.style.position = 'absolute';
       img.style.borderRadius = '15px';
       img.style.boxShadow = '0 10px 25px rgba(0,0,0,0.6)';
-      img.style.transition = 'all 1s ease';
       img.style.pointerEvents = 'none';
       img.style.opacity = 0;
+      img.style.width = 'auto';
+      img.style.height = 'auto';
+      img.style.maxWidth = '200px';
+      img.style.maxHeight = '200px';
       container.appendChild(img);
       images.push(img);
     }
 
-    // Animation starten nach kurzem Timeout
     setTimeout(function animate() {
       images.forEach(img => {
         const x = Math.random() * (container.clientWidth - 100);
