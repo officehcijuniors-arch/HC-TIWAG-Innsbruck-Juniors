@@ -3,7 +3,6 @@
 <head>
 <meta charset="utf-8">
 <title>HC TIWAG Innsbruck Juniors - Infosäule</title>
-
 <style>
 /* ===================== SCHRIFTART ===================== */
 @font-face { 
@@ -177,10 +176,9 @@ header h1 {
 @keyframes shine { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
 </style>
 </head>
-
 <body>
 
-<!-- =================== SEITE 1: START =================== -->
+<!-- =================== SEITE 1 =================== -->
 <section class="page page-1 active">
   <div class="logo-container">
     <img src="HAI.png" alt="HAI Logo" loading="lazy">
@@ -199,23 +197,23 @@ header h1 {
   <div class="shark-gif"></div>
 </section>
 
-<!-- =================== SEITE 3: ORGANIGRAMM =================== -->
+<!-- =================== SEITE 3 =================== -->
 <section class="page org-page page-3">
   <img src="ORG.png" alt="Organigramm Vollbild" loading="lazy">
 </section>
 
-<!-- =================== SEITE 4–6: VIDEOS =================== -->
+<!-- =================== SEITE 4–6 VIDEOS =================== -->
 <section class="page video-page page-4"><video autoplay loop muted playsinline preload="none" data-src="Fotos.mp4" class="zoom-video"></video></section>
 <section class="page video-page page-5"><video autoplay loop muted playsinline preload="none" data-src="FANSHOP.mp4" class="zoom-video"></video></section>
 <section class="page video-page page-6"><video autoplay loop muted playsinline preload="none" data-src="HCINWSPPräs.mp4" class="zoom-video"></video></section>
 
-<!-- =================== SEITE 7: GALERIE =================== -->
+<!-- =================== SEITE 7 GALERIE =================== -->
 <section class="page page-7">
   <div class="gallery-container" id="gallery"></div>
   <div class="shark-gif"></div>
 </section>
 
-<!-- =================== SEITE 8–9: PLATZHALTER =================== -->
+<!-- =================== SEITE 8–9 PLATZHALTER =================== -->
 <section class="page page-8"></section>
 <section class="page page-9"></section>
 
@@ -236,7 +234,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-  // ---- Funktionen zur Seitensteuerung ----
+  // ---- Hilfsfunktionen ----
   function getActivePages() {
     const arr = [];
     for (let i = 1; i <= 9; i++) if (settings.pages[i]?.enabled) arr.push(i - 1);
@@ -248,13 +246,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     return d;
   }
 
-  // ---- Lazy Load Videos ----
+  // ---- Lazy-Load Videos mit Cache-Busting ----
   const videoObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const video = entry.target;
-        if (video.dataset.src && !video.src) {
-          video.src = video.dataset.src;
+        if (video.dataset.src) {
+          video.src = video.dataset.src + "?v=" + Date.now();
           video.load();
         }
       }
@@ -262,7 +260,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }, { threshold: 0.3 });
   document.querySelectorAll("video[data-src]").forEach(v => videoObserver.observe(v));
 
-  // ---- Galerie-Animation ----
+  // ---- Galerie mit Cache-Busting ----
   async function startGalleryAnimation() {
     const container = document.getElementById("gallery");
     container.innerHTML = "";
@@ -273,16 +271,17 @@ document.addEventListener("DOMContentLoaded", async () => {
       const images = files.filter(f => f.name.match(/\.(png|jpe?g)$/i));
       images.forEach((file, i) => {
         const img = document.createElement("img");
-        img.src = `https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/SpielerFotos/${file.name}`;
+        img.src = `https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/SpielerFotos/${file.name}?v=${Date.now()}`;
         img.style.zIndex = i + 1;
         container.appendChild(img);
       });
+
       let idx = 0;
       function animateNext() {
         const imgs = container.querySelectorAll("img");
         imgs.forEach(img => {
           img.style.opacity = 0;
-          img.style.transform = `translate(${Math.random() * 30 - 15}px,${Math.random() * 30 - 15}px) scale(${Math.random() * 0.5 + 0.75})`;
+          img.style.transform = `translate(${Math.random()*30-15}px,${Math.random()*30-15}px) scale(${Math.random()*0.5+0.75})`;
         });
         if (imgs[idx]) {
           imgs[idx].style.opacity = 1;
@@ -297,7 +296,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  // ---- Seitenrotation ----
+  // ---- Seite anzeigen ----
   function showPage(index) {
     pages.forEach((p, i) => p.classList.toggle("active", i === index));
     if (index === 6) startGalleryAnimation();
@@ -315,13 +314,23 @@ document.addEventListener("DOMContentLoaded", async () => {
     setTimeout(rotateToNext, durations[current] || 5000);
   }
 
+  // ---- Initialisierung ----
   const activePages = getActivePages();
   current = activePages.length > 0 ? activePages[0] : 0;
   showPage(current);
   rotateToNext();
 
+  // ---- Optionaler automatischer Reload mit Cache-Busting ----
   if (settings.reload && settings.reload > 0)
-    setInterval(() => location.reload(), settings.reload * 60 * 1000);
+    setInterval(() => {
+      document.querySelectorAll("video[data-src]").forEach(v => {
+        v.src = v.dataset.src + "?v=" + Date.now();
+      });
+      document.querySelectorAll("#gallery img").forEach(img => {
+        img.src = img.src.split("?v=")[0] + "?v=" + Date.now();
+      });
+      location.reload();
+    }, settings.reload * 60 * 1000);
 });
 </script>
 </body>
