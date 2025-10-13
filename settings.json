@@ -1,6 +1,6 @@
 {
   "pages": {
-    "1": { "enabled": false, "duration": 10, "note": "Startseite / Infosäule" },
+    "1": { "enabled": true, "duration": 10, "note": "Startseite / Infosäule" },
     "2": { "enabled": true, "duration": 35, "note": "Kalender / Eisplan" },
     "3": { "enabled": false, "duration": 25, "note": "Organigramm" },
     "4": { "enabled": false, "duration": 20, "note": "Fotoshop" },
@@ -12,6 +12,7 @@
   },
   "reload": 30
 }
+
 
 
 
