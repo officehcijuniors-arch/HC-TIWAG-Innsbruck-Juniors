@@ -1,7 +1,7 @@
 {
   "pages": {
     "1": { "enabled": true, "duration": 10, "note": "Startseite / Infosäule" },
-    "2": { "enabled": false, "duration": 35, "note": "Kalender / Eisplan" },
+    "2": { "enabled": true, "duration": 35, "note": "Kalender / Eisplan" },
     "3": { "enabled": false, "duration": 25, "note": "Organigramm" },
     "4": { "enabled": false, "duration": 20, "note": "Fotoshop" },
     "5": { "enabled": false, "duration": 25, "note": "FANSHOP Video" },
@@ -12,6 +12,7 @@
   },
   "reload": 30
 }
+
 
 
 
