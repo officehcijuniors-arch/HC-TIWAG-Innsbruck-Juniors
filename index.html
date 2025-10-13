@@ -193,7 +193,6 @@ header h1 {
   animation: shine 3s linear infinite;
 }
 @keyframes shine { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
-
 </style>
 </head>
 <body>
@@ -290,30 +289,22 @@ window.addEventListener('DOMContentLoaded', async () => {
     const images = [];
 
     const maxImages = 16; // nur Bild1.png bis Bild16.png
+
     for(let i=1;i<=maxImages;i++){
-      const img = new Image();
+      const img = document.createElement('img');
       img.src = `SpielerFotos/Bild${i}.png?v=${Date.now()}`;
-      img.onload = () => {
-        img.style.position = 'absolute';
-        img.style.borderRadius = '15px';
-        img.style.boxShadow = '0 10px 25px rgba(0,0,0,0.6)';
-        img.style.transition = 'all 1s ease';
-        img.style.pointerEvents = 'none';
-        img.style.opacity = 0;
-        container.appendChild(img);
-        images.push(img);
-      };
+      img.style.position = 'absolute';
+      img.style.borderRadius = '15px';
+      img.style.boxShadow = '0 10px 25px rgba(0,0,0,0.6)';
+      img.style.transition = 'all 1s ease';
+      img.style.pointerEvents = 'none';
+      img.style.opacity = 0;
+      container.appendChild(img);
+      images.push(img);
     }
 
-    // Animation starten, wenn mindestens ein Bild geladen ist
-    const checkLoaded = setInterval(()=>{
-      if(images.length>0){
-        clearInterval(checkLoaded);
-        animate();
-      }
-    }, 200);
-
-    function animate() {
+    // Animation starten nach kurzem Timeout
+    setTimeout(function animate() {
       images.forEach(img => {
         const x = Math.random() * (container.clientWidth - 100);
         const y = Math.random() * (container.clientHeight - 100);
@@ -323,7 +314,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         img.style.opacity = opacity;
       });
       setTimeout(animate, 3500);
-    }
+    }, 100);
   }
 
   function showPage(index){
