@@ -112,9 +112,9 @@ header h1 {
   opacity: 0;
   transform: scale(0.97);
 }
-.page-2.active iframe {
-  opacity: 1;
-  transform: scale(1);
+.page-2.active iframe{
+  opacity:1;
+  transform:scale(1);
 }
 
 /* ===================== SHARK GIF ===================== */
@@ -247,7 +247,7 @@ header h1 {
   <div class="shark-gif"></div>
 </section>
 
-<!-- =================== SEITE 8 / 9 LEER =================== -->
+<!-- =================== SEITE 8/9 LEER =================== -->
 <section class="page video-page page-8"></section>
 <section class="page video-page page-9"></section>
 
@@ -288,33 +288,31 @@ window.addEventListener('DOMContentLoaded', async () => {
   async function startGalleryAnimation(){ 
     const container=document.getElementById('gallery'); 
     container.innerHTML=''; 
-    const apiUrl="https://api.github.com/repos/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/contents/SpielerFotos"; 
-    try{ 
-      const res=await fetch(apiUrl); 
-      const files=await res.json(); 
-      const images=files.filter(f=>f.name.match(/\.(png|jpe?g)$/i)); 
-      images.forEach((file,i)=>{ 
-        const img=document.createElement('img'); 
-        img.src=`https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/SpielerFotos/${file.name}?v=${Date.now()}`; 
-        img.style.zIndex=i+1; 
-        container.appendChild(img); 
-      }); 
 
-      function animate() {
-        const imgs = container.querySelectorAll("img");
-        imgs.forEach(img => {
-          const x = Math.random() * (container.clientWidth - 100);
-          const y = Math.random() * (container.clientHeight - 100);
-          const scale = Math.random()*0.5+0.75;
-          const opacity = Math.random()*0.7+0.3;
-          img.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
-          img.style.opacity = opacity;
-        });
-        setTimeout(animate, 3000);
-      }
-      animate();
+    // Alle lokalen Bilder im Ordner SpielerFotos laden (JPG/PNG)
+    const fileExtensions = ['jpg','jpeg','png'];
+    for(let i=1;i<=50;i++){ // Platzhalter für max. 50 Bilder, passe an deine Anzahl an
+      fileExtensions.forEach(ext=>{
+        const img = document.createElement('img');
+        img.src = `SpielerFotos/Spieler${i}.${ext}?v=${Date.now()}`;
+        img.style.zIndex = i;
+        container.appendChild(img);
+      });
+    }
 
-    } catch(err){ console.error("❌ Fehler beim Laden der SpielerFotos:",err); } 
+    function animate() {
+      const imgs = container.querySelectorAll("img");
+      imgs.forEach(img => {
+        const x = Math.random() * (container.clientWidth - 100);
+        const y = Math.random() * (container.clientHeight - 100);
+        const scale = Math.random() * 0.5 + 0.75;
+        const opacity = Math.random() * 0.7 + 0.3;
+        img.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+        img.style.opacity = opacity;
+      });
+      setTimeout(animate, 3000);
+    }
+    animate();
   }
 
   function showPage(index){
