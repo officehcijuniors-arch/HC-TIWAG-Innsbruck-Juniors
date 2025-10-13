@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <title>HC TIWAG Innsbruck Juniors - Infosäule</title>
+  
   <style>
-    /* ===================== Webfont Einbindung ===================== */
     @font-face {
       font-family: "Areno Serif";
       src: url("areno-serif-webfont.woff2") format("woff2"),
@@ -14,7 +14,6 @@
       font-style: normal;
     }
 
-    /* ===================== Allgemein ===================== */
     body {
       margin: 0;
       font-family: "Areno Serif", serif;
@@ -23,7 +22,6 @@
       background: #000;
     }
 
-    /* ===================== Seitencontainer ===================== */
     .page {
       position: absolute;
       inset: 0;
@@ -39,7 +37,6 @@
     }
 
     .page.active { opacity: 1; z-index: 1; }
-    /* Animationen auf inaktiven Seiten anhalten */
     .page:not(.active) * { animation-play-state: paused !important; }
 
     @keyframes gradientShift {
@@ -48,7 +45,6 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* ===================== Logos ===================== */
     .logo-container {
       display: flex;
       justify-content: center;
@@ -69,8 +65,8 @@
 
     @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
 
-    /* ===================== Header ===================== */
     header { text-align: center; padding: 10px 0; }
+
     header h1 {
       font-size: 2.4em;
       margin: 0 0 5px 0;
@@ -79,15 +75,10 @@
       transform: scale(0.95);
       animation: fadeInScale 1s forwards 0.5s;
     }
+
     @keyframes fadeInScale { to { opacity: 1; transform: scale(1); } }
 
-    /* ===================== Infosäule ===================== */
-    .announcement-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 10px;
-    }
+    .announcement-container { display: flex; flex-direction: column; align-items: center; margin-top: 10px; }
 
     .infosaule {
       font-size: 7vw;
@@ -104,7 +95,6 @@
       50% { text-shadow: 0 0 60px rgba(255,255,255,0.85); }
     }
 
-    /* ===================== Kalender ===================== */
     .calendar-page {
       justify-content: flex-start;
       padding-top: 15px;
@@ -130,16 +120,16 @@
 
     @keyframes fadeIn { to { opacity: 1; } }
 
-    /* ===================== Shark-Video ===================== */
     .shark-gif {
       position: absolute;
       bottom: 5%;
       width: 280px;
       height: 280px;
+      background: url('HCI.gif') no-repeat center;
+      background-size: contain;
       pointer-events: none;
       filter: drop-shadow(0 0 25px rgba(0,0,0,0.6));
       animation: float 4s ease-in-out infinite;
-      object-fit: contain;
     }
 
     @keyframes float {
@@ -150,7 +140,6 @@
     .page-1 .shark-gif { opacity: 0.85; }
     .calendar-page .shark-gif { opacity: 0.3; }
 
-    /* ===================== Organigramm ===================== */
     .org-page img {
       position: absolute;
       inset: 0;
@@ -159,14 +148,12 @@
       object-fit: contain;
     }
 
-    /* ===================== Videos ===================== */
     .video-page video.zoom-video {
       width: 100%;
       height: 100%;
       object-fit: contain;
     }
 
-    /* ===================== Signatur ===================== */
     .signature {
       position: fixed;
       bottom: 10px;
@@ -190,7 +177,6 @@
 </head>
 <body>
 
-  <!-- ===================== SEITE 1: STARTSEITE ===================== -->
   <section class="page page-1 active">
     <div class="logo-container">
       <img src="HAI.png" alt="HAI Logo" loading="lazy">
@@ -202,22 +188,19 @@
     <main class="announcement-container">
       <h1 class="infosaule">I N F O P O I N T</h1>
     </main>
-    <!-- Behalte hier das GIF oder Video nach Wunsch; preload="none" reduziert Initialload -->
-    <video autoplay loop muted playsinline preload="none" class="shark-gif" src="HCI.mp4"></video>
+    <div class="shark-gif"></div>
   </section>
 
-  <!-- ===================== SEITE 2: KALENDER (EXAKT UNVERÄNDERT) ===================== -->
+  <!-- Kalender 1:1 unverändert -->
   <section class="page calendar-page page-2">
     <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showPrint=0&showTitle=0&showTabs=0&showCalendars=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZDU3OWRjY2M2MTNhZTI0YzZlNjY1NmE5ZGIyOWM0MDRlNDk5NjNhZjFiZDYyNjY0NGQwZGE5OTVhNTUzNmUxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzBiZDg4YjUxNmVlNGRmNGFjMmZkMWU2NGJhOWQ4MzBlMjViY2VlZjc4YjM4MmM5N2FhZWZmZWU1NmY5NjlmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YjQ5M2RhNTY5NDg5NTA2MDQ0YWE2MmVmYTA5ODIyODM0MmQ0NjRhMzQ4MzY5MGYyNTU1NTE0Yzg0Y2ZmNDI0NEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YWQ4ZjNlMmRiODQ1YjZiNmM5ZTZkYmIyZDkyNGY1NTliNjVhNjI3YTNlNWEzMmYwYzQ0YmRhZTA1NzMxNGMwOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6&color=%23c0ca33&color=%230b8043&color=%233f51b5&color=%238e24aa&color=%23616161&color=%23ad1457&color=%23e4c441" frameborder="0" scrolling="no"></iframe>
-    <video autoplay loop muted playsinline preload="none" class="shark-gif" src="HCI.mp4"></video>
+    <div class="shark-gif"></div>
   </section>
 
-  <!-- ===================== SEITE 3: ORGANIGRAMM ===================== -->
   <section class="page org-page page-3">
     <img src="ORG.png" alt="Organigramm Vollbild" loading="lazy">
   </section>
 
-  <!-- ===================== SEITE 4–6: VIDEOS (QUELLEN LADEN ERST BEIM ANZEIGEN) ===================== -->
   <section class="page video-page page-4">
     <video autoplay loop muted playsinline preload="none" class="zoom-video">
       <source data-src="Fotos.mp4" type="video/mp4">
@@ -234,15 +217,12 @@
     </video>
   </section>
 
-  <!-- ===================== PLATZHALTER ===================== -->
   <section class="page video-page page-7"></section>
   <section class="page video-page page-8"></section>
   <section class="page video-page page-9"></section>
 
-  <!-- ===================== SIGNATUR ===================== -->
   <footer class="signature">MS</footer>
 
-  <!-- ===================== JAVASCRIPT: Seitenrotation ===================== -->
   <script>
     window.addEventListener('DOMContentLoaded', async () => {
       const pages = document.querySelectorAll('.page');
@@ -263,64 +243,61 @@
       function getActivePageIndexes() {
         const active = [];
         for (let i = 1; i <= 9; i++)
-          if (settings.pages[i] && settings.pages[i].enabled) active.push(i-1);
+          if (settings.pages[i] && settings.pages[i].enabled) active.push(i - 1);
         return active;
       }
 
       function getDurations() {
         const durations = {};
         for (let i = 1; i <= 9; i++)
-          if (settings.pages[i]) durations[i-1] = settings.pages[i].duration * 1000;
+          if (settings.pages[i]) durations[i - 1] = settings.pages[i].duration * 1000;
         return durations;
       }
 
       function showPage(index) {
-        pages.forEach((p,i) => p.classList.toggle('active', i===index));
+        pages.forEach((p, i) => p.classList.toggle('active', i === index));
         const page = pages[index];
+        const pageSettings = settings.pages[index + 1];
 
-        // Videos erst dann komplett laden, wenn Seite aktiv wird
-        const videoEl = page.querySelector('video.zoom-video');
-        if (videoEl && !videoEl.src) {
-          const src = videoEl.querySelector('source').dataset.src;
-          if (src) {
-            videoEl.src = src;
+        // robustes Kiosk-kompatibles Videohandling
+        if (pageSettings && page.classList.contains("video-page")) {
+          const videoEl = page.querySelector('video');
+          if (videoEl) {
+            const srcEl = videoEl.querySelector('source');
+            if (!videoEl.src && srcEl && srcEl.dataset.src) {
+              videoEl.src = srcEl.dataset.src;
+            }
+            videoEl.pause();
+            videoEl.currentTime = 0;
             videoEl.load();
-            // play() kann in manchen TV-Browsern ein Promise zurückgeben; catch ruhig Fehler
-            videoEl.play().catch(()=>{});
-          }
-        }
-
-        // kleine zusätzliche Optimierung: pausieren/stoppen von Videos auf inaktiven Seiten
-        pages.forEach((p, idx) => {
-          if (idx !== index) {
-            const v = p.querySelector('video');
-            if (v && !p.classList.contains('active')) {
-              try { v.pause(); v.currentTime = 0; } catch(e){}
+            const playPromise = videoEl.play();
+            if (playPromise !== undefined) {
+              playPromise.catch(err => console.warn("Autoplay blockiert:", err));
             }
           }
-        });
+        }
       }
 
       function rotateToNext() {
         const active = getActivePageIndexes();
         const durations = getDurations();
-        if(active.length===0) return;
+        if (active.length === 0) return;
 
         let pos = active.indexOf(current);
-        if(pos===-1) pos = 0;
-        const next = active[(pos+1)%active.length];
+        if (pos === -1) pos = 0;
+        const next = active[(pos + 1) % active.length];
         current = next;
         showPage(current);
         rotationTimeout = setTimeout(rotateToNext, durations[current] || 5000);
       }
 
       const activePages = getActivePageIndexes();
-      current = activePages.length>0 ? activePages[0] : 0;
+      current = activePages.length > 0 ? activePages[0] : 0;
       showPage(current);
       rotateToNext();
 
-      if(settings.reload && settings.reload>0)
-        setInterval(() => location.reload(), settings.reload*60*1000);
+      if (settings.reload && settings.reload > 0)
+        setInterval(() => location.reload(), settings.reload * 60 * 1000);
     });
   </script>
 </body>
