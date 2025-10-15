@@ -4,23 +4,17 @@
 <meta charset="utf-8">
 <title>HC TIWAG Innsbruck Juniors – Spielerfotos</title>
 <style>
-body, html {
+/* ===== Hintergrund ===== */
+html, body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
-  font-family: "Areno Serif", serif;
   overflow: hidden;
-  background: #000;
-}
-
-.page {
-  width: 100%;
-  height: 100vh;
-  position: relative;
   background: linear-gradient(135deg, #003789 50%, #d42323 50%);
   background-size: 200% 200%;
   animation: gradientShift 15s ease infinite;
+  font-family: "Areno Serif", serif;
 }
 
 @keyframes gradientShift {
@@ -29,95 +23,132 @@ body, html {
   100% { background-position: 0% 50%; }
 }
 
-.player-gallery {
-  width: 100%;
-  height: 100%;
+/* ===== Container für alle Spielerbilder ===== */
+.player-container {
   position: relative;
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
 }
 
-.player-gallery img {
+/* ===== Spielerbilder ===== */
+.player {
   position: absolute;
-  border-radius: 15px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 5px 10px rgba(0,0,0,0.3);
-  opacity: 0;
-  transform: scale(0.8);
-  animation: floatInOut 8s ease-in-out infinite;
+  object-fit: contain;       /* ganze Bild sichtbar */
+  border-radius: 20px;      /* weiche Ecken */
+  box-shadow: 0 20px 45px rgba(0,0,0,0.55);
+  opacity: 0;               /* Start unsichtbar */
+  transform: scale(0.9);    /* Start leicht verkleinert */
+  transition: opacity 1s ease, transform 1s ease;
 }
 
-img.small { width: 120px; }
-img.medium { width: 180px; }
-img.large { width: 250px; }
-
-@keyframes floatInOut {
-  0% { opacity: 0; transform: scale(0.8) translateY(0); }
-  20% { opacity: 1; transform: scale(1) translateY(-10px); }
-  80% { opacity: 1; transform: scale(1) translateY(10px); }
-  100% { opacity: 0; transform: scale(0.8) translateY(0); }
+/* ===== Schwebeanimation für mittleres Bild ===== */
+@keyframes float {
+  0%,100% { transform: translateX(0) translateY(0) scale(1); }
+  50% { transform: translateX(0) translateY(-12px) scale(1.03); }
+}
+.center.floating {
+  animation: float 6s ease-in-out infinite;
 }
 </style>
 </head>
 <body>
-<section class="page">
-  <div class="player-gallery" id="gallery"></div>
-</section>
+
+<!-- Container für Spielerbilder -->
+<div class="player-container" id="playerContainer"></div>
 
 <script>
-const gallery = document.getElementById('gallery');
-const totalImages = 16; // max. 16
-const usedPositions = []; // bereits belegte Positionen
-const containerW = window.innerWidth;
-const containerH = window.innerHeight;
+/* ===== Einstellungen ===== */
+const totalImages = 16;       // Anzahl der Spielerbilder
+const batchSize = 3;          // Anzahl Bilder gleichzeitig
+const displayTime = 7000;     // Anzeigezeit pro Batch in ms
+const container = document.getElementById("playerContainer");
+let currentIndex = 0;
+const imagePool = [];
 
-// Spielerbilder laden
+/* ===== Bilder vorbereiten ===== */
 for (let i = 1; i <= totalImages; i++) {
   const img = new Image();
-  img.src = `SpielerFotos/Bild${i}.png`;
-  img.className = ['small','medium','large'][Math.floor(Math.random()*3)];
-  img.dataset.index = i;
-  img.onload = () => {
-    gallery.appendChild(img);
-    placeImage(img);
-  };
-  img.onerror = () => console.log(`Bild ${i} nicht gefunden, übersprungen.`);
+  img.src = `SpielerFotos/Bild${i}.png`;  // Pfad zu Spielerbildern
+  img.className = "player";
+  imagePool.push(img);
 }
 
-// Positionierung ohne Überlappung
-function placeImage(img) {
-  const rectWidth = img.width;
-  const rectHeight = img.height;
-  let tries = 0;
-  let placed = false;
+/* ===== Positionierung der Bilder ===== */
+function positionImages(batch) {
+  const W = container.clientWidth;
+  const H = container.clientHeight;
 
-  while (!placed && tries < 100) {
-    let x = Math.random() * (containerW - rectWidth);
-    let y = Math.random() * (containerH - rectHeight);
-    let overlap = usedPositions.some(pos => {
-      return !(x + rectWidth < pos.x || x > pos.x + pos.width ||
-               y + rectHeight < pos.y || y > pos.y + pos.height);
-    });
-    if (!overlap) {
-      img.style.left = x + 'px';
-      img.style.top = y + 'px';
-      usedPositions.push({x, y, width: rectWidth, height: rectHeight});
-      placed = true;
-      img.style.opacity = 1;
-    }
-    tries++;
+  // Linkes Bild
+  const leftImg = batch[0];
+  leftImg.style.width = W * 0.28 + 'px';
+  leftImg.style.height = 'auto';
+  leftImg.style.top = H * 0.08 + 'px';
+  leftImg.style.left = W * 0.02 + 'px';
+  leftImg.style.transform = 'scale(1)';
+
+  // Rechtes Bild
+  const rightImg = batch[1];
+  rightImg.style.width = W * 0.28 + 'px';
+  rightImg.style.height = 'auto';
+  rightImg.style.top = H * 0.08 + 'px';
+  rightImg.style.left = W - rightImg.clientWidth - W * 0.02 + 'px';
+  rightImg.style.transform = 'scale(1)';
+
+  // Mittleres Bild: zentriert, maximal passend, nichts abgeschnitten
+  const centerImg = batch[2];
+  const maxWidth = W * 0.45;
+  const maxHeight = H * 0.6;
+  const imgRatio = centerImg.naturalWidth / centerImg.naturalHeight;
+  const containerRatio = maxWidth / maxHeight;
+
+  if (imgRatio > containerRatio) {
+    centerImg.style.width = maxWidth + 'px';
+    centerImg.style.height = 'auto';
+  } else {
+    centerImg.style.width = 'auto';
+    centerImg.style.height = maxHeight + 'px';
   }
+
+  centerImg.style.left = (W - centerImg.clientWidth)/2 + 'px';
+  centerImg.style.top = (H - centerImg.clientHeight)/2 + 'px';
+  centerImg.classList.add('floating');
 }
 
-// Kontinuierliches Schweben
-function animate() {
-  const imgs = gallery.querySelectorAll('img');
-  imgs.forEach(img => {
-    const dy = Math.sin(Date.now()/1000 + parseInt(img.dataset.index)) * 5;
-    img.style.transform = `scale(1) translateY(${dy}px)`;
+/* ===== Anzeige der nächsten 3 Bilder ===== */
+function showNextBatch() {
+  container.innerHTML = "";   // Alte Bilder entfernen
+  const batch = [];
+
+  for (let i = 0; i < batchSize; i++) {
+    const index = (currentIndex + i) % totalImages;
+    const img = imagePool[index];
+    if (!img) continue;
+    container.appendChild(img);
+    batch.push(img);
+  }
+
+  positionImages(batch);
+
+  // Einblenden
+  batch.forEach((img, i) => {
+    setTimeout(() => img.style.opacity = 1, i * 300);
   });
-  requestAnimationFrame(animate);
+
+  // Ausblenden
+  setTimeout(() => {
+    batch.forEach((img, i) => {
+      setTimeout(() => img.style.opacity = 0, i * 200);
+    });
+  }, displayTime - 1500);
+
+  currentIndex = (currentIndex + batchSize) % totalImages;
 }
 
-animate();
+/* ===== Start ===== */
+showNextBatch();
+setInterval(showNextBatch, displayTime);
 </script>
+
 </body>
 </html>
