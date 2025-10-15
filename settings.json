@@ -6,12 +6,13 @@
     "4": { "enabled": true, "duration": 18, "note": "Fotoshop" },
     "5": { "enabled": true, "duration": 15, "note": "FANSHOP Video" },
     "6": { "enabled": true, "duration": 34, "note": "CANVA Spielankündigungen Juniors" },
-    "7": { "enabled": false, "duration": 30, "note": "Spielerfotos" },
+    "7": { "enabled": true, "duration": 15, "note": "Spielerfotos" },
     "8": { "enabled": false, "duration": 8, "note": "Platzhalter 8" },
     "9": { "enabled": false, "duration": 8, "note": "Platzhalter 9" }
   },
   "reload": 30
 }
+
 
 
 
