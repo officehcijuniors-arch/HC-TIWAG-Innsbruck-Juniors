@@ -13,13 +13,13 @@ html, body {
   overflow: hidden;
   background: linear-gradient(135deg, #003789 50%, #d42323 50%);
   background-size: 200% 200%;
-  animation: gradientShift 15s ease infinite;
+  animation: gradientShift 180s ease-in-out infinite; /* verlangsamt (3 Minuten) */
   font-family: "Areno Serif", serif;
 }
 
 @keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
@@ -49,6 +49,7 @@ html, body {
 }
 .center.floating {
   animation: float 6s ease-in-out infinite;
+  will-change: transform; /* GPU-Hinweis für flüssige Bewegung */
 }
 </style>
 </head>
