@@ -13,7 +13,7 @@ html, body {
   overflow: hidden;
   background: linear-gradient(135deg, #003789 50%, #d42323 50%);
   background-size: 200% 200%;
-  animation: gradientShift 120s ease-in-out infinite; /* verlangsamt (3 Minuten) */
+  animation: gradientShift 120s ease-in-out infinite;
   font-family: "Areno Serif", serif;
 }
 
@@ -39,7 +39,7 @@ html, body {
   box-shadow: 0 20px 45px rgba(0,0,0,0.55);
   opacity: 0;
   transform: scale(0.9);
-  transition: opacity 1.5s ease, transform 1.5s ease; /* leicht verlangsamt */
+  transition: opacity 1.5s ease, transform 1.5s ease;
 }
 
 /* ===== Schwebeanimation für mittleres Bild ===== */
@@ -57,12 +57,12 @@ html, body {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 25vw;               /* relative Größe, passt sich an Bildschirm an */
+  width: 25vw;
   max-width: 350px;
   transform: translate(-50%, -50%);
-  opacity: 0.30;             /* leicht transparent */
-  z-index: 1;                /* über Hintergrund, unter Fotos */
-  pointer-events: none;      /* verhindert Interaktionen */
+  opacity: 0.15;
+  z-index: 1;
+  pointer-events: none;
 }
 </style>
 </head>
@@ -76,9 +76,9 @@ html, body {
 
 <script>
 /* ===== Einstellungen ===== */
-const totalImages = 16;       // Anzahl der Spielerbilder
-const batchSize = 3;          // Anzahl Bilder gleichzeitig
-const displayTime = 15000;    // Anzeigezeit pro Batch in ms (langsamer, ressourcenschonender)
+const totalImages = 16;
+const batchSize = 3;
+const displayTime = 10000;
 const container = document.getElementById("playerContainer");
 let currentIndex = 0;
 const imagePool = [];
@@ -164,4 +164,3 @@ setInterval(showNextBatch, displayTime);
 
 </body>
 </html>
-
