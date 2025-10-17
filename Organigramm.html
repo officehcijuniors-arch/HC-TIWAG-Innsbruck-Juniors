@@ -1,89 +1,65 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-<meta charset="utf-8">
-<title>HC TIWAG Innsbruck Juniors – Infopoint</title>
-
 <style>
-/* ===========================================================
-   HINTERGRUND UND GRUNDEINSTELLUNGEN
-   =========================================================== */
 html, body {
-  margin: 0;                      /* keine Standardabstände */
+  margin: 0;
   padding: 0;
-  width: 100%;                    /* Seite soll gesamte Breite nutzen */
-  height: 100%;                   /* Seite soll gesamte Höhe nutzen */
-  overflow: hidden;               /* nichts darf über den Rand hinausragen */
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 
-  /* Hintergrund mit Farbverlauf (blau ↔ rot) */
   background: linear-gradient(135deg, #003789 50%, #d42323 50%);
-  background-size: 200% 200%;     /* sorgt für sanfte Bewegung des Farbverlaufs */
+  background-size: 200% 200%;
   animation: gradientShift 120s ease-in-out infinite;
 
-  font-family: "Areno Serif", serif;  /* Schriftart (optional) */
+  font-family: "Areno Serif", serif;
 }
 
-/* Animation des Farbverlaufs (langsames Hin- und Herfließen) */
 @keyframes gradientShift {
   0%   { background-position: 0% 50%; }
   50%  { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-/* ===========================================================
-   CONTAINER: ZENTRIERT DEN RAHMEN MIT DEM BILD
-   =========================================================== */
 .frame-container {
   position: relative;
-  width: 100vw;                   /* volle Bildschirmbreite */
-  height: 100vh;                  /* volle Bildschirmhöhe */
-  display: flex;                  /* zentriert das Bild horizontal & vertikal */
+  width: 100vw;
+  height: 100vh;
+  display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
 }
 
-/* ===========================================================
-   RAHMEN-STIL (GLEICH WIE BEI DEN SPIELERFOTOS)
-   =========================================================== */
 .frame {
   position: relative;
-  width: 90%;                     /* Rahmen nimmt 90 % der Breite ein */
-  max-width: 1600px;              /* auf großen Bildschirmen maximal 1600px */
-  border-radius: 20px;            /* leicht abgerundete Ecken */
-  overflow: hidden;               /* Inhalt bleibt im Rahmen */
-  box-shadow: 0 20px 45px rgba(0,0,0,0.55); /* weicher Schatten für 3D-Effekt */
-  background: rgba(255,255,255,0.10);       /* halbtransparenter Hintergrund */
-  backdrop-filter: blur(8px);     /* leicht verschwommener "Glas"-Effekt */
+  width: 90%;
+  max-width: 1600px;
+
+  /* 16:9 Verhältnis für den Rahmen */
+  aspect-ratio: 16 / 9;
+
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 45px rgba(0,0,0,0.55);
+  background: rgba(255,255,255,0.10);
+  backdrop-filter: blur(8px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* ===========================================================
-   BILD (ORG.png)
-   =========================================================== */
 .frame img {
-  width: 100%;                    /* Bild füllt den Rahmen in der Breite aus */
-  height: auto;                   /* Höhe wird automatisch berechnet (keine Verzerrung) */
-  display: block;                 /* entfernt kleine Lücken bei Inline-Elementen */
-  border-radius: 20px;            /* Bild folgt den Rahmenrundungen */
-  object-fit: contain;            /* Bild wird komplett angezeigt, ohne Beschnitt */
-  background: rgba(0,0,0,0.25);   /* dunkler Hintergrund, falls Bild transparente Bereiche hat */
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 20px;
+
+  /* Bild vollständig sichtbar, kein Abschneiden */
+  object-fit: contain;
+
+  /* Hintergrundfarbe bei Lücken */
+  background: rgba(0,0,0,0.25);
 }
 </style>
-</head>
-
-<body>
-
-<!-- 
-  HIER WIRD DAS BILD ANGEZEIGT.
-  - Der äußere Container sorgt für die Bildschirmmitte.
-  - Der innere "frame"-Block ist der sichtbare Rahmen.
-  - Das Bild (ORG.png) liegt im selben Ordner wie diese HTML-Datei.
--->
-<div class="frame-container">
-  <div class="frame">
-    <img src="ORG.png" alt="HC TIWAG Innsbruck Juniors">
-  </div>
-</div>
-
-</body>
-</html>
