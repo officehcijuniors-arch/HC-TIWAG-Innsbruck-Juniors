@@ -34,12 +34,12 @@ html, body {
 /* ===== Spielerbilder ===== */
 .player {
   position: absolute;
-  object-fit: contain;       /* ganze Bild sichtbar */
-  border-radius: 20px;      /* weiche Ecken */
+  object-fit: contain;
+  border-radius: 20px;
   box-shadow: 0 20px 45px rgba(0,0,0,0.55);
-  opacity: 0;               /* Start unsichtbar */
-  transform: scale(0.9);    /* Start leicht verkleinert */
-  transition: opacity 1s ease, transform 1s ease;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 1.5s ease, transform 1.5s ease; /* leicht verlangsamt */
 }
 
 /* ===== Schwebeanimation für mittleres Bild ===== */
@@ -49,11 +49,27 @@ html, body {
 }
 .center.floating {
   animation: float 6s ease-in-out infinite;
-  will-change: transform; /* GPU-Hinweis für flüssige Bewegung */
+  will-change: transform;
+}
+
+/* ===== Logo in der Mitte ===== */
+.logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 25vw;               /* relative Größe, passt sich an Bildschirm an */
+  max-width: 350px;
+  transform: translate(-50%, -50%);
+  opacity: 0.15;             /* leicht transparent */
+  z-index: 1;                /* über Hintergrund, unter Fotos */
+  pointer-events: none;      /* verhindert Interaktionen */
 }
 </style>
 </head>
 <body>
+
+<!-- Transparentes Logo -->
+<img src="hai.png" alt="Hai-Logo" class="logo">
 
 <!-- Container für Spielerbilder -->
 <div class="player-container" id="playerContainer"></div>
@@ -62,7 +78,7 @@ html, body {
 /* ===== Einstellungen ===== */
 const totalImages = 16;       // Anzahl der Spielerbilder
 const batchSize = 3;          // Anzahl Bilder gleichzeitig
-const displayTime = 7000;     // Anzeigezeit pro Batch in ms
+const displayTime = 15000;    // Anzeigezeit pro Batch in ms (langsamer, ressourcenschonender)
 const container = document.getElementById("playerContainer");
 let currentIndex = 0;
 const imagePool = [];
@@ -70,7 +86,7 @@ const imagePool = [];
 /* ===== Bilder vorbereiten ===== */
 for (let i = 1; i <= totalImages; i++) {
   const img = new Image();
-  img.src = `SpielerFotos/Bild${i}.png`;  // Pfad zu Spielerbildern
+  img.src = `SpielerFotos/Bild${i}.png`;
   img.className = "player";
   imagePool.push(img);
 }
@@ -80,7 +96,6 @@ function positionImages(batch) {
   const W = container.clientWidth;
   const H = container.clientHeight;
 
-  // Linkes Bild
   const leftImg = batch[0];
   leftImg.style.width = W * 0.28 + 'px';
   leftImg.style.height = 'auto';
@@ -88,7 +103,6 @@ function positionImages(batch) {
   leftImg.style.left = W * 0.02 + 'px';
   leftImg.style.transform = 'scale(1)';
 
-  // Rechtes Bild
   const rightImg = batch[1];
   rightImg.style.width = W * 0.28 + 'px';
   rightImg.style.height = 'auto';
@@ -96,7 +110,6 @@ function positionImages(batch) {
   rightImg.style.left = W - rightImg.clientWidth - W * 0.02 + 'px';
   rightImg.style.transform = 'scale(1)';
 
-  // Mittleres Bild: zentriert, maximal passend, nichts abgeschnitten
   const centerImg = batch[2];
   const maxWidth = W * 0.45;
   const maxHeight = H * 0.6;
@@ -118,7 +131,7 @@ function positionImages(batch) {
 
 /* ===== Anzeige der nächsten 3 Bilder ===== */
 function showNextBatch() {
-  container.innerHTML = "";   // Alte Bilder entfernen
+  container.innerHTML = "";
   const batch = [];
 
   for (let i = 0; i < batchSize; i++) {
@@ -131,17 +144,15 @@ function showNextBatch() {
 
   positionImages(batch);
 
-  // Einblenden
   batch.forEach((img, i) => {
-    setTimeout(() => img.style.opacity = 1, i * 300);
+    setTimeout(() => img.style.opacity = 1, i * 400);
   });
 
-  // Ausblenden
   setTimeout(() => {
     batch.forEach((img, i) => {
-      setTimeout(() => img.style.opacity = 0, i * 200);
+      setTimeout(() => img.style.opacity = 0, i * 300);
     });
-  }, displayTime - 1500);
+  }, displayTime - 2000);
 
   currentIndex = (currentIndex + batchSize) % totalImages;
 }
@@ -153,4 +164,3 @@ setInterval(showNextBatch, displayTime);
 
 </body>
 </html>
-
