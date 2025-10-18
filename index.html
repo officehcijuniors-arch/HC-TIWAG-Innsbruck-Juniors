@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>HC TIWAG Innsbruck Juniors - Infosäule</title>
 <style>
-/* === Schriftart === */
+/* =================== Schriftart =================== */
 @font-face { 
     font-family: "Areno Serif"; 
     src: url("areno-serif-webfont.woff2") format("woff2"), 
@@ -14,7 +14,7 @@
     font-style: normal; 
 }
 
-/* === Grundlayout der Seite === */
+/* =================== Grundlayout =================== */
 body { 
     margin: 0; 
     font-family: "Areno Serif", serif; 
@@ -23,7 +23,7 @@ body {
     background: #000; 
 }
 
-/* === Seiten-Layout === */
+/* =================== Seitenlayout =================== */
 .page { 
     position: absolute; 
     inset: 0; 
@@ -35,22 +35,25 @@ body {
     transition: opacity 1s ease; 
     background: linear-gradient(135deg, #003789 50%, #d42323 50%);
     background-size: 200% 200%;
-    animation: gradientShift 120s ease infinite;
+    animation: gradientShift 180s ease infinite;
 }
+
 .page.active { 
     opacity: 1; 
     z-index: 1; 
 }
+
 .page:not(.active) * { 
     animation-play-state: paused !important; 
 }
+
 @keyframes gradientShift { 
     0% { background-position: 0% 50%; } 
     50% { background-position: 100% 50%; } 
     100% { background-position: 0% 50%; } 
 }
 
-/* === Logo === */
+/* =================== Logo =================== */
 .logo-container { 
     display: flex; 
     justify-content: center; 
@@ -66,9 +69,10 @@ body {
     animation: fadeInUp 1s forwards; 
 }
 .page-1 .logo-container img:nth-child(2) { max-height: 50px; }
+
 @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
 
-/* === Header === */
+/* =================== Header =================== */
 header { text-align: center; padding: 10px 0; }
 header h1 { 
     font-size: 2.4em; 
@@ -80,7 +84,7 @@ header h1 {
 }
 @keyframes fadeInScale { to { opacity: 1; transform: scale(1); } }
 
-/* === Infosäule Text === */
+/* =================== Infosäule Text =================== */
 .announcement-container { 
     display: flex; 
     flex-direction: column; 
@@ -101,7 +105,7 @@ header h1 {
     50% { text-shadow: 0 0 60px rgba(255,255,255,0.85); } 
 }
 
-/* === Kalender-Seite === */
+/* =================== Kalender-Seite =================== */
 .calendar-page { justify-content: flex-start; padding-top: 15px; }
 .calendar-page iframe { 
     border-radius: 15px; 
@@ -109,7 +113,6 @@ header h1 {
     border: 2px solid rgba(255,255,255,0.2); 
     width: 97%; 
     height: calc(100vh - 30px); 
-    margin-top: 0; 
     opacity: 0; 
     animation: fadeIn 1s forwards; 
     transform: scale(0.97); 
@@ -121,7 +124,7 @@ header h1 {
 }
 @keyframes fadeIn { to { opacity: 1; } }
 
-/* === Shark GIF Animation === */
+/* =================== Shark GIF =================== */
 .shark-gif { 
     position: absolute; 
     bottom: 5%; 
@@ -137,13 +140,10 @@ header h1 {
 .page-1 .shark-gif { opacity: 0.85; }
 .calendar-page .shark-gif { opacity: 0.3; }
 
-/* === Organigramm === */
-.org-page img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
-
-/* === Videos === */
+/* =================== Videos =================== */
 .video-page video.zoom-video { width: 100%; height: 100%; object-fit: contain; }
 
-/* === Signatur === */
+/* =================== Footer / Signatur =================== */
 .signature { 
     position: fixed; bottom: 10px; right: 15px; font-size: 0.9em; font-weight: bold; color: rgba(255,255,255,0.35); pointer-events: none; z-index: 9999; 
     background: linear-gradient(120deg, rgba(255,255,255,0.6), rgba(255,255,255,0.1), rgba(255,255,255,0.6)); 
@@ -174,9 +174,10 @@ header h1 {
   <div class="shark-gif"></div>
 </section>
 
-<!-- =================== Seite 3: Organigramm =================== -->
-<section class="page org-page page-3">
-  <img src="ORG.png" alt="Organigramm Vollbild" loading="lazy">
+<!-- =================== Seite 3: Organigramm HTML =================== -->
+<section class="page page-3">
+  <!-- ORG.html wie auf Seite 7 einbinden -->
+  <iframe src="ORG.html" frameborder="0" scrolling="no" style="width:100%; height:100%;"></iframe>
 </section>
 
 <!-- =================== Seite 4-6: Videos =================== -->
@@ -200,16 +201,17 @@ header h1 {
 
 <!-- =================== Seite 7: Spielerfotos =================== -->
 <section class="page page-7">
-  <iframe src="spielerfotos.html" frameborder="0" scrolling="no" 
-          style="width:100%; height:100%;"></iframe>
+  <iframe src="spielerfotos.html" frameborder="0" scrolling="no" style="width:100%; height:100%;"></iframe>
 </section>
-<!-- =================== Seite 7: Platzhalter =================== -->
+
+<!-- =================== Seite 8-9: Platzhalter =================== -->
 <section class="page video-page page-8"></section>
 <section class="page video-page page-9"></section>
 
 <footer class="signature">MS</footer>
 
 <script>
+// =================== Seitenrotation & Einstellungen ===================
 window.addEventListener('DOMContentLoaded', async () => {
   const pages = document.querySelectorAll('.page'); 
   let current = 0; 
@@ -223,18 +225,21 @@ window.addEventListener('DOMContentLoaded', async () => {
     return; 
   }
 
+  // === nur die Seiten aktivieren, die in settings erlaubt sind ===
   function getActivePages() {
     const arr = [];
     for (let i = 1; i <= 9; i++) if (settings.pages[i] && settings.pages[i].enabled) arr.push(i-1);
     return arr;
   }
 
+  // === Dauer jeder Seite in Millisekunden aus settings holen ===
   function getDurations() {
     const d = {};
     for (let i = 1; i <= 9; i++) if (settings.pages[i]) d[i-1] = settings.pages[i].duration*1000;
     return d;
   }
 
+  // === Videoquelle laden, wenn Video-Seite aktiv ist ===
   function loadVideo(page){
     const video = page.querySelector('video');
     if(!video) return;
@@ -245,12 +250,14 @@ window.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
+  // === Seite anzeigen und alle anderen ausblenden ===
   function showPage(index){
     pages.forEach((p,i)=>p.classList.toggle('active',i===index));
     const page = pages[index];
     if(page.classList.contains('video-page')) loadVideo(page); 
   }
 
+  // === zur nächsten Seite rotieren ===
   function rotateToNext(){
     const active = getActivePages();
     const durations = getDurations();
@@ -267,11 +274,11 @@ window.addEventListener('DOMContentLoaded', async () => {
   current = activePages.length>0 ? activePages[0] : 0; 
   showPage(current); 
   rotateToNext(); 
+
+  // === Optional: automatische Seiten-Neuladung alle X Minuten ===
   if(settings.reload && settings.reload>0) setInterval(()=>location.reload(), settings.reload*60*1000); 
 });
 </script>
+
 </body>
 </html>
-
-
-
