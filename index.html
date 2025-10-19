@@ -4,195 +4,93 @@
 <meta charset="utf-8">
 <title>HC TIWAG Innsbruck Juniors - Infosäule</title>
 
+<!-- =================== STYLES =================== -->
 <style>
-/* =================== Schriftart =================== */
-@font-face { 
-    font-family: "Areno Serif"; 
-    src: url("areno-serif-webfont.woff2") format("woff2"), 
-         url("areno-serif-webfont.woff") format("woff"), 
-         url("Areno-Serif.otf") format("opentype"); 
-    font-weight: normal; 
-    font-style: normal; 
-}
-
-/* =================== Grundlayout =================== */
+/* Grundlayout der Seite: kein Abstand, Scrollen verhindern, Schrift und Farben setzen */
 body { 
-    margin: 0; 
-    font-family: "Areno Serif", serif; 
-    color: #fff; 
-    overflow: hidden; 
-    background: #000; 
+  margin: 0; 
+  overflow: hidden; 
+  font-family: "Areno Serif", serif; 
+  color: #fff; 
+  background: #000; 
 }
 
-/* =================== Seitenlayout =================== */
+/* Jede "Seite" der Infosäule wird absolut positioniert und zunächst unsichtbar */
 .page { 
-    display: flex;
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: flex-start; 
-    position: absolute;
-    inset: 0;
-    opacity: 0; /* inaktive Seiten unsichtbar */
-    pointer-events: none;
-    background: linear-gradient(135deg, #003789 50%, #d42323 50%);
-    background-size: 200% 200%;
-    animation: gradientShift 180s ease infinite;
-    transition: opacity 1s ease;
+  position: absolute; 
+  inset: 0; 
+  opacity: 0; 
+  pointer-events: none; 
+  transition: opacity 1s ease; /* sanftes Einblenden */
 }
 
+/* Aktive Seite sichtbar machen */
 .page.active { 
-    opacity: 1;
-    pointer-events: all;
-    z-index: 1; 
+  opacity: 1; 
+  pointer-events: all; 
+  z-index: 1; 
 }
 
-@keyframes gradientShift { 
-    0% { background-position: 0% 50%; } 
-    50% { background-position: 100% 50%; } 
-    100% { background-position: 0% 50%; } 
+/* Grundstil für eingebettete iframes und Videos: volle Fläche, abgerundete Ecken, Schatten */
+.calendar-page iframe, 
+.org-page iframe, 
+.video-page video, 
+.page iframe { 
+  width: 100%; 
+  height: 100%; 
+  border: 0; 
+  border-radius: 15px; 
+  box-shadow: 0 15px 30px rgba(0,0,0,0.6); 
 }
 
-/* =================== Logos =================== */
-.logo-container { 
-    display: flex; 
-    justify-content: center; 
-    align-items: flex-end; 
-    gap: 60px; 
-    margin: 10px 0 5px; 
-}
-.logo-container img { 
-    max-height: 100px; 
-    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.6)); 
-    opacity: 0; 
-    transform: translateY(-20px); 
-    animation: fadeInUp 1s forwards; 
-}
-.page-1 .logo-container img:nth-child(2) { max-height: 50px; }
-
-@keyframes fadeInUp { 
-    to { opacity: 1; transform: translateY(0); } 
+/* Videos an Container anpassen */
+.video-page video { 
+  object-fit: contain; 
 }
 
-/* =================== Header =================== */
-header { text-align: center; padding: 10px 0; }
-header h1 { 
-    font-size: 2.4em; 
-    margin: 0 0 5px 0; 
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.8); 
-    opacity: 0; 
-    transform: scale(0.95); 
-    animation: fadeInScale 1s forwards 0.5s; 
-}
-@keyframes fadeInScale { 
-    to { opacity: 1; transform: scale(1); } 
-}
-
-/* =================== Infosäule =================== */
-.announcement-container { 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    margin-top: 10px; 
-}
-.infosaule { 
-    font-size: 7vw; 
-    font-weight: 800; 
-    letter-spacing: 0.25em; 
-    text-transform: uppercase; 
-    text-shadow: 0 0 20px rgba(255,255,255,0.9), 0 0 40px rgba(255,255,255,0.7); 
-    animation: glowPulse 2s ease-in-out infinite alternate; 
-    margin-top: 5vh; 
-}
-@keyframes glowPulse { 
-    0%,100% { text-shadow: 0 0 15px rgba(255,255,255,0.6); } 
-    50% { text-shadow: 0 0 60px rgba(255,255,255,0.85); } 
-}
-
-/* =================== Shark-GIF nur Seite 1 =================== */
-.shark-gif { 
-    position: absolute; 
-    bottom: 5%; 
-    left: 50%;              /* horizontal zentriert */
-    transform: translateX(-50%);
-    width: 20vw;             /* responsive Breite */
-    max-width: 280px;        /* maximale Breite */
-    height: auto;            /* proportional */
-    pointer-events: none; 
-    animation: float 4s ease-in-out infinite; 
-    opacity: 0;              /* standardmäßig unsichtbar */
-    transition: opacity 1s ease;
-}
-.page-1.active .shark-gif { 
-    opacity: 0.85; 
-}
-@keyframes float { 
-    0%,100% { transform: translateX(-50%) translateY(0); } 
-    50% { transform: translateX(-50%) translateY(-10px); } 
-}
-
-/* =================== Kalender-Seite =================== */
-.calendar-page iframe { 
-    border-radius: 15px; 
-    box-shadow: 0 15px 30px rgba(0,0,0,0.6); 
-    border: 2px solid rgba(255,255,255,0.2); 
-    width: 100%; 
-    height: 100%; 
-}
-
-/* =================== Videos =================== */
-.video-page video.zoom-video { 
-    width: 100%; 
-    height: 100%; 
-    object-fit: contain; 
-}
-
-/* =================== Footer / Signatur =================== */
+/* Signatur unten rechts mit animiertem Glanzeffekt */
 .signature { 
-    position: fixed; 
-    bottom: 10px; 
-    right: 15px; 
-    font-size: 0.9em; 
-    font-weight: bold; 
-    color: rgba(255,255,255,0.35); 
-    pointer-events: none; 
-    z-index: 9999; 
-    background: linear-gradient(120deg, rgba(255,255,255,0.6), rgba(255,255,255,0.1), rgba(255,255,255,0.6)); 
-    -webkit-background-clip: text; 
-    -webkit-text-fill-color: transparent; 
-    animation: shine 3s linear infinite; 
+  position: fixed; 
+  bottom: 10px; 
+  right: 15px; 
+  font-size: 0.9em; 
+  font-weight: bold; 
+  color: rgba(255,255,255,0.35); 
+  pointer-events: none; /* kein Klick möglich */
+  z-index: 9999; 
+  background: linear-gradient(120deg, rgba(255,255,255,0.6), rgba(255,255,255,0.1), rgba(255,255,255,0.6)); 
+  -webkit-background-clip: text; 
+  -webkit-text-fill-color: transparent; 
+  animation: shine 3s linear infinite; /* endlose Animation */
 }
+
+/* Animation für die Signatur */
 @keyframes shine { 
-    0% { background-position: -200% 0; } 
-    100% { background-position: 200% 0; } 
+  0% { background-position: -200% 0; } 
+  100% { background-position: 200% 0; } 
 }
 </style>
 </head>
 <body>
 
-<!-- =================== Seite 1: Startseite =================== -->
+<!-- =================== SEITENSTRUKTUR =================== -->
+
+<!-- Seite 1: Infopoint -->
 <section class="page page-1 active">
-  <div class="logo-container">
-    <img src="HAI.webp" alt="HAI Logo" loading="lazy">
-    <img src="TIWAG.webp" alt="TIWAG Logo" loading="lazy">
-  </div>
-  <header><h1>HC TIWAG Innsbruck Juniors</h1></header>
-  <main class="announcement-container">
-    <h1 class="infosaule">I N F O P O I N T</h1>
-  </main>
-  <img src="HCI.gif" alt="Shark" class="shark-gif" loading="lazy">
+  <iframe src="Infopoint.html" frameborder="0" scrolling="no"></iframe>
 </section>
 
-<!-- =================== Seite 2: Kalender =================== -->
+<!-- Seite 2: Kalender -->
 <section class="page calendar-page page-2">
   <iframe src="KALENDER.html" frameborder="0" scrolling="no"></iframe>
 </section>
 
-<!-- =================== Seite 3: Organigramm HTML =================== -->
-<section class="page page-3">
-  <iframe src="ORG.html" frameborder="0" scrolling="no" style="width:100%; height:100%;"></iframe>
+<!-- Seite 3: Organigramm -->
+<section class="page org-page page-3">
+  <iframe src="ORG.html" frameborder="0" scrolling="no"></iframe>
 </section>
 
-<!-- =================== Seite 4-6: Videos =================== -->
+<!-- Seiten 4-6: Videos -->
 <section class="page video-page page-4">
   <video autoplay loop muted playsinline preload="none" class="zoom-video">
     <source data-src="Fotoshop.webm" type="video/mp4">
@@ -211,23 +109,25 @@ header h1 {
   </video>
 </section>
 
-<!-- =================== Seite 7: Spielerfotos =================== -->
+<!-- Seite 7: Spielerfotos -->
 <section class="page page-7">
-  <iframe src="spielerfotos.html" frameborder="0" scrolling="no" style="width:100%; height:100%;"></iframe>
+  <iframe src="spielerfotos.html" frameborder="0" scrolling="no"></iframe>
 </section>
 
-<!-- =================== Seite 8-9: Platzhalter =================== -->
+<!-- Seiten 8-9: Platzhalter für zukünftige Inhalte -->
 <section class="page video-page page-8"></section>
 <section class="page video-page page-9"></section>
 
+<!-- Signatur -->
 <footer class="signature">MS</footer>
 
-<!-- =================== JS: Seitenrotation & Video-Loader =================== -->
+<!-- =================== JAVASCRIPT =================== -->
 <script>
 window.addEventListener('DOMContentLoaded', async () => {
-  const pages = document.querySelectorAll('.page'); 
-  let current = 0; 
-
+  const pages = document.querySelectorAll('.page'); // Alle Seiten erfassen
+  let current = 0; // Startseite
+  
+  // JSON mit Einstellungen von GitHub laden
   const settingsUrl = 'https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/settings.json'; 
   let settings; 
   try { 
@@ -238,18 +138,21 @@ window.addEventListener('DOMContentLoaded', async () => {
     return; 
   }
 
+  // Nur die Seiten aktivieren, die in settings.json eingeschaltet sind
   function getActivePages() {
     const arr = [];
     for (let i = 1; i <= 9; i++) if (settings.pages[i] && settings.pages[i].enabled) arr.push(i-1);
     return arr;
   }
 
+  // Dauer jeder Seite in Millisekunden aus settings.json
   function getDurations() {
     const d = {};
     for (let i = 1; i <= 9; i++) if (settings.pages[i]) d[i-1] = settings.pages[i].duration*1000;
     return d;
   }
 
+  // Videos "lazy loaden" (erst beim Anzeigen die Quelle setzen)
   function loadVideo(page){
     const video = page.querySelector('video');
     if(!video) return;
@@ -260,12 +163,14 @@ window.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
+  // Seite sichtbar machen
   function showPage(index){
     pages.forEach((p,i)=>p.classList.toggle('active',i===index));
     const page = pages[index];
     if(page.classList.contains('video-page')) loadVideo(page); 
   }
 
+  // Nächste Seite nach Dauer automatisch anzeigen
   function rotateToNext(){
     const active = getActivePages();
     const durations = getDurations();
@@ -275,7 +180,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     const next = active[(pos+1)%active.length];
     current = next;
     showPage(current);
-    setTimeout(rotateToNext, durations[current]||5000);
+    setTimeout(rotateToNext, durations[current]||5000); // Standard 5 Sekunden
   }
 
   const activePages = getActivePages(); 
@@ -283,11 +188,10 @@ window.addEventListener('DOMContentLoaded', async () => {
   showPage(current); 
   rotateToNext(); 
 
+  // Optional: Seite nach bestimmter Zeit neu laden
   if(settings.reload && settings.reload>0) setInterval(()=>location.reload(), settings.reload*60*1000); 
 });
 </script>
 
 </body>
 </html>
-
-
