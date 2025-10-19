@@ -11,7 +11,7 @@
     "9": { "enabled": false, "duration": 8, "note": "Platzhalter 9" }
   },
 
-  "reload": 30,
+  "reload": 60,
 
   "options": {
     "lazyVideoLoad": true,
@@ -49,3 +49,4 @@
     "info": "Diese JSON-Datei steuert die automatische Seitenrotation, Performance-Optionen und Lazy-Loading für die HTML-Anzeige auf dem Vidaa-TV. Änderungen wirken sich direkt auf die index.html aus, ohne dass die HTML-Dateien selbst angepasst werden müssen."
   }
 }
+
