@@ -33,7 +33,7 @@ body {
     position: absolute;
     inset: 0;
     opacity: 0; /* inaktive Seiten unsichtbar */
-    pointer-events: none; /* inaktive Seiten nicht anklickbar */
+    pointer-events: none;
     background: linear-gradient(135deg, #003789 50%, #d42323 50%);
     background-size: 200% 200%;
     animation: gradientShift 180s ease infinite;
@@ -42,7 +42,7 @@ body {
 
 .page.active { 
     opacity: 1;
-    pointer-events: all; /* aktive Seite anklickbar */
+    pointer-events: all;
     z-index: 1; 
 }
 
@@ -108,25 +108,26 @@ header h1 {
     50% { text-shadow: 0 0 60px rgba(255,255,255,0.85); } 
 }
 
-/* =================== Shark GIF nur Seite 1 =================== */
+/* =================== Shark-GIF nur Seite 1 =================== */
 .shark-gif { 
     position: absolute; 
     bottom: 5%; 
-    width: 280px; 
-    height: 280px; 
-    background: url('HCI.gif') no-repeat center; 
-    background-size: contain; 
+    left: 50%;              /* horizontal zentriert */
+    transform: translateX(-50%);
+    width: 20vw;             /* responsive Breite */
+    max-width: 280px;        /* maximale Breite */
+    height: auto;            /* proportional */
     pointer-events: none; 
-    filter: drop-shadow(0 0 25px rgba(0,0,0,0.6)); 
     animation: float 4s ease-in-out infinite; 
-    opacity: 0; 
+    opacity: 0;              /* standardmäßig unsichtbar */
     transition: opacity 1s ease;
 }
-.page-1.active .shark-gif { opacity: 0.85; }
-
+.page-1.active .shark-gif { 
+    opacity: 0.85; 
+}
 @keyframes float { 
-    0%,100% { transform: translateY(0); } 
-    50% { transform: translateY(-10px); } 
+    0%,100% { transform: translateX(-50%) translateY(0); } 
+    50% { transform: translateX(-50%) translateY(-10px); } 
 }
 
 /* =================== Kalender-Seite =================== */
@@ -178,7 +179,7 @@ header h1 {
   <main class="announcement-container">
     <h1 class="infosaule">I N F O P O I N T</h1>
   </main>
-  <div class="shark-gif"></div> <!-- GIF nur hier -->
+  <img src="HCI.gif" alt="Shark" class="shark-gif" loading="lazy">
 </section>
 
 <!-- =================== Seite 2: Kalender =================== -->
@@ -227,7 +228,6 @@ window.addEventListener('DOMContentLoaded', async () => {
   const pages = document.querySelectorAll('.page'); 
   let current = 0; 
 
-  // Einstellungen von GitHub laden
   const settingsUrl = 'https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/settings.json'; 
   let settings; 
   try { 
@@ -238,21 +238,18 @@ window.addEventListener('DOMContentLoaded', async () => {
     return; 
   }
 
-  // Aktive Seiten aus settings ermitteln
   function getActivePages() {
     const arr = [];
     for (let i = 1; i <= 9; i++) if (settings.pages[i] && settings.pages[i].enabled) arr.push(i-1);
     return arr;
   }
 
-  // Seiten-Dauern aus settings ermitteln
   function getDurations() {
     const d = {};
     for (let i = 1; i <= 9; i++) if (settings.pages[i]) d[i-1] = settings.pages[i].duration*1000;
     return d;
   }
 
-  // Videoquelle laden, wenn Video-Seite aktiv ist
   function loadVideo(page){
     const video = page.querySelector('video');
     if(!video) return;
@@ -263,14 +260,12 @@ window.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-  // Seite anzeigen und andere ausblenden
   function showPage(index){
     pages.forEach((p,i)=>p.classList.toggle('active',i===index));
     const page = pages[index];
     if(page.classList.contains('video-page')) loadVideo(page); 
   }
 
-  // Rotation zur nächsten Seite
   function rotateToNext(){
     const active = getActivePages();
     const durations = getDurations();
@@ -288,7 +283,6 @@ window.addEventListener('DOMContentLoaded', async () => {
   showPage(current); 
   rotateToNext(); 
 
-  // Automatische Seiten-Neuladung optional
   if(settings.reload && settings.reload>0) setInterval(()=>location.reload(), settings.reload*60*1000); 
 });
 </script>
