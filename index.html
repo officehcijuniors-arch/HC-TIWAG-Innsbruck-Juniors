@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>HC TIWAG Innsbruck Juniors - Infosäule</title>
+
 <style>
 /* =================== Schriftart =================== */
 @font-face { 
@@ -25,26 +26,24 @@ body {
 
 /* =================== Seitenlayout =================== */
 .page { 
-    position: absolute; 
-    inset: 0; 
-    display: flex; 
+    display: flex;
     flex-direction: column; 
     align-items: center; 
     justify-content: flex-start; 
-    opacity: 0; 
-    transition: opacity 200s ease; 
+    position: absolute;
+    inset: 0;
+    opacity: 0; /* inaktive Seiten unsichtbar */
+    pointer-events: none; /* inaktive Seiten nicht anklickbar */
     background: linear-gradient(135deg, #003789 50%, #d42323 50%);
     background-size: 200% 200%;
     animation: gradientShift 180s ease infinite;
+    transition: opacity 1s ease;
 }
 
 .page.active { 
-    opacity: 1; 
+    opacity: 1;
+    pointer-events: all; /* aktive Seite anklickbar */
     z-index: 1; 
-}
-
-.page:not(.active) * { 
-    animation-play-state: paused !important; 
 }
 
 @keyframes gradientShift { 
@@ -53,7 +52,7 @@ body {
     100% { background-position: 0% 50%; } 
 }
 
-/* =================== Logo =================== */
+/* =================== Logos =================== */
 .logo-container { 
     display: flex; 
     justify-content: center; 
@@ -70,7 +69,9 @@ body {
 }
 .page-1 .logo-container img:nth-child(2) { max-height: 50px; }
 
-@keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInUp { 
+    to { opacity: 1; transform: translateY(0); } 
+}
 
 /* =================== Header =================== */
 header { text-align: center; padding: 10px 0; }
@@ -82,9 +83,11 @@ header h1 {
     transform: scale(0.95); 
     animation: fadeInScale 1s forwards 0.5s; 
 }
-@keyframes fadeInScale { to { opacity: 1; transform: scale(1); } }
+@keyframes fadeInScale { 
+    to { opacity: 1; transform: scale(1); } 
+}
 
-/* =================== Infosäule Text =================== */
+/* =================== Infosäule =================== */
 .announcement-container { 
     display: flex; 
     flex-direction: column; 
@@ -105,26 +108,7 @@ header h1 {
     50% { text-shadow: 0 0 60px rgba(255,255,255,0.85); } 
 }
 
-/* =================== Kalender-Seite =================== */
-.calendar-page { justify-content: flex-start; padding-top: 15px; }
-.calendar-page iframe { 
-    border-radius: 15px; 
-    box-shadow: 0 15px 30px rgba(0,0,0,0.6); 
-    border: 2px solid rgba(255,255,255,0.2); 
-    width: 97%; 
-    height: calc(100vh - 30px); 
-    opacity: 0; 
-    animation: fadeIn 1s forwards; 
-    transform: scale(0.97); 
-    transition: transform 0.5s ease, box-shadow 0.5s ease; 
-}
-.calendar-page iframe:hover { 
-    transform: scale(1); 
-    box-shadow: 0 20px 40px rgba(0,0,0,0.7); 
-}
-@keyframes fadeIn { to { opacity: 1; } }
-
-/* =================== Shark GIF =================== */
+/* =================== Shark GIF nur Seite 1 =================== */
 .shark-gif { 
     position: absolute; 
     bottom: 5%; 
@@ -135,21 +119,51 @@ header h1 {
     pointer-events: none; 
     filter: drop-shadow(0 0 25px rgba(0,0,0,0.6)); 
     animation: float 4s ease-in-out infinite; 
+    opacity: 0; 
+    transition: opacity 1s ease;
 }
-@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-.page-1 .shark-gif { opacity: 0.85; }
-.calendar-page .shark-gif { opacity: 0.3; }
+.page-1.active .shark-gif { opacity: 0.85; }
+
+@keyframes float { 
+    0%,100% { transform: translateY(0); } 
+    50% { transform: translateY(-10px); } 
+}
+
+/* =================== Kalender-Seite =================== */
+.calendar-page iframe { 
+    border-radius: 15px; 
+    box-shadow: 0 15px 30px rgba(0,0,0,0.6); 
+    border: 2px solid rgba(255,255,255,0.2); 
+    width: 100%; 
+    height: 100%; 
+}
 
 /* =================== Videos =================== */
-.video-page video.zoom-video { width: 100%; height: 100%; object-fit: contain; }
+.video-page video.zoom-video { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: contain; 
+}
 
 /* =================== Footer / Signatur =================== */
 .signature { 
-    position: fixed; bottom: 10px; right: 15px; font-size: 0.9em; font-weight: bold; color: rgba(255,255,255,0.35); pointer-events: none; z-index: 9999; 
+    position: fixed; 
+    bottom: 10px; 
+    right: 15px; 
+    font-size: 0.9em; 
+    font-weight: bold; 
+    color: rgba(255,255,255,0.35); 
+    pointer-events: none; 
+    z-index: 9999; 
     background: linear-gradient(120deg, rgba(255,255,255,0.6), rgba(255,255,255,0.1), rgba(255,255,255,0.6)); 
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 3s linear infinite; 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+    animation: shine 3s linear infinite; 
 }
-@keyframes shine { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+@keyframes shine { 
+    0% { background-position: -200% 0; } 
+    100% { background-position: 200% 0; } 
+}
 </style>
 </head>
 <body>
@@ -164,19 +178,16 @@ header h1 {
   <main class="announcement-container">
     <h1 class="infosaule">I N F O P O I N T</h1>
   </main>
-  <div class="shark-gif"></div>
+  <div class="shark-gif"></div> <!-- GIF nur hier -->
 </section>
 
 <!-- =================== Seite 2: Kalender =================== -->
 <section class="page calendar-page page-2">
-  <!-- <<< KALENDER-IFRAME UNVERÄNDERT >>> -->
-  <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showPrint=0&showTitle=0&showTabs=0&showCalendars=0&showTz=0&mode=WEEK&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZDU3OWRjY2M2MTNhZTI0YzZlNjY1NmE5ZGIyOWM0MDRlNDk5NjNhZjFiZDYyNjY0NGQwZGE5OTVhNTUzNmUxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzBiZDg4YjUxNmVlNGRmNGFjMmZkMWU2NGJhOWQ4MzBlMjViY2VlZjc4YjM4MmM5N2FhZWZmZWU1NmY5NjlmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YjQ5M2RhNTY5NDg5NTA2MDQ0YWE2MmVmYTA5ODIyODM0MmQ0NjRhMzQ4MzY5MGYyNTU1NTE0Yzg0Y2ZmNDI0NEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YWQ4ZjNlMmRiODQ1YjZiNmM5ZTZkYmIyZDkyNGY1NTliNjVhNjI3YTNlNWEzMmYwYzQ0YmRhZTA1NzMxNGMwOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6&color=%23c0ca33&color=%230b8043&color=%233f51b5&color=%238e24aa&color=%23616161&color=%23ad1457&color=%23e4c441" frameborder="0" scrolling="no"></iframe>
-  <div class="shark-gif"></div>
+  <iframe src="KALENDER.html" frameborder="0" scrolling="no"></iframe>
 </section>
 
 <!-- =================== Seite 3: Organigramm HTML =================== -->
 <section class="page page-3">
-  <!-- ORG.html wie auf Seite 7 einbinden -->
   <iframe src="ORG.html" frameborder="0" scrolling="no" style="width:100%; height:100%;"></iframe>
 </section>
 
@@ -210,11 +221,13 @@ header h1 {
 
 <footer class="signature">MS</footer>
 
+<!-- =================== JS: Seitenrotation & Video-Loader =================== -->
 <script>
-// =================== Seitenrotation & Einstellungen ===================
 window.addEventListener('DOMContentLoaded', async () => {
   const pages = document.querySelectorAll('.page'); 
   let current = 0; 
+
+  // Einstellungen von GitHub laden
   const settingsUrl = 'https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/settings.json'; 
   let settings; 
   try { 
@@ -225,21 +238,21 @@ window.addEventListener('DOMContentLoaded', async () => {
     return; 
   }
 
-  // === nur die Seiten aktivieren, die in settings erlaubt sind ===
+  // Aktive Seiten aus settings ermitteln
   function getActivePages() {
     const arr = [];
     for (let i = 1; i <= 9; i++) if (settings.pages[i] && settings.pages[i].enabled) arr.push(i-1);
     return arr;
   }
 
-  // === Dauer jeder Seite in Millisekunden aus settings holen ===
+  // Seiten-Dauern aus settings ermitteln
   function getDurations() {
     const d = {};
     for (let i = 1; i <= 9; i++) if (settings.pages[i]) d[i-1] = settings.pages[i].duration*1000;
     return d;
   }
 
-  // === Videoquelle laden, wenn Video-Seite aktiv ist ===
+  // Videoquelle laden, wenn Video-Seite aktiv ist
   function loadVideo(page){
     const video = page.querySelector('video');
     if(!video) return;
@@ -250,14 +263,14 @@ window.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-  // === Seite anzeigen und alle anderen ausblenden ===
+  // Seite anzeigen und andere ausblenden
   function showPage(index){
     pages.forEach((p,i)=>p.classList.toggle('active',i===index));
     const page = pages[index];
     if(page.classList.contains('video-page')) loadVideo(page); 
   }
 
-  // === zur nächsten Seite rotieren ===
+  // Rotation zur nächsten Seite
   function rotateToNext(){
     const active = getActivePages();
     const durations = getDurations();
@@ -275,11 +288,10 @@ window.addEventListener('DOMContentLoaded', async () => {
   showPage(current); 
   rotateToNext(); 
 
-  // === Optional: automatische Seiten-Neuladung alle X Minuten ===
+  // Automatische Seiten-Neuladung optional
   if(settings.reload && settings.reload>0) setInterval(()=>location.reload(), settings.reload*60*1000); 
 });
 </script>
 
 </body>
 </html>
-
