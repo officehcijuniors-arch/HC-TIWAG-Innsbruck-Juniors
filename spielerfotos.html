@@ -86,7 +86,7 @@ const imagePool = [];
 /* ===== Bilder vorbereiten ===== */
 for (let i = 1; i <= totalImages; i++) {
   const img = new Image();
-  img.src = `SpielerFotos/Bild${i}.png`;
+  img.src = `SpielerFotos/Bild${i}.webp`;
   img.className = "player";
   imagePool.push(img);
 }
@@ -164,5 +164,6 @@ setInterval(showNextBatch, displayTime);
 
 </body>
 </html>
+
 
 
