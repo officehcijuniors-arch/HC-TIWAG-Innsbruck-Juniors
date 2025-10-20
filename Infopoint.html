@@ -5,6 +5,16 @@
 <title>HC TIWAG Innsbruck Juniors - Startseite</title>
 
 <style>
+@font-face {
+    font-family: "Areno Serif";
+    src: url("https://officehcijuniors-arch.github.io/HC-TIWAG-Innsbruck-Juniors/areno-serif-webfont.woff2") format("woff2"),
+         url("https://officehcijuniors-arch.github.io/HC-TIWAG-Innsbruck-Juniors/areno-serif-webfont.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ===== Grundlayout ===== */
 body {
     margin: 0;
     font-family: "Areno Serif", serif;
@@ -13,7 +23,7 @@ body {
     overflow: hidden;
 }
 
-/* ===== Hintergrund und Grundlayout ===== */
+/* ===== Hintergrund und Animation ===== */
 .page {
     display: flex;
     flex-direction: column;
@@ -39,6 +49,7 @@ header h1 {
     text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
 }
 
+/* ===== Infopoint ===== */
 .infosaule {
     font-size: 7vw;
     font-weight: 800;
@@ -53,7 +64,7 @@ header h1 {
     50% { text-shadow: 0 0 60px rgba(255,255,255,0.85); }
 }
 
-/* ===== Infopoint-Bereich ===== */
+/* ===== Infotabelle ===== */
 .info-table {
     display: flex;
     flex-direction: column;
@@ -61,23 +72,19 @@ header h1 {
     margin-top: 5vh;
     font-size: 1.6em;
     line-height: 1.8;
-    margin-left: 10vw; /* hier wird der Block nach links verschoben */
+    margin-left: 10vw;
 }
-
-
 .info-row {
     display: flex;
     align-items: center;
     margin-bottom: 1em;
 }
-
 .symbol {
     display: inline-block;
-    width: 2.5em; /* feste Spaltenbreite */
+    width: 2.5em;
     text-align: center;
     font-size: 1.8em;
 }
-
 .linktext {
     min-width: 20em;
     text-align: left;
@@ -90,7 +97,7 @@ header h1 {
     text-decoration: underline;
 }
 
-/* ===== Hai-GIF ===== */
+/* ===== Hai-Animation ===== */
 .shark-gif {
     position: absolute;
     bottom: 5%;
