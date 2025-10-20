@@ -5,137 +5,135 @@
 <title>HC TIWAG Innsbruck Juniors - Startseite</title>
 
 <style>
-/* =================== Schriftart =================== */
-@font-face { 
-    font-family: "Areno Serif"; 
-    src: url("areno-serif-webfont.woff2") format("woff2"), 
-         url("areno-serif-webfont.woff") format("woff"), 
-         url("Areno-Serif.otf") format("opentype"); 
-    font-weight: normal; 
-    font-style: normal; 
+body {
+    margin: 0;
+    font-family: "Areno Serif", serif;
+    color: #fff;
+    background: #000;
+    overflow: hidden;
 }
 
-/* =================== Grundlayout =================== */
-body { 
-    margin: 0; 
-    font-family: "Areno Serif", serif; 
-    color: #fff; 
-    overflow: hidden; 
-    background: #000; 
-}
-
-/* =================== Seite =================== */
-.page { 
+/* ===== Hintergrund und Grundlayout ===== */
+.page {
     display: flex;
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: flex-start; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
     position: absolute;
     inset: 0;
-    opacity: 1; /* aktiv, sonst unsichtbar */
-    pointer-events: all;
     background: linear-gradient(135deg, #003789 50%, #d42323 50%);
     background-size: 200% 200%;
     animation: gradientShift 180s ease infinite;
 }
-
-@keyframes gradientShift { 
-    0% { background-position: 0% 50%; } 
-    50% { background-position: 100% 50%; } 
-    100% { background-position: 0% 50%; } 
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
-/* =================== Logos =================== */
-.logo-container { 
-    display: flex; 
-    justify-content: center; 
-    align-items: flex-end; 
-    gap: 60px; 
-    margin: 10px 0 5px; 
-}
-.logo-container img { 
-    max-height: 100px; 
-    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.6)); 
-    opacity: 0; 
-    transform: translateY(-20px); 
-    animation: fadeInUp 1s forwards; 
-}
-.logo-container img:nth-child(2) { max-height: 50px; }
-
-@keyframes fadeInUp { 
-    to { opacity: 1; transform: translateY(0); } 
-}
-
-/* =================== Header =================== */
+/* ===== Überschrift ===== */
 header { text-align: center; padding: 10px 0; }
-header h1 { 
-    font-size: 2.4em; 
-    margin: 0 0 5px 0; 
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.8); 
-    opacity: 0; 
-    transform: scale(0.95); 
-    animation: fadeInScale 1s forwards 0.5s; 
-}
-@keyframes fadeInScale { 
-    to { opacity: 1; transform: scale(1); } 
+header h1 {
+    font-size: 2.4em;
+    margin: 0 0 5px 0;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
 }
 
-/* =================== Infosäule =================== */
-.announcement-container { 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    margin-top: 10px; 
+.infosaule {
+    font-size: 7vw;
+    font-weight: 800;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    text-shadow: 0 0 20px rgba(255,255,255,0.9), 0 0 40px rgba(255,255,255,0.7);
+    animation: glowPulse 2s ease-in-out infinite alternate;
+    margin-top: 5vh;
 }
-.infosaule { 
-    font-size: 7vw; 
-    font-weight: 800; 
-    letter-spacing: 0.25em; 
-    text-transform: uppercase; 
-    text-shadow: 0 0 20px rgba(255,255,255,0.9), 0 0 40px rgba(255,255,255,0.7); 
-    animation: glowPulse 2s ease-in-out infinite alternate; 
-    margin-top: 5vh; 
-}
-@keyframes glowPulse { 
-    0%,100% { text-shadow: 0 0 15px rgba(255,255,255,0.6); } 
-    50% { text-shadow: 0 0 60px rgba(255,255,255,0.85); } 
+@keyframes glowPulse {
+    0%,100% { text-shadow: 0 0 15px rgba(255,255,255,0.6); }
+    50% { text-shadow: 0 0 60px rgba(255,255,255,0.85); }
 }
 
-/* =================== Hai-GIF =================== */
-.shark-gif { 
-    position: absolute; 
-    bottom: 5%; 
-    left: 50%; 
+/* ===== Infopoint-Bereich ===== */
+.info-table {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5vh;
+    font-size: 1.6em;
+    line-height: 1.8;
+    margin-left: 10vw; /* hier wird der Block nach links verschoben */
+}
+
+
+.info-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+.symbol {
+    display: inline-block;
+    width: 2.5em; /* feste Spaltenbreite */
+    text-align: center;
+    font-size: 1.8em;
+}
+
+.linktext {
+    min-width: 20em;
+    text-align: left;
+}
+.linktext a {
+    color: #fff;
+    text-decoration: none;
+}
+.linktext a:hover {
+    text-decoration: underline;
+}
+
+/* ===== Hai-GIF ===== */
+.shark-gif {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
     transform: translateX(-50%);
-    width: 20vw; 
-    max-width: 280px; 
-    height: auto; 
-    pointer-events: none; 
-    animation: float 4s ease-in-out infinite; 
+    width: 20vw;
+    max-width: 280px;
+    height: auto;
+    pointer-events: none;
+    animation: float 4s ease-in-out infinite;
     opacity: 0.85;
 }
-@keyframes float { 
-    0%,100% { transform: translateX(-50%) translateY(0); } 
-    50% { transform: translateX(-50%) translateY(-10px); } 
+@keyframes float {
+    0%,100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-10px); }
 }
 </style>
 </head>
+
 <body>
-
-<section class="page page-1">
-  <div class="logo-container">
-    <img src="HAI.webp" alt="HAI Logo" loading="lazy">
-    <img src="TIWAG.webp" alt="TIWAG Logo" loading="lazy">
-  </div>
-
+<section class="page">
   <header><h1>HC TIWAG Innsbruck Juniors</h1></header>
 
   <main class="announcement-container">
     <h1 class="infosaule">I N F O P O I N T</h1>
+
+    <div class="info-table">
+      <div class="info-row">
+        <div class="symbol">🌐</div>
+        <div class="linktext"><a href="https://www.hcinnsbruck.at/" target="_blank">www.hcinnsbruck.at</a></div>
+      </div>
+      <div class="info-row">
+        <div class="symbol">📸</div>
+        <div class="linktext"><a href="https://www.instagram.com/hcijuniors" target="_blank">www.instagram.com/hcijuniors</a></div>
+      </div>
+      <div class="info-row">
+        <div class="symbol">📘</div>
+        <div class="linktext"><a href="https://www.facebook.com/hcijuniors" target="_blank">www.facebook.com/hcijuniors</a></div>
+      </div>
+    </div>
   </main>
 
   <img src="HCI.gif" alt="Shark" class="shark-gif" loading="lazy">
 </section>
-
 </body>
 </html>
