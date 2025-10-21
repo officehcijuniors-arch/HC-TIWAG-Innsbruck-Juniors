@@ -1,170 +1,197 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de"> <!-- Sprache Deutsch -->
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8"> <!-- Zeichencodierung für Umlaute -->
 <title>HC TIWAG Innsbruck Juniors – Spielerfotos</title>
+
 <style>
-/* ===== Hintergrund ===== */
+/* =========================================
+   1) HINTERGRUND & GRUNDEINSTELLUNGEN
+   ========================================= */
 html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+  margin: 0;      /* Kein Außenabstand */
+  padding: 0;     /* Kein Innenabstand */
+  width: 100%;    /* volle Breite */
+  height: 100%;   /* volle Höhe */
+  overflow: hidden; /* keine Scrollbalken */
+  
+  /* Hintergrund: rot-blauer Verlauf wie auf Startseite */
   background: linear-gradient(135deg, #003789 50%, #d42323 50%);
-  background-size: 200% 200%;
-  animation: gradientShift 120s ease-in-out infinite;
-  font-family: "Areno Serif", serif;
+  background-size: 200% 200%; /* Hintergrund größer für Animation */
+  animation: gradientShift 120s ease-in-out infinite; /* sanfte Bewegung */
+  
+  font-family: "Areno Serif", serif; /* Schriftart wie Vereins-CI */
 }
 
+/* =========================================
+   2) HINTERGRUND-ANIMATION
+   ========================================= */
 @keyframes gradientShift {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0%   { background-position: 0% 50%; }   /* Start links */
+  50%  { background-position: 100% 50%; } /* Mitte rechts */
+  100% { background-position: 0% 50%; }   /* zurück links */
 }
 
-/* ===== Container für alle Spielerbilder ===== */
+/* =========================================
+   3) CONTAINER FÜR ALLE SPIELERBILDER
+   ========================================= */
 .player-container {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
+  position: relative; /* absolute Position der Spielerbilder innerhalb */
+  width: 100vw;       /* volle Breite des Viewports */
+  height: 100vh;      /* volle Höhe des Viewports */
+  overflow: hidden;   /* nichts außerhalb sichtbar */
 }
 
-/* ===== Spielerbilder ===== */
+/* =========================================
+   4) SPIELERBILDER (GRUNDFORM)
+   ========================================= */
 .player {
-  position: absolute;
-  object-fit: contain;
-  border-radius: 20px;
-  box-shadow: 0 20px 45px rgba(0,0,0,0.55);
-  opacity: 0;
-  transform: scale(0.9);
-  transition: opacity 1.5s ease, transform 1.5s ease;
+  position: absolute; /* frei positionierbar im Container */
+  object-fit: contain; /* Bild wird nicht verzerrt */
+  border-radius: 20px; /* abgerundete Ecken */
+  box-shadow: 0 20px 45px rgba(0,0,0,0.55); /* Schatten für 3D-Effekt */
+  opacity: 0;          /* unsichtbar beim Start */
+  transform: scale(0.9); /* etwas kleiner starten */
+  transition: opacity 1.5s ease, transform 1.5s ease; /* sanftes Einblenden */
 }
 
-/* ===== Schwebeanimation für mittleres Bild ===== */
+/* =========================================
+   5) SCHWEBEANIMATION FÜR MITTLERES BILD
+   ========================================= */
 @keyframes float {
-  0%,100% { transform: translateX(0) translateY(0) scale(1); }
-  50% { transform: translateX(0) translateY(-12px) scale(1.03); }
+  0%,100% { transform: translateX(0) translateY(0) scale(1); } /* Ausgangsposition */
+  50%      { transform: translateX(0) translateY(-12px) scale(1.03); } /* leicht hoch & größer */
 }
 .center.floating {
-  animation: float 6s ease-in-out infinite;
-  will-change: transform;
+  animation: float 6s ease-in-out infinite; /* endlos schwebend */
+  will-change: transform; /* Hinweis an Browser für bessere Performance */
 }
 
-/* ===== Logo in der Mitte ===== */
+/* =========================================
+   6) HAI-LOGO IN DER MITTE (DEKORATION)
+   ========================================= */
 .logo {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 25vw;
-  max-width: 350px;
-  transform: translate(-50%, -50%);
-  opacity: 0.05;
-  z-index: 1;
-  pointer-events: none;
+  position: absolute; /* frei positionierbar */
+  top: 50%;           /* vertikal Mitte */
+  left: 50%;          /* horizontal Mitte */
+  width: 25vw;        /* Breite 25% des Bildschirms */
+  max-width: 350px;   /* maximal nicht zu groß */
+  transform: translate(-50%, -50%); /* exakt zentriert */
+  opacity: 0.05;      /* sehr transparent, Hintergrundelement */
+  z-index: 1;         /* hinter Spielerbildern */
+  pointer-events: none; /* Klicks gehen durch, stört nicht */
 }
 </style>
 </head>
 <body>
 
-<!-- Transparentes Logo -->
+<!-- =========================================
+     HAI-LOGO (Hintergrundbild)
+     ========================================= -->
 <img src="HAI.webp" alt="Hai-Logo" class="logo">
 
-<!-- Container für Spielerbilder -->
+<!-- =========================================
+     CONTAINER FÜR SPIELERBILDER
+     ========================================= -->
 <div class="player-container" id="playerContainer"></div>
 
 <script>
-/* ===== Einstellungen ===== */
-const totalImages = 16;
-const batchSize = 3;
-const displayTime = 10000;
-const container = document.getElementById("playerContainer");
-let currentIndex = 0;
-const imagePool = [];
+/* =========================================
+   7) JAVASCRIPT: SPIELERBILDER ANZEIGEN
+   ========================================= */
 
-/* ===== Bilder vorbereiten ===== */
+/* ===== EINSTELLUNGEN ===== */
+const totalImages = 16;   // Anzahl aller Spielerbilder
+const batchSize = 3;      // Anzahl Bilder gleichzeitig (links, rechts, Mitte)
+const displayTime = 10000; // Zeit in ms bis zum nächsten Bildwechsel
+const container = document.getElementById("playerContainer"); // Container-Element
+let currentIndex = 0;     // Aktuelles Bild-Index
+const imagePool = [];     // Speicher für alle geladenen Bilder
+
+/* ===== BILDER VORBEREITEN ===== */
 for (let i = 1; i <= totalImages; i++) {
   const img = new Image();
-  img.src = `SpielerFotos/Bild${i}.webp`;
-  img.className = "player";
-  imagePool.push(img);
+  img.src = `SpielerFotos/Bild${i}.webp`; // Pfad zum Bild
+  img.className = "player"; // CSS-Klasse
+  imagePool.push(img);       // in den Pool speichern
 }
 
-/* ===== Positionierung der Bilder ===== */
+/* ===== POSITIONIERUNG DER BILDER ===== */
 function positionImages(batch) {
-  const W = container.clientWidth;
-  const H = container.clientHeight;
+  const W = container.clientWidth;  // Breite des Containers
+  const H = container.clientHeight; // Höhe des Containers
 
+  // Linkes Bild
   const leftImg = batch[0];
-  leftImg.style.width = W * 0.28 + 'px';
+  leftImg.style.width = W * 0.28 + 'px';  // Breite 28% des Bildschirms
   leftImg.style.height = 'auto';
-  leftImg.style.top = H * 0.08 + 'px';
-  leftImg.style.left = W * 0.02 + 'px';
-  leftImg.style.transform = 'scale(1)';
+  leftImg.style.top = H * 0.08 + 'px';    // Abstand oben 8%
+  leftImg.style.left = W * 0.02 + 'px';   // Abstand links 2%
+  leftImg.style.transform = 'scale(1)';   // normale Größe
 
+  // Rechtes Bild
   const rightImg = batch[1];
   rightImg.style.width = W * 0.28 + 'px';
   rightImg.style.height = 'auto';
   rightImg.style.top = H * 0.08 + 'px';
-  rightImg.style.left = W - rightImg.clientWidth - W * 0.02 + 'px';
+  rightImg.style.left = W - rightImg.clientWidth - W * 0.02 + 'px'; // rechts platzieren
   rightImg.style.transform = 'scale(1)';
 
+  // Mittleres Bild (größtes, schwebend)
   const centerImg = batch[2];
-  const maxWidth = W * 0.45;
-  const maxHeight = H * 0.6;
-  const imgRatio = centerImg.naturalWidth / centerImg.naturalHeight;
+  const maxWidth = W * 0.45;  // maximal 45% Breite
+  const maxHeight = H * 0.6;  // maximal 60% Höhe
+  const imgRatio = centerImg.naturalWidth / centerImg.naturalHeight; // Bildseitenverhältnis
   const containerRatio = maxWidth / maxHeight;
 
-  if (imgRatio > containerRatio) {
+  if (imgRatio > containerRatio) { // Breiter als hoch
     centerImg.style.width = maxWidth + 'px';
     centerImg.style.height = 'auto';
-  } else {
+  } else { // Hochformat oder quadratisch
     centerImg.style.width = 'auto';
     centerImg.style.height = maxHeight + 'px';
   }
 
+  // Zentrieren im Container
   centerImg.style.left = (W - centerImg.clientWidth)/2 + 'px';
   centerImg.style.top = (H - centerImg.clientHeight)/2 + 'px';
-  centerImg.classList.add('floating');
+  centerImg.classList.add('floating'); // schwebende Animation
 }
 
-/* ===== Anzeige der nächsten 3 Bilder ===== */
+/* ===== ZEIGE NÄCHSTE 3 BILDER ===== */
 function showNextBatch() {
-  container.innerHTML = "";
+  container.innerHTML = ""; // alte Bilder entfernen
   const batch = [];
 
   for (let i = 0; i < batchSize; i++) {
-    const index = (currentIndex + i) % totalImages;
+    const index = (currentIndex + i) % totalImages; // zyklisch durch alle Bilder
     const img = imagePool[index];
     if (!img) continue;
-    container.appendChild(img);
-    batch.push(img);
+    container.appendChild(img); // ins HTML einfügen
+    batch.push(img);            // Batch speichern
   }
 
-  positionImages(batch);
+  positionImages(batch); // Positionen festlegen
 
+  // Bilder nacheinander einblenden
   batch.forEach((img, i) => {
     setTimeout(() => img.style.opacity = 1, i * 400);
   });
 
+  // Bilder kurz vor dem nächsten Batch ausblenden
   setTimeout(() => {
     batch.forEach((img, i) => {
       setTimeout(() => img.style.opacity = 0, i * 300);
     });
   }, displayTime - 2000);
 
-  currentIndex = (currentIndex + batchSize) % totalImages;
+  currentIndex = (currentIndex + batchSize) % totalImages; // Index für nächste Runde
 }
 
-/* ===== Start ===== */
-showNextBatch();
-setInterval(showNextBatch, displayTime);
+/* ===== START ===== */
+showNextBatch();                   // Erstes Anzeigen
+setInterval(showNextBatch, displayTime); // automatisch wechseln
 </script>
 
 </body>
 </html>
-
-
-
-
