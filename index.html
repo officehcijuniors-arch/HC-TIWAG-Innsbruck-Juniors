@@ -4,18 +4,13 @@
 <meta charset="utf-8">
 <title>HC TIWAG Innsbruck Juniors - Infosäule (Stabile Version)</title>
 
+<!-- CI-CSS einbinden -->
+<link rel="stylesheet" href="https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/assets/styles/ci.css">
+
 <!-- ======================================================
      CSS – Layout, Farben und Übergänge
      ====================================================== -->
 <style>
-body {
-  margin: 0;
-  overflow: hidden;
-  font-family: "Areno Serif", serif;
-  background: #000;
-  color: #fff;
-}
-
 /* Jede Seite wird überlagert, nur die aktive sichtbar */
 .page {
   position: absolute;
@@ -100,7 +95,7 @@ iframe, video {
 <footer class="signature">MS</footer>
 
 <!-- ======================================================
-     JavaScript – Rotation & Fehlerbehandlung
+     JavaScript – Rotation & CI-Injektion
      ====================================================== -->
 <script>
 window.addEventListener('DOMContentLoaded', async () => {
@@ -122,6 +117,20 @@ window.addEventListener('DOMContentLoaded', async () => {
     };
   }
 
+  // --- Funktion zum Injizieren der CI-CSS in iFrames
+  function injectCICSS(iframe) {
+    try {
+      const doc = iframe.contentDocument || iframe.contentWindow.document;
+      if (!doc) return;
+      const link = doc.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = 'https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/assets/styles/ci.css';
+      doc.head.appendChild(link);
+    } catch (err) {
+      console.warn('⚠️ CI-Stile konnten nicht injiziert werden:', err);
+    }
+  }
+
   // --- Aktive Seiten
   function getActivePages() {
     const arr = [];
@@ -136,13 +145,14 @@ window.addEventListener('DOMContentLoaded', async () => {
     return d;
   }
 
-  // --- iFrame Laden mit Timeout
+  // --- iFrame Laden mit Timeout + CI
   function loadIframe(page) {
     const iframe = page.querySelector('iframe');
     if(!iframe || iframe.src) return;
     if(iframe.dataset.src){
       try{
         iframe.src = iframe.dataset.src;
+        iframe.onload = () => injectCICSS(iframe);
         setTimeout(() => {
           if(!iframe.contentWindow){
             console.warn('⚠️ iFrame konnte nicht geladen werden, überspringe.');
