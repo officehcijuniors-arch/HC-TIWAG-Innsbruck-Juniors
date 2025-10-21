@@ -5,18 +5,25 @@
 <title>HC TIWAG Innsbruck Juniors – ORG (CI-konform)</title>
 
 <!-- ================================
-     CI-CSS einbinden
-     ================================ -->
-<!--
-  Schrift "Areno Serif" und weiße Textfarbe kommen von der zentralen CI-Datei.
-  Vorteil: Einheitliche CI auf allen Seiten, einfache Pflege.
--->
-<link rel="stylesheet" href="https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/assets/styles/ci.css">
-
-<!-- ================================
-     Lokales CSS für Layout & Animation
+     Lokale Schriftart einbinden
      ================================ -->
 <style>
+@font-face {
+    font-family: "Areno Serif";
+    src: url("fonts/ArenoSerif-Regular.woff2") format("woff2"),
+         url("fonts/ArenoSerif-Regular.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Areno Serif";
+    src: url("fonts/ArenoSerif-Bold.woff2") format("woff2"),
+         url("fonts/ArenoSerif-Bold.woff") format("woff");
+    font-weight: 800;
+    font-style: normal;
+}
+
 /* =======================================
    Vollbild-Hintergrund mit Animation
    ======================================= */
@@ -25,11 +32,11 @@ html, body {
   padding: 0;
   width: 100%;
   height: 100%;
-  display: flex;                  /* Inhalt zentrieren */
-  align-items: center;            /* vertikal zentrieren */
-  justify-content: center;        /* horizontal zentrieren */
-  font-family: "Areno Serif", serif; /* Schrift CI */
-  color: #fff;                    /* Textfarbe CI (weiß) */
+  display: flex;                 
+  align-items: center;           
+  justify-content: center;       
+  font-family: "Areno Serif", serif; /* Lokale Schrift */
+  color: #fff;                   
 
   /* Rot-blauer animierter Hintergrund */
   background: linear-gradient(135deg, #003789 50%, #d42323 50%);
@@ -48,23 +55,21 @@ html, body {
    Glas-Rahmen für das Bild
    ======================================= */
 .frame {
-  display: inline-block;           /* passt an den Inhalt an */
-  border-radius: 20px;             /* abgerundete Ecken */
-  overflow: hidden;                /* nichts ragt raus */
-  background: rgba(255,255,255,0.15); /* leicht transparent */
-  backdrop-filter: blur(12px);     /* Glas-Effekt */
-  box-shadow: 0 20px 45px rgba(0,0,0,0.55); /* Schatten darunter */
+  display: inline-block;
+  border-radius: 20px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 20px 45px rgba(0,0,0,0.55);
 }
 
-/* =======================================
-   Bild im Rahmen
-   ======================================= */
+/* Bild im Rahmen */
 .frame img {
-  display: block;                  /* entfernt Leerraum */
-  width: auto; 
+  display: block;
+  width: auto;
   height: auto;
-  max-width: 95vw;                 /* maximale Breite relativ zum Bildschirm */
-  max-height: 95vh;                /* maximale Höhe */
+  max-width: 95vw;
+  max-height: 95vh;
 }
 </style>
 </head>
