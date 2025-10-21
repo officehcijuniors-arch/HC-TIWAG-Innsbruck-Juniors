@@ -1,204 +1,168 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="utf-8">
-<title>HC TIWAG Innsbruck Juniors - Infosäule (Stabile Version)</title>
-
-<!-- ======================================================
-     CSS – Layout, Farben und Übergänge
-     ====================================================== -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vidaa-TV Seitenrotation</title>
 <style>
-body {
-  margin: 0;
-  overflow: hidden;
-  font-family: "Areno Serif", serif;
-  background: #000;
-  color: #fff;
-}
+  /* =====================
+     Grundlayout
+     ===================== */
+  body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;        /* Kein Scrollen */
+    background-color: #000;  /* schwarzer Hintergrund */
+    font-family: Arial, sans-serif;
+  }
 
-/* Jede Seite wird überlagert, nur die aktive sichtbar */
-.page {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.8s ease;
-}
-.page.active {
-  opacity: 1;
-  pointer-events: all;
-  z-index: 1;
-}
+  /* =====================
+     Jede Seite
+     ===================== */
+  .page {
+    position: absolute;      /* Alle Seiten übereinander */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;              /* standardmäßig unsichtbar */
+    transition: opacity 1s ease-in-out; /* sanftes Ein-/Ausblenden */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 2rem;
+    background-size: cover;
+    background-position: center;
+  }
 
-/* iFrames und Videos füllen den Container */
-iframe, video {
-  width: 100%;
-  height: 100%;
-  border: 0;
-  border-radius: 10px;
-}
+  /* Aktive Seite sichtbar */
+  .page.active {
+    opacity: 1;
+    z-index: 1; /* liegt über allen anderen Seiten */
+  }
 
-/* Videos skalieren, ohne zu schneiden */
-.video-page video {
-  object-fit: contain;
-}
-
-/* Signatur unten rechts */
-.signature {
-  position: fixed;
-  bottom: 8px;
-  right: 12px;
-  font-size: 0.8em;
-  color: rgba(255,255,255,0.4);
-  pointer-events: none;
-  z-index: 9999;
-}
+  /* Info-Text für Laien (unten links) */
+  .info-text {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: #ccc;
+    font-size: 1rem;
+    background-color: rgba(0,0,0,0.4);
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
 </style>
 </head>
 <body>
 
-<!-- ======================================================
-     Seitenstruktur
-     ====================================================== -->
-<section class="page page-1 active">
-  <iframe data-src="Infopoint.html"></iframe>
-</section>
+<!-- Container für alle Seiten -->
+<div id="pages-container"></div>
 
-<section class="page page-2">
-  <iframe data-src="KALENDER.html"></iframe>
-</section>
+<!-- Info-Text für Laien -->
+<div class="info-text">
+  Seitenrotation aktiv. Seiten werden automatisch angezeigt.
+</div>
 
-<section class="page page-3">
-  <iframe data-src="ORG.html"></iframe>
-</section>
-
-<section class="page video-page page-4">
-  <video autoplay loop muted playsinline preload="none">
-    <source data-src="Fotoshop.mp4" type="video/mp4">
-  </video>
-</section>
-
-<section class="page video-page page-5">
-  <video autoplay loop muted playsinline preload="none">
-    <source data-src="Fanshop.mp4" type="video/mp4">
-  </video>
-</section>
-
-<section class="page video-page page-6">
-  <video autoplay loop muted playsinline preload="none">
-    <source data-src="HCINWSPPräs.mp4" type="video/mp4">
-  </video>
-</section>
-
-<section class="page page-7">
-  <iframe data-src="spielerfotos.html"></iframe>
-</section>
-
-<section class="page page-8"></section>
-<section class="page page-9"></section>
-
-<footer class="signature">MS</footer>
-
-<!-- ======================================================
-     JavaScript – Rotation & Fehlerbehandlung
-     ====================================================== -->
 <script>
-window.addEventListener('DOMContentLoaded', async () => {
-  const pages = document.querySelectorAll('.page');
-  let current = 0;
-  let settings;
-
-  // JSON-Datei mit Einstellungen laden
-  const settingsUrl = 'https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/settings.json';
-  try {
-    const res = await fetch(settingsUrl, {cache:"no-store"});
-    settings = await res.json();
-  } catch(err) {
-    console.warn("⚠️ Einstellungen konnten nicht geladen werden, Standardwerte werden genutzt.");
-    settings = {
-      pages: {1:{enabled:true,duration:10},2:{enabled:true,duration:20},3:{enabled:true,duration:15},7:{enabled:true,duration:55}},
-      reload: 60,
-      options: {lazyVideoLoad:true,lazyIframeLoad:true}
-    };
+/* ================================
+   JSON-Datei: Steuert alle Seiten
+   unverändert übernommen
+   ================================ */
+const jsonData = {
+  "pages": {
+    "1": { "enabled": true, "duration": 10, "note": "Startseite / Infosäule", "preload": false },
+    "2": { "enabled": true, "duration": 30, "note": "Kalender / Eisplan", "preload": false },
+    "3": { "enabled": true, "duration": 15, "note": "Organigramm", "preload": false },
+    "4": { "enabled": false, "duration": 23, "note": "Fotoshop", "preload": false },
+    "5": { "enabled": false, "duration": 20, "note": "FANSHOP Video", "preload": false },
+    "6": { "enabled": false, "duration": 7, "note": "CANVA Spielankündigungen Juniors", "preload": false },
+    "7": { "enabled": false, "duration": 50, "note": "Spielerfotos", "preload": true, "liteMode": true },
+    "8": { "enabled": false, "duration": 8, "note": "Platzhalter 8" },
+    "9": { "enabled": false, "duration": 8, "note": "Platzhalter 9" }
+  },
+  "reload": 60, // Seiten neu laden alle 60 Minuten
+  "options": {
+    "lazyVideoLoad": true,
+    "lazyIframeLoad": true,
+    "limitAnimations": true,
+    "backgroundAnimation": false,
+    "imageFormat": "webp",
+    "maxImageResolution": 1600,
+    "debug": false
   }
+};
 
-  // --- Aktive Seiten
-  function getActivePages() {
-    const arr = [];
-    for (let i = 1; i <= 9; i++) if(settings.pages[i] && settings.pages[i].enabled) arr.push(i-1);
-    return arr;
-  }
+/* ================================
+   Seiten vorbereiten
+   ================================ */
+const container = document.getElementById('pages-container');
+const pagesArray = []; // Array für alle aktiven Seiten
 
-  // --- Dauer pro Seite
-  function getDurations() {
-    const d = {};
-    for (let i = 1; i <= 9; i++) if(settings.pages[i]) d[i-1] = settings.pages[i].duration*1000;
-    return d;
-  }
+for (let key in jsonData.pages) {
+  const pageData = jsonData.pages[key];
 
-  // --- iFrame Laden mit Timeout
-  function loadIframe(page) {
-    const iframe = page.querySelector('iframe');
-    if(!iframe || iframe.src) return;
-    if(iframe.dataset.src){
-      try{
-        iframe.src = iframe.dataset.src;
-        setTimeout(() => {
-          if(!iframe.contentWindow){
-            console.warn('⚠️ iFrame konnte nicht geladen werden, überspringe.');
-            iframe.remove();
-          }
-        },8000);
-      }catch(e){iframe.remove();}
+  // Nur Seiten anzeigen, die aktiviert sind
+  if (pageData.enabled) {
+    const div = document.createElement('div');
+    div.classList.add('page');
+    div.id = `page-${key}`;
+    
+    // Zeige den "note"-Text als Inhalt (für Laien sichtbar)
+    div.textContent = pageData.note;
+
+    // Optional: preload-Inhalte (Bilder/Videos) könnten hier geladen werden
+    if (pageData.preload) {
+      // Beispiel: Hintergrundbild laden
+      // div.style.backgroundImage = "url('deinBild.webp')";
     }
-  }
 
-  // --- Video Laden mit Timeout
-  function loadVideo(page){
-    const video = page.querySelector('video');
-    if(!video || video.dataset.loaded) return;
-    const source = video.querySelector('source');
-    if(source && source.dataset.src){
-      source.src = source.dataset.src;
-      video.load();
-      video.dataset.loaded = true;
-      let played = false;
-      video.oncanplay = () => played = true;
-      setTimeout(()=>{if(!played){console.warn('⚠️ Video nicht geladen, überspringe');video.remove();}},8000);
-    }
+    container.appendChild(div);
+    pagesArray.push({ el: div, duration: pageData.duration * 1000 });
   }
+}
 
-  // --- Seite anzeigen
-  function showPage(index){
-    pages.forEach((p,i)=>p.classList.toggle('active',i===index));
-    const page = pages[index];
-    if(page.classList.contains('video-page')) loadVideo(page);
-    else loadIframe(page);
-  }
+/* ================================
+   Seitenwechsel-Funktion
+   ================================ */
+let currentIndex = 0;
 
-  // --- Rotation
-  function rotateToNext(){
-    const active = getActivePages();
-    const durations = getDurations();
-    if(active.length===0) return;
-    let pos = active.indexOf(current);
-    if(pos===-1) pos=0;
-    current = active[(pos+1)%active.length];
-    showPage(current);
-    setTimeout(rotateToNext,durations[current]||8000);
-  }
+// Funktion: Eine Seite sichtbar machen
+function showPage(index) {
+  pagesArray.forEach((page, i) => {
+    // Nur die aktuelle Seite bekommt die Klasse "active"
+    page.el.classList.toggle('active', i === index);
+  });
+}
 
-  // --- Start
-  const activePages = getActivePages();
-  current = activePages.length>0 ? activePages[0] : 0;
-  showPage(current);
-  rotateToNext();
+/* ================================
+   Automatische Rotation
+   ================================ */
+function startRotation() {
+  showPage(currentIndex); // aktuelle Seite anzeigen
 
-  // --- Auto-Reload alle x Minuten
-  if(settings.reload && settings.reload>0){
-    setInterval(()=>location.reload(), settings.reload*60*1000);
-  }
-});
+  // Nach Ablauf der Dauer, nächste Seite anzeigen
+  setTimeout(() => {
+    currentIndex = (currentIndex + 1) % pagesArray.length; // zyklisch wechseln
+    startRotation(); // wiederholen für endlose Rotation
+  }, pagesArray[currentIndex].duration);
+}
+
+/* ================================
+   Auto-Reload alle x Minuten
+   ================================ */
+if (jsonData.reload) {
+  setInterval(() => location.reload(), jsonData.reload * 1000 * 60);
+}
+
+/* ================================
+   Starte die Rotation
+   ================================ */
+startRotation();
+
 </script>
 </body>
 </html>
