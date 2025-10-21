@@ -2,14 +2,23 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<title>HC TIWAG Innsbruck Juniors - Infosäule (Stabile Version)</title>
+<title>HC TIWAG Innsbruck Juniors - Infosäule (CI-konform)</title>
 
-<!-- CI-CSS einbinden -->
+<!-- ================================
+     CI-CSS einbinden
+     ================================ -->
+<!--
+  Hier wird die zentrale CI-CSS geladen.
+  Sie enthält:
+    - Schrift „Areno Serif“
+    - Weiße Schriftfarbe für alle Texte
+    - Einheitliche Farben, Buttons, Tabellen usw.
+-->
 <link rel="stylesheet" href="https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/assets/styles/ci.css">
 
-<!-- ======================================================
-     CSS – Layout, Farben und Übergänge
-     ====================================================== -->
+<!-- ================================
+     Lokales CSS (Layout, Übergänge)
+     ================================ -->
 <style>
 /* Jede Seite wird überlagert, nur die aktive sichtbar */
 .page {
@@ -19,6 +28,8 @@
   pointer-events: none;
   transition: opacity 0.8s ease;
 }
+
+/* Aktive Seite sichtbar */
 .page.active {
   opacity: 1;
   pointer-events: all;
@@ -31,6 +42,8 @@ iframe, video {
   height: 100%;
   border: 0;
   border-radius: 10px;
+  font-family: 'Areno Serif', serif;  /* Schriftart aus CI verwenden */
+  color: #fff !important;            /* Textfarbe immer weiß */
 }
 
 /* Videos skalieren, ohne zu schneiden */
@@ -52,9 +65,9 @@ iframe, video {
 </head>
 <body>
 
-<!-- ======================================================
+<!-- ================================
      Seitenstruktur
-     ====================================================== -->
+     ================================ -->
 <section class="page page-1 active">
   <iframe data-src="Infopoint.html"></iframe>
 </section>
@@ -94,16 +107,19 @@ iframe, video {
 
 <footer class="signature">MS</footer>
 
-<!-- ======================================================
+<!-- ================================
      JavaScript – Rotation & CI-Injektion
-     ====================================================== -->
+     ================================ -->
 <script>
 window.addEventListener('DOMContentLoaded', async () => {
+
   const pages = document.querySelectorAll('.page');
   let current = 0;
   let settings;
 
+  // ================================
   // JSON-Datei mit Einstellungen laden
+  // ================================
   const settingsUrl = 'https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/settings.json';
   try {
     const res = await fetch(settingsUrl, {cache:"no-store"});
@@ -117,7 +133,9 @@ window.addEventListener('DOMContentLoaded', async () => {
     };
   }
 
-  // --- Funktion zum Injizieren der CI-CSS in iFrames
+  // ================================
+  // Funktion: CI-CSS in iFrames injizieren
+  // ================================
   function injectCICSS(iframe) {
     try {
       const doc = iframe.contentDocument || iframe.contentWindow.document;
@@ -131,27 +149,36 @@ window.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-  // --- Aktive Seiten
+  // ================================
+  // Funktion: Welche Seiten aktiv sind
+  // ================================
   function getActivePages() {
     const arr = [];
-    for (let i = 1; i <= 9; i++) if(settings.pages[i] && settings.pages[i].enabled) arr.push(i-1);
+    for (let i = 1; i <= 9; i++)
+      if(settings.pages[i] && settings.pages[i].enabled) arr.push(i-1);
     return arr;
   }
 
-  // --- Dauer pro Seite
+  // ================================
+  // Dauer pro Seite
+  // ================================
   function getDurations() {
     const d = {};
-    for (let i = 1; i <= 9; i++) if(settings.pages[i]) d[i-1] = settings.pages[i].duration*1000;
+    for (let i = 1; i <= 9; i++)
+      if(settings.pages[i]) d[i-1] = settings.pages[i].duration*1000;
     return d;
   }
 
-  // --- iFrame Laden mit Timeout + CI
+  // ================================
+  // Funktion: iFrame laden + CI injizieren
+  // ================================
   function loadIframe(page) {
     const iframe = page.querySelector('iframe');
     if(!iframe || iframe.src) return;
     if(iframe.dataset.src){
       try{
         iframe.src = iframe.dataset.src;
+        // CI-CSS direkt nach Laden einfügen
         iframe.onload = () => injectCICSS(iframe);
         setTimeout(() => {
           if(!iframe.contentWindow){
@@ -163,7 +190,9 @@ window.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-  // --- Video Laden mit Timeout
+  // ================================
+  // Funktion: Video laden
+  // ================================
   function loadVideo(page){
     const video = page.querySelector('video');
     if(!video || video.dataset.loaded) return;
@@ -178,7 +207,9 @@ window.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-  // --- Seite anzeigen
+  // ================================
+  // Funktion: Seite anzeigen
+  // ================================
   function showPage(index){
     pages.forEach((p,i)=>p.classList.toggle('active',i===index));
     const page = pages[index];
@@ -186,7 +217,9 @@ window.addEventListener('DOMContentLoaded', async () => {
     else loadIframe(page);
   }
 
-  // --- Rotation
+  // ================================
+  // Rotation der Seiten
+  // ================================
   function rotateToNext(){
     const active = getActivePages();
     const durations = getDurations();
@@ -198,16 +231,21 @@ window.addEventListener('DOMContentLoaded', async () => {
     setTimeout(rotateToNext,durations[current]||8000);
   }
 
-  // --- Start
+  // ================================
+  // Start der Rotation
+  // ================================
   const activePages = getActivePages();
   current = activePages.length>0 ? activePages[0] : 0;
   showPage(current);
   rotateToNext();
 
-  // --- Auto-Reload alle x Minuten
+  // ================================
+  // Auto-Reload alle x Minuten
+  // ================================
   if(settings.reload && settings.reload>0){
     setInterval(()=>location.reload(), settings.reload*60*1000);
   }
+
 });
 </script>
 </body>
