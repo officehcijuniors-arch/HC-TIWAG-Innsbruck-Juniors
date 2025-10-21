@@ -2,19 +2,34 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<title>HC TIWAG Innsbruck Juniors – Infopoint</title>
+<title>HC TIWAG Innsbruck Juniors – ORG (CI-konform)</title>
 
+<!-- ================================
+     CI-CSS einbinden
+     ================================ -->
+<!--
+  Schrift "Areno Serif" und weiße Textfarbe kommen von der zentralen CI-Datei.
+  Vorteil: Einheitliche CI auf allen Seiten, einfache Pflege.
+-->
+<link rel="stylesheet" href="https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/assets/styles/ci.css">
+
+<!-- ================================
+     Lokales CSS für Layout & Animation
+     ================================ -->
 <style>
-/* ===== Hintergrund ===== */
+/* =======================================
+   Vollbild-Hintergrund mit Animation
+   ======================================= */
 html, body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: "Areno Serif", serif;
+  display: flex;                  /* Inhalt zentrieren */
+  align-items: center;            /* vertikal zentrieren */
+  justify-content: center;        /* horizontal zentrieren */
+  font-family: "Areno Serif", serif; /* Schrift CI */
+  color: #fff;                    /* Textfarbe CI (weiß) */
 
   /* Rot-blauer animierter Hintergrund */
   background: linear-gradient(135deg, #003789 50%, #d42323 50%);
@@ -22,38 +37,44 @@ html, body {
   animation: gradientShift 120s ease-in-out infinite;
 }
 
+/* Hintergrund-Animation */
 @keyframes gradientShift {
   0%   { background-position: 0% 50%; }
   50%  { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-/* ===== Glas-Rahmen ===== */
+/* =======================================
+   Glas-Rahmen für das Bild
+   ======================================= */
 .frame {
-  display: inline-block;
-  border-radius: 20px;
-  overflow: hidden;
-
-  background: rgba(255,255,255,0.15);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 20px 45px rgba(0,0,0,0.55);
+  display: inline-block;           /* passt an den Inhalt an */
+  border-radius: 20px;             /* abgerundete Ecken */
+  overflow: hidden;                /* nichts ragt raus */
+  background: rgba(255,255,255,0.15); /* leicht transparent */
+  backdrop-filter: blur(12px);     /* Glas-Effekt */
+  box-shadow: 0 20px 45px rgba(0,0,0,0.55); /* Schatten darunter */
 }
 
-/* ===== Bild im Rahmen ===== */
+/* =======================================
+   Bild im Rahmen
+   ======================================= */
 .frame img {
-  display: block;
-  width: auto;
+  display: block;                  /* entfernt Leerraum */
+  width: auto; 
   height: auto;
-  max-width: 95vw;
-  max-height: 95vh;
+  max-width: 95vw;                 /* maximale Breite relativ zum Bildschirm */
+  max-height: 95vh;                /* maximale Höhe */
 }
 </style>
 </head>
 
 <body>
+<!-- =======================================
+     Bild im Glas-Rahmen
+     ======================================= -->
 <div class="frame">
   <img src="ORG.webp" alt="HC TIWAG Innsbruck Juniors">
 </div>
 </body>
 </html>
-
