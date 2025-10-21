@@ -2,24 +2,20 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<title>HC TIWAG Innsbruck Juniors - Infosäule (CI-konform)</title>
+<title>HC TIWAG Innsbruck Juniors - Infosäule (Stabile Version)</title>
 
-<!-- ================================
-     CI-CSS einbinden
-     ================================ -->
-<!--
-  Hier wird die zentrale CI-CSS geladen.
-  Sie enthält:
-    - Schrift „Areno Serif“
-    - Weiße Schriftfarbe für alle Texte
-    - Einheitliche Farben, Buttons, Tabellen usw.
--->
-<link rel="stylesheet" href="https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/assets/styles/ci.css">
-
-<!-- ================================
-     Lokales CSS (Layout, Übergänge)
-     ================================ -->
+<!-- ======================================================
+     CSS – Layout, Farben und Übergänge
+     ====================================================== -->
 <style>
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: "Areno Serif", serif;
+  background: #000;
+  color: #fff;
+}
+
 /* Jede Seite wird überlagert, nur die aktive sichtbar */
 .page {
   position: absolute;
@@ -28,8 +24,6 @@
   pointer-events: none;
   transition: opacity 0.8s ease;
 }
-
-/* Aktive Seite sichtbar */
 .page.active {
   opacity: 1;
   pointer-events: all;
@@ -42,8 +36,6 @@ iframe, video {
   height: 100%;
   border: 0;
   border-radius: 10px;
-  font-family: 'Areno Serif', serif;  /* Schriftart aus CI verwenden */
-  color: #fff !important;            /* Textfarbe immer weiß */
 }
 
 /* Videos skalieren, ohne zu schneiden */
@@ -65,9 +57,9 @@ iframe, video {
 </head>
 <body>
 
-<!-- ================================
+<!-- ======================================================
      Seitenstruktur
-     ================================ -->
+     ====================================================== -->
 <section class="page page-1 active">
   <iframe data-src="Infopoint.html"></iframe>
 </section>
@@ -107,19 +99,16 @@ iframe, video {
 
 <footer class="signature">MS</footer>
 
-<!-- ================================
-     JavaScript – Rotation & CI-Injektion
-     ================================ -->
+<!-- ======================================================
+     JavaScript – Rotation & Fehlerbehandlung
+     ====================================================== -->
 <script>
 window.addEventListener('DOMContentLoaded', async () => {
-
   const pages = document.querySelectorAll('.page');
   let current = 0;
   let settings;
 
-  // ================================
   // JSON-Datei mit Einstellungen laden
-  // ================================
   const settingsUrl = 'https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/settings.json';
   try {
     const res = await fetch(settingsUrl, {cache:"no-store"});
@@ -133,53 +122,27 @@ window.addEventListener('DOMContentLoaded', async () => {
     };
   }
 
-  // ================================
-  // Funktion: CI-CSS in iFrames injizieren
-  // ================================
-  function injectCICSS(iframe) {
-    try {
-      const doc = iframe.contentDocument || iframe.contentWindow.document;
-      if (!doc) return;
-      const link = doc.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = 'https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/assets/styles/ci.css';
-      doc.head.appendChild(link);
-    } catch (err) {
-      console.warn('⚠️ CI-Stile konnten nicht injiziert werden:', err);
-    }
-  }
-
-  // ================================
-  // Funktion: Welche Seiten aktiv sind
-  // ================================
+  // --- Aktive Seiten
   function getActivePages() {
     const arr = [];
-    for (let i = 1; i <= 9; i++)
-      if(settings.pages[i] && settings.pages[i].enabled) arr.push(i-1);
+    for (let i = 1; i <= 9; i++) if(settings.pages[i] && settings.pages[i].enabled) arr.push(i-1);
     return arr;
   }
 
-  // ================================
-  // Dauer pro Seite
-  // ================================
+  // --- Dauer pro Seite
   function getDurations() {
     const d = {};
-    for (let i = 1; i <= 9; i++)
-      if(settings.pages[i]) d[i-1] = settings.pages[i].duration*1000;
+    for (let i = 1; i <= 9; i++) if(settings.pages[i]) d[i-1] = settings.pages[i].duration*1000;
     return d;
   }
 
-  // ================================
-  // Funktion: iFrame laden + CI injizieren
-  // ================================
+  // --- iFrame Laden mit Timeout
   function loadIframe(page) {
     const iframe = page.querySelector('iframe');
     if(!iframe || iframe.src) return;
     if(iframe.dataset.src){
       try{
         iframe.src = iframe.dataset.src;
-        // CI-CSS direkt nach Laden einfügen
-        iframe.onload = () => injectCICSS(iframe);
         setTimeout(() => {
           if(!iframe.contentWindow){
             console.warn('⚠️ iFrame konnte nicht geladen werden, überspringe.');
@@ -190,9 +153,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-  // ================================
-  // Funktion: Video laden
-  // ================================
+  // --- Video Laden mit Timeout
   function loadVideo(page){
     const video = page.querySelector('video');
     if(!video || video.dataset.loaded) return;
@@ -207,9 +168,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-  // ================================
-  // Funktion: Seite anzeigen
-  // ================================
+  // --- Seite anzeigen
   function showPage(index){
     pages.forEach((p,i)=>p.classList.toggle('active',i===index));
     const page = pages[index];
@@ -217,9 +176,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     else loadIframe(page);
   }
 
-  // ================================
-  // Rotation der Seiten
-  // ================================
+  // --- Rotation
   function rotateToNext(){
     const active = getActivePages();
     const durations = getDurations();
@@ -231,21 +188,16 @@ window.addEventListener('DOMContentLoaded', async () => {
     setTimeout(rotateToNext,durations[current]||8000);
   }
 
-  // ================================
-  // Start der Rotation
-  // ================================
+  // --- Start
   const activePages = getActivePages();
   current = activePages.length>0 ? activePages[0] : 0;
   showPage(current);
   rotateToNext();
 
-  // ================================
-  // Auto-Reload alle x Minuten
-  // ================================
+  // --- Auto-Reload alle x Minuten
   if(settings.reload && settings.reload>0){
     setInterval(()=>location.reload(), settings.reload*60*1000);
   }
-
 });
 </script>
 </body>
