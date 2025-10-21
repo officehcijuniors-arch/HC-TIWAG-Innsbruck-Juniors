@@ -5,42 +5,47 @@
 <title>HC TIWAG Innsbruck Juniors - Startseite (CI-konform)</title>
 
 <!-- ================================
-     CI-CSS einbinden
-     ================================ -->
-<!--
-  Diese CSS-Datei sorgt für:
-    1. Schrift "Areno Serif"
-    2. Weiße Schriftfarbe für alle Texte
-    3. Einheitliches Layout für CI (Corporate Identity)
-  Vorteil: Wenn wir die CI ändern, müssen wir nur ci.css anpassen, nicht jede HTML-Seite.
--->
-<link rel="stylesheet" href="https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/assets/styles/ci.css">
-
-<!-- ================================
-     Lokales CSS für Layout & Animation
+     Lokale Schriftart einbinden
      ================================ -->
 <style>
+@font-face {
+    font-family: "Areno Serif";
+    src: url("fonts/ArenoSerif-Regular.woff2") format("woff2"),
+         url("fonts/ArenoSerif-Regular.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Areno Serif";
+    src: url("fonts/ArenoSerif-Bold.woff2") format("woff2"),
+         url("fonts/ArenoSerif-Bold.woff") format("woff");
+    font-weight: 800;
+    font-style: normal;
+}
+
 /* =======================================
    Grundlayout der Seite
    ======================================= */
 body {
-    margin: 0;          /* Kein Rand um die Seite */
-    overflow: hidden;   /* Scrollbars ausblenden */
+    margin: 0;
+    overflow: hidden;
+    font-family: "Areno Serif", serif;
 }
 
 /* =======================================
    Seitencontainer
    ======================================= */
 .page {
-    display: flex;                  /* Flexbox für vertikale Ausrichtung */
-    flex-direction: column;         /* Inhalte untereinander */
-    align-items: center;            /* Zentriert horizontal */
-    justify-content: flex-start;    /* Start oben */
-    position: absolute;             /* Positioniert über den ganzen Bildschirm */
-    inset: 0;                       /* oben, rechts, unten, links = 0 */
-    background: linear-gradient(135deg, #003789 50%, #d42323 50%); /* CI-Farben Blau + Rot */
-    background-size: 200% 200%;    /* Für Animation */
-    animation: gradientShift 180s ease infinite; /* Langsame Farbverschiebung */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #003789 50%, #d42323 50%);
+    background-size: 200% 200%;
+    animation: gradientShift 180s ease infinite;
 }
 
 /* =======================================
@@ -60,23 +65,23 @@ header {
     padding: 10px 0; 
 }
 header h1 {
-    font-size: 2.4em;                   /* Schriftgröße */
-    margin: 0 0 5px 0;                  /* Abstand unten */
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.8); /* Schatten für bessere Lesbarkeit */
+    font-size: 2.4em;
+    margin: 0 0 5px 0;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
 }
 
 /* =======================================
    Infopoint-Titel mit Glüheffekt
    ======================================= */
 .infosaule {
-    font-size: 7vw;                     /* Schriftgröße relativ zur Bildschirmbreite */
-    font-weight: 800;                    /* Fettdruck */
-    letter-spacing: 0.25em;             /* Abstand zwischen Buchstaben */
-    text-transform: uppercase;           /* Großbuchstaben */
+    font-size: 7vw;
+    font-weight: 800;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
     text-shadow: 0 0 20px rgba(255,255,255,0.9), 
-                 0 0 40px rgba(255,255,255,0.7); /* Weißer Glanz */
-    animation: glowPulse 2s ease-in-out infinite alternate; /* Pulsierender Effekt */
-    margin-top: 5vh;                     /* Abstand nach oben */
+                 0 0 40px rgba(255,255,255,0.7);
+    animation: glowPulse 2s ease-in-out infinite alternate;
+    margin-top: 5vh;
 }
 
 /* Animation Glüheffekt */
@@ -91,60 +96,51 @@ header h1 {
 .info-table {
     display: flex;
     flex-direction: column;
-    align-items: center;       /* Zentriert horizontal */
-    margin-top: 5vh;           /* Abstand nach oben */
-    font-size: 1.6em;          /* Textgröße */
-    line-height: 1.8;          /* Zeilenabstand */
-    margin-left: 10vw;         /* Abstand links */
+    align-items: center;
+    margin-top: 5vh;
+    font-size: 1.6em;
+    line-height: 1.8;
+    margin-left: 10vw;
 }
-
-/* Jede Zeile in der Tabelle */
 .info-row {
     display: flex;
     align-items: center;
     margin-bottom: 1em;
 }
-
-/* Symbol links (Emoji) */
 .symbol {
     display: inline-block;
     width: 2.5em;
     text-align: center;
     font-size: 1.8em;
 }
-
-/* Text rechts vom Symbol */
 .linktext {
-    min-width: 20em;           /* Mindestbreite */
+    min-width: 20em;
     text-align: left;
 }
-
-/* Link-Formatierung */
 .linktext a {
-    color: #fff;               /* CI-Farbe: immer weiß */
+    color: #fff;
     text-decoration: none;
 }
 .linktext a:hover {
-    text-decoration: underline; /* Unterstrich beim Hover */
+    text-decoration: underline;
 }
 
 /* =======================================
    Hai-GIF Animation
    ======================================= */
 .shark-gif {
-    position: absolute;             /* Überlagert den Hintergrund */
-    bottom: 5%;                     /* Abstand vom unteren Rand */
-    left: 50%;                       /* Zentriert horizontal */
-    transform: translateX(-50%);    /* Genau zentrieren */
-    width: 14vw;                     /* Größe relativ zum Bildschirm */
-    max-width: 280px;                /* Maximale Breite */
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14vw;
+    max-width: 280px;
     height: auto;
-    pointer-events: none;            /* Nicht anklickbar */
-    animation: float 4s ease-in-out infinite; /* Auf- und Abbewegung */
-    opacity: 0.85;                   /* Leicht transparent */
+    pointer-events: none;
+    animation: float 4s ease-in-out infinite;
+    opacity: 0.85;
 }
 
-/* Animation für das Schweben */
 @keyframes float {
     0%,100% { transform: translateX(-50%) translateY(0); }
     50% { transform: translateX(-50%) translateY(-10px); }
@@ -154,20 +150,14 @@ header h1 {
 
 <body>
 
-<!-- ================================
-     Seiteninhalt
-     ================================ -->
 <section class="page">
-  <!-- Überschrift -->
   <header>
     <h1>HC TIWAG Innsbruck Juniors</h1>
   </header>
 
   <main class="announcement-container">
-    <!-- Infopoint-Titel -->
     <h1 class="infosaule">I N F O P O I N T</h1>
 
-    <!-- Tabelle mit Links -->
     <div class="info-table">
       <div class="info-row">
         <div class="symbol">🌐</div>
@@ -190,7 +180,6 @@ header h1 {
     </div>
   </main>
 
-  <!-- Hai-GIF -->
   <img src="HCI.gif" alt="Shark" class="shark-gif" loading="lazy">
 </section>
 
