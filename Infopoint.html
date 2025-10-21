@@ -8,9 +8,6 @@
      Lokale Schriftart einbinden
      ================================ -->
 <style>
-/* =======================================
-   Lokale Schriftart (Areno Serif)
-   ======================================= */
 @font-face {
     font-family: "Areno Serif";
     src: url("fonts/areno-serif-webfont.woff2") format("woff2"),
@@ -30,19 +27,12 @@
 }
 
 /* =======================================
-   Alle Texte weiße Schrift + lokale Schrift
-   ======================================= */
-* {
-    font-family: "Areno Serif", serif;
-    color: #fff;
-}
-
-/* =======================================
    Grundlayout der Seite
    ======================================= */
 body {
     margin: 0;
     overflow: hidden;
+    font-family: "Areno Serif", serif;
 }
 
 /* =======================================
@@ -60,14 +50,18 @@ body {
     animation: gradientShift 180s ease infinite;
 }
 
-/* Hintergrund-Animation */
+/* =======================================
+   Animation für den Hintergrund
+   ======================================= */
 @keyframes gradientShift {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-/* Überschrift oben */
+/* =======================================
+   Überschrift oben
+   ======================================= */
 header { 
     text-align: center; 
     padding: 10px 0; 
@@ -75,29 +69,34 @@ header {
 header h1 {
     font-size: 2.4em;
     margin: 0 0 5px 0;
-    font-weight: 800; /* fette Überschrift */
+    font-weight: 800;
     text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
 }
 
-/* Infopoint-Titel mit Glüheffekt */
+/* =======================================
+   Infopoint-Titel mit Glüheffekt
+   ======================================= */
 .infosaule {
     font-size: 7vw;
     font-weight: 800;
     letter-spacing: 0.25em;
     text-transform: uppercase;
+    color: #fff; /* ← jetzt explizit weiß */
     text-shadow: 0 0 20px rgba(255,255,255,0.9), 
                  0 0 40px rgba(255,255,255,0.7);
     animation: glowPulse 2s ease-in-out infinite alternate;
     margin-top: 5vh;
 }
 
-/* Glüheffekt */
+/* Animation Glüheffekt */
 @keyframes glowPulse {
     0%,100% { text-shadow: 0 0 15px rgba(255,255,255,0.6); }
     50% { text-shadow: 0 0 60px rgba(255,255,255,0.85); }
 }
 
-/* Infotabelle mit Links */
+/* =======================================
+   Infotabelle mit Links
+   ======================================= */
 .info-table {
     display: flex;
     flex-direction: column;
@@ -123,14 +122,16 @@ header h1 {
     text-align: left;
 }
 .linktext a {
-    color: #fff; /* Links weiß */
+    color: #fff;
     text-decoration: none;
 }
 .linktext a:hover {
     text-decoration: underline;
 }
 
-/* Hai-GIF Animation */
+/* =======================================
+   Hai-GIF Animation
+   ======================================= */
 .shark-gif {
     position: absolute;
     bottom: 5%;
