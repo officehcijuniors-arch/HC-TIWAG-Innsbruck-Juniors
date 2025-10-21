@@ -8,20 +8,33 @@
      Lokale Schriftart einbinden
      ================================ -->
 <style>
+/* =======================================
+   Lokale Schriftart (Areno Serif)
+   ======================================= */
 @font-face {
     font-family: "Areno Serif";
-    src: url("fonts/ArenoSerif-Regular.woff2") format("woff2"),
-         url("fonts/ArenoSerif-Regular.woff") format("woff");
+    src: url("fonts/areno-serif-webfont.woff2") format("woff2"),
+         url("fonts/areno-serif-webfont.woff") format("woff"),
+         url("fonts/Areno-Serif.otf") format("opentype");
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: "Areno Serif";
-    src: url("fonts/ArenoSerif-Bold.woff2") format("woff2"),
-         url("fonts/ArenoSerif-Bold.woff") format("woff");
+    src: url("fonts/areno-serif-webfont.woff2") format("woff2"),
+         url("fonts/areno-serif-webfont.woff") format("woff"),
+         url("fonts/Areno-Serif.otf") format("opentype");
     font-weight: 800;
     font-style: normal;
+}
+
+/* =======================================
+   Universelle Schrift- und Farbsetzung
+   ======================================= */
+* {
+    font-family: "Areno Serif", serif; /* überall lokale Schrift */
+    color: #fff;                        /* überall weiß */
 }
 
 /* =======================================
@@ -35,8 +48,6 @@ html, body {
   display: flex;                 
   align-items: center;           
   justify-content: center;       
-  font-family: "Areno Serif", serif; /* Lokale Schrift */
-  color: #fff;                   
 
   /* Rot-blauer animierter Hintergrund */
   background: linear-gradient(135deg, #003789 50%, #d42323 50%);
