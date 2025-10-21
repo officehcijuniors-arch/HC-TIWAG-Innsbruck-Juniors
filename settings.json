@@ -6,7 +6,7 @@
     "4": { "enabled": false, "duration": 23, "note": "Fotoshop", "preload": false },
     "5": { "enabled": false, "duration": 20, "note": "FANSHOP Video", "preload": false },
     "6": { "enabled": false, "duration": 7, "note": "CANVA Spielankündigungen Juniors", "preload": false },
-    "7": { "enabled": true, "duration": 50, "note": "Spielerfotos", "preload": true, "liteMode": true },
+    "7": { "enabled": false, "duration": 50, "note": "Spielerfotos", "preload": true, "liteMode": true },
     "8": { "enabled": false, "duration": 8, "note": "Platzhalter 8" },
     "9": { "enabled": false, "duration": 8, "note": "Platzhalter 9" }
   },
@@ -49,6 +49,7 @@
     "info": "Diese JSON-Datei steuert die automatische Seitenrotation, Performance-Optionen und Lazy-Loading für die HTML-Anzeige auf dem Vidaa-TV. Änderungen wirken sich direkt auf die index.html aus, ohne dass die HTML-Dateien selbst angepasst werden müssen."
   }
 }
+
 
 
 
