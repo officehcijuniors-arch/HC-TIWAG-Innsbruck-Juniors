@@ -1,96 +1,113 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de"> <!-- Sprache auf Deutsch eingestellt -->
 <head>
-<meta charset="utf-8">
-<title>HC TIWAG Innsbruck Juniors – ORG (CI-konform)</title>
+<meta charset="utf-8"> <!-- Zeichencodierung für Umlaute und Sonderzeichen -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Wichtig: sorgt für richtige Anzeige auf Handys -->
+<title>HC TIWAG Innsbruck Juniors – ORG (CI-konform)</title> <!-- Titel, der im Browser-Tab angezeigt wird -->
 
 <!-- ================================
-     Lokale Schriftart einbinden
+     EINGEBETTETES CSS-DESIGN
      ================================ -->
 <style>
+
 /* =======================================
-   Lokale Schriftart (Areno Serif)
+   1) LOKALE SCHRIFTART (ARENO SERIF)
    ======================================= */
+
+/* Normale Schriftstärke */
 @font-face {
-    font-family: "Areno Serif";
-    src: url("fonts/areno-serif-webfont.woff2") format("woff2"),
-         url("fonts/areno-serif-webfont.woff") format("woff"),
-         url("fonts/Areno-Serif.otf") format("opentype");
-    font-weight: normal;
-    font-style: normal;
+    font-family: "Areno Serif"; /* Name, den du im CSS später verwendest */
+    src: url("fonts/areno-serif-webfont.woff2") format("woff2"), /* moderne Variante */
+         url("fonts/areno-serif-webfont.woff") format("woff"),   /* ältere Variante */
+         url("fonts/Areno-Serif.otf") format("opentype");        /* Originalschrift */
+    font-weight: normal; /* normale Stärke */
+    font-style: normal;  /* keine Kursivschrift */
 }
 
+/* Fette Variante der Schrift */
 @font-face {
     font-family: "Areno Serif";
     src: url("fonts/areno-serif-webfont.woff2") format("woff2"),
          url("fonts/areno-serif-webfont.woff") format("woff"),
          url("fonts/Areno-Serif.otf") format("opentype");
-    font-weight: 800;
+    font-weight: 800; /* extra fett */
     font-style: normal;
 }
 
 /* =======================================
-   Universelle Schrift- und Farbsetzung
+   2) GRUNDEINSTELLUNGEN FÜR ALLE ELEMENTE
    ======================================= */
 * {
-    font-family: "Areno Serif", serif; /* überall lokale Schrift */
-    color: #fff;                        /* überall weiß */
+    font-family: "Areno Serif", serif; /* Deine Vereins-Schriftart für alles */
+    color: #fff;                        /* Alle Texte weiß */
 }
 
 /* =======================================
-   Vollbild-Hintergrund mit Animation
+   3) HINTERGRUND UND LAYOUT DES SEITENKÖRPERS
    ======================================= */
 html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
+  margin: 0;     /* Kein äußerer Rand */
+  padding: 0;    /* Kein Innenabstand */
+  width: 100%;   /* gesamte Seitenbreite */
+  height: 100%;  /* gesamte Bildschirmhöhe */
+
+  /* Flexbox – sorgt dafür, dass der Inhalt (das Bild) zentriert ist */
   display: flex;                 
-  align-items: center;           
-  justify-content: center;       
+  align-items: center;           /* vertikal zentriert */
+  justify-content: center;       /* horizontal zentriert */
 
-  /* Rot-blauer animierter Hintergrund */
+  /* Rot-blauer animierter Hintergrund im Vereinsstil */
   background: linear-gradient(135deg, #003789 50%, #d42323 50%);
-  background-size: 200% 200%;
-  animation: gradientShift 120s ease-in-out infinite;
-}
-
-/* Hintergrund-Animation */
-@keyframes gradientShift {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  background-size: 200% 200%;          /* größerer Hintergrund, damit Bewegung möglich ist */
+  animation: gradientShift 120s ease-in-out infinite; /* sanfte, dauerhafte Bewegung */
 }
 
 /* =======================================
-   Glas-Rahmen für das Bild
+   4) ANIMATION DES HINTERGRUNDS
    ======================================= */
-.frame {
-  display: inline-block;
-  border-radius: 20px;
-  overflow: hidden;
-  background: rgba(255,255,255,0.15);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 20px 45px rgba(0,0,0,0.55);
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }    /* Startposition */
+  50%  { background-position: 100% 50%; }  /* Verlauf wandert nach rechts */
+  100% { background-position: 0% 50%; }    /* wieder zurück */
 }
 
-/* Bild im Rahmen */
-.frame img {
-  display: block;
-  width: auto;
-  height: auto;
-  max-width: 95vw;
-  max-height: 95vh;
+/* =======================================
+   5) "GLASRAHMEN" FÜR DAS BILD
+   ======================================= */
+.frame {
+  display: inline-block;                      /* passt sich dem Inhalt (dem Bild) an */
+  border-radius: 20px;                        /* abgerundete Ecken */
+  overflow: hidden;                           /* alles außerhalb der Ecken wird abgeschnitten */
+  background: rgba(255,255,255,0.15);         /* leicht transparente weiße Fläche */
+  backdrop-filter: blur(12px);                /* Unschärfe hinter dem Element (Glaseffekt) */
+  box-shadow: 0 20px 45px rgba(0,0,0,0.55);   /* sanfter Schatten unter dem Rahmen */
 }
+
+/* =======================================
+   6) BILD-INHALT IM GLASRAHMEN
+   ======================================= */
+.frame img {
+  display: block;           /* entfernt kleine Abstände, die Bilder sonst haben */
+  width: auto;              /* Breite bleibt im Originalverhältnis */
+  height: auto;             /* Höhe bleibt im Originalverhältnis */
+  max-width: 95vw;          /* niemals breiter als 95% der Bildschirmbreite */
+  max-height: 95vh;         /* niemals höher als 95% der Bildschirmhöhe */
+}
+
 </style>
 </head>
 
-<body>
 <!-- =======================================
-     Bild im Glas-Rahmen
+     7) HAUPTINHALT DER SEITE
      ======================================= -->
+<body>
+
+<!-- Das Bild liegt in einem Glasrahmen und ist zentriert -->
 <div class="frame">
   <img src="ORG.webp" alt="HC TIWAG Innsbruck Juniors">
+  <!-- src = Bilddatei (muss im selben Ordner liegen)
+       alt = Alternativtext, wird angezeigt, wenn das Bild fehlt -->
 </div>
+
 </body>
 </html>
