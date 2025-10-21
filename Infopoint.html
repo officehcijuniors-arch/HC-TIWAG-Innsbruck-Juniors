@@ -8,6 +8,9 @@
      Lokale Schriftart einbinden
      ================================ -->
 <style>
+/* =======================================
+   Lokale Schriftart (Areno Serif) einbinden
+   ======================================= */
 @font-face {
     font-family: "Areno Serif";
     src: url("fonts/areno-serif-webfont.woff2") format("woff2"),
@@ -27,27 +30,34 @@
 }
 
 /* =======================================
-   Grundlayout der Seite
+   Alle Texte weiß und mit lokaler Schrift
    ======================================= */
-body {
-    margin: 0;
-    overflow: hidden;
-    font-family: "Areno Serif", serif;
+* {
+    font-family: "Areno Serif", serif; /* Lokale Schrift für alle Elemente */
+    color: #fff;                        /* Alle Texte weiß */
 }
 
 /* =======================================
-   Seitencontainer
+   Grundlayout der Seite
+   ======================================= */
+body {
+    margin: 0;         /* Kein Abstand um die Seite */
+    overflow: hidden;  /* Keine Scrollbars */
+}
+
+/* =======================================
+   Seitencontainer mit animiertem Hintergrund
    ======================================= */
 .page {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    position: absolute;
-    inset: 0;
+    flex-direction: column;     /* Elemente untereinander anordnen */
+    align-items: center;        /* Zentriert horizontal */
+    justify-content: flex-start;/* Start oben */
+    position: absolute;         /* Über den gesamten Bildschirm */
+    inset: 0;                   /* oben, rechts, unten, links = 0 */
     background: linear-gradient(135deg, #003789 50%, #d42323 50%);
-    background-size: 200% 200%;
-    animation: gradientShift 180s ease infinite;
+    background-size: 200% 200%; 
+    animation: gradientShift 180s ease infinite; /* Langsame Farbverschiebung */
 }
 
 /* =======================================
@@ -64,28 +74,29 @@ body {
    ======================================= */
 header { 
     text-align: center; 
-    padding: 10px 0; 
+    padding: 10px 0; /* Abstand oben und unten innerhalb des Headers */
 }
+
 header h1 {
-    font-size: 2.4em;
-    margin: 0 0 5px 0;
-    font-weight: 800;
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+    font-size: 2.4em; 
+    font-weight: 800;               /* Fett */
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.8); /* Schatten für Lesbarkeit */
+    margin: 40px 0 5px 0;           /* Abstand oben 40px, unten 5px */
 }
 
 /* =======================================
    Infopoint-Titel mit Glüheffekt
    ======================================= */
 .infosaule {
-    font-size: 7vw;
-    font-weight: 800;
-    letter-spacing: 0.25em;
+    font-size: 7vw; 
+    font-weight: 800; 
+    letter-spacing: 0.25em; 
     text-transform: uppercase;
-    color: #fff; /* ← jetzt explizit weiß */
+    color: #fff;                     /* Schriftfarbe explizit weiß */
     text-shadow: 0 0 20px rgba(255,255,255,0.9), 
-                 0 0 40px rgba(255,255,255,0.7);
-    animation: glowPulse 2s ease-in-out infinite alternate;
-    margin-top: 5vh;
+                 0 0 40px rgba(255,255,255,0.7); /* Glüheffekt */
+    animation: glowPulse 2s ease-in-out infinite alternate; /* Pulsierender Effekt */
+    margin-top: 5vh;                 /* Abstand nach oben */
 }
 
 /* Animation Glüheffekt */
@@ -99,52 +110,57 @@ header h1 {
    ======================================= */
 .info-table {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
     align-items: center;
-    margin-top: 5vh;
-    font-size: 1.6em;
-    line-height: 1.8;
-    margin-left: 10vw;
+    margin-top: 5vh; 
+    font-size: 1.6em; 
+    line-height: 1.8; 
+    margin-left: 10vw; 
 }
+
 .info-row {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1em;
+    display: flex; 
+    align-items: center; 
+    margin-bottom: 1em; 
 }
+
 .symbol {
-    display: inline-block;
-    width: 2.5em;
-    text-align: center;
-    font-size: 1.8em;
+    display: inline-block; 
+    width: 2.5em; 
+    text-align: center; 
+    font-size: 1.8em; 
 }
+
 .linktext {
-    min-width: 20em;
-    text-align: left;
+    min-width: 20em; 
+    text-align: left; 
 }
+
 .linktext a {
-    color: #fff;
-    text-decoration: none;
+    color: #fff;                  /* Links weiß */
+    text-decoration: none; 
 }
 .linktext a:hover {
-    text-decoration: underline;
+    text-decoration: underline;   /* Unterstrich beim Hover */
 }
 
 /* =======================================
    Hai-GIF Animation
    ======================================= */
 .shark-gif {
-    position: absolute;
-    bottom: 5%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 14vw;
-    max-width: 280px;
+    position: absolute;             
+    bottom: 5%;                     
+    left: 50%;                       
+    transform: translateX(-50%);    
+    width: 14vw;                     
+    max-width: 280px;                
     height: auto;
-    pointer-events: none;
-    animation: float 4s ease-in-out infinite;
-    opacity: 0.85;
+    pointer-events: none;            
+    animation: float 4s ease-in-out infinite; 
+    opacity: 0.85;                   
 }
 
+/* Schwebe-Animation */
 @keyframes float {
     0%,100% { transform: translateX(-50%) translateY(0); }
     50% { transform: translateX(-50%) translateY(-10px); }
@@ -155,13 +171,17 @@ header h1 {
 <body>
 
 <section class="page">
+  <!-- Überschrift oben -->
   <header>
     <h1>HC TIWAG Innsbruck Juniors</h1>
   </header>
 
+  <!-- Hauptinhalt -->
   <main class="announcement-container">
+    <!-- Infopoint-Titel -->
     <h1 class="infosaule">I N F O P O I N T</h1>
 
+    <!-- Tabelle mit Links -->
     <div class="info-table">
       <div class="info-row">
         <div class="symbol">🌐</div>
@@ -184,6 +204,7 @@ header h1 {
     </div>
   </main>
 
+  <!-- Hai-GIF -->
   <img src="HCI.gif" alt="Shark" class="shark-gif" loading="lazy">
 </section>
 
