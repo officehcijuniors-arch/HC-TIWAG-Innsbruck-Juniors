@@ -14,10 +14,10 @@
   "reload": 120,
 
   "options": {
-    "lazyVideoLoad": true,
-    "lazyIframeLoad": true,
-    "limitAnimations": true,
-    "backgroundAnimation": true,
+    "lazyVideoLoad": false,
+    "lazyIframeLoad": false,
+    "limitAnimations": false,
+    "backgroundAnimation": false,
     "imageFormat": "webp",
     "maxImageResolution": 1600,
     "debug": false
@@ -49,6 +49,7 @@
     "info": "Diese JSON-Datei steuert die automatische Seitenrotation, Performance-Optionen und Lazy-Loading für die HTML-Anzeige auf dem Vidaa-TV. Änderungen wirken sich direkt auf die index.html aus, ohne dass die HTML-Dateien selbst angepasst werden müssen."
   }
 }
+
 
 
 
