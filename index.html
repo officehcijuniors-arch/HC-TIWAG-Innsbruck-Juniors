@@ -19,7 +19,6 @@
     font-weight: normal;
     font-style: normal;
 }
-
 @font-face {
     font-family: "Areno Serif";
     src: url("fonts/areno-serif-webfont.woff2") format("woff2"),
@@ -30,7 +29,7 @@
 }
 
 /* ========================================
-   2) GRUNDEINSTELLUNGEN FÜR BODY
+   2) BODY-GRUNDEINSTELLUNGEN
    ======================================== */
 body {
   margin: 0;
@@ -41,7 +40,7 @@ body {
 }
 
 /* ========================================
-   3) SEITENSTRUKTUR – Jede Seite als Overlay
+   3) SEITENSTRUKTUR
    ======================================== */
 .page {
   position: absolute;
@@ -50,8 +49,6 @@ body {
   pointer-events: none;
   transition: opacity 0.8s ease;
 }
-
-/* Aktivierte Seite sichtbar machen */
 .page.active {
   opacity: 1;
   pointer-events: all;
@@ -59,7 +56,7 @@ body {
 }
 
 /* ========================================
-   4) iFrames & Videos füllen Container
+   4) MEDIENSTILE
    ======================================== */
 iframe, video {
   width: 100%;
@@ -67,13 +64,12 @@ iframe, video {
   border: 0;
   border-radius: 10px;
 }
-
 .video-page video {
   object-fit: contain;
 }
 
 /* ========================================
-   5) SIGNATUR (unten rechts)
+   5) SIGNATUR
    ======================================== */
 .signature {
   position: fixed;
@@ -104,20 +100,20 @@ iframe, video {
 </section>
 
 <section class="page video-page page-4">
-  <video autoplay loop muted playsinline preload="none">
-    <source data-src="Fotoshop.mp4" type="video/mp4">
+  <video autoplay loop muted playsinline preload="auto">
+    <source src="Fotoshop.mp4" type="video/mp4">
   </video>
 </section>
 
 <section class="page video-page page-5">
-  <video autoplay loop muted playsinline preload="none">
-    <source data-src="Fanshop.mp4" type="video/mp4">
+  <video autoplay loop muted playsinline preload="auto">
+    <source src="Fanshop.mp4" type="video/mp4">
   </video>
 </section>
 
 <section class="page video-page page-6">
-  <video autoplay loop muted playsinline preload="none">
-    <source data-src="HCINWSPPräs.mp4" type="video/mp4">
+  <video autoplay loop muted playsinline preload="auto">
+    <source src="HCINWSPPräs.mp4" type="video/mp4">
   </video>
 </section>
 
@@ -147,13 +143,18 @@ window.addEventListener('DOMContentLoaded', async () => {
   } catch(err) {
     console.warn("⚠️ Einstellungen konnten nicht geladen werden, Standardwerte werden genutzt.");
     settings = {
-      pages: {1:{enabled:true,duration:10},2:{enabled:true,duration:20},3:{enabled:true,duration:15},7:{enabled:true,duration:55}},
-      reload: 60,
-      options: {lazyVideoLoad:true,lazyIframeLoad:true}
+      pages: {1:{enabled:true,duration:10},2:{enabled:true,duration:20},3:{enabled:true,duration:15},
+              4:{enabled:true,duration:23},5:{enabled:true,duration:20},6:{enabled:true,duration:40},
+              7:{enabled:true,duration:55}},
+      reload: 120,
+      options: {lazyVideoLoad:false,lazyIframeLoad:true}
     };
   }
 
-  // --- Aktive Seiten ermitteln ---
+  // Sicherheitshalber Lazy-Load für Videos ausschalten
+  settings.options.lazyVideoLoad = false;
+
+  // --- Aktive Seiten ---
   function getActivePages() {
     const arr = [];
     for (let i = 1; i <= 9; i++)
@@ -161,7 +162,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     return arr;
   }
 
-  // --- Dauer pro Seite in ms ---
+  // --- Dauer pro Seite ---
   function getDurations() {
     const d = {};
     for (let i = 1; i <= 9; i++)
@@ -172,36 +173,22 @@ window.addEventListener('DOMContentLoaded', async () => {
   // --- iFrame laden ---
   function loadIframe(page) {
     const iframe = page.querySelector('iframe');
-    if(!iframe || iframe.src) return;
-    if(iframe.dataset.src){
-      try{
-        iframe.src = iframe.dataset.src;
-        setTimeout(() => {
-          if(!iframe.contentWindow){
-            console.warn('⚠️ iFrame konnte nicht geladen werden, überspringe.');
-            iframe.remove();
-          }
-        },8000);
-      }catch(e){iframe.remove();}
+    if(!iframe) return;
+    if(!iframe.src && iframe.dataset.src){
+      iframe.src = iframe.dataset.src;
     }
   }
 
-  // --- Video laden ---
+  // --- Video laden (immer aktiv, kein Lazy) ---
   function loadVideo(page){
     const video = page.querySelector('video');
-    if(!video || video.dataset.loaded) return;
+    if(!video) return;
     const source = video.querySelector('source');
-    if(source && source.dataset.src){
+    if(source && !source.src && source.dataset.src){
       source.src = source.dataset.src;
-      video.load();
-      video.dataset.loaded = true;
-      let played = false;
-      video.oncanplay = () => played = true;
-      setTimeout(()=>{if(!played){
-        console.warn('⚠️ Video nicht geladen, überspringe');
-        video.remove();
-      }},8000);
     }
+    video.load();
+    video.dataset.loaded = true;
   }
 
   // --- Seite anzeigen ---
@@ -212,15 +199,15 @@ window.addEventListener('DOMContentLoaded', async () => {
       loadVideo(page);
       const video = page.querySelector('video');
       if(video){
-        video.currentTime = 0;      // <<< Startet jedes Mal von vorne
-        video.play().catch(()=>{}); // <<< Sicheres Abspielen
+        video.currentTime = 0;      // Startet immer von vorne
+        video.play().catch(()=>{}); // Sicheres Abspielen
       }
     } else {
       loadIframe(page);
     }
   }
 
-  // --- Rotation zur nächsten Seite ---
+  // --- Rotation ---
   function rotateToNext(){
     const active = getActivePages();
     const durations = getDurations();
@@ -233,12 +220,11 @@ window.addEventListener('DOMContentLoaded', async () => {
   }
 
   // --- Start ---
-  const activePages = getActivePages();
-  current = activePages.length>0 ? activePages[0] : 0;
+  current = 0; // Seite 1 immer als Start
   showPage(current);
   rotateToNext();
 
-  // --- Automatischer Reload alle x Minuten ---
+  // --- Automatischer Reload ---
   if(settings.reload && settings.reload>0){
     setInterval(()=>location.reload(), settings.reload*60*1000);
   }
