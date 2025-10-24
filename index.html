@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="utf-8"> <!-- Zeichencodierung für Umlaute -->
+<meta charset="utf-8">
 <title>HC TIWAG Innsbruck Juniors - Infosäule (Stabile Version)</title>
 
 <!-- ======================================================
@@ -25,7 +25,7 @@
     src: url("fonts/areno-serif-webfont.woff2") format("woff2"),
          url("fonts/areno-serif-webfont.woff") format("woff"),
          url("fonts/Areno-Serif.otf") format("opentype");
-    font-weight: 800; /* fette Schrift */
+    font-weight: 800;
     font-style: normal;
 }
 
@@ -33,57 +33,56 @@
    2) GRUNDEINSTELLUNGEN FÜR BODY
    ======================================== */
 body {
-  margin: 0; /* kein Abstand außen */
-  overflow: hidden; /* keine Scrollbalken */
-  font-family: "Areno Serif", serif; /* lokale Schrift */
-  background: #000; /* schwarzer Hintergrund */
-  color: #fff; /* weiße Schrift */
+  margin: 0;
+  overflow: hidden;
+  font-family: "Areno Serif", serif;
+  background: #000;
+  color: #fff;
 }
 
 /* ========================================
    3) SEITENSTRUKTUR – Jede Seite als Overlay
    ======================================== */
 .page {
-  position: absolute; /* übereinander stapeln */
-  inset: 0;           /* oben, rechts, unten, links = 0 */
-  opacity: 0;         /* unsichtbar standardmäßig */
-  pointer-events: none; /* nicht klickbar, solange nicht aktiv */
-  transition: opacity 0.8s ease; /* sanfte Einblendung */
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease;
 }
 
 /* Aktivierte Seite sichtbar machen */
 .page.active {
   opacity: 1;
-  pointer-events: all; /* jetzt klickbar */
-  z-index: 1;          /* oben */
+  pointer-events: all;
+  z-index: 1;
 }
 
 /* ========================================
    4) iFrames & Videos füllen Container
    ======================================== */
 iframe, video {
-  width: 100%;   /* volle Breite */
-  height: 100%;  /* volle Höhe */
-  border: 0;     /* keine Rahmen */
-  border-radius: 10px; /* leicht abgerundete Ecken */
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 10px;
 }
 
-/* Videos skalieren korrekt ohne Zuschneiden */
 .video-page video {
-  object-fit: contain; /* Bild bleibt komplett sichtbar */
+  object-fit: contain;
 }
 
 /* ========================================
    5) SIGNATUR (unten rechts)
    ======================================== */
 .signature {
-  position: fixed; /* bleibt immer sichtbar */
-  bottom: 8px;     /* Abstand vom unteren Rand */
-  right: 12px;     /* Abstand vom rechten Rand */
+  position: fixed;
+  bottom: 8px;
+  right: 12px;
   font-size: 0.8em;
-  color: rgba(255,255,255,0.4); /* hell, aber transparent */
-  pointer-events: none; /* stört nicht bei Klicks */
-  z-index: 9999;    /* immer ganz oben */
+  color: rgba(255,255,255,0.4);
+  pointer-events: none;
+  z-index: 9999;
 }
 </style>
 </head>
@@ -91,64 +90,63 @@ iframe, video {
 
 <!-- ======================================================
      6) SEITENINHALT
-     Jede Seite wird als Overlay geladen
      ====================================================== -->
 <section class="page page-1 active">
-  <iframe data-src="Infopoint.html"></iframe> <!-- Infopoint -->
+  <iframe data-src="Infopoint.html"></iframe>
 </section>
 
 <section class="page page-2">
-  <iframe data-src="KALENDER.html"></iframe> <!-- Kalender -->
+  <iframe data-src="KALENDER.html"></iframe>
 </section>
 
 <section class="page page-3">
-  <iframe data-src="ORG.html"></iframe> <!-- ORG-Bild -->
+  <iframe data-src="ORG.html"></iframe>
 </section>
 
 <section class="page video-page page-4">
   <video autoplay loop muted playsinline preload="none">
-    <source data-src="Fotoshop.mp4" type="video/mp4"> <!-- Fanshop-Video -->
+    <source data-src="Fotoshop.mp4" type="video/mp4">
   </video>
 </section>
 
 <section class="page video-page page-5">
   <video autoplay loop muted playsinline preload="none">
-    <source data-src="Fanshop.mp4" type="video/mp4"> <!-- Fanshop-Video -->
+    <source data-src="Fanshop.mp4" type="video/mp4">
   </video>
 </section>
 
 <section class="page video-page page-6">
   <video autoplay loop muted playsinline preload="none">
-    <source data-src="HCINWSPPräs.mp4" type="video/mp4"> <!-- HCIN Präsentation -->
+    <source data-src="HCINWSPPräs.mp4" type="video/mp4">
   </video>
 </section>
 
 <section class="page page-7">
-  <iframe data-src="spielerfotos.html"></iframe> <!-- Spielerfotos -->
+  <iframe data-src="spielerfotos.html"></iframe>
 </section>
 
-<section class="page page-8"></section> <!-- Platzhalter für zukünftige Seiten -->
-<section class="page page-9"></section> <!-- Platzhalter -->
+<section class="page page-8"></section>
+<section class="page page-9"></section>
 
-<footer class="signature">MS</footer> <!-- Signatur unten rechts -->
+<footer class="signature">MS</footer>
 
 <!-- ======================================================
      7) JAVASCRIPT – Rotation & Lade-Logik
      ====================================================== -->
 <script>
 window.addEventListener('DOMContentLoaded', async () => {
-  const pages = document.querySelectorAll('.page'); // Alle Seiten
-  let current = 0; // Aktuelle Seite
+  const pages = document.querySelectorAll('.page');
+  let current = 0;
   let settings;
 
   // --- JSON-Datei mit Einstellungen laden ---
   const settingsUrl = 'https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/settings.json';
   try {
-    const res = await fetch(settingsUrl, {cache:"no-store"}); // immer neu laden
-    settings = await res.json(); // JSON auswerten
+    const res = await fetch(settingsUrl, {cache:"no-store"});
+    settings = await res.json();
   } catch(err) {
     console.warn("⚠️ Einstellungen konnten nicht geladen werden, Standardwerte werden genutzt.");
-    settings = { // Fallback-Werte
+    settings = {
       pages: {1:{enabled:true,duration:10},2:{enabled:true,duration:20},3:{enabled:true,duration:15},7:{enabled:true,duration:55}},
       reload: 60,
       options: {lazyVideoLoad:true,lazyIframeLoad:true}
@@ -174,16 +172,16 @@ window.addEventListener('DOMContentLoaded', async () => {
   // --- iFrame laden ---
   function loadIframe(page) {
     const iframe = page.querySelector('iframe');
-    if(!iframe || iframe.src) return; // schon geladen?
+    if(!iframe || iframe.src) return;
     if(iframe.dataset.src){
       try{
-        iframe.src = iframe.dataset.src; // iFrame Quelle setzen
+        iframe.src = iframe.dataset.src;
         setTimeout(() => {
           if(!iframe.contentWindow){
             console.warn('⚠️ iFrame konnte nicht geladen werden, überspringe.');
             iframe.remove();
           }
-        },8000); // Timeout nach 8s
+        },8000);
       }catch(e){iframe.remove();}
     }
   }
@@ -191,14 +189,14 @@ window.addEventListener('DOMContentLoaded', async () => {
   // --- Video laden ---
   function loadVideo(page){
     const video = page.querySelector('video');
-    if(!video || video.dataset.loaded) return; // schon geladen?
+    if(!video || video.dataset.loaded) return;
     const source = video.querySelector('source');
     if(source && source.dataset.src){
-      source.src = source.dataset.src; // Videoquelle setzen
-      video.load(); // Video laden
+      source.src = source.dataset.src;
+      video.load();
       video.dataset.loaded = true;
       let played = false;
-      video.oncanplay = () => played = true; // prüfen ob spielbar
+      video.oncanplay = () => played = true;
       setTimeout(()=>{if(!played){
         console.warn('⚠️ Video nicht geladen, überspringe');
         video.remove();
@@ -210,8 +208,16 @@ window.addEventListener('DOMContentLoaded', async () => {
   function showPage(index){
     pages.forEach((p,i)=>p.classList.toggle('active',i===index));
     const page = pages[index];
-    if(page.classList.contains('video-page')) loadVideo(page);
-    else loadIframe(page);
+    if(page.classList.contains('video-page')){
+      loadVideo(page);
+      const video = page.querySelector('video');
+      if(video){
+        video.currentTime = 0;      // <<< Startet jedes Mal von vorne
+        video.play().catch(()=>{}); // <<< Sicheres Abspielen
+      }
+    } else {
+      loadIframe(page);
+    }
   }
 
   // --- Rotation zur nächsten Seite ---
@@ -221,7 +227,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     if(active.length===0) return;
     let pos = active.indexOf(current);
     if(pos===-1) pos=0;
-    current = active[(pos+1)%active.length]; // zyklisch
+    current = active[(pos+1)%active.length];
     showPage(current);
     setTimeout(rotateToNext,durations[current]||8000);
   }
