@@ -5,7 +5,7 @@
     "3": { "enabled": true, "duration": 15, "note": "Organigramm", "preload": true },
     "4": { "enabled": true, "duration": 23, "note": "Fotoshop", "preload": true },
     "5": { "enabled": true, "duration": 20, "note": "FANSHOP Video", "preload": true },
-    "6": { "enabled": true, "duration": 40, "note": "CANVA Spielankündigungen Juniors", "preload": true },
+    "6": { "enabled": false, "duration": 40, "note": "CANVA Spielankündigungen Juniors", "preload": true },
     "7": { "enabled": true, "duration": 65, "note": "Spielerfotos", "preload": true, "liteMode": false },
     "8": { "enabled": false, "duration": 8, "note": "Platzhalter 8" },
     "9": { "enabled": false, "duration": 8, "note": "Platzhalter 9" }
