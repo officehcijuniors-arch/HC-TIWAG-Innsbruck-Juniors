@@ -7,8 +7,9 @@
     "5": { "enabled": true,  "duration": 20, "title": "Fanshop" },
     "6": { "enabled": true,  "duration": 14, "title": "Spielankündigungen" },
     "7": { "enabled": true,  "duration": 65, "title": "Spielerfotos" },
-    "8": { "enabled": true,  "duration": 30, "title": "Tabellen" },
+    "8": { "enabled": true,  "duration": 40, "title": "Tabellen" },
     "9": { "enabled": false, "duration": 8, "title": "Res" }
   },
   "reload": 120
 }
+
