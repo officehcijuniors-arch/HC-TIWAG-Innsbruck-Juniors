@@ -7,11 +7,12 @@
     "5": { "enabled": true,  "duration": 20 }, "Fanshop"
     "6": { "enabled": true, "duration": 14 }, "Spielankündigungen"
     "7": { "enabled": true,  "duration": 65 }, "Spielerfotos"
-    "8": { "enabled": false, "duration": 8  }, "Tabellen"
+    "8": { "enabled": true, "duration": 30  }, "Tabellen"
     "9": { "enabled": false, "duration": 8  } "Res"
   },
   "reload": 120
 }
+
 
 
 
