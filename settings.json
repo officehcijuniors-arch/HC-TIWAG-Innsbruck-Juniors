@@ -1,16 +1,17 @@
 {
   "pages": {
-    "1": { "enabled": true,  "duration": 10 },"Startseite"
-    "2": { "enabled": true,  "duration": 30 },
-    "3": { "enabled": true,  "duration": 15 },
-    "4": { "enabled": true,  "duration": 23 },
-    "5": { "enabled": true,  "duration": 20 },
-    "6": { "enabled": true, "duration": 14 },
-    "7": { "enabled": true,  "duration": 65 },
-    "8": { "enabled": false, "duration": 8  },
-    "9": { "enabled": false, "duration": 8  }
+    "1": { "enabled": true,  "duration": 10 }, "Startseite"
+    "2": { "enabled": true,  "duration": 30 }, "Eisplan Kalender"
+    "3": { "enabled": true,  "duration": 15 }, "Organigramm"
+    "4": { "enabled": true,  "duration": 23 }, "Fotoshop"
+    "5": { "enabled": true,  "duration": 20 }, "Fanshop"
+    "6": { "enabled": true, "duration": 14 }, "Spielankündigungen"
+    "7": { "enabled": true,  "duration": 65 }, "Spielerfotos"
+    "8": { "enabled": false, "duration": 8  }, "Tabellen"
+    "9": { "enabled": false, "duration": 8  } "Res"
   },
   "reload": 120
 }
+
 
 
