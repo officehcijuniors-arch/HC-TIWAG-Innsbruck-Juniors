@@ -57,7 +57,24 @@ tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
 <p id="letzteAktualisierung"></p>
 
 <script>
-const manualUpdate = true;
+// Backup-Daten
+const backupData = {
+    "data": {
+        "rows": [
+            {"tableRank":1,"teamLongname":"EC KAC","gamesPlayed":9,"gamesWon":9,"gamesTied":0,"gamesLost":0,"goalsFor":80,"goalsAgainst":17,"goalDifference":"+63","points":27},
+            {"tableRank":2,"teamLongname":"\"Rockit-Apfel\" Graz99 Juniors","gamesPlayed":10,"gamesWon":9,"gamesTied":0,"gamesLost":1,"goalsFor":82,"goalsAgainst":21,"goalDifference":"+61","points":27},
+            {"tableRank":3,"teamLongname":"Steel Wings Linz","gamesPlayed":9,"gamesWon":6,"gamesTied":0,"gamesLost":2,"goalsFor":72,"goalsAgainst":22,"goalDifference":"+50","points":20},
+            {"tableRank":4,"teamLongname":"EK Zeller Eisbären","gamesPlayed":10,"gamesWon":6,"gamesTied":0,"gamesLost":3,"goalsFor":68,"goalsAgainst":45,"goalDifference":"+23","points":20},
+            {"tableRank":5,"teamLongname":"EC Red Bull Salzburg","gamesPlayed":10,"gamesWon":5,"gamesTied":0,"gamesLost":4,"goalsFor":62,"goalsAgainst":49,"goalDifference":"+13","points":16},
+            {"tableRank":6,"teamLongname":"EC iDM VSV","gamesPlayed":10,"gamesWon":5,"gamesTied":0,"gamesLost":5,"goalsFor":73,"goalsAgainst":51,"goalDifference":"+22","points":15},
+            {"tableRank":7,"teamLongname":"EC Lower Austria Stars","gamesPlayed":10,"gamesWon":5,"gamesTied":0,"gamesLost":5,"goalsFor":66,"goalsAgainst":42,"goalDifference":"+24","points":15},
+            {"tableRank":8,"teamLongname":"HC TIWAG Innsbruck - Die Haie","gamesPlayed":10,"gamesWon":4,"gamesTied":0,"gamesLost":5,"goalsFor":55,"goalsAgainst":40,"goalDifference":"+15","points":13},
+            {"tableRank":9,"teamLongname":"EAC Junior Capitals","gamesPlayed":10,"gamesWon":2,"gamesTied":0,"gamesLost":8,"goalsFor":46,"goalsAgainst":60,"goalDifference":"-14","points":6},
+            {"tableRank":10,"teamLongname":"KSV Eishockey - Juniors / Graz99 Juniors","gamesPlayed":10,"gamesWon":1,"gamesTied":0,"gamesLost":9,"goalsFor":22,"goalsAgainst":90,"goalDifference":"-68","points":3},
+            {"tableRank":11,"teamLongname":"EV Zeltweg - Murtal Lions","gamesPlayed":10,"gamesWon":0,"gamesTied":0,"gamesLost":10,"goalsFor":9,"goalsAgainst":198,"goalDifference":"-189","points":0}
+        ]
+    }
+};
 
 function renderTabelle(data) {
   const tbody = $("#tabelle");
@@ -82,18 +99,8 @@ function renderTabelle(data) {
   $("#letzteAktualisierung").text(`Letzte Aktualisierung: ${jetzt.toLocaleDateString()} ${jetzt.toLocaleTimeString()}`);
 }
 
-function fetchDaten() {
-  const url = "https://api.hockeydata.net/data/ebel/Standings?apiKey=738aba5a0c15ea7da496e1cda6922ff1&lang=de&referer=www.hcinnsbruck.at&divisionId=oehv-u13-gd";
-  $.getJSON(url)
-    .done(renderTabelle)
-    .fail(() => {
-      console.error("API konnte nicht geladen werden.");
-    });
-}
-
-// Init
-fetchDaten();
-if(manualUpdate) setInterval(fetchDaten, 60000);
+// Init mit Backup-Daten
+renderTabelle(backupData);
 </script>
 
 </body>
