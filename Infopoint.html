@@ -1,224 +1,201 @@
-<!DOCTYPE html> <!-- Gibt an, dass das Dokument HTML5 ist -->
-<html lang="de"> <!-- Sprache der Seite: Deutsch -->
+<!DOCTYPE html>
+<html lang="de">
 <head>
-<meta charset="utf-8"> <!-- Zeichensatz UTF-8: unterstützt Umlaute -->
-<title>HC TIWAG Innsbruck Juniors - Startseite (CI-konform)</title> <!-- Titel im Browser-Tab -->
+<meta charset="utf-8">
+<title>HC TIWAG Innsbruck Juniors - Startseite (CI-konform)</title>
 
-<!-- ================================
-     STILBEREICH (CSS)
-     ================================ -->
+<!-- ==============================
+     CSS-Stilbereich
+     ============================== -->
 <style>
 
-/* =======================================
-   1. Lokale Schriftart "Areno Serif" laden
-   ======================================= */
-@font-face {
-    font-family: "Areno Serif"; /* Name, unter dem die Schrift im CSS verwendet wird */
-    src: url("fonts/areno-serif-webfont.woff2") format("woff2"), /* Moderne Web-Schriftdatei */
-         url("fonts/areno-serif-webfont.woff") format("woff"),   /* Fallback für ältere Browser */
-         url("fonts/Areno-Serif.otf") format("opentype");        /* Lokale OTF-Datei als letzte Option */
-    font-weight: normal; /* normale Stärke */
-    font-style: normal;  /* nicht kursiv */
-}
+  /* ========================================
+     1. Lokale Schriftart "Areno Serif"
+     ======================================== */
+  @font-face {
+      font-family: "Areno Serif";
+      src: url("fonts/areno-serif-webfont.woff2") format("woff2"),
+           url("fonts/areno-serif-webfont.woff") format("woff"),
+           url("fonts/Areno-Serif.otf") format("opentype");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap; /* sorgt für schnelles Rendering */
+  }
 
-@font-face {
-    font-family: "Areno Serif"; /* gleiche Schriftart, aber fetter Schnitt */
-    src: url("fonts/areno-serif-webfont.woff2") format("woff2"),
-         url("fonts/areno-serif-webfont.woff") format("woff"),
-         url("fonts/Areno-Serif.otf") format("opentype");
-    font-weight: 800;   /* sehr fett */
-    font-style: normal;
-}
+  @font-face {
+      font-family: "Areno Serif";
+      src: url("fonts/areno-serif-webfont.woff2") format("woff2"),
+           url("fonts/areno-serif-webfont.woff") format("woff"),
+           url("fonts/Areno-Serif.otf") format("opentype");
+      font-weight: 800;
+      font-style: normal;
+      font-display: swap;
+  }
 
-/* =======================================
-   2. Allgemeine Textgestaltung
-   ======================================= */
-* {
-    font-family: "Areno Serif", serif; /* Verwende überall die geladene Schriftart */
-    color: #fff;                        /* Alle Texte sind weiß */
-}
+  /* ========================================
+     2. Grundlegendes Styling
+     ======================================== */
+  * {
+      font-family: "Areno Serif", serif; /* überall einheitlich */
+      color: #fff;
+      box-sizing: border-box; /* vereinfacht Layout */
+      margin: 0;
+      padding: 0;
+  }
 
-/* =======================================
-   3. Grundlayout des Body-Bereichs
-   ======================================= */
-body {
-    margin: 0;        /* Entfernt Standard-Abstand um die Seite */
-    overflow: hidden; /* Verhindert Scrollbalken */
-}
+  body {
+      overflow: hidden; /* keine Scrollbalken */
+      background-color: #000; /* Hintergrundfarbe */
+  }
 
-/* =======================================
-   4. Haupthülle der Seite (.page)
-   ======================================= */
-.page {
-    display: flex;                 /* Flexbox für einfache Anordnung */
-    flex-direction: column;        /* Elemente untereinander (vertikal) */
-    align-items: center;           /* Zentriert horizontal */
-    justify-content: flex-start;   /* Start oben */
-    position: absolute;            /* Füllt den ganzen Bildschirm */
-    inset: 0;                      /* oben, rechts, unten, links = 0 */
-    background: linear-gradient(135deg, #003789 50%, #d42323 50%); /* Diagonaler Farbverlauf: Blau/Rot */
-    background-size: 200% 200%;    /* Vergrößert die Fläche für Animation */
-    animation: gradientShift 180s ease infinite; /* Langsame Farbverschiebung über 180 Sekunden */
-}
+  /* ========================================
+     3. Seitencontainer
+     ======================================== */
+  .page {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      background: linear-gradient(135deg, #003789 50%, #d42323 50%);
+      background-size: 200% 200%;
+      animation: gradientShift 180s ease infinite;
+  }
 
-/* =======================================
-   5. Hintergrund-Animation (verlaufende Farben)
-   ======================================= */
-@keyframes gradientShift {
-    0%   { background-position: 0% 50%; }   /* Startposition */
-    50%  { background-position: 100% 50%; } /* Verlauf verschiebt sich */
-    100% { background-position: 0% 50%; }   /* Zurück zum Anfang */
-}
+  @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+  }
 
-/* =======================================
-   6. Kopfbereich (Header)
-   ======================================= */
-header { 
-    text-align: center; /* Text zentriert */
-    padding: 10px 0;    /* Abstand oben/unten innerhalb des Headers */
-}
+  /* ========================================
+     4. Kopfbereich (Header)
+     ======================================== */
+  header {
+      text-align: center;
+      padding: 10px 0;
+  }
 
-header h1 {
-    font-size: 2.4em;  /* Schriftgröße */
-    font-weight: 800;  /* Fett */
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.8); /* Schatten für bessere Lesbarkeit */
-    margin: 60px 0 5px 0; /* Oben 60px Abstand, unten 5px */
-}
+  header h1 {
+      font-size: 2.4em;
+      font-weight: 800;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+      margin: 60px 0 5px 0;
+  }
 
-/* =======================================
-   7. Großer "INFOSÄULE"-Titel mit Glüheffekt
-   ======================================= */
-.infosaule {
-    font-size: 7vw;             /* Schriftgröße abhängig von Bildschirmbreite */
-    font-weight: 800;           /* Sehr fett */
-    letter-spacing: 0.25em;     /* Buchstabenabstand */
-    text-transform: uppercase;  /* Alles Großbuchstaben */
-    color: #fff;                /* Weißer Text */
-    text-shadow:                /* Glüheffekt durch mehrere Schatten */
-        0 0 20px rgba(255,255,255,0.9),
-        0 0 40px rgba(255,255,255,0.7);
-    animation: glowPulse 2s ease-in-out infinite alternate; /* Pulsierende Animation */
-    margin-top: 5vh;            /* Abstand nach oben (5% der Bildschirmhöhe) */
-}
+  /* ========================================
+     5. Großer Infosäule-Titel
+     ======================================== */
+  .infosaule {
+      font-size: 7vw; 
+      font-weight: 800;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      text-shadow:
+          0 0 20px rgba(255,255,255,0.9),
+          0 0 40px rgba(255,255,255,0.7);
+      animation: glowPulse 2s ease-in-out infinite alternate;
+      margin-top: 5vh;
+      text-align: center;
+  }
 
-/* Glüh-Animation: der Text „atmet“ leicht */
-@keyframes glowPulse {
-    0%,100% { text-shadow: 0 0 15px rgba(255,255,255,0.6); }  /* Weniger Leuchten */
-    50% { text-shadow: 0 0 60px rgba(255,255,255,0.85); }     /* Stärkeres Leuchten */
-}
+  @keyframes glowPulse {
+      0%,100% { text-shadow: 0 0 15px rgba(255,255,255,0.6); }
+      50% { text-shadow: 0 0 60px rgba(255,255,255,0.85); }
+  }
 
-/* =======================================
-   8. Infotabelle (Liste mit Links)
-   ======================================= */
-.info-table {
-    display: flex;             /* Vertikale Liste */
-    flex-direction: column; 
-    align-items: center;       /* Zentriert horizontal */
-    margin-top: 5vh;           /* Abstand nach oben */
-    font-size: 2em;            /* Große Schrift für Übersicht */
-    line-height: 1.8;          /* Zeilenhöhe */
-    margin-left: 10vw;         /* Leichte Einrückung nach rechts */
-}
+  /* ========================================
+     6. Infotabelle (Liste)
+     ======================================== */
+  .info-table {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 5vh;
+      font-size: 2em;
+      line-height: 1.8;
+  }
 
-.info-row {
-    display: flex;             /* Symbol und Text nebeneinander */
-    align-items: center; 
-    margin-bottom: 1em;        /* Abstand nach unten */
-}
+  .info-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1em;
+  }
 
-.symbol {
-    display: inline-block; 
-    width: 2.5em;              /* Breite für Gleichmäßigkeit */
-    text-align: center;        /* Symbol zentriert */
-    font-size: 2.2em;          /* Etwas größer als Text */
-}
+  .symbol {
+      width: 2.5em;
+      text-align: center;
+      font-size: 2.2em;
+  }
 
-.linktext {
-    min-width: 20em;           /* Mindestbreite für gleichmäßige Zeilen */
-    text-align: left;          /* Text linksbündig */
-}
+  .linktext {
+      min-width: 20em;
+      text-align: left;
+  }
 
-/* Gestaltung der Links */
-.linktext a {
-    color: #fff;               /* Weißer Text */
-    text-decoration: none;     /* Kein Unterstrich */
-}
+  .linktext a {
+      color: #fff;
+      text-decoration: none;
+  }
 
-/* Wenn man mit der Maus drüberfährt */
-.linktext a:hover {
-    text-decoration: underline; /* Unterstrich bei Hover */
-}
+  .linktext a:hover {
+      text-decoration: underline;
+  }
 
-/* =======================================
-   9. Hai-GIF am unteren Rand
-   ======================================= */
-.shark-gif {
-    position: absolute;       /* Fester Platz am Bildschirm */
-    bottom: 5%;               /* 5% vom unteren Rand */
-    left: 50%;                /* In der Mitte */
-    transform: translateX(-50%); /* Exakte Zentrierung */
-    width: 10vw;              /* Breite abhängig vom Bildschirm (responsive) */
-    max-width: 280px;         /* Obergrenze für große Monitore */
-    height: auto;             /* Höhe passt sich an */
-    pointer-events: none;     /* Klicks gehen durch (nicht anklickbar) */
-    animation: float 4s ease-in-out infinite; /* Schwebe-Animation */
-    opacity: 0.85;            /* Leicht transparent */
-}
+  /* ========================================
+     7. Animierter Hai
+     ======================================== */
+  .shark-gif {
+      position: absolute;
+      bottom: 5%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 10vw;
+      max-width: 280px;
+      height: auto;
+      pointer-events: none;
+      animation: float 4s ease-in-out infinite;
+      opacity: 0.85;
+  }
 
-/* Animation: der Hai schwebt leicht auf/ab */
-@keyframes float {
-    0%,100% { transform: translateX(-50%) translateY(0); }   /* Ausgangsposition */
-    50% { transform: translateX(-50%) translateY(-10px); }   /* Leicht nach oben */
-}
+  @keyframes float {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-10px); }
+  }
 
 </style>
 </head>
 
 <body>
 
-<!-- =======================================
-     10. Seiteninhalt
-     ======================================= -->
+<!-- =========================
+     Seiteninhalt
+     ========================= -->
 <section class="page">
-  <!-- Kopfbereich mit Titel -->
   <header>
     <h1>HC TIWAG Innsbruck Juniors</h1>
   </header>
 
-  <!-- Hauptinhalt -->
   <main class="announcement-container">
-    <!-- Großer Titel in der Mitte -->
     <h1 class="infosaule">I N F O P O I N T</h1>
 
-    <!-- Tabelle mit Links (Info-Bereich) -->
     <div class="info-table">
-      <!-- Erste Zeile: Website -->
       <div class="info-row">
-        <div class="symbol">🌐</div> <!-- Symbol -->
-        <div class="linktext">
-          <a href="https://www.hcinnsbruck.at/" target="_blank">www.hcinnsbruck.at</a>
-        </div>
+        <div class="symbol">🌐</div>
+        <div class="linktext"><a href="https://www.hcinnsbruck.at/" target="_blank">www.hcinnsbruck.at</a></div>
       </div>
-
-      <!-- Zweite Zeile: Instagram -->
       <div class="info-row">
         <div class="symbol">📸</div>
-        <div class="linktext">
-          <a href="https://www.instagram.com/hcijuniors" target="_blank">www.instagram.com/hcijuniors</a>
-        </div>
+        <div class="linktext"><a href="https://www.instagram.com/hcijuniors" target="_blank">www.instagram.com/hcijuniors</a></div>
       </div>
-
-      <!-- Dritte Zeile: Facebook -->
       <div class="info-row">
         <div class="symbol">📘</div>
-        <div class="linktext">
-          <a href="https://www.facebook.com/hcijuniors" target="_blank">www.facebook.com/hcijuniors</a>
-        </div>
+        <div class="linktext"><a href="https://www.facebook.com/hcijuniors" target="_blank">www.facebook.com/hcijuniors</a></div>
       </div>
     </div>
   </main>
 
-  <!-- Animierter Hai unten -->
   <img src="HCI.gif" alt="Shark" class="shark-gif" loading="lazy">
 </section>
 
