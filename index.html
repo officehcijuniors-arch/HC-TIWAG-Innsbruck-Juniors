@@ -142,7 +142,7 @@
   <section class="page frame-page page-8">
     <div class="frame-container">
       <div class="frame" id="table-frame">
-        <iframe src="Tabelle_U13.html" title="Tabelle U13"></iframe>
+        <!-- Tabellen werden dynamisch per JS geladen -->
       </div>
     </div>
   </section>
@@ -235,11 +235,11 @@
         setInterval(()=>location.reload(), settings.reload*60*1000);
 
       // =========================
-      // Seite 8: Einzelne Tabellen oder zwei untereinander, Start immer U13
+      // Seite 8 – Tabellenrotation (robust)
       // =========================
       const tableSequence = [
-        ["Tabelle_U13.html"],                 
-        ["Tabelle_U15.html"],                 
+        ["Tabelle_U13.html"],
+        ["Tabelle_U15.html"],
         ["Tabelle_U17.html","Tabelle_U20.html"]
       ];
 
@@ -247,23 +247,36 @@
       const frame = document.getElementById("table-frame");
 
       if(frame){
+
+        function createIframe(src) {
+          const iframe = document.createElement("iframe");
+          iframe.src = src;
+          iframe.title = src;
+          iframe.width = "100%";
+          iframe.height = "100%";
+          iframe.style.border = "0";
+          return iframe;
+        }
+
         function rotateTables(){
           const currentTables = tableSequence[index];
 
           frame.classList.remove('multiple');
           frame.innerHTML = "";
 
+          if(!currentTables || currentTables.length === 0){
+            console.warn("⚠️ Keine Tabellen im aktuellen Index:", index);
+            return;
+          }
+
           if(currentTables.length === 1){
-            const iframe = document.createElement("iframe");
-            iframe.src = currentTables[0];
-            iframe.title = currentTables[0];
+            const iframe = createIframe(currentTables[0]);
             frame.appendChild(iframe);
           } else {
             frame.classList.add('multiple');
             currentTables.forEach(tbl => {
-              const iframe = document.createElement("iframe");
-              iframe.src = tbl;
-              iframe.title = tbl;
+              const iframe = createIframe(tbl);
+              iframe.style.height = "50%";
               frame.appendChild(iframe);
             });
           }
@@ -271,7 +284,6 @@
           index = (index + 1) % tableSequence.length;
         }
 
-        index = 0; // sicherstellen, dass U13 initial geladen wird
         rotateTables();
         setInterval(rotateTables, 10000); // alle 10 Sekunden wechseln
       }
