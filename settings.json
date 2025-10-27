@@ -1,69 +1,14 @@
 {
   "pages": {
-    "1": { "enabled": true, "duration": 10, "note": "Startseite / Infosäule", "preload": true },
-    "2": { "enabled": true, "duration": 30, "note": "Kalender / Eisplan", "preload": true },
-    "3": { "enabled": true, "duration": 15, "note": "Organigramm", "preload": true },
-    "4": { "enabled": true, "duration": 23, "note": "Fotoshop", "preload": true },
-    "5": { "enabled": true, "duration": 20, "note": "FANSHOP Video", "preload": true },
-    "6": { "enabled": false, "duration": 40, "note": "CANVA Spielankündigungen Juniors", "preload": true },
-    "7": { "enabled": true, "duration": 65, "note": "Spielerfotos", "preload": true, "liteMode": false },
-    "8": { "enabled": false, "duration": 8, "note": "Platzhalter 8" },
-    "9": { "enabled": false, "duration": 8, "note": "Platzhalter 9" }
+    "1": { "enabled": true,  "duration": 10 },
+    "2": { "enabled": true,  "duration": 30 },
+    "3": { "enabled": true,  "duration": 15 },
+    "4": { "enabled": true,  "duration": 23 },
+    "5": { "enabled": true,  "duration": 20 },
+    "6": { "enabled": false, "duration": 40 },
+    "7": { "enabled": true,  "duration": 65 },
+    "8": { "enabled": false, "duration": 8  },
+    "9": { "enabled": false, "duration": 8  }
   },
-
-  "reload": 120,
-
-  "options": {
-    "lazyVideoLoad": false,
-    "lazyIframeLoad": false,
-    "limitAnimations": false,
-    "backgroundAnimation": false,
-    "imageFormat": "webp",
-    "maxImageResolution": 1600,
-    "debug": false
-  },
-
-  "explanations": {
-    "pages": "Definiert die Seiten in der Rotation. Die Schlüssel '1'..'9' entsprechen den Seiten im HTML.",
-    "pages.enabled": "Boolean. true = Seite wird angezeigt, false = Seite wird übersprungen.",
-    "pages.duration": "Anzeigedauer in Sekunden für die jeweilige Seite.",
-    "pages.note": "Kurze Beschreibung für Dokumentationszwecke (kein technischer Effekt).",
-    "pages.preload": "Wenn true, werden Bilder/Videos/iFrames vorgeladen, bevor die Seite aktiv wird.",
-    "pages.liteMode": "Wenn true, reduziert die Seite Animationen und Effekte, um Performance auf leistungsschwachen Geräten zu verbessern.",
-
-    "reload": "Intervall in Minuten, nach dem die gesamte Anzeige automatisch neu geladen wird, um Speicherlecks zu vermeiden.",
-
-    "options.lazyVideoLoad": "Wenn true, werden Videos erst geladen, wenn die Seite angezeigt wird (spart Bandbreite und RAM).",
-    "options.lazyIframeLoad": "Wenn true, werden iFrames erst geladen, wenn die Seite angezeigt wird (z.B. Kalender, ORG).",
-    "options.limitAnimations": "Wenn true, werden Animationen reduziert, um die Performance auf schwächeren Geräten zu verbessern.",
-    "options.backgroundAnimation": "Wenn false, wird der animierte Hintergrund deaktiviert, um Ressourcen zu sparen.",
-    "options.imageFormat": "Bevorzugtes Bildformat für Spielerfotos. WebP empfohlen für schnelle Ladezeiten.",
-    "options.maxImageResolution": "Maximale Breite/Höhe in Pixeln für Bilder, um RAM und Bandbreite zu schonen.",
-    "options.debug": "Wenn true, werden zusätzliche Konsolenmeldungen angezeigt. Nur für Testzwecke verwenden."
-  },
-
-  "meta": {
-    "author": "M&S",
-    "version": "1.1",
-    "lastUpdated": "2025-10-19",
-    "info": "Diese JSON-Datei steuert die automatische Seitenrotation, Performance-Optionen und Lazy-Loading für die HTML-Anzeige auf dem Vidaa-TV. Änderungen wirken sich direkt auf die index.html aus, ohne dass die HTML-Dateien selbst angepasst werden müssen."
-  }
+  "reload": 120
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
