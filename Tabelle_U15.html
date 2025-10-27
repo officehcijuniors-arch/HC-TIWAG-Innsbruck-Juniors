@@ -24,15 +24,11 @@ h1 {
   margin:0;
   color:#0047AB;
 }
-
-/* Logo oben rechts */
 #logo {
   height:55px;
   opacity:0.8;
   display:block;
 }
-
-/* Tabelle größer & Spalten enger */
 table {
   width:100%;
   border-collapse:collapse;
@@ -41,13 +37,12 @@ table {
   overflow:hidden;
   box-shadow:0 12px 35px rgba(0,0,0,0.18);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  font-size:1rem; /* größer */
+  font-size:1rem;
 }
 table:hover {
   transform: translateY(-6px);
   box-shadow:0 25px 50px rgba(0,0,0,0.25);
 }
-
 thead {
   background:#eaeaea;
 }
@@ -77,15 +72,12 @@ tbody tr:hover{
   color:#E10600;
   font-weight:700;
 }
-
 #letzteAktualisierung {
   font-size:0.8rem;
   color:#555;
   text-align:right;
   margin-top:0.5rem;
 }
-
-/* Responsive Design */
 @media (max-width:768px){
   table,thead,tbody,th,td,tr{display:block;}
   thead{display:none;}
@@ -108,7 +100,6 @@ tbody tr:hover{
   td::before{content:attr(data-label); font-weight:600; color:#444;}
 }
 </style>
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -141,23 +132,23 @@ tbody tr:hover{
 <p id="letzteAktualisierung"></p>
 
 <script>
-const manualUpdate = true;
-
+// Backup-Daten für U15
 const backupData = {
   "data": {
     "rows": [
-      {"tableRank":1,"teamLongname":"EC KAC","gamesPlayed":8,"gamesWon":8,"gamesWonInOt":0,"gamesTied":0,"gamesLostInOt":0,"gamesLost":0,"goalsFor":67,"goalsAgainst":17,"goalDifference":"+50","points":24},
-      {"tableRank":2,"teamLongname":"\"Rockit-Apfel\" Graz99 Juniors","gamesPlayed":9,"gamesWon":8,"gamesWonInOt":0,"gamesTied":0,"gamesLostInOt":0,"gamesLost":1,"goalsFor":58,"goalsAgainst":20,"goalDifference":"+38","points":24},
-      {"tableRank":3,"teamLongname":"EK Zeller Eisbären","gamesPlayed":9,"gamesWon":6,"gamesWonInOt":1,"gamesTied":0,"gamesLostInOt":0,"gamesLost":2,"goalsFor":67,"goalsAgainst":40,"goalDifference":"+27","points":20},
-      {"tableRank":4,"teamLongname":"Steel Wings Linz","gamesPlayed":8,"gamesWon":5,"gamesWonInOt":1,"gamesTied":0,"gamesLostInOt":0,"gamesLost":2,"goalsFor":67,"goalsAgainst":21,"goalDifference":"+46","points":17},
-      {"tableRank":5,"teamLongname":"EC Red Bull Salzburg","gamesPlayed":9,"gamesWon":5,"gamesWonInOt":0,"gamesTied":0,"gamesLostInOt":1,"gamesLost":3,"goalsFor":62,"goalsAgainst":45,"goalDifference":"+17","points":16},
-      {"tableRank":6,"teamLongname":"HC TIWAG Innsbruck - Die Haie","gamesPlayed":10,"gamesWon":4,"gamesWonInOt":0,"gamesTied":0,"gamesLostInOt":1,"gamesLost":5,"goalsFor":55,"goalsAgainst":40,"goalDifference":"+15","points":13},
-      {"tableRank":7,"teamLongname":"EC iDM VSV","gamesPlayed":9,"gamesWon":4,"gamesWonInOt":0,"gamesTied":0,"gamesLostInOt":0,"gamesLost":5,"goalsFor":56,"goalsAgainst":51,"goalDifference":"+5","points":12},
-      {"tableRank":8,"teamLongname":"EC Lower Austria Stars","gamesPlayed":8,"gamesWon":3,"gamesWonInOt":0,"gamesTied":0,"gamesLostInOt":0,"gamesLost":5,"goalsFor":55,"goalsAgainst":39,"goalDifference":"+16","points":9},
-      {"tableRank":9,"teamLongname":"EAC Junior Capitals","gamesPlayed":9,"gamesWon":2,"gamesWonInOt":0,"gamesTied":0,"gamesLostInOt":0,"gamesLost":7,"goalsFor":43,"goalsAgainst":53,"goalDifference":"-10","points":6},
-      {"tableRank":10,"teamLongname":"KSV Eishockey - Juniors / Graz99 Juniors","gamesPlayed":8,"gamesWon":1,"gamesWonInOt":0,"gamesTied":0,"gamesLostInOt":0,"gamesLost":7,"goalsFor":22,"goalsAgainst":60,"goalDifference":"-38","points":3},
-      {"tableRank":11,"teamLongname":"EV Zeltweg - Murtal Lions","gamesPlayed":9,"gamesWon":0,"gamesWonInOt":0,"gamesTied":0,"gamesLostInOt":0,"gamesLost":9,"goalsFor":8,"goalsAgainst":174,"goalDifference":"-166","points":0}
+      {"tableRank":1,"teamLongname":"EC IDM VSV","gamesPlayed":14,"gamesWon":11,"gamesWonInOt":0,"gamesTied":0,"gamesLostInOt":1,"gamesLost":2,"goalsFor":76,"goalsAgainst":33,"goalDifference":"+43","points":34},
+      {"tableRank":2,"teamLongname":"EC KAC","gamesPlayed":11,"gamesWon":8,"gamesWonInOt":2,"gamesTied":0,"gamesLostInOt":0,"gamesLost":1,"goalsFor":70,"goalsAgainst":21,"goalDifference":"+49","points":28},
+      {"tableRank":3,"teamLongname":"SPG OHA / LAS","gamesPlayed":14,"gamesWon":9,"gamesWonInOt":0,"gamesTied":0,"gamesLostInOt":0,"gamesLost":5,"goalsFor":101,"goalsAgainst":35,"goalDifference":"+66","points":27},
+      {"tableRank":4,"teamLongname":"Eishockey Akademie Steiermark","gamesPlayed":12,"gamesWon":8,"gamesWonInOt":0,"gamesTied":0,"gamesLostInOt":0,"gamesLost":4,"goalsFor":93,"goalsAgainst":40,"goalDifference":"+53","points":24},
+      {"tableRank":5,"teamLongname":"EV Vienna Capitals","gamesPlayed":12,"gamesWon":6,"gamesWonInOt":0,"gamesTied":0,"gamesLostInOt":1,"gamesLost":5,"goalsFor":74,"goalsAgainst":37,"goalDifference":"+37","points":19},
+      {"tableRank":6,"teamLongname":"HC TIWAG Innsbruck - Die Haie","gamesPlayed":12,"gamesWon":6,"gamesWonInOt":0,"gamesTied":0,"gamesLostInOt":0,"gamesLost":6,"goalsFor":65,"goalsAgainst":56,"goalDifference":"+9","points":18},
+      {"tableRank":7,"teamLongname":"EC Red Bull Salzburg","gamesPlayed":13,"gamesWon":5,"gamesWonInOt":0,"gamesTied":0,"gamesLostInOt":0,"gamesLost":8,"goalsFor":67,"goalsAgainst":60,"goalDifference":"+7","points":15},
+      {"tableRank":8,"teamLongname":"Steel Wings Linz","gamesPlayed":12,"gamesWon":2,"gamesWonInOt":0,"gamesTied":0,"gamesLostInOt":0,"gamesLost":10,"goalsFor":67,"goalsAgainst":87,"goalDifference":"-20","points":6},
+      {"tableRank":9,"teamLongname":"Ultras Spittal","gamesPlayed":14,"gamesWon":0,"gamesWonInOt":0,"gamesTied":0,"gamesLostInOt":0,"gamesLost":14,"goalsFor":12,"goalsAgainst":256,"goalDifference":"-244","points":0}
     ]
+  },
+  "lastUpdate": {
+    "formattedLong": "27.October 2025 07:32"
   }
 };
 
@@ -185,27 +176,12 @@ function renderTabelle(data) {
     `);
   });
 
-  updateZeitstempel();
-}
-
-function updateZeitstempel() {
-  const jetzt = new Date();
-  $("#letzteAktualisierung").text(`Letzte Aktualisierung: ${jetzt.toLocaleDateString()} ${jetzt.toLocaleTimeString()}`);
-}
-
-function fetchDaten() {
-  const url = "https://api.hockeydata.net/data/ebel/Standings?apiKey=738aba5a0c15ea7da496e1cda6922ff1&lang=en&referer=www.hcinnsbruck.at&divisionId=oehv-u15-gd&callback=?";
-  $.getJSON(url, function(data){
-    renderTabelle(data);
-  }).fail(function(){
-    renderTabelle(backupData);
-  });
+  // Zeige Zeitpunkt der letzten offiziellen Aktualisierung
+  $("#letzteAktualisierung").text(`Letzte Aktualisierung: ${data.lastUpdate.formattedLong}`);
 }
 
 // Init
 renderTabelle(backupData);
-if(manualUpdate) setInterval(fetchDaten,60000);
-fetchDaten();
 </script>
 
 </body>
