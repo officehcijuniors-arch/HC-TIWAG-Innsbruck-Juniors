@@ -54,17 +54,34 @@ tbody tr:hover { background:#f0f3f8; transition: background 0.3s ease; }
       <th>Punkte</th>
     </tr>
   </thead>
-  <tbody id="tabelle">
-    <tr><td colspan="12">Lade Daten ...</td></tr>
-  </tbody>
+  <tbody id="tabelle"></tbody>
 </table>
 
-<p id="letzteAktualisierung">Letzte Aktualisierung: wird geladen ...</p>
+<p id="letzteAktualisierung"></p>
 
 <script>
+// Backup-Daten für U17
+const backupData = {
+  "data": {
+    "rows": [
+      {"tableRank":1,"teamLongname":"Eishockey Akademie Oberösterreich","gamesPlayed":12,"gamesWon":9,"gamesWonInOt":1,"gamesTied":0,"gamesLostInOt":1,"gamesLost":1,"goalsFor":74,"goalsAgainst":26,"goalDifference":"+48","points":30},
+      {"tableRank":2,"teamLongname":"Eishockey Akademie Steiermark","gamesPlayed":13,"gamesWon":9,"gamesWonInOt":0,"gamesTied":0,"gamesLostInOt":2,"gamesLost":2,"goalsFor":67,"goalsAgainst":21,"goalDifference":"+46","points":29},
+      {"tableRank":3,"teamLongname":"EC Red Bull Salzburg","gamesPlayed":11,"gamesWon":8,"gamesWonInOt":1,"gamesTied":0,"gamesLostInOt":0,"gamesLost":2,"goalsFor":87,"goalsAgainst":20,"goalDifference":"+67","points":26},
+      {"tableRank":4,"teamLongname":"Okanagan Hockey Academy","gamesPlayed":10,"gamesWon":8,"gamesWonInOt":0,"gamesTied":0,"gamesLostInOt":0,"gamesLost":2,"goalsFor":66,"goalsAgainst":26,"goalDifference":"+40","points":24},
+      {"tableRank":5,"teamLongname":"HC TIWAG Innsbruck - Die Haie","gamesPlayed":9,"gamesWon":3,"gamesWonInOt":1,"gamesTied":0,"gamesLostInOt":0,"gamesLost":5,"goalsFor":33,"goalsAgainst":52,"goalDifference":"-19","points":11},
+      {"tableRank":6,"teamLongname":"Eishockey Leistungszentrum Vorarlberg","gamesPlayed":15,"gamesWon":2,"gamesWonInOt":0,"gamesTied":0,"gamesLostInOt":0,"gamesLost":13,"goalsFor":29,"goalsAgainst":92,"goalDifference":"-63","points":6},
+      {"tableRank":7,"teamLongname":"Hockey Club Ferlach","gamesPlayed":14,"gamesWon":0,"gamesWonInOt":0,"gamesTied":0,"gamesLostInOt":0,"gamesLost":14,"goalsFor":17,"goalsAgainst":136,"goalDifference":"-119","points":0}
+    ]
+  },
+  "lastUpdate": {
+    "formattedLong": "27.October 2025 07:11"
+  }
+};
+
 function renderTabelle(data) {
   const tbody = $("#tabelle");
   tbody.empty();
+
   data.data.rows.forEach(team => {
     const teamKlasse = team.teamLongname.includes("Innsbruck") ? "team-rot" : "";
     tbody.append(`
@@ -84,23 +101,12 @@ function renderTabelle(data) {
       </tr>
     `);
   });
-  $("#letzteAktualisierung").text("Letzte Aktualisierung: " + (data.lastUpdate?.formattedShort || new Date().toLocaleString()));
-}
 
-function fetchDaten() {
-  const url = "https://api.hockeydata.net/data/ebel/Standings?callback=jQuery35107394160842128046_1761568933547&apiKey=738aba5a0c15ea7da496e1cda6922ff1&lang=en&referer=www.hcinnsbruck.at&divisionId=oehv-u17-gd&widgetWidths=%5B760%5D&_=1761568933548";
-  $.get(url, function(text){
-    const jsonStr = text.replace(/^.*?\(/, "").replace(/\);?$/, "");
-    const data = JSON.parse(jsonStr);
-    renderTabelle(data);
-  }).fail(function(){
-    $("#tabelle").html('<tr><td colspan="12">Fehler beim Laden der Daten</td></tr>');
-  });
+  $("#letzteAktualisierung").text(`Letzte Aktualisierung: ${data.lastUpdate.formattedLong}`);
 }
 
 // Init
-fetchDaten();
-setInterval(fetchDaten, 60000);
+renderTabelle(backupData);
 </script>
 
 </body>
