@@ -28,7 +28,6 @@ tbody tr:hover { background:#f0f3f8; transition: background 0.3s ease; }
   td::before{content:attr(data-label); font-weight:600; color:#444;}
 }
 </style>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 
@@ -54,17 +53,37 @@ tbody tr:hover { background:#f0f3f8; transition: background 0.3s ease; }
       <th>Punkte</th>
     </tr>
   </thead>
-  <tbody id="tabelle">
-    <tr><td colspan="12">Lade Daten ...</td></tr>
-  </tbody>
+  <tbody id="tabelle"></tbody>
 </table>
 
-<p id="letzteAktualisierung">Letzte Aktualisierung: wird geladen ...</p>
+<p id="letzteAktualisierung"></p>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+// Backup-Daten für U20
+const backupData = {
+  "data": {
+    "rows": [
+      {"tableRank":1,"teamLongname":"HD - mladi - Jesenice","gamesPlayed":14,"gamesWon":13,"gamesWonInOt":0,"gamesTied":0,"gamesLostInOt":1,"gamesLost":0,"goalsFor":77,"goalsAgainst":22,"goalDifference":"+55","points":40},
+      {"tableRank":2,"teamLongname":"Eishockey Akademie Steiermark","gamesPlayed":14,"gamesWon":11,"gamesWonInOt":1,"gamesTied":0,"gamesLostInOt":0,"gamesLost":2,"goalsFor":66,"goalsAgainst":27,"goalDifference":"+39","points":35},
+      {"tableRank":3,"teamLongname":"Nordic Hockey Academy","gamesPlayed":14,"gamesWon":5,"gamesWonInOt":3,"gamesTied":0,"gamesLostInOt":1,"gamesLost":5,"goalsFor":41,"goalsAgainst":44,"goalDifference":"-3","points":22},
+      {"tableRank":4,"teamLongname":"Vasas SC","gamesPlayed":14,"gamesWon":5,"gamesWonInOt":2,"gamesTied":0,"gamesLostInOt":1,"gamesLost":6,"goalsFor":46,"goalsAgainst":46,"goalDifference":"+0","points":20},
+      {"tableRank":5,"teamLongname":"HC TIWAG Innsbruck - Die Haie","gamesPlayed":14,"gamesWon":5,"gamesWonInOt":0,"gamesTied":0,"gamesLostInOt":2,"gamesLost":7,"goalsFor":43,"goalsAgainst":43,"goalDifference":"+0","points":17},
+      {"tableRank":6,"teamLongname":"EV Vienna Capitals","gamesPlayed":14,"gamesWon":4,"gamesWonInOt":2,"gamesTied":0,"gamesLostInOt":1,"gamesLost":7,"goalsFor":41,"goalsAgainst":54,"goalDifference":"-13","points":17},
+      {"tableRank":7,"teamLongname":"Okanagan Hockey Academy","gamesPlayed":14,"gamesWon":3,"gamesWonInOt":0,"gamesTied":0,"gamesLostInOt":0,"gamesLost":11,"goalsFor":29,"goalsAgainst":75,"goalDifference":"-46","points":9},
+      {"tableRank":8,"teamLongname":"Hiti Academy Bled Hawks","gamesPlayed":14,"gamesWon":2,"gamesWonInOt":0,"gamesTied":0,"gamesLostInOt":2,"gamesLost":10,"goalsFor":32,"goalsAgainst":64,"goalDifference":"-32","points":8},
+      {"tableRank":9,"teamLongname":"*Unassigned Team","gamesPlayed":0,"gamesWon":0,"gamesWonInOt":0,"gamesTied":0,"gamesLostInOt":0,"gamesLost":0,"goalsFor":0,"goalsAgainst":0,"goalDifference":"+0","points":0}
+    ]
+  },
+  "lastUpdate": {
+    "formattedLong": "27.October 2025 02:44"
+  }
+};
+
 function renderTabelle(data) {
   const tbody = $("#tabelle");
   tbody.empty();
+
   data.data.rows.forEach(team => {
     const teamKlasse = team.teamLongname.includes("Innsbruck") ? "team-rot" : "";
     tbody.append(`
@@ -84,23 +103,12 @@ function renderTabelle(data) {
       </tr>
     `);
   });
-  $("#letzteAktualisierung").text("Letzte Aktualisierung: " + (data.lastUpdate?.formattedShort || new Date().toLocaleString()));
-}
 
-function fetchDaten() {
-  const url = "https://api.hockeydata.net/data/ebel/Standings?callback=jQuery35106810737808352126_1761569321814&apiKey=738aba5a0c15ea7da496e1cda6922ff1&lang=en&referer=www.hcinnsbruck.at&timestamp=1761569321975&divisionId=oehv-u20i-p1d2&widgetWidths=%5B760%5D&_=1761569321815";
-  $.get(url, function(text){
-    const jsonStr = text.replace(/^.*?\(/, "").replace(/\);?$/, "");
-    const data = JSON.parse(jsonStr);
-    renderTabelle(data);
-  }).fail(function(){
-    $("#tabelle").html('<tr><td colspan="12">Fehler beim Laden der Daten</td></tr>');
-  });
+  $("#letzteAktualisierung").text(`Letzte Aktualisierung: ${data.lastUpdate.formattedLong}`);
 }
 
 // Init
-fetchDaten();
-setInterval(fetchDaten, 60000);
+renderTabelle(backupData);
 </script>
 
 </body>
