@@ -1,112 +1,107 @@
 <!DOCTYPE html>
-<html lang="de"> <!-- Sprache auf Deutsch eingestellt -->
+<html lang="de">
 <head>
-<meta charset="utf-8"> <!-- Zeichencodierung für Umlaute und Sonderzeichen -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Wichtig: sorgt für richtige Anzeige auf Handys -->
-<title>HC TIWAG Innsbruck Juniors – ORG (CI-konform)</title> <!-- Titel, der im Browser-Tab angezeigt wird -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HC TIWAG Innsbruck Juniors – ORG (CI-konform)</title>
 
-<!-- ================================
-     EINGEBETTETES CSS-DESIGN
-     ================================ -->
+<!-- ==============================
+     CSS-Stilbereich
+     ============================== -->
 <style>
 
-/* =======================================
-   1) LOKALE SCHRIFTART (ARENO SERIF)
-   ======================================= */
+  /* ===================================================
+     1. Lokale Schriftart "Areno Serif"
+     =================================================== */
+  @font-face {
+      font-family: "Areno Serif";
+      src: url("fonts/areno-serif-webfont.woff2") format("woff2"),
+           url("fonts/areno-serif-webfont.woff") format("woff"),
+           url("fonts/Areno-Serif.otf") format("opentype");
+      font-weight: normal;
+      font-style: normal;
+  }
 
-/* Normale Schriftstärke */
-@font-face {
-    font-family: "Areno Serif"; /* Name, den du im CSS später verwendest */
-    src: url("fonts/areno-serif-webfont.woff2") format("woff2"), /* moderne Variante */
-         url("fonts/areno-serif-webfont.woff") format("woff"),   /* ältere Variante */
-         url("fonts/Areno-Serif.otf") format("opentype");        /* Originalschrift */
-    font-weight: normal; /* normale Stärke */
-    font-style: normal;  /* keine Kursivschrift */
-}
+  @font-face {
+      font-family: "Areno Serif";
+      src: url("fonts/areno-serif-webfont.woff2") format("woff2"),
+           url("fonts/areno-serif-webfont.woff") format("woff"),
+           url("fonts/Areno-Serif.otf") format("opentype");
+      font-weight: 800;
+      font-style: normal;
+  }
 
-/* Fette Variante der Schrift */
-@font-face {
-    font-family: "Areno Serif";
-    src: url("fonts/areno-serif-webfont.woff2") format("woff2"),
-         url("fonts/areno-serif-webfont.woff") format("woff"),
-         url("fonts/Areno-Serif.otf") format("opentype");
-    font-weight: 800; /* extra fett */
-    font-style: normal;
-}
+  /* ===================================================
+     2. Grundstil für alle Elemente
+     =================================================== */
+  * {
+      font-family: "Areno Serif", serif;
+      color: #fff;
+      box-sizing: border-box; /* Praktisch für Layouts */
+  }
 
-/* =======================================
-   2) GRUNDEINSTELLUNGEN FÜR ALLE ELEMENTE
-   ======================================= */
-* {
-    font-family: "Areno Serif", serif; /* Deine Vereins-Schriftart für alles */
-    color: #fff;                        /* Alle Texte weiß */
-}
+  /* ===================================================
+     3. Body & Hintergrund
+     =================================================== */
+  html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      
+      display: flex;
+      align-items: center;        /* vertikal zentriert */
+      justify-content: center;    /* horizontal zentriert */
+      
+      background: linear-gradient(135deg, #003789 50%, #d42323 50%);
+      background-size: 200% 200%;
+      animation: gradientShift 120s ease-in-out infinite; /* sanfte Farbverschiebung */
+  }
 
-/* =======================================
-   3) HINTERGRUND UND LAYOUT DES SEITENKÖRPERS
-   ======================================= */
-html, body {
-  margin: 0;     /* Kein äußerer Rand */
-  padding: 0;    /* Kein Innenabstand */
-  width: 100%;   /* gesamte Seitenbreite */
-  height: 100%;  /* gesamte Bildschirmhöhe */
+  /* ===================================================
+     4. Animation des Hintergrunds
+     =================================================== */
+  @keyframes gradientShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+  }
 
-  /* Flexbox – sorgt dafür, dass der Inhalt (das Bild) zentriert ist */
-  display: flex;                 
-  align-items: center;           /* vertikal zentriert */
-  justify-content: center;       /* horizontal zentriert */
+  /* ===================================================
+     5. Glasrahmen für das Bild
+     =================================================== */
+  .frame {
+      display: inline-block;
+      border-radius: 20px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.15); /* leicht transparent */
+      backdrop-filter: blur(12px);         /* Glaseffekt */
+      box-shadow: 0 20px 45px rgba(0,0,0,0.55); /* Schatten für Tiefe */
+  }
 
-  /* Rot-blauer animierter Hintergrund im Vereinsstil */
-  background: linear-gradient(135deg, #003789 50%, #d42323 50%);
-  background-size: 200% 200%;          /* größerer Hintergrund, damit Bewegung möglich ist */
-  animation: gradientShift 120s ease-in-out infinite; /* sanfte, dauerhafte Bewegung */
-}
-
-/* =======================================
-   4) ANIMATION DES HINTERGRUNDS
-   ======================================= */
-@keyframes gradientShift {
-  0%   { background-position: 0% 50%; }    /* Startposition */
-  50%  { background-position: 100% 50%; }  /* Verlauf wandert nach rechts */
-  100% { background-position: 0% 50%; }    /* wieder zurück */
-}
-
-/* =======================================
-   5) "GLASRAHMEN" FÜR DAS BILD
-   ======================================= */
-.frame {
-  display: inline-block;                      /* passt sich dem Inhalt (dem Bild) an */
-  border-radius: 20px;                        /* abgerundete Ecken */
-  overflow: hidden;                           /* alles außerhalb der Ecken wird abgeschnitten */
-  background: rgba(255,255,255,0.15);         /* leicht transparente weiße Fläche */
-  backdrop-filter: blur(12px);                /* Unschärfe hinter dem Element (Glaseffekt) */
-  box-shadow: 0 20px 45px rgba(0,0,0,0.55);   /* sanfter Schatten unter dem Rahmen */
-}
-
-/* =======================================
-   6) BILD-INHALT IM GLASRAHMEN
-   ======================================= */
-.frame img {
-  display: block;           /* entfernt kleine Abstände, die Bilder sonst haben */
-  width: auto;              /* Breite bleibt im Originalverhältnis */
-  height: auto;             /* Höhe bleibt im Originalverhältnis */
-  max-width: 95vw;          /* niemals breiter als 95% der Bildschirmbreite */
-  max-height: 95vh;         /* niemals höher als 95% der Bildschirmhöhe */
-}
+  /* ===================================================
+     6. Bild im Glasrahmen
+     =================================================== */
+  .frame img {
+      display: block;          /* entfernt Standard-Abstand */
+      width: auto;             /* Originalverhältnis */
+      height: auto;            /* Originalverhältnis */
+      max-width: 95vw;         /* maximal 95% der Bildschirmbreite */
+      max-height: 95vh;        /* maximal 95% der Bildschirmhöhe */
+  }
 
 </style>
 </head>
 
-<!-- =======================================
-     7) HAUPTINHALT DER SEITE
-     ======================================= -->
 <body>
 
-<!-- Das Bild liegt in einem Glasrahmen und ist zentriert -->
+<!-- =========================
+     Hauptinhalt: Bild im Glasrahmen
+     ========================= -->
 <div class="frame">
   <img src="ORG.webp" alt="HC TIWAG Innsbruck Juniors">
-  <!-- src = Bilddatei (muss im selben Ordner liegen)
-       alt = Alternativtext, wird angezeigt, wenn das Bild fehlt -->
+  <!-- Bild muss im selben Ordner liegen -->
+  <!-- alt-Text für Barrierefreiheit / Anzeige, falls Bild fehlt -->
 </div>
 
 </body>
