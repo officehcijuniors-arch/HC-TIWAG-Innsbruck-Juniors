@@ -1,119 +1,107 @@
-<!DOCTYPE html> <!-- HTML5-Dokumenttyp – teilt dem Browser mit, dass modernes HTML verwendet wird -->
-<html lang="de"> <!-- Sprache der Webseite: Deutsch -->
+<!DOCTYPE html>
+<html lang="de">
 <head>
-<meta charset="utf-8"> <!-- Zeichensatz: UTF-8, damit Umlaute richtig angezeigt werden -->
-<title>HC TIWAG Innsbruck Juniors - Kalender</title> <!-- Titel, der im Browser-Tab angezeigt wird -->
+<meta charset="utf-8">
+<title>HC TIWAG Innsbruck Juniors - Kalender</title>
 
+<!-- ==============================
+     CSS-Stilbereich
+     ============================== -->
 <style>
-/* =====================================================================
-   GRUNDLAYOUT DER SEITE
-   ===================================================================== */
-body { 
-    margin: 0; /* Entfernt den Standard-Abstand des Browsers um die Seite */
-    font-family: "Areno Serif", serif; /* Schriftart – gleiche wie auf der Startseite */
-    overflow: hidden; /* verhindert, dass Scrollbalken erscheinen */
 
-    /* Hintergrund mit Farbverlauf (blau/rot) – wie auf der Startseite */
-    background: linear-gradient(135deg, #003789 50%, #d42323 50%);
-    background-size: 200% 200%; /* macht den Verlauf größer für Animation */
-    animation: gradientShift 180s ease infinite; /* langsame Farbverschiebung über 180 Sekunden */
-}
+  /* ===================================================
+     1. Grundlayout der Seite
+     =================================================== */
+  body { 
+      margin: 0;
+      font-family: "Areno Serif", serif; /* gleiche Schrift wie auf der Startseite */
+      overflow: hidden; /* verhindert Scrollbalken */
+      
+      /* Hintergrund mit Farbverlauf (Blau/Rot) */
+      background: linear-gradient(135deg, #003789 50%, #d42323 50%);
+      background-size: 200% 200%; /* Vergrößerte Fläche für Animation */
+      animation: gradientShift 180s ease infinite; /* langsame Farbverschiebung */
+  }
 
-/* =====================================================================
-   ANIMATION DES HINTERGRUNDES
-   ===================================================================== */
-@keyframes gradientShift { 
-    0%   { background-position: 0% 50%; }   /* Start: Farbverlauf an linker Seite */
-    50%  { background-position: 100% 50%; } /* Mitte: Verlauf wandert nach rechts */
-    100% { background-position: 0% 50%; }   /* Ende: zurück zum Anfang */
-}
+  /* ===================================================
+     2. Animation des Hintergrunds
+     =================================================== */
+  @keyframes gradientShift { 
+      0%,100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+  }
 
-/* =====================================================================
-   HAUPTBEREICH FÜR DEN KALENDER
-   ===================================================================== */
-.calendar-page { 
-    position: relative; /* Eltern-Element für absolute Positionierung des Hais */
-    width: 100%;        /* gesamte Seitenbreite */
-    height: 100vh;      /* gesamte Bildschirmhöhe (vh = viewport height) */
+  /* ===================================================
+     3. Hauptbereich für den Kalender
+     =================================================== */
+  .calendar-page { 
+      position: relative; /* Eltern-Element für absolute Positionierung des Hais */
+      width: 100%;
+      height: 100vh; /* volle Höhe des Viewports */
+      display: flex;
+      justify-content: center; /* horizontal zentriert */
+      align-items: flex-start; /* oben ausgerichtet */
+      padding-top: 15px; /* kleiner Abstand nach oben */
+  }
 
-    display: flex;              /* Flexbox für einfache Zentrierung */
-    justify-content: center;    /* Kalender horizontal zentrieren */
-    align-items: flex-start;    /* Oben am Bildschirm ausrichten */
-    padding-top: 15px;          /* kleiner Abstand von oben */
-}
+  /* ===================================================
+     4. Google-Kalender (iframe)
+     =================================================== */
+  .calendar-page iframe { 
+      z-index: 1; /* unter dem Hai-Overlay */
+      border-radius: 15px; /* abgerundete Ecken */
+      box-shadow: 0 15px 30px rgba(0,0,0,0.6); /* leichter Schatten für Tiefe */
+      border: 2px solid rgba(255,255,255,0.2); /* dezenter Rand */
+      width: 97%; /* fast volle Breite */
+      height: calc(100vh - 30px); /* volle Höhe minus Abstand oben */
+      transform: scale(0.97); /* leicht verkleinert für harmonische Wirkung */
+  }
 
-/* =====================================================================
-   DARSTELLUNG DES GOOGLE-KALENDERS (IFRAME)
-   ===================================================================== */
-.calendar-page iframe { 
-    position: relative; /* Standard-Position innerhalb des Flexcontainers */
-    z-index: 1; /* Z-Ebene: liegt unter dem Hai-Overlay */
-    
-    /* Gestaltung des Rahmens um den Kalender */
-    border-radius: 15px;                  /* abgerundete Ecken */
-    box-shadow: 0 15px 30px rgba(0,0,0,0.6); /* Schatten für 3D-Effekt */
-    border: 2px solid rgba(255,255,255,0.2); /* dezenter, halbtransparenter Rand */
+  /* ===================================================
+     5. Hai-Grafik (Overlay)
+     =================================================== */
+  .hai-image { 
+      position: absolute; /* frei über dem Kalender platzierbar */
+      bottom: 5%;         /* Abstand vom unteren Rand */
+      left: 50%;          /* horizontal zentriert */
+      transform: translateX(-50%); /* exakte Zentrierung */
+      width: 120px;
+      height: 120px;
+      background: url('HAI.webp') no-repeat center;
+      background-size: contain; /* passt sich an, ohne Verzerrung */
+      pointer-events: none; /* Klicks gehen durch, Kalender bleibt interaktiv */
+      z-index: 2; /* über dem Kalender */
+      animation: float 4s ease-in-out infinite; /* Schwebe-Animation */
+      opacity: 0.25; /* leicht transparent */
+  }
 
-    /* Größe und Einpassung des Kalenders */
-    width: 97%; /* nimmt 97% der Bildschirmbreite ein */
-    height: calc(100vh - 30px); /* volle Höhe minus 30px Abstand */
-    transform: scale(0.97); /* leicht verkleinert, wirkt harmonischer */
-
-    /* Kein Übergangseffekt (transition) – wurde bewusst entfernt */
-}
-
-/* =====================================================================
-   HAI-GRAFIK (Overlay)
-   ===================================================================== */
-.hai-image { 
-    position: absolute; /* frei platzierbar über dem Kalender */
-    bottom: 5%;         /* Abstand 5% vom unteren Bildschirmrand */
-
-    width: 120px;       /* Breite des Hais */
-    height: 120px;      /* Höhe des Hais */
-    
-    /* Grafikeinbindung: HAI.webp liegt im gleichen Ordner */
-    background: url('HAI.webp') no-repeat center; /* zentrierte Grafik, ohne Wiederholung */
-    background-size: contain; /* passt sich an, ohne verzerrt zu werden */
-
-    pointer-events: none; /* Klicks gehen durch das Bild hindurch – Kalender bleibt anklickbar */
-    z-index: 2; /* liegt über dem Kalender (höher als z-index 1) */
-
-    /* Animation und Transparenz */
-    animation: float 4s ease-in-out infinite; /* sanftes Auf-und-Ab-Schweben */
-    opacity: 0.25; /* leicht durchsichtig, damit nicht zu dominant */
-}
-
-/* =====================================================================
-   ANIMATION: HAI SCHWEBT LEICHT AUF UND AB
-   ===================================================================== */
-@keyframes float { 
-    0%,100% { transform: translateY(0); }     /* Ausgangsposition */
-    50%     { transform: translateY(-10px); } /* Mitte der Bewegung – Hai schwebt leicht nach oben */
-}
+  /* ===================================================
+     6. Animation: Hai schwebt leicht auf/ab
+     =================================================== */
+  @keyframes float { 
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-10px); }
+  }
 
 </style>
 </head>
 
 <body>
 
-<!-- =====================================================================
-     HAUPTINHALT DER SEITE
-     ===================================================================== -->
+<!-- =========================
+     Hauptinhalt der Seite
+     ========================= -->
 <section class="calendar-page">
   
-  <!-- ========== GOOGLE KALENDER ========== -->
+  <!-- Google-Kalender iframe -->
   <iframe 
     src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FVienna&showPrint=0&showTitle=0&showNav=0&mode=WEEK&showTz=0&src=NWFlMmY4NGNkZmM5ZDAyMTQ2ZjY2NmE5NGVjMzE3YjY0MmMxMmY4YzhiNGUxMjNhYWM4NmZmYWY5YzQwNjM2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2UxOTFkNzBiNDBhNDljMDZhZWVlN2IwNzhhYjQwYjEyOGY1ZGMyNjA3OTZlYjkzYzI3MTU0OTU4YWZiMjI4ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YzIwOThkMzI5MDA2MmI4ZDAxZjMxOTU0NDQ5OGY3YmQzNDVjNWQzZWRmOTA5NDJjOGQxNDM4YjVmZWUxYzVjMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzFjYTI5MjEzNGEwZjg1NzI1NGJlM2RkMTM3N2NhZjc5OGYyNDg1OTU4OWE2MGMzNmI0NWJiNjcyN2VjZjljMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZDU3OWRjY2M2MTNhZTI0YzZlNjY1NmE5ZGIyOWM0MDRlNDk5NjNhZjFiZDYyNjY0NGQwZGE5OTVhNTUzNmUxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzBiZDg4YjUxNmVlNGRmNGFjMmZkMWU2NGJhOWQ4MzBlMjViY2VlZjc4YjM4MmM5N2FhZWZmZWU1NmY5NjlmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YjQ5M2RhNTY5NDg5NTA2MDQ0YWE2MmVmYTA5ODIyODM0MmQ0NjRhMzQ4MzY5MGYyNTU1NTE0Yzg0Y2ZmNDI0NEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YWQ4ZjNlMmRiODQ1YjZiNmM5ZTZkYmIyZDkyNGY1NTliNjVhNjI3YTNlNWEzMmYwYzQ0YmRhZTA1NzMxNGMwOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233d0af6&color=%23c0ca33&color=%230b8043&color=%233f51b5&color=%238e24aa&color=%23616161&color=%23ad1457&color=%23e4c441" 
-    style="border-width:0" width="800" height="600" frameborder="0" scrolling="no">
+    style="border-width:0" width="800" height="600" frameborder="0" scrolling="no" title="HC TIWAG Kalender">
   </iframe>
 
-  <!-- =====================================================================
-       HAI-BILD (DEKORATION)
-       liegt über dem Kalender, leicht transparent
-       dient nur zur optischen Wiedererkennung (CI-Element)
-       ===================================================================== -->
+  <!-- Hai-Overlay -->
   <div class="hai-image"></div>
+
 </section>
 
 </body>
