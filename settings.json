@@ -1,6 +1,6 @@
 {
   "pages": {
-    "1": { "enabled": true,  "duration": 10 },
+    "1": { "enabled": true,  "duration": 10 },"Startseite"
     "2": { "enabled": true,  "duration": 30 },
     "3": { "enabled": true,  "duration": 15 },
     "4": { "enabled": true,  "duration": 23 },
@@ -12,4 +12,5 @@
   },
   "reload": 120
 }
+
 
