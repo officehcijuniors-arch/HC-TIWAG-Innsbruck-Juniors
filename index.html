@@ -1,234 +1,182 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="utf-8">
-<title>HC TIWAG Innsbruck Juniors - Infosäule (Stabile Version)</title>
+  <meta charset="utf-8" />
+  <title>HC TIWAG Innsbruck Juniors - Infosäule (Bereinigt)</title>
 
-<!-- ======================================================
-     CSS – Schrift, Layout, Farben, Übergänge
-     ====================================================== -->
-<style>
-/* ========================================
-   1) LOKALE SCHRIFTART ARENO SERIF
-   ======================================== */
-@font-face {
-    font-family: "Areno Serif";
-    src: url("fonts/areno-serif-webfont.woff2") format("woff2"),
-         url("fonts/areno-serif-webfont.woff") format("woff"),
-         url("fonts/Areno-Serif.otf") format("opentype");
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
-    font-family: "Areno Serif";
-    src: url("fonts/areno-serif-webfont.woff2") format("woff2"),
-         url("fonts/areno-serif-webfont.woff") format("woff"),
-         url("fonts/Areno-Serif.otf") format("opentype");
-    font-weight: 800;
-    font-style: normal;
-}
+  <!-- ============================
+       CSS – Schrift, Layout, Farben
+       ============================ -->
+  <style>
+    @font-face {
+      font-family: "Areno Serif";
+      src: url("fonts/areno-serif-webfont.woff2") format("woff2"),
+           url("fonts/areno-serif-webfont.woff") format("woff"),
+           url("fonts/Areno-Serif.otf") format("opentype");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Areno Serif";
+      src: url("fonts/areno-serif-webfont.woff2") format("woff2"),
+           url("fonts/areno-serif-webfont.woff") format("woff"),
+           url("fonts/Areno-Serif.otf") format("opentype");
+      font-weight: 800;
+      font-style: normal;
+      font-display: swap;
+    }
 
-/* ========================================
-   2) BODY-GRUNDEINSTELLUNGEN
-   ======================================== */
-body {
-  margin: 0;
-  overflow: hidden;
-  font-family: "Areno Serif", serif;
-  background: #000;
-  color: #fff;
-}
+    html, body {
+      margin: 0;
+      height: 100%;
+      background: #000;
+      color: #fff;
+      font-family: "Areno Serif", serif;
+      overflow: hidden;
+    }
 
-/* ========================================
-   3) SEITENSTRUKTUR
-   ======================================== */
-.page {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.8s ease;
-}
-.page.active {
-  opacity: 1;
-  pointer-events: all;
-  z-index: 1;
-}
+    .page {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.8s ease;
+    }
+    .page.active {
+      opacity: 1;
+      pointer-events: all;
+      z-index: 1;
+    }
 
-/* ========================================
-   4) MEDIENSTILE
-   ======================================== */
-iframe, video {
-  width: 100%;
-  height: 100%;
-  border: 0;
-  border-radius: 10px;
-}
-.video-page video {
-  object-fit: contain;
-}
+    iframe, video {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      border-radius: 10px;
+      display: block;
+    }
+    .video-page video {
+      object-fit: contain;
+    }
 
-/* ========================================
-   5) SIGNATUR
-   ======================================== */
-.signature {
-  position: fixed;
-  bottom: 8px;
-  right: 12px;
-  font-size: 0.8em;
-  color: rgba(255,255,255,0.4);
-  pointer-events: none;
-  z-index: 9999;
-}
-</style>
+    .signature {
+      position: fixed;
+      bottom: 8px;
+      right: 12px;
+      font-size: 0.9em;
+      color: rgba(255,255,255,0.4);
+      pointer-events: none;
+      z-index: 9999;
+    }
+  </style>
 </head>
 <body>
 
-<!-- ======================================================
-     6) SEITENINHALT
-     ====================================================== -->
-<section class="page page-1 active">
-  <iframe data-src="Infopoint.html"></iframe>
-</section>
+  <!-- =========================
+       Seitenstruktur
+       ========================= -->
+  <section class="page page-1 active"><iframe data-src="Infopoint.html" title="Infosäule"></iframe></section>
+  <section class="page page-2"><iframe data-src="KALENDER.html" title="Kalender"></iframe></section>
+  <section class="page page-3"><iframe data-src="ORG.html" title="Organigramm"></iframe></section>
+  <section class="page video-page page-4">
+    <video autoplay loop muted playsinline preload="auto"><source src="Fotoshop.mp4" type="video/mp4"></video>
+  </section>
+  <section class="page video-page page-5">
+    <video autoplay loop muted playsinline preload="auto"><source src="Fanshop.mp4" type="video/mp4"></video>
+  </section>
+  <section class="page video-page page-6">
+    <video autoplay loop muted playsinline preload="auto"><source src="HCINWSPPräs.mp4" type="video/mp4"></video>
+  </section>
+  <section class="page page-7"><iframe data-src="spielerfotos.html" title="Spielerfotos"></iframe></section>
+  <section class="page page-8"></section>
+  <section class="page page-9"></section>
 
-<section class="page page-2">
-  <iframe data-src="KALENDER.html"></iframe>
-</section>
+  <footer class="signature">MS</footer>
 
-<section class="page page-3">
-  <iframe data-src="ORG.html"></iframe>
-</section>
+  <!-- =========================
+       JS – Rotation & Lade-Logik
+       ========================= -->
+  <script>
+    window.addEventListener('DOMContentLoaded', async () => {
+      const pages = document.querySelectorAll('.page');
+      let current = 0;
+      let settings;
 
-<section class="page video-page page-4">
-  <video autoplay loop muted playsinline preload="auto">
-    <source src="Fotoshop.mp4" type="video/mp4">
-  </video>
-</section>
-
-<section class="page video-page page-5">
-  <video autoplay loop muted playsinline preload="auto">
-    <source src="Fanshop.mp4" type="video/mp4">
-  </video>
-</section>
-
-<section class="page video-page page-6">
-  <video autoplay loop muted playsinline preload="auto">
-    <source src="HCINWSPPräs.mp4" type="video/mp4">
-  </video>
-</section>
-
-<section class="page page-7">
-  <iframe data-src="spielerfotos.html"></iframe>
-</section>
-
-<section class="page page-8"></section>
-<section class="page page-9"></section>
-
-<footer class="signature">MS</footer>
-
-<!-- ======================================================
-     7) JAVASCRIPT – Rotation & Lade-Logik
-     ====================================================== -->
-<script>
-window.addEventListener('DOMContentLoaded', async () => {
-  const pages = document.querySelectorAll('.page');
-  let current = 0;
-  let settings;
-
-  // --- JSON-Datei mit Einstellungen laden ---
-  const settingsUrl = 'https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/settings.json';
-  try {
-    const res = await fetch(settingsUrl, {cache:"no-store"});
-    settings = await res.json();
-  } catch(err) {
-    console.warn("⚠️ Einstellungen konnten nicht geladen werden, Standardwerte werden genutzt.");
-    settings = {
-      pages: {1:{enabled:true,duration:10},2:{enabled:true,duration:20},3:{enabled:true,duration:15},
-              4:{enabled:true,duration:23},5:{enabled:true,duration:20},6:{enabled:true,duration:40},
-              7:{enabled:true,duration:55}},
-      reload: 120,
-      options: {lazyVideoLoad:false,lazyIframeLoad:true}
-    };
-  }
-
-  // Sicherheitshalber Lazy-Load für Videos ausschalten
-  settings.options.lazyVideoLoad = false;
-
-  // --- Aktive Seiten ---
-  function getActivePages() {
-    const arr = [];
-    for (let i = 1; i <= 9; i++)
-      if(settings.pages[i] && settings.pages[i].enabled) arr.push(i-1);
-    return arr;
-  }
-
-  // --- Dauer pro Seite ---
-  function getDurations() {
-    const d = {};
-    for (let i = 1; i <= 9; i++)
-      if(settings.pages[i]) d[i-1] = settings.pages[i].duration*1000;
-    return d;
-  }
-
-  // --- iFrame laden ---
-  function loadIframe(page) {
-    const iframe = page.querySelector('iframe');
-    if(!iframe) return;
-    if(!iframe.src && iframe.dataset.src){
-      iframe.src = iframe.dataset.src;
-    }
-  }
-
-  // --- Video laden (immer aktiv, kein Lazy) ---
-  function loadVideo(page){
-    const video = page.querySelector('video');
-    if(!video) return;
-    const source = video.querySelector('source');
-    if(source && !source.src && source.dataset.src){
-      source.src = source.dataset.src;
-    }
-    video.load();
-    video.dataset.loaded = true;
-  }
-
-  // --- Seite anzeigen ---
-  function showPage(index){
-    pages.forEach((p,i)=>p.classList.toggle('active',i===index));
-    const page = pages[index];
-    if(page.classList.contains('video-page')){
-      loadVideo(page);
-      const video = page.querySelector('video');
-      if(video){
-        video.currentTime = 0;      // Startet immer von vorne
-        video.play().catch(()=>{}); // Sicheres Abspielen
+      try {
+        const res = await fetch('https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/settings.json', {cache:"no-store"});
+        settings = await res.json();
+      } catch(err) {
+        console.warn("⚠️ Einstellungen nicht geladen, Standardwerte werden genutzt.");
+        settings = {
+          pages: {
+            1: { enabled: true,  duration: 10 },
+            2: { enabled: true,  duration: 20 },
+            3: { enabled: true,  duration: 15 },
+            4: { enabled: true,  duration: 23 },
+            5: { enabled: true,  duration: 20 },
+            6: { enabled: true,  duration: 40 },
+            7: { enabled: true,  duration: 55 },
+            8: { enabled: false, duration: 8 },
+            9: { enabled: false, duration: 8 }
+          },
+          reload: 120
+        };
       }
-    } else {
-      loadIframe(page);
-    }
-  }
 
-  // --- Rotation ---
-  function rotateToNext(){
-    const active = getActivePages();
-    const durations = getDurations();
-    if(active.length===0) return;
-    let pos = active.indexOf(current);
-    if(pos===-1) pos=0;
-    current = active[(pos+1)%active.length];
-    showPage(current);
-    setTimeout(rotateToNext,durations[current]||8000);
-  }
+      function getActivePages() {
+        const arr = [];
+        for (let i=1;i<=pages.length;i++)
+          if(settings.pages[i] && settings.pages[i].enabled) arr.push(i-1);
+        return arr;
+      }
 
-  // --- Start ---
-  current = 0; // Seite 1 immer als Start
-  showPage(current);
-  rotateToNext();
+      function getDurations() {
+        const d = {};
+        for (let i=1;i<=pages.length;i++)
+          if(settings.pages[i]) d[i-1] = settings.pages[i].duration*1000;
+        return d;
+      }
 
-  // --- Automatischer Reload ---
-  if(settings.reload && settings.reload>0){
-    setInterval(()=>location.reload(), settings.reload*60*1000);
-  }
-});
-</script>
+      function loadIframe(page) {
+        const iframe = page.querySelector('iframe');
+        if(!iframe) return;
+        if(!iframe.src && iframe.dataset.src) iframe.src = iframe.dataset.src;
+      }
+
+      function loadVideo(page){
+        const video = page.querySelector('video');
+        if(!video) return;
+        video.load();
+        video.currentTime = 0;
+        video.play().catch(()=>{});
+      }
+
+      function showPage(index){
+        pages.forEach((p,i)=>p.classList.toggle('active',i===index));
+        const page = pages[index];
+        if(page.classList.contains('video-page')) loadVideo(page);
+        else loadIframe(page);
+      }
+
+      function rotateToNext(){
+        const active = getActivePages();
+        const durations = getDurations();
+        if(active.length===0) return;
+        let pos = active.indexOf(current);
+        if(pos===-1) pos=0;
+        current = active[(pos+1)%active.length];
+        showPage(current);
+        setTimeout(rotateToNext,durations[current]||8000);
+      }
+
+      current = 0;
+      showPage(current);
+      rotateToNext();
+
+      if(settings.reload && settings.reload>0)
+        setInterval(()=>location.reload(), settings.reload*60*1000);
+    });
+  </script>
 </body>
 </html>
