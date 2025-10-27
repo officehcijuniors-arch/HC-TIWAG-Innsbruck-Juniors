@@ -42,6 +42,9 @@
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.8s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .page.active {
       opacity: 1;
@@ -69,13 +72,58 @@
       pointer-events: none;
       z-index: 9999;
     }
+
+    /* ============================
+       Seite 8 – Glasrahmen mit animiertem Hintergrund
+       ============================ */
+    .frame-page {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #003789 50%, #d42323 50%);
+        background-size: 200% 200%;
+        animation: gradientShift 120s ease-in-out infinite;
+    }
+
+    @keyframes gradientShift {
+        0%   { background-position: 0% 50%; }
+        50%  { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .frame-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    .frame {
+        border-radius: 20px;
+        overflow: hidden;
+        background: rgba(255,255,255,0.15);
+        backdrop-filter: blur(12px);
+        box-shadow: 0 20px 45px rgba(0,0,0,0.55);
+        width: 90vw;
+        height: 90vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .frame.multiple iframe {
+        height: 50%;
+    }
   </style>
 </head>
 <body>
 
   <!-- =========================
        Seitenstruktur
-       ========================= -->
+       ============================ -->
   <section class="page page-1 active"><iframe data-src="Infopoint.html" title="Infosäule"></iframe></section>
   <section class="page page-2"><iframe data-src="KALENDER.html" title="Kalender"></iframe></section>
   <section class="page page-3"><iframe data-src="ORG.html" title="Organigramm"></iframe></section>
@@ -89,14 +137,23 @@
     <video autoplay loop muted playsinline preload="auto"><source src="HCINWSPPräs.mp4" type="video/mp4"></video>
   </section>
   <section class="page page-7"><iframe data-src="spielerfotos.html" title="Spielerfotos"></iframe></section>
-  <section class="page page-8"></section>
+
+  <!-- Seite 8 – Glasrahmen mit wechselnden Tabellen, Start immer U13 -->
+  <section class="page frame-page page-8">
+    <div class="frame-container">
+      <div class="frame" id="table-frame">
+        <iframe src="Tabelle_U13.html" title="Tabelle U13"></iframe>
+      </div>
+    </div>
+  </section>
+
   <section class="page page-9"></section>
 
   <footer class="signature">MS</footer>
 
   <!-- =========================
        JS – Rotation & Lade-Logik
-       ========================= -->
+       ============================ -->
   <script>
     window.addEventListener('DOMContentLoaded', async () => {
       const pages = document.querySelectorAll('.page');
@@ -117,7 +174,7 @@
             5: { enabled: true,  duration: 20 },
             6: { enabled: true,  duration: 40 },
             7: { enabled: true,  duration: 55 },
-            8: { enabled: false, duration: 8 },
+            8: { enabled: true,  duration: 30 },
             9: { enabled: false, duration: 8 }
           },
           reload: 120
@@ -156,7 +213,7 @@
         pages.forEach((p,i)=>p.classList.toggle('active',i===index));
         const page = pages[index];
         if(page.classList.contains('video-page')) loadVideo(page);
-        else loadIframe(page);
+        else if(page.querySelector('iframe')) loadIframe(page);
       }
 
       function rotateToNext(){
@@ -176,6 +233,49 @@
 
       if(settings.reload && settings.reload>0)
         setInterval(()=>location.reload(), settings.reload*60*1000);
+
+      // =========================
+      // Seite 8: Einzelne Tabellen oder zwei untereinander, Start immer U13
+      // =========================
+      const tableSequence = [
+        ["Tabelle_U13.html"],                 
+        ["Tabelle_U15.html"],                 
+        ["Tabelle_U17.html","Tabelle_U20.html"]
+      ];
+
+      let index = 0; // Start bei U13
+      const frame = document.getElementById("table-frame");
+
+      if(frame){
+        function rotateTables(){
+          const currentTables = tableSequence[index];
+
+          frame.classList.remove('multiple');
+          frame.innerHTML = "";
+
+          if(currentTables.length === 1){
+            const iframe = document.createElement("iframe");
+            iframe.src = currentTables[0];
+            iframe.title = currentTables[0];
+            frame.appendChild(iframe);
+          } else {
+            frame.classList.add('multiple');
+            currentTables.forEach(tbl => {
+              const iframe = document.createElement("iframe");
+              iframe.src = tbl;
+              iframe.title = tbl;
+              frame.appendChild(iframe);
+            });
+          }
+
+          index = (index + 1) % tableSequence.length;
+        }
+
+        index = 0; // sicherstellen, dass U13 initial geladen wird
+        rotateTables();
+        setInterval(rotateTables, 10000); // alle 10 Sekunden wechseln
+      }
+
     });
   </script>
 </body>
