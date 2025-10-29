@@ -125,7 +125,7 @@
   <!-- =========================
        Seitenstruktur
        ============================ -->
-  <!-- Seite 1 – SocialMedia.png statt Infopoint.html -->
+  <!-- Seite 1 – SocialMedia.png -->
   <section class="page page-1 active">
     <img src="SocialMedia.png" alt="Social Media Übersicht" style="object-fit:contain;">
   </section>
@@ -143,7 +143,7 @@
   </section>
   <section class="page page-7"><iframe data-src="spielerfotos.html" title="Spielerfotos"></iframe></section>
 
-  <!-- Seite 8 – Glasrahmen mit wechselnden Tabellen, Start immer U13 -->
+  <!-- Seite 8 – Glasrahmen mit wechselnden Tabellen -->
   <section class="page frame-page page-8">
     <div class="frame-container">
       <div class="frame" id="table-frame">
@@ -152,7 +152,12 @@
     </div>
   </section>
 
-  <section class="page page-9"></section>
+  <!-- Seite 9 – Laufschule-Video -->
+  <section class="page video-page page-9">
+    <video autoplay loop muted playsinline preload="auto">
+      <source src="Laufschule.mp4" type="video/mp4">
+    </video>
+  </section>
 
   <footer class="signature">MS</footer>
 
@@ -180,7 +185,7 @@
             6: { enabled: true,  duration: 40 },
             7: { enabled: true,  duration: 55 },
             8: { enabled: true,  duration: 30 },
-            9: { enabled: false, duration: 8 }
+            9: { enabled: true,  duration: 25 }
           },
           reload: 120
         };
@@ -240,7 +245,7 @@
         setInterval(()=>location.reload(), settings.reload*60*1000);
 
       // =========================
-      // Seite 8 – Tabellenrotation (robust)
+      // Seite 8 – Tabellenrotation
       // =========================
       const tableSequence = [
         ["Tabelle_U13.html"],
@@ -248,7 +253,7 @@
         ["Tabelle_U17.html","Tabelle_U20.html"]
       ];
 
-      let index = 0; // Start bei U13
+      let index = 0;
       const frame = document.getElementById("table-frame");
 
       if(frame){
@@ -290,7 +295,7 @@
         }
 
         rotateTables();
-        setInterval(rotateTables, 10000); // alle 10 Sekunden wechseln
+        setInterval(rotateTables, 10000);
       }
 
     });
