@@ -8,9 +8,10 @@
     "6": { "enabled": true,  "duration": 28, "title": "Spielankündigungen" },
     "7": { "enabled": true,  "duration": 65, "title": "Spielerfotos" },
     "8": { "enabled": true,  "duration": 50, "title": "Tabellen" },
-    "9": { "enabled": false, "duration": 8, "title": "Res" }
+    "9": { "enabled": false, "duration": 43, "title": "Res" }
   },
   "reload": 120
 }
+
 
 
