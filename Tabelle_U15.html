@@ -5,13 +5,35 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>U15-Tabelle – HC Innsbruck</title>
 <style>
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 15px #E10600, 0 0 25px #0047AB; }
+  50% { box-shadow: 0 0 25px #E10600, 0 0 35px #0047AB; }
+  100% { box-shadow: 0 0 15px #E10600, 0 0 25px #0047AB; }
+}
+
 body {
   font-family:"Inter",Arial,sans-serif;
-  background:#f7f8fa;
   margin:0;
   padding:2rem;
   color:#222;
+  background: linear-gradient(-45deg, #E10600, #0047AB, #E10600, #0047AB);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
 }
+
+#letzteAktualisierung {
+  font-size:1rem;
+  color:#fff;
+  font-weight:700;
+  margin-bottom:1rem;
+}
+
 header {
   display:flex;
   justify-content:space-between;
@@ -22,13 +44,15 @@ h1 {
   font-size:2rem;
   font-weight:700;
   margin:0;
-  color:#0047AB;
+  color:#fff;
 }
 #logo {
   height:55px;
   opacity:0.8;
   display:block;
 }
+
+/* Tabelle */
 table {
   width:100%;
   border-collapse:collapse;
@@ -37,7 +61,9 @@ table {
   overflow:hidden;
   box-shadow:0 12px 35px rgba(0,0,0,0.18);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  font-size:1rem;
+  font-size:1.2rem;
+  font-weight:700;
+  animation: glow 3s ease-in-out infinite alternate;
 }
 table:hover {
   transform: translateY(-6px);
@@ -47,16 +73,16 @@ thead {
   background:#eaeaea;
 }
 th {
-  font-weight:600;
+  font-weight:700;
   padding:10px 6px;
   text-align:center;
   color:#333;
-  border-bottom:2px solid #ddd;
+  border-bottom:3px solid #ddd;
 }
 td {
   padding:8px 6px;
   text-align:center;
-  border-bottom:1px solid #eee;
+  border-bottom:2px solid #ccc;
 }
 tbody tr:nth-child(even){
   background:#fafafa;
@@ -68,16 +94,14 @@ tbody tr:hover{
 .punkte {
   font-weight:700;
 }
-.team-rot {
-  color:#E10600;
-  font-weight:700;
+
+/* HC TIWAG Innsbruck-Zeile */
+.innsbruck-zeile td {
+  background-color:#E10600 !important;
+  color:#000 !important;
 }
-#letzteAktualisierung {
-  font-size:0.8rem;
-  color:#555;
-  text-align:right;
-  margin-top:0.5rem;
-}
+
+/* Responsive */
 @media (max-width:768px){
   table,thead,tbody,th,td,tr{display:block;}
   thead{display:none;}
@@ -94,15 +118,35 @@ tbody tr:hover{
     justify-content:space-between;
     padding:6px 8px;
     border:none;
-    border-bottom:1px solid #f0f0f0;
+    border-bottom:2px solid #ccc;
   }
   td:last-child{border-bottom:none;}
   td::before{content:attr(data-label); font-weight:600; color:#444;}
+}
+
+@media (max-width:500px){
+  th:nth-child(1)::after { content:"Rg"; }
+  th:nth-child(2)::after { content:"Team"; }
+  th:nth-child(3)::after { content:"Sp"; }
+  th:nth-child(4)::after { content:"Sg"; }
+  th:nth-child(5)::after { content:"SgOT"; }
+  th:nth-child(6)::after { content:"U"; }
+  th:nth-child(7)::after { content:"N_OT"; }
+  th:nth-child(8)::after { content:"N"; }
+  th:nth-child(9)::after { content:"T"; }
+  th:nth-child(10)::after { content:"GT"; }
+  th:nth-child(11)::after { content:"TD"; }
+  th:nth-child(12)::after { content:"Pkt"; }
+  thead th { font-size:0; } 
+  thead th::after { font-size:1rem; font-weight:700; display:block; text-align:center; }
 }
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+
+<!-- Letzte Aktualisierung manuell editierbar -->
+<p id="letzteAktualisierung">Letzte Aktualisierung: 27.10.2025</p>
 
 <header>
   <h1>U15-Tabelle – HC Innsbruck</h1>
@@ -129,8 +173,6 @@ tbody tr:hover{
   <tbody id="tabelle"></tbody>
 </table>
 
-<p id="letzteAktualisierung"></p>
-
 <script>
 // Backup-Daten für U15
 const backupData = {
@@ -146,22 +188,21 @@ const backupData = {
       {"tableRank":8,"teamLongname":"Steel Wings Linz","gamesPlayed":12,"gamesWon":2,"gamesWonInOt":0,"gamesTied":0,"gamesLostInOt":0,"gamesLost":10,"goalsFor":67,"goalsAgainst":87,"goalDifference":"-20","points":6},
       {"tableRank":9,"teamLongname":"Ultras Spittal","gamesPlayed":14,"gamesWon":0,"gamesWonInOt":0,"gamesTied":0,"gamesLostInOt":0,"gamesLost":14,"goalsFor":12,"goalsAgainst":256,"goalDifference":"-244","points":0}
     ]
-  },
-  "lastUpdate": {
-    "formattedLong": "27.October 2025 07:32"
   }
 };
 
 function renderTabelle(data) {
   const tbody = $("#tabelle");
   tbody.empty();
-
   data.data.rows.forEach(team => {
-    const teamKlasse = team.teamLongname === "HC TIWAG Innsbruck - Die Haie" ? "team-rot" : "";
+    let zeilenKlasse = "";
+    if(team.teamLongname === "HC TIWAG Innsbruck - Die Haie"){
+      zeilenKlasse = "innsbruck-zeile";
+    }
     tbody.append(`
-      <tr>
+      <tr class="${zeilenKlasse}">
         <td data-label="Rang">${team.tableRank}</td>
-        <td data-label="Team" class="${teamKlasse}">${team.teamLongname}</td>
+        <td data-label="Team">${team.teamLongname}</td>
         <td data-label="Spiele">${team.gamesPlayed}</td>
         <td data-label="Siege">${team.gamesWon}</td>
         <td data-label="Siege OT">${team.gamesWonInOt}</td>
@@ -175,9 +216,6 @@ function renderTabelle(data) {
       </tr>
     `);
   });
-
-  // Zeige Zeitpunkt der letzten offiziellen Aktualisierung
-  $("#letzteAktualisierung").text(`Letzte Aktualisierung: ${data.lastUpdate.formattedLong}`);
 }
 
 // Init

@@ -5,32 +5,100 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>U13-Tabelle – HC Innsbruck</title>
 <style>
-body { font-family:"Inter",Arial,sans-serif; background:#f7f8fa; margin:0; padding:2rem; color:#222; }
+body { 
+  font-family:"Inter",Arial,sans-serif; 
+  margin:0; 
+  padding:2rem; 
+  color:#222; 
+  background: linear-gradient(-45deg, #E10600, #0047AB, #E10600, #0047AB); 
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 15px #E10600, 0 0 25px #0047AB; }
+  50% { box-shadow: 0 0 25px #E10600, 0 0 35px #0047AB; }
+  100% { box-shadow: 0 0 15px #E10600, 0 0 25px #0047AB; }
+}
+
+#letzteAktualisierung {
+  font-size:1rem;
+  color:#fff;
+  margin-bottom:1rem;
+  font-weight:700;
+  text-align:left;
+}
+
 header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; }
-h1 { font-size:2rem; font-weight:700; margin:0; color:#0047AB; }
+h1 { font-size:2rem; font-weight:700; margin:0; color:#fff; }
 #logo { height:55px; opacity:0.8; display:block; }
-table { width:100%; border-collapse:collapse; background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 12px 35px rgba(0,0,0,0.18); transition: transform 0.3s ease, box-shadow 0.3s ease; font-size:1rem; }
-table:hover { transform: translateY(-6px); box-shadow:0 25px 50px rgba(0,0,0,0.25); }
+
+/* Tabelle */
+table { 
+  width:100%; 
+  border-collapse:collapse; 
+  background:#fff; 
+  border-radius:10px; 
+  overflow:hidden; 
+  box-shadow:0 12px 35px rgba(0,0,0,0.18); 
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+  font-size:1.2rem; 
+  font-weight:700; 
+  animation: glow 3s ease-in-out infinite alternate;
+}
+table:hover { 
+  transform: translateY(-6px); 
+  box-shadow:0 25px 50px rgba(0,0,0,0.25); 
+}
 thead { background:#eaeaea; }
-th { font-weight:600; padding:10px 6px; text-align:center; color:#333; border-bottom:2px solid #ddd; }
-td { padding:8px 6px; text-align:center; border-bottom:1px solid #eee; }
+th { font-weight:700; padding:10px 6px; text-align:center; color:#333; border-bottom:3px solid #ddd; }
+td { padding:8px 6px; text-align:center; border-bottom:2px solid #ccc; }
 tbody tr:nth-child(even){ background:#fafafa; }
 tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
 .punkte { font-weight:700; }
-.team-rot { color:#E10600; font-weight:700; }
-#letzteAktualisierung { font-size:0.8rem; color:#555; text-align:right; margin-top:0.5rem; }
+
+/* Zeile für HC TIWAG Innsbruck */
+.innsbruck-zeile td {
+    background-color: #E10600 !important; /* Hintergrund rot */
+    color: #000 !important;               /* Text schwarz */
+}
+
+/* Responsive Abkürzungen und Mobile */
 @media (max-width:768px){
   table,thead,tbody,th,td,tr{display:block;}
   thead{display:none;}
   tr{ background:#fff; margin-bottom:1rem; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.05); overflow:hidden; padding:0.5rem; }
-  td{ display:flex; justify-content:space-between; padding:6px 8px; border:none; border-bottom:1px solid #f0f0f0; }
+  td{ display:flex; justify-content:space-between; padding:6px 8px; border:none; border-bottom:2px solid #ccc; }
   td:last-child{border-bottom:none;}
   td::before{content:attr(data-label); font-weight:600; color:#444;}
+}
+
+@media (max-width:500px){
+  th:nth-child(1)::after { content:"Rg"; }
+  th:nth-child(2)::after { content:"Team"; }
+  th:nth-child(3)::after { content:"Sp"; }
+  th:nth-child(4)::after { content:"Sg"; }
+  th:nth-child(5)::after { content:"U"; }
+  th:nth-child(6)::after { content:"N"; }
+  th:nth-child(7)::after { content:"T"; }
+  th:nth-child(8)::after { content:"TD"; }
+  th:nth-child(9)::after { content:"Pkt"; }
+  thead th { font-size:0; } 
+  thead th::after { font-size:1rem; font-weight:700; display:block; text-align:center; }
 }
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+
+<!-- Letzte Aktualisierung manuell eintragen -->
+<p id="letzteAktualisierung">Letzte Aktualisierung: 31.10.2025</p>
 
 <header>
   <h1>U13-Tabelle – HC Innsbruck</h1>
@@ -53,8 +121,6 @@ tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
   </thead>
   <tbody id="tabelle"></tbody>
 </table>
-
-<p id="letzteAktualisierung"></p>
 
 <script>
 // Backup-Daten
@@ -80,11 +146,14 @@ function renderTabelle(data) {
   const tbody = $("#tabelle");
   tbody.empty();
   data.data.rows.forEach(team => {
-    const teamKlasse = team.teamLongname.includes("Innsbruck") ? "team-rot" : "";
+    let zeilenKlasse = "";
+    if(team.teamLongname.includes("HC TIWAG Innsbruck")){
+      zeilenKlasse = "innsbruck-zeile";
+    }
     tbody.append(`
-      <tr>
+      <tr class="${zeilenKlasse}">
         <td data-label="Rang">${team.tableRank}</td>
-        <td data-label="Team" class="${teamKlasse}">${team.teamLongname}</td>
+        <td data-label="Team">${team.teamLongname}</td>
         <td data-label="Spiele">${team.gamesPlayed}</td>
         <td data-label="Siege">${team.gamesWon}</td>
         <td data-label="Unentschieden">${team.gamesTied}</td>
@@ -95,8 +164,6 @@ function renderTabelle(data) {
       </tr>
     `);
   });
-  const jetzt = new Date();
-  $("#letzteAktualisierung").text(`Letzte Aktualisierung: ${jetzt.toLocaleDateString()} ${jetzt.toLocaleTimeString()}`);
 }
 
 // Init mit Backup-Daten
