@@ -114,10 +114,6 @@
         flex-direction: column;
         gap: 10px;
     }
-
-    .frame.multiple iframe {
-        height: 50%;
-    }
   </style>
 </head>
 <body>
@@ -245,12 +241,13 @@
         setInterval(()=>location.reload(), settings.reload*60*1000);
 
       // =========================
-      // Seite 8 – Tabellenrotation
+      // Seite 8 – Tabellenrotation (einzeln)
       // =========================
       const tableSequence = [
         ["Tabelle_U13.html"],
         ["Tabelle_U15.html"],
-        ["Tabelle_U17.html","Tabelle_U20.html"]
+        ["Tabelle_U17.html"],
+        ["Tabelle_U20.html"]
       ];
 
       let index = 0;
@@ -279,23 +276,15 @@
             return;
           }
 
-          if(currentTables.length === 1){
-            const iframe = createIframe(currentTables[0]);
-            frame.appendChild(iframe);
-          } else {
-            frame.classList.add('multiple');
-            currentTables.forEach(tbl => {
-              const iframe = createIframe(tbl);
-              iframe.style.height = "50%";
-              frame.appendChild(iframe);
-            });
-          }
+          // Jede Tabelle einzeln anzeigen
+          const iframe = createIframe(currentTables[0]);
+          frame.appendChild(iframe);
 
           index = (index + 1) % tableSequence.length;
         }
 
         rotateTables();
-        setInterval(rotateTables, 10000);
+        setInterval(rotateTables, 10000); // bleibt unverändert
       }
 
     });
