@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>U15-Tabelle – HC Innsbruck</title>
 <style>
+body { 
+  font-family:"Inter",Arial,sans-serif; 
+  margin:0; 
+  padding:2rem; 
+  color:#222; 
+  background: linear-gradient(-45deg, #E10600, #0047AB, #E10600, #0047AB); 
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
 @keyframes gradientShift {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -17,109 +27,54 @@
   100% { box-shadow: 0 0 15px #E10600, 0 0 25px #0047AB; }
 }
 
-body {
-  font-family:"Inter",Arial,sans-serif;
-  margin:0;
-  padding:2rem;
-  color:#222;
-  background: linear-gradient(-45deg, #E10600, #0047AB, #E10600, #0047AB);
-  background-size: 400% 400%;
-  animation: gradientShift 15s ease infinite;
-}
-
 #letzteAktualisierung {
   font-size:1rem;
   color:#fff;
-  font-weight:700;
   margin-bottom:1rem;
+  font-weight:700;
+  text-align:left;
 }
 
-header {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:1rem;
-}
-h1 {
-  font-size:2rem;
-  font-weight:700;
-  margin:0;
-  color:#fff;
-}
-#logo {
-  height:55px;
-  opacity:0.8;
-  display:block;
-}
+header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; }
+h1 { font-size:2rem; font-weight:700; margin:0; color:#fff; }
+#logo { height:55px; opacity:0.8; display:block; }
 
 /* Tabelle */
-table {
-  width:100%;
-  border-collapse:collapse;
-  background:#fff;
-  border-radius:10px;
-  overflow:hidden;
-  box-shadow:0 12px 35px rgba(0,0,0,0.18);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  font-size:1.2rem;
-  font-weight:700;
+table { 
+  width:100%; 
+  border-collapse:collapse; 
+  background:#fff; 
+  border-radius:10px; 
+  overflow:hidden; 
+  box-shadow:0 12px 35px rgba(0,0,0,0.18); 
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+  font-size:1.2rem; 
+  font-weight:700; 
   animation: glow 3s ease-in-out infinite alternate;
 }
-table:hover {
-  transform: translateY(-6px);
-  box-shadow:0 25px 50px rgba(0,0,0,0.25);
+table:hover { 
+  transform: translateY(-6px); 
+  box-shadow:0 25px 50px rgba(0,0,0,0.25); 
 }
-thead {
-  background:#eaeaea;
-}
-th {
-  font-weight:700;
-  padding:10px 6px;
-  text-align:center;
-  color:#333;
-  border-bottom:3px solid #ddd;
-}
-td {
-  padding:8px 6px;
-  text-align:center;
-  border-bottom:2px solid #ccc;
-}
-tbody tr:nth-child(even){
-  background:#fafafa;
-}
-tbody tr:hover{
-  background:#f0f3f8;
-  transition: background 0.3s ease;
-}
-.punkte {
-  font-weight:700;
-}
+thead { background:#eaeaea; }
+th { font-weight:700; padding:10px 6px; text-align:center; color:#333; border-bottom:3px solid #ddd; }
+td { padding:8px 6px; text-align:center; border-bottom:2px solid #ccc; }
+tbody tr:nth-child(even){ background:#fafafa; }
+tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
+.punkte { font-weight:700; }
 
-/* HC TIWAG Innsbruck-Zeile */
+/* Zeile für HC TIWAG Innsbruck */
 .innsbruck-zeile td {
-  background-color:#E10600 !important;
-  color:#000 !important;
+    background-color: #E10600 !important; /* Hintergrund rot */
+    color: #000 !important;               /* Text schwarz */
 }
 
-/* Responsive */
+/* Responsive Abkürzungen und Mobile */
 @media (max-width:768px){
   table,thead,tbody,th,td,tr{display:block;}
   thead{display:none;}
-  tr{
-    background:#fff;
-    margin-bottom:1rem;
-    border-radius:8px;
-    box-shadow:0 2px 6px rgba(0,0,0,0.05);
-    overflow:hidden;
-    padding:0.5rem;
-  }
-  td{
-    display:flex;
-    justify-content:space-between;
-    padding:6px 8px;
-    border:none;
-    border-bottom:2px solid #ccc;
-  }
+  tr{ background:#fff; margin-bottom:1rem; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.05); overflow:hidden; padding:0.5rem; }
+  td{ display:flex; justify-content:space-between; padding:6px 8px; border:none; border-bottom:2px solid #ccc; }
   td:last-child{border-bottom:none;}
   td::before{content:attr(data-label); font-weight:600; color:#444;}
 }
@@ -129,14 +84,11 @@ tbody tr:hover{
   th:nth-child(2)::after { content:"Team"; }
   th:nth-child(3)::after { content:"Sp"; }
   th:nth-child(4)::after { content:"Sg"; }
-  th:nth-child(5)::after { content:"SgOT"; }
-  th:nth-child(6)::after { content:"U"; }
-  th:nth-child(7)::after { content:"N_OT"; }
-  th:nth-child(8)::after { content:"N"; }
-  th:nth-child(9)::after { content:"T"; }
-  th:nth-child(10)::after { content:"GT"; }
-  th:nth-child(11)::after { content:"TD"; }
-  th:nth-child(12)::after { content:"Pkt"; }
+  th:nth-child(5)::after { content:"U"; }
+  th:nth-child(6)::after { content:"N"; }
+  th:nth-child(7)::after { content:"T"; }
+  th:nth-child(8)::after { content:"TD"; }
+  th:nth-child(9)::after { content:"Pkt"; }
   thead th { font-size:0; } 
   thead th::after { font-size:1rem; font-weight:700; display:block; text-align:center; }
 }
@@ -145,8 +97,7 @@ tbody tr:hover{
 </head>
 <body>
 
-<!-- Letzte Aktualisierung manuell editierbar -->
-<p id="letzteAktualisierung">Letzte Aktualisierung: 27.10.2025</p>
+<p id="letzteAktualisierung">Letzte Aktualisierung: 31.10.2025</p>
 
 <header>
   <h1>U15-Tabelle – HC Innsbruck</h1>
@@ -160,12 +111,9 @@ tbody tr:hover{
       <th>Team</th>
       <th>Spiele</th>
       <th>Siege</th>
-      <th>Siege OT</th>
       <th>Unentschieden</th>
-      <th>Niederlagen OT</th>
       <th>Niederlagen</th>
       <th>Tore</th>
-      <th>Gegentore</th>
       <th>Tordifferenz</th>
       <th>Punkte</th>
     </tr>
@@ -176,19 +124,19 @@ tbody tr:hover{
 <script>
 // Backup-Daten für U15
 const backupData = {
-  "data": {
-    "rows": [
-      {"tableRank":1,"teamLongname":"EC IDM VSV","gamesPlayed":14,"gamesWon":11,"gamesWonInOt":0,"gamesTied":0,"gamesLostInOt":1,"gamesLost":2,"goalsFor":76,"goalsAgainst":33,"goalDifference":"+43","points":34},
-      {"tableRank":2,"teamLongname":"EC KAC","gamesPlayed":11,"gamesWon":8,"gamesWonInOt":2,"gamesTied":0,"gamesLostInOt":0,"gamesLost":1,"goalsFor":70,"goalsAgainst":21,"goalDifference":"+49","points":28},
-      {"tableRank":3,"teamLongname":"SPG OHA / LAS","gamesPlayed":14,"gamesWon":9,"gamesWonInOt":0,"gamesTied":0,"gamesLostInOt":0,"gamesLost":5,"goalsFor":101,"goalsAgainst":35,"goalDifference":"+66","points":27},
-      {"tableRank":4,"teamLongname":"Eishockey Akademie Steiermark","gamesPlayed":12,"gamesWon":8,"gamesWonInOt":0,"gamesTied":0,"gamesLostInOt":0,"gamesLost":4,"goalsFor":93,"goalsAgainst":40,"goalDifference":"+53","points":24},
-      {"tableRank":5,"teamLongname":"EV Vienna Capitals","gamesPlayed":12,"gamesWon":6,"gamesWonInOt":0,"gamesTied":0,"gamesLostInOt":1,"gamesLost":5,"goalsFor":74,"goalsAgainst":37,"goalDifference":"+37","points":19},
-      {"tableRank":6,"teamLongname":"HC TIWAG Innsbruck - Die Haie","gamesPlayed":12,"gamesWon":6,"gamesWonInOt":0,"gamesTied":0,"gamesLostInOt":0,"gamesLost":6,"goalsFor":65,"goalsAgainst":56,"goalDifference":"+9","points":18},
-      {"tableRank":7,"teamLongname":"EC Red Bull Salzburg","gamesPlayed":13,"gamesWon":5,"gamesWonInOt":0,"gamesTied":0,"gamesLostInOt":0,"gamesLost":8,"goalsFor":67,"goalsAgainst":60,"goalDifference":"+7","points":15},
-      {"tableRank":8,"teamLongname":"Steel Wings Linz","gamesPlayed":12,"gamesWon":2,"gamesWonInOt":0,"gamesTied":0,"gamesLostInOt":0,"gamesLost":10,"goalsFor":67,"goalsAgainst":87,"goalDifference":"-20","points":6},
-      {"tableRank":9,"teamLongname":"Ultras Spittal","gamesPlayed":14,"gamesWon":0,"gamesWonInOt":0,"gamesTied":0,"gamesLostInOt":0,"gamesLost":14,"goalsFor":12,"goalsAgainst":256,"goalDifference":"-244","points":0}
-    ]
-  }
+    "data": {
+        "rows": [
+            {"tableRank":1,"teamLongname":"EC IDM VSV","gamesPlayed":14,"gamesWon":11,"gamesTied":0,"gamesLost":3,"goalsFor":76,"goalsAgainst":33,"goalDifference":"+43","points":34},
+            {"tableRank":2,"teamLongname":"EC KAC","gamesPlayed":11,"gamesWon":8,"gamesTied":0,"gamesLost":3,"goalsFor":70,"goalsAgainst":21,"goalDifference":"+49","points":28},
+            {"tableRank":3,"teamLongname":"SPG OHA / LAS","gamesPlayed":14,"gamesWon":9,"gamesTied":0,"gamesLost":5,"goalsFor":101,"goalsAgainst":35,"goalDifference":"+66","points":27},
+            {"tableRank":4,"teamLongname":"Eishockey Akademie Steiermark","gamesPlayed":12,"gamesWon":8,"gamesTied":0,"gamesLost":4,"goalsFor":93,"goalsAgainst":40,"goalDifference":"+53","points":24},
+            {"tableRank":5,"teamLongname":"EV Vienna Capitals","gamesPlayed":12,"gamesWon":6,"gamesTied":0,"gamesLost":6,"goalsFor":74,"goalsAgainst":37,"goalDifference":"+37","points":19},
+            {"tableRank":6,"teamLongname":"HC TIWAG Innsbruck - Die Haie","gamesPlayed":12,"gamesWon":6,"gamesTied":0,"gamesLost":6,"goalsFor":65,"goalsAgainst":56,"goalDifference":"+9","points":18},
+            {"tableRank":7,"teamLongname":"EC Red Bull Salzburg","gamesPlayed":13,"gamesWon":5,"gamesTied":0,"gamesLost":8,"goalsFor":67,"goalsAgainst":60,"goalDifference":"+7","points":15},
+            {"tableRank":8,"teamLongname":"Steel Wings Linz","gamesPlayed":12,"gamesWon":2,"gamesTied":0,"gamesLost":10,"goalsFor":67,"goalsAgainst":87,"goalDifference":"-20","points":6},
+            {"tableRank":9,"teamLongname":"Ultras Spittal","gamesPlayed":14,"gamesWon":0,"gamesTied":0,"gamesLost":14,"goalsFor":12,"goalsAgainst":256,"goalDifference":"-244","points":0}
+        ]
+    }
 };
 
 function renderTabelle(data) {
@@ -196,7 +144,7 @@ function renderTabelle(data) {
   tbody.empty();
   data.data.rows.forEach(team => {
     let zeilenKlasse = "";
-    if(team.teamLongname === "HC TIWAG Innsbruck - Die Haie"){
+    if(team.teamLongname.includes("HC TIWAG Innsbruck")){
       zeilenKlasse = "innsbruck-zeile";
     }
     tbody.append(`
@@ -205,12 +153,9 @@ function renderTabelle(data) {
         <td data-label="Team">${team.teamLongname}</td>
         <td data-label="Spiele">${team.gamesPlayed}</td>
         <td data-label="Siege">${team.gamesWon}</td>
-        <td data-label="Siege OT">${team.gamesWonInOt}</td>
         <td data-label="Unentschieden">${team.gamesTied}</td>
-        <td data-label="Niederlagen OT">${team.gamesLostInOt}</td>
         <td data-label="Niederlagen">${team.gamesLost}</td>
-        <td data-label="Tore">${team.goalsFor}</td>
-        <td data-label="Gegentore">${team.goalsAgainst}</td>
+        <td data-label="Tore">${team.goalsFor}:${team.goalsAgainst}</td>
         <td data-label="Tordifferenz">${team.goalDifference}</td>
         <td data-label="Punkte" class="punkte">${team.points}</td>
       </tr>
