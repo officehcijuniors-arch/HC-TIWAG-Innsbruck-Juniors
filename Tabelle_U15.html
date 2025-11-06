@@ -97,7 +97,7 @@ tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
 </head>
 <body>
 
-<p id="letzteAktualisierung">Letzte Aktualisierung: 31.10.2025</p>
+<p id="letzteAktualisierung">Letzte Aktualisierung: </p>
 
 <header>
   <h1>U15-Tabelle – HC Innsbruck</h1>
@@ -122,17 +122,16 @@ tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
 </table>
 
 <script>
-// Backup-Daten für U15
-const backupData = {
+const aktuelleDaten = {
     "data": {
         "rows": [
             {"tableRank":1,"teamLongname":"EC IDM VSV","gamesPlayed":14,"gamesWon":11,"gamesTied":0,"gamesLost":3,"goalsFor":76,"goalsAgainst":33,"goalDifference":"+43","points":34},
-            {"tableRank":2,"teamLongname":"EC KAC","gamesPlayed":11,"gamesWon":8,"gamesTied":0,"gamesLost":3,"goalsFor":70,"goalsAgainst":21,"goalDifference":"+49","points":28},
-            {"tableRank":3,"teamLongname":"SPG OHA / LAS","gamesPlayed":14,"gamesWon":9,"gamesTied":0,"gamesLost":5,"goalsFor":101,"goalsAgainst":35,"goalDifference":"+66","points":27},
-            {"tableRank":4,"teamLongname":"Eishockey Akademie Steiermark","gamesPlayed":12,"gamesWon":8,"gamesTied":0,"gamesLost":4,"goalsFor":93,"goalsAgainst":40,"goalDifference":"+53","points":24},
-            {"tableRank":5,"teamLongname":"EV Vienna Capitals","gamesPlayed":12,"gamesWon":6,"gamesTied":0,"gamesLost":6,"goalsFor":74,"goalsAgainst":37,"goalDifference":"+37","points":19},
-            {"tableRank":6,"teamLongname":"HC TIWAG Innsbruck - Die Haie","gamesPlayed":12,"gamesWon":6,"gamesTied":0,"gamesLost":6,"goalsFor":65,"goalsAgainst":56,"goalDifference":"+9","points":18},
-            {"tableRank":7,"teamLongname":"EC Red Bull Salzburg","gamesPlayed":13,"gamesWon":5,"gamesTied":0,"gamesLost":8,"goalsFor":67,"goalsAgainst":60,"goalDifference":"+7","points":15},
+            {"tableRank":2,"teamLongname":"SPG OHA / LAS","gamesPlayed":16,"gamesWon":11,"gamesTied":0,"gamesLost":5,"goalsFor":113,"goalsAgainst":41,"goalDifference":"+72","points":33},
+            {"tableRank":3,"teamLongname":"EC KAC","gamesPlayed":12,"gamesWon":11,"gamesTied":0,"gamesLost":1,"goalsFor":74,"goalsAgainst":24,"goalDifference":"+50","points":30},
+            {"tableRank":4,"teamLongname":"Eishockey Akademie Steiermark","gamesPlayed":13,"gamesWon":8,"gamesTied":0,"gamesLost":5,"goalsFor":96,"goalsAgainst":44,"goalDifference":"+52","points":25},
+            {"tableRank":5,"teamLongname":"EV Vienna Capitals","gamesPlayed":13,"gamesWon":6,"gamesTied":0,"gamesLost":7,"goalsFor":79,"goalsAgainst":44,"goalDifference":"+35","points":19},
+            {"tableRank":6,"teamLongname":"EC Red Bull Salzburg","gamesPlayed":15,"gamesWon":6,"gamesTied":0,"gamesLost":9,"goalsFor":72,"goalsAgainst":68,"goalDifference":"+4","points":18},
+            {"tableRank":7,"teamLongname":"HC TIWAG Innsbruck - Die Haie","gamesPlayed":13,"gamesWon":6,"gamesTied":0,"gamesLost":7,"goalsFor":68,"goalsAgainst":60,"goalDifference":"+8","points":18},
             {"tableRank":8,"teamLongname":"Steel Wings Linz","gamesPlayed":12,"gamesWon":2,"gamesTied":0,"gamesLost":10,"goalsFor":67,"goalsAgainst":87,"goalDifference":"-20","points":6},
             {"tableRank":9,"teamLongname":"Ultras Spittal","gamesPlayed":14,"gamesWon":0,"gamesTied":0,"gamesLost":14,"goalsFor":12,"goalsAgainst":256,"goalDifference":"-244","points":0}
         ]
@@ -164,7 +163,12 @@ function renderTabelle(data) {
 }
 
 // Init
-renderTabelle(backupData);
+renderTabelle(aktuelleDaten);
+
+// Aktualisiere Datum
+const jetzt = new Date();
+const datumStr = jetzt.toLocaleDateString("de-DE", {day:"2-digit", month:"2-digit", year:"numeric"});
+$("#letzteAktualisierung").text(`Letzte Aktualisierung: ${datumStr}`);
 </script>
 
 </body>
