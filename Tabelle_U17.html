@@ -14,13 +14,11 @@ body {
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
 }
-
 @keyframes gradientShift {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
-
 @keyframes glow {
   0% { box-shadow: 0 0 15px #E10600, 0 0 25px #0047AB; }
   50% { box-shadow: 0 0 25px #E10600, 0 0 35px #0047AB; }
@@ -34,10 +32,8 @@ body {
   font-weight:700;
   text-align:left;
 }
-
 header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; }
 h1 { font-size:2rem; font-weight:700; margin:0; color:#fff; }
-#logo { height:55px; opacity:0.8; display:block; }
 
 /* Tabelle */
 table { 
@@ -52,10 +48,7 @@ table {
   font-weight:700; 
   animation: glow 3s ease-in-out infinite alternate;
 }
-table:hover { 
-  transform: translateY(-6px); 
-  box-shadow:0 25px 50px rgba(0,0,0,0.25); 
-}
+table:hover { transform:translateY(-6px); box-shadow:0 25px 50px rgba(0,0,0,0.25); }
 thead { background:#eaeaea; }
 th { font-weight:700; padding:10px 6px; text-align:center; color:#333; border-bottom:3px solid #ddd; }
 td { padding:8px 6px; text-align:center; border-bottom:2px solid #ccc; }
@@ -63,33 +56,34 @@ tbody tr:nth-child(even){ background:#fafafa; }
 tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
 .punkte { font-weight:700; }
 
-/* Zeile für HC TIWAG Innsbruck */
+/* Innsbruck-Zeile */
 .innsbruck-zeile td {
-    background-color: #E10600 !important; /* Hintergrund rot */
-    color: #000 !important;               /* Text schwarz */
+  background-color:#E10600 !important;
+  color:#000 !important;
 }
 
-/* Responsive Abkürzungen und Mobile */
+/* Logo */
+#logo-unten { display:flex; justify-content:center; margin-top:2rem; }
+.logo-professionell {
+  max-width:300px;
+  width:100%;
+  height:auto;
+  opacity:0.9;
+  transition:transform 0.3s ease;
+}
+.logo-professionell:hover { transform:scale(1.05); }
+
+/* Mobile Ansicht */
 @media (max-width:768px){
   table,thead,tbody,th,td,tr{display:block;}
   thead{display:none;}
-  tr{ background:#fff; margin-bottom:1rem; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.05); overflow:hidden; padding:0.5rem; }
-  td{ display:flex; justify-content:space-between; padding:6px 8px; border:none; border-bottom:2px solid #ccc; }
+  tr{ background:#fff; margin-bottom:1rem; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.05); overflow:hidden; padding:0.5rem;}
+  td{ display:flex; justify-content:space-between; padding:6px 8px; border:none; border-bottom:2px solid #ccc;}
   td:last-child{border-bottom:none;}
   td::before{content:attr(data-label); font-weight:600; color:#444;}
 }
-
 @media (max-width:500px){
-  th:nth-child(1)::after { content:"Rg"; }
-  th:nth-child(2)::after { content:"Team"; }
-  th:nth-child(3)::after { content:"Sp"; }
-  th:nth-child(4)::after { content:"Sg"; }
-  th:nth-child(5)::after { content:"U"; }
-  th:nth-child(6)::after { content:"N"; }
-  th:nth-child(7)::after { content:"T"; }
-  th:nth-child(8)::after { content:"TD"; }
-  th:nth-child(9)::after { content:"Pkt"; }
-  thead th { font-size:0; } 
+  thead th { font-size:0; }
   thead th::after { font-size:1rem; font-weight:700; display:block; text-align:center; }
 }
 </style>
@@ -97,12 +91,9 @@ tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
 </head>
 <body>
 
-<!-- Letzte Aktualisierung manuell eintragen -->
-<p id="letzteAktualisierung">Letzte Aktualisierung: 06.11.2025</p>
-
+<p id="letzteAktualisierung">Letzte Aktualisierung: 11.11.2025</p>
 <header>
   <h1>U17-Tabelle – HC Innsbruck</h1>
-  <img id="logo" src="HAI.webp" alt="HC Innsbruck Logo">
 </header>
 
 <table>
@@ -122,31 +113,32 @@ tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
   <tbody id="tabelle"></tbody>
 </table>
 
+<div id="logo-unten">
+  <img src="HAI.webp" alt="HC Innsbruck Logo" class="logo-professionell">
+</div>
+
 <script>
-const aktuelleDatenU17 = {
-    "data": {
-        "rows": [
-            {"tableRank":1,"teamLongname":"Eishockey Akademie Oberösterreich","gamesPlayed":12,"gamesWon":9,"gamesTied":0,"gamesLost":2,"goalsFor":74,"goalsAgainst":26,"goalDifference":"+48","points":30},
-            {"tableRank":2,"teamLongname":"Okanagan Hockey Academy","gamesPlayed":12,"gamesWon":10,"gamesTied":0,"gamesLost":2,"goalsFor":86,"goalsAgainst":31,"goalDifference":"+55","points":30},
-            {"tableRank":3,"teamLongname":"Eishockey Akademie Steiermark","gamesPlayed":13,"gamesWon":9,"gamesTied":0,"gamesLost":4,"goalsFor":67,"goalsAgainst":21,"goalDifference":"+46","points":29},
-            {"tableRank":4,"teamLongname":"EC Red Bull Salzburg","gamesPlayed":12,"gamesWon":9,"gamesTied":0,"gamesLost":2,"goalsFor":99,"goalsAgainst":21,"goalDifference":"+78","points":29},
-            {"tableRank":5,"teamLongname":"HC TIWAG Innsbruck - Die Haie","gamesPlayed":11,"gamesWon":4,"gamesTied":0,"gamesLost":7,"goalsFor":37,"goalsAgainst":71,"goalDifference":"-34","points":11},
-            {"tableRank":6,"teamLongname":"Eishockey Leistungszentrum Vorarlberg","gamesPlayed":16,"gamesWon":2,"gamesTied":0,"gamesLost":14,"goalsFor":31,"goalsAgainst":105,"goalDifference":"-74","points":6},
-            {"tableRank":7,"teamLongname":"Hockey Club Ferlach","gamesPlayed":14,"gamesWon":0,"gamesTied":0,"gamesLost":14,"goalsFor":17,"goalsAgainst":136,"goalDifference":"-119","points":0}
-        ]
-    }
+const backupData = {
+  "data": {
+    "rows": [
+      {"tableRank":1,"teamLongname":"Eishockey Akademie Oberösterreich","gamesPlayed":14,"gamesWon":11,"gamesTied":0,"gamesLost":1,"goalsFor":80,"goalsAgainst":28,"goalDifference":"+52","points":36},
+      {"tableRank":2,"teamLongname":"Okanagan Hockey Academy","gamesPlayed":12,"gamesWon":10,"gamesTied":0,"gamesLost":2,"goalsFor":86,"goalsAgainst":31,"goalDifference":"+55","points":30},
+      {"tableRank":3,"teamLongname":"Eishockey Akademie Steiermark","gamesPlayed":13,"gamesWon":9,"gamesTied":0,"gamesLost":2,"goalsFor":67,"goalsAgainst":21,"goalDifference":"+46","points":29},
+      {"tableRank":4,"teamLongname":"EC Red Bull Salzburg","gamesPlayed":12,"gamesWon":9,"gamesTied":0,"gamesLost":2,"goalsFor":99,"goalsAgainst":21,"goalDifference":"+78","points":29},
+      {"tableRank":5,"teamLongname":"HC TIWAG Innsbruck - Die Haie","gamesPlayed":13,"gamesWon":3,"gamesTied":0,"gamesLost":9,"goalsFor":39,"goalsAgainst":77,"goalDifference":"-38","points":11},
+      {"tableRank":6,"teamLongname":"Eishockey Leistungszentrum Vorarlberg","gamesPlayed":16,"gamesWon":2,"gamesTied":0,"gamesLost":14,"goalsFor":31,"goalsAgainst":105,"goalDifference":"-74","points":6},
+      {"tableRank":7,"teamLongname":"Hockey Club Ferlach","gamesPlayed":14,"gamesWon":0,"gamesTied":0,"gamesLost":14,"goalsFor":17,"goalsAgainst":136,"goalDifference":"-119","points":0}
+    ]
+  }
 };
 
-function renderTabelleU17(data) {
-  const tbody = $("#tabelle");
+function renderTabelle(data){
+  const tbody=$("#tabelle");
   tbody.empty();
-  data.data.rows.forEach(team => {
-    let zeilenKlasse = "";
-    if(team.teamLongname.includes("HC TIWAG Innsbruck")){
-      zeilenKlasse = "innsbruck-zeile";
-    }
+  data.data.rows.forEach(team=>{
+    const innsbruck=team.teamLongname.includes("HC TIWAG Innsbruck");
     tbody.append(`
-      <tr class="${zeilenKlasse}">
+      <tr class="${innsbruck ? "innsbruck-zeile":""}">
         <td data-label="Rang">${team.tableRank}</td>
         <td data-label="Team">${team.teamLongname}</td>
         <td data-label="Spiele">${team.gamesPlayed}</td>
@@ -160,16 +152,8 @@ function renderTabelleU17(data) {
     `);
   });
 }
-
-// Init
-renderTabelleU17(aktuelleDatenU17);
-
-// Aktualisiere Datum
-const jetzt = new Date();
-const datumStr = jetzt.toLocaleDateString("de-DE", {day:"2-digit", month:"2-digit", year:"numeric"});
-$("#letzteAktualisierung").text(`Letzte Aktualisierung: ${datumStr}`);
+renderTabelle(backupData);
 </script>
 
 </body>
 </html>
-

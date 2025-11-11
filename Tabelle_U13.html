@@ -37,7 +37,6 @@ body {
 
 header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; }
 h1 { font-size:2rem; font-weight:700; margin:0; color:#fff; }
-#logo { height:55px; opacity:0.8; display:block; }
 
 /* Tabelle */
 table { 
@@ -65,8 +64,25 @@ tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
 
 /* Zeile für HC TIWAG Innsbruck */
 .innsbruck-zeile td {
-    background-color: #E10600 !important; /* Hintergrund rot */
-    color: #000 !important;               /* Text schwarz */
+    background-color: #E10600 !important;
+    color: #000 !important;
+}
+
+/* Logo unter der Tabelle */
+#logo-unten {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+.logo-professionell {
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+  opacity: 0.9;
+  transition: transform 0.3s ease;
+}
+.logo-professionell:hover {
+  transform: scale(1.05);
 }
 
 /* Responsive Abkürzungen und Mobile */
@@ -102,7 +118,6 @@ tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
 
 <header>
   <h1>U13-Tabelle – HC Innsbruck</h1>
-  <img id="logo" src="HAI.webp" alt="HC Innsbruck Logo">
 </header>
 
 <table>
@@ -121,6 +136,11 @@ tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
   </thead>
   <tbody id="tabelle"></tbody>
 </table>
+
+<!-- Logo unter der Tabelle -->
+<div id="logo-unten">
+  <img src="HAI.webp" alt="HC Innsbruck Logo" class="logo-professionell">
+</div>
 
 <script>
 // Backup-Daten
@@ -171,5 +191,4 @@ renderTabelle(backupData);
 </script>
 
 </body>
-
 </html>

@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>U20-Tabelle – HC Innsbruck</title>
 <style>
-body {
-  font-family:"Inter",Arial,sans-serif;
-  margin:0;
-  padding:2rem;
-  color:#222;
-  background: linear-gradient(-45deg, #E10600, #0047AB, #E10600, #0047AB);
+body { 
+  font-family:"Inter",Arial,sans-serif; 
+  margin:0; 
+  padding:2rem; 
+  color:#222; 
+  background: linear-gradient(-45deg, #E10600, #0047AB, #E10600, #0047AB); 
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
 }
@@ -30,43 +30,30 @@ body {
 #letzteAktualisierung {
   font-size:1rem;
   color:#fff;
-  font-weight:700;
   margin-bottom:1rem;
+  font-weight:700;
+  text-align:left;
 }
 
-header {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:1rem;
-}
-h1 {
-  font-size:2rem;
-  font-weight:700;
-  margin:0;
-  color:#fff;
-}
-#logo {
-  height:55px;
-  opacity:0.8;
-  display:block;
-}
+header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; }
+h1 { font-size:2rem; font-weight:700; margin:0; color:#fff; }
 
-table {
-  width:100%;
-  border-collapse:collapse;
-  background:#fff;
-  border-radius:10px;
-  overflow:hidden;
-  box-shadow:0 12px 35px rgba(0,0,0,0.18);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  font-size:1.2rem;
-  font-weight:700;
+/* Tabelle */
+table { 
+  width:100%; 
+  border-collapse:collapse; 
+  background:#fff; 
+  border-radius:10px; 
+  overflow:hidden; 
+  box-shadow:0 12px 35px rgba(0,0,0,0.18); 
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+  font-size:1.2rem; 
+  font-weight:700; 
   animation: glow 3s ease-in-out infinite alternate;
 }
-table:hover {
-  transform: translateY(-6px);
-  box-shadow:0 25px 50px rgba(0,0,0,0.25);
+table:hover { 
+  transform: translateY(-6px); 
+  box-shadow:0 25px 50px rgba(0,0,0,0.25); 
 }
 thead { background:#eaeaea; }
 th { font-weight:700; padding:10px 6px; text-align:center; color:#333; border-bottom:3px solid #ddd; }
@@ -75,12 +62,34 @@ tbody tr:nth-child(even){ background:#fafafa; }
 tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
 .punkte { font-weight:700; }
 
-.innsbruck-zeile td { background-color:#E10600 !important; color:#000 !important; }
+/* Zeile für HC TIWAG Innsbruck */
+.innsbruck-zeile td {
+    background-color: #E10600 !important;
+    color: #000 !important;
+}
 
+/* Logo unter der Tabelle */
+#logo-unten {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+.logo-professionell {
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+  opacity: 0.9;
+  transition: transform 0.3s ease;
+}
+.logo-professionell:hover {
+  transform: scale(1.05);
+}
+
+/* Responsive Abkürzungen und Mobile */
 @media (max-width:768px){
   table,thead,tbody,th,td,tr{display:block;}
   thead{display:none;}
-  tr{ background:#fff; margin-bottom:1rem; border-radius:8px; overflow:hidden; padding:0.5rem; }
+  tr{ background:#fff; margin-bottom:1rem; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.05); overflow:hidden; padding:0.5rem; }
   td{ display:flex; justify-content:space-between; padding:6px 8px; border:none; border-bottom:2px solid #ccc; }
   td:last-child{border-bottom:none;}
   td::before{content:attr(data-label); font-weight:600; color:#444;}
@@ -104,11 +113,11 @@ tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
 </head>
 <body>
 
+<!-- Letzte Aktualisierung -->
 <p id="letzteAktualisierung">Letzte Aktualisierung: 06.11.2025</p>
 
 <header>
   <h1>U20-Tabelle – HC Innsbruck</h1>
-  <img id="logo" src="HAI.webp" alt="HC Innsbruck Logo">
 </header>
 
 <table>
@@ -128,23 +137,33 @@ tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
   <tbody id="tabelle"></tbody>
 </table>
 
+<!-- Logo -->
+<div id="logo-unten">
+  <img src="HAI.webp" alt="HC Innsbruck Logo" class="logo-professionell">
+</div>
+
 <script>
-const data = [
-  {"tableRank":1,"teamLongname":"HD - mladi - Jesenice","gamesPlayed":14,"gamesWon":13,"gamesTied":0,"gamesLost":1,"goalsFor":77,"goalsAgainst":22,"goalDifference":"+55","points":40},
-  {"tableRank":2,"teamLongname":"Eishockey Akademie Steiermark","gamesPlayed":14,"gamesWon":11,"gamesTied":0,"gamesLost":2,"goalsFor":66,"goalsAgainst":27,"goalDifference":"+39","points":35},
-  {"tableRank":3,"teamLongname":"Nordic Hockey Academy","gamesPlayed":14,"gamesWon":5,"gamesTied":0,"gamesLost":5,"goalsFor":41,"goalsAgainst":44,"goalDifference":"-3","points":22},
-  {"tableRank":4,"teamLongname":"Vasas SC","gamesPlayed":14,"gamesWon":5,"gamesTied":0,"gamesLost":6,"goalsFor":46,"goalsAgainst":46,"goalDifference":"+0","points":20},
-  {"tableRank":5,"teamLongname":"HC TIWAG Innsbruck - Die Haie","gamesPlayed":14,"gamesWon":5,"gamesTied":0,"gamesLost":7,"goalsFor":43,"goalsAgainst":43,"goalDifference":"+0","points":17},
-  {"tableRank":6,"teamLongname":"EV Vienna Capitals","gamesPlayed":14,"gamesWon":4,"gamesTied":0,"gamesLost":7,"goalsFor":41,"goalsAgainst":54,"goalDifference":"-13","points":17},
-  {"tableRank":7,"teamLongname":"Okanagan Hockey Academy","gamesPlayed":14,"gamesWon":3,"gamesTied":0,"gamesLost":11,"goalsFor":29,"goalsAgainst":75,"goalDifference":"-46","points":9},
-  {"tableRank":8,"teamLongname":"Hiti Academy Bled Hawks","gamesPlayed":14,"gamesWon":2,"gamesTied":0,"gamesLost":10,"goalsFor":32,"goalsAgainst":64,"goalDifference":"-32","points":8},
-  {"tableRank":9,"teamLongname":"*Unassigned Team","gamesPlayed":0,"gamesWon":0,"gamesTied":0,"gamesLost":0,"goalsFor":0,"goalsAgainst":0,"goalDifference":"+0","points":0}
-];
+// Backup-Daten
+const backupData = {
+  "data": {
+    "rows": [
+      {"tableRank":1,"teamLongname":"HD - mladi - Jesenice","gamesPlayed":14,"gamesWon":13,"gamesTied":0,"gamesLost":1,"goalsFor":77,"goalsAgainst":22,"goalDifference":"+55","points":40},
+      {"tableRank":2,"teamLongname":"Eishockey Akademie Steiermark","gamesPlayed":14,"gamesWon":11,"gamesTied":0,"gamesLost":2,"goalsFor":66,"goalsAgainst":27,"goalDifference":"+39","points":35},
+      {"tableRank":3,"teamLongname":"Nordic Hockey Academy","gamesPlayed":14,"gamesWon":5,"gamesTied":0,"gamesLost":5,"goalsFor":41,"goalsAgainst":44,"goalDifference":"-3","points":22},
+      {"tableRank":4,"teamLongname":"Vasas SC","gamesPlayed":14,"gamesWon":5,"gamesTied":0,"gamesLost":6,"goalsFor":46,"goalsAgainst":46,"goalDifference":"+0","points":20},
+      {"tableRank":5,"teamLongname":"HC TIWAG Innsbruck - Die Haie","gamesPlayed":14,"gamesWon":5,"gamesTied":0,"gamesLost":7,"goalsFor":43,"goalsAgainst":43,"goalDifference":"+0","points":17},
+      {"tableRank":6,"teamLongname":"EV Vienna Capitals","gamesPlayed":14,"gamesWon":4,"gamesTied":0,"gamesLost":7,"goalsFor":41,"goalsAgainst":54,"goalDifference":"-13","points":17},
+      {"tableRank":7,"teamLongname":"Okanagan Hockey Academy","gamesPlayed":14,"gamesWon":3,"gamesTied":0,"gamesLost":11,"goalsFor":29,"goalsAgainst":75,"goalDifference":"-46","points":9},
+      {"tableRank":8,"teamLongname":"Hiti Academy Bled Hawks","gamesPlayed":14,"gamesWon":2,"gamesTied":0,"gamesLost":10,"goalsFor":32,"goalsAgainst":64,"goalDifference":"-32","points":8},
+      {"tableRank":9,"teamLongname":"*Unassigned Team","gamesPlayed":0,"gamesWon":0,"gamesTied":0,"gamesLost":0,"goalsFor":0,"goalsAgainst":0,"goalDifference":"+0","points":0}
+    ]
+  }
+};
 
 function renderTabelle(data) {
   const tbody = $("#tabelle");
   tbody.empty();
-  data.forEach(team => {
+  data.data.rows.forEach(team => {
     let zeilenKlasse = team.teamLongname.includes("HC TIWAG Innsbruck") ? "innsbruck-zeile" : "";
     tbody.append(`
       <tr class="${zeilenKlasse}">
@@ -162,9 +181,9 @@ function renderTabelle(data) {
   });
 }
 
-renderTabelle(data);
+// Init mit Backup-Daten
+renderTabelle(backupData);
 </script>
 
 </body>
 </html>
-

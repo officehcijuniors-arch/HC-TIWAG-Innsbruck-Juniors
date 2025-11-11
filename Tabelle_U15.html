@@ -37,7 +37,6 @@ body {
 
 header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; }
 h1 { font-size:2rem; font-weight:700; margin:0; color:#fff; }
-#logo { height:55px; opacity:0.8; display:block; }
 
 /* Tabelle */
 table { 
@@ -65,8 +64,25 @@ tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
 
 /* Zeile für HC TIWAG Innsbruck */
 .innsbruck-zeile td {
-    background-color: #E10600 !important; /* Hintergrund rot */
-    color: #000 !important;               /* Text schwarz */
+    background-color: #E10600 !important;
+    color: #000 !important;
+}
+
+/* Logo unter der Tabelle */
+#logo-unten {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+.logo-professionell {
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+  opacity: 0.9;
+  transition: transform 0.3s ease;
+}
+.logo-professionell:hover {
+  transform: scale(1.05);
 }
 
 /* Responsive Abkürzungen und Mobile */
@@ -97,12 +113,11 @@ tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
 </head>
 <body>
 
-<!-- Letzte Aktualisierung manuell eintragen -->
-<p id="letzteAktualisierung">Letzte Aktualisierung: 06.11.2025</p>
+<!-- Letzte Aktualisierung -->
+<p id="letzteAktualisierung">Letzte Aktualisierung: 11.11.2025</p>
 
 <header>
   <h1>U15-Tabelle – HC Innsbruck</h1>
-  <img id="logo" src="HAI.webp" alt="HC Innsbruck Logo">
 </header>
 
 <table>
@@ -122,31 +137,34 @@ tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
   <tbody id="tabelle"></tbody>
 </table>
 
+<!-- Logo -->
+<div id="logo-unten">
+  <img src="HAI.webp" alt="HC Innsbruck Logo" class="logo-professionell">
+</div>
+
 <script>
-const aktuelleDaten = {
-    "data": {
-        "rows": [
-            {"tableRank":1,"teamLongname":"EC IDM VSV","gamesPlayed":14,"gamesWon":11,"gamesTied":0,"gamesLost":3,"goalsFor":76,"goalsAgainst":33,"goalDifference":"+43","points":34},
-            {"tableRank":2,"teamLongname":"SPG OHA / LAS","gamesPlayed":16,"gamesWon":11,"gamesTied":0,"gamesLost":5,"goalsFor":113,"goalsAgainst":41,"goalDifference":"+72","points":33},
-            {"tableRank":3,"teamLongname":"EC KAC","gamesPlayed":12,"gamesWon":11,"gamesTied":0,"gamesLost":1,"goalsFor":74,"goalsAgainst":24,"goalDifference":"+50","points":30},
-            {"tableRank":4,"teamLongname":"Eishockey Akademie Steiermark","gamesPlayed":13,"gamesWon":8,"gamesTied":0,"gamesLost":5,"goalsFor":96,"goalsAgainst":44,"goalDifference":"+52","points":25},
-            {"tableRank":5,"teamLongname":"EV Vienna Capitals","gamesPlayed":13,"gamesWon":6,"gamesTied":0,"gamesLost":7,"goalsFor":79,"goalsAgainst":44,"goalDifference":"+35","points":19},
-            {"tableRank":6,"teamLongname":"EC Red Bull Salzburg","gamesPlayed":15,"gamesWon":6,"gamesTied":0,"gamesLost":9,"goalsFor":72,"goalsAgainst":68,"goalDifference":"+4","points":18},
-            {"tableRank":7,"teamLongname":"HC TIWAG Innsbruck - Die Haie","gamesPlayed":13,"gamesWon":6,"gamesTied":0,"gamesLost":7,"goalsFor":68,"goalsAgainst":60,"goalDifference":"+8","points":18},
-            {"tableRank":8,"teamLongname":"Steel Wings Linz","gamesPlayed":12,"gamesWon":2,"gamesTied":0,"gamesLost":10,"goalsFor":67,"goalsAgainst":87,"goalDifference":"-20","points":6},
-            {"tableRank":9,"teamLongname":"Ultras Spittal","gamesPlayed":14,"gamesWon":0,"gamesTied":0,"gamesLost":14,"goalsFor":12,"goalsAgainst":256,"goalDifference":"-244","points":0}
-        ]
-    }
+// Backup-Daten (aus API-Antwort übernommen)
+const backupData = {
+  "data": {
+    "rows": [
+      {"tableRank":1,"teamLongname":"EC KAC","gamesPlayed":14,"gamesWon":10,"gamesTied":0,"gamesLost":1,"goalsFor":88,"goalsAgainst":30,"goalDifference":"+58","points":36},
+      {"tableRank":2,"teamLongname":"EC IDM VSV","gamesPlayed":14,"gamesWon":11,"gamesTied":0,"gamesLost":2,"goalsFor":76,"goalsAgainst":33,"goalDifference":"+43","points":34},
+      {"tableRank":3,"teamLongname":"SPG OHA / LAS","gamesPlayed":16,"gamesWon":11,"gamesTied":0,"gamesLost":5,"goalsFor":113,"goalsAgainst":41,"goalDifference":"+72","points":33},
+      {"tableRank":4,"teamLongname":"Eishockey Akademie Steiermark","gamesPlayed":15,"gamesWon":9,"gamesTied":0,"gamesLost":5,"goalsFor":104,"goalsAgainst":49,"goalDifference":"+55","points":28},
+      {"tableRank":5,"teamLongname":"HC TIWAG Innsbruck - Die Haie","gamesPlayed":15,"gamesWon":7,"gamesTied":0,"gamesLost":8,"goalsFor":73,"goalsAgainst":68,"goalDifference":"+5","points":21},
+      {"tableRank":6,"teamLongname":"EV Vienna Capitals","gamesPlayed":13,"gamesWon":6,"gamesTied":0,"gamesLost":6,"goalsFor":79,"goalsAgainst":44,"goalDifference":"+35","points":19},
+      {"tableRank":7,"teamLongname":"EC Red Bull Salzburg","gamesPlayed":15,"gamesWon":6,"gamesTied":0,"gamesLost":9,"goalsFor":72,"goalsAgainst":68,"goalDifference":"+4","points":18},
+      {"tableRank":8,"teamLongname":"Steel Wings Linz","gamesPlayed":14,"gamesWon":2,"gamesTied":0,"gamesLost":12,"goalsFor":73,"goalsAgainst":101,"goalDifference":"-28","points":6},
+      {"tableRank":9,"teamLongname":"Ultras Spittal","gamesPlayed":14,"gamesWon":0,"gamesTied":0,"gamesLost":14,"goalsFor":12,"goalsAgainst":256,"goalDifference":"-244","points":0}
+    ]
+  }
 };
 
 function renderTabelle(data) {
   const tbody = $("#tabelle");
   tbody.empty();
   data.data.rows.forEach(team => {
-    let zeilenKlasse = "";
-    if(team.teamLongname.includes("HC TIWAG Innsbruck")){
-      zeilenKlasse = "innsbruck-zeile";
-    }
+    let zeilenKlasse = team.teamLongname.includes("HC TIWAG Innsbruck") ? "innsbruck-zeile" : "";
     tbody.append(`
       <tr class="${zeilenKlasse}">
         <td data-label="Rang">${team.tableRank}</td>
@@ -163,15 +181,9 @@ function renderTabelle(data) {
   });
 }
 
-// Init
-renderTabelle(aktuelleDaten);
-
-// Aktualisiere Datum
-const jetzt = new Date();
-const datumStr = jetzt.toLocaleDateString("de-DE", {day:"2-digit", month:"2-digit", year:"numeric"});
-$("#letzteAktualisierung").text(`Letzte Aktualisierung: ${datumStr}`);
+// Init mit Backup-Daten
+renderTabelle(backupData);
 </script>
 
 </body>
 </html>
-
