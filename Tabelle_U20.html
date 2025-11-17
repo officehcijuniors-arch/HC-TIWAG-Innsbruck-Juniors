@@ -68,7 +68,7 @@ tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
     color: #000 !important;
 }
 
-/* Logo unter der Tabelle */
+/* Logo */
 #logo-unten {
   display: flex;
   justify-content: center;
@@ -81,11 +81,9 @@ tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
   opacity: 0.9;
   transition: transform 0.3s ease;
 }
-.logo-professionell:hover {
-  transform: scale(1.05);
-}
+.logo-professionell:hover { transform: scale(1.05); }
 
-/* Responsive Abkürzungen und Mobile */
+/* Responsive */
 @media (max-width:768px){
   table,thead,tbody,th,td,tr{display:block;}
   thead{display:none;}
@@ -94,27 +92,13 @@ tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
   td:last-child{border-bottom:none;}
   td::before{content:attr(data-label); font-weight:600; color:#444;}
 }
-
-@media (max-width:500px){
-  th:nth-child(1)::after { content:"Rg"; }
-  th:nth-child(2)::after { content:"Team"; }
-  th:nth-child(3)::after { content:"Sp"; }
-  th:nth-child(4)::after { content:"Sg"; }
-  th:nth-child(5)::after { content:"U"; }
-  th:nth-child(6)::after { content:"N"; }
-  th:nth-child(7)::after { content:"T"; }
-  th:nth-child(8)::after { content:"TD"; }
-  th:nth-child(9)::after { content:"Pkt"; }
-  thead th { font-size:0; } 
-  thead th::after { font-size:1rem; font-weight:700; display:block; text-align:center; }
-}
 </style>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 
-<!-- Letzte Aktualisierung -->
-<p id="letzteAktualisierung">Letzte Aktualisierung: 11.11.2025</p>
+<p id="letzteAktualisierung">Letzte Aktualisierung: 16.11.2025 – 20:56</p>
 
 <header>
   <h1>U20-Tabelle – HC Innsbruck</h1>
@@ -127,35 +111,33 @@ tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
       <th>Team</th>
       <th>Spiele</th>
       <th>Siege</th>
-      <th>Unentschieden</th>
-      <th>Niederlagen</th>
+      <th>Unentsch.</th>
+      <th>Niederl.</th>
       <th>Tore</th>
-      <th>Tordifferenz</th>
+      <th>Tordiff.</th>
       <th>Punkte</th>
     </tr>
   </thead>
   <tbody id="tabelle"></tbody>
 </table>
 
-<!-- Logo -->
 <div id="logo-unten">
   <img src="HAI.webp" alt="HC Innsbruck Logo" class="logo-professionell">
 </div>
 
 <script>
-// Backup-Daten
+// U20-Daten
 const backupData = {
   "data": {
     "rows": [
-      {"tableRank":1,"teamLongname":"HD - mladi - Jesenice","gamesPlayed":14,"gamesWon":13,"gamesTied":0,"gamesLost":1,"goalsFor":77,"goalsAgainst":22,"goalDifference":"+55","points":40},
-      {"tableRank":2,"teamLongname":"Eishockey Akademie Steiermark","gamesPlayed":14,"gamesWon":11,"gamesTied":0,"gamesLost":2,"goalsFor":66,"goalsAgainst":27,"goalDifference":"+39","points":35},
-      {"tableRank":3,"teamLongname":"Nordic Hockey Academy","gamesPlayed":14,"gamesWon":5,"gamesTied":0,"gamesLost":5,"goalsFor":41,"goalsAgainst":44,"goalDifference":"-3","points":22},
-      {"tableRank":4,"teamLongname":"Vasas SC","gamesPlayed":14,"gamesWon":5,"gamesTied":0,"gamesLost":6,"goalsFor":46,"goalsAgainst":46,"goalDifference":"+0","points":20},
-      {"tableRank":5,"teamLongname":"HC TIWAG Innsbruck - Die Haie","gamesPlayed":14,"gamesWon":5,"gamesTied":0,"gamesLost":7,"goalsFor":43,"goalsAgainst":43,"goalDifference":"+0","points":17},
-      {"tableRank":6,"teamLongname":"EV Vienna Capitals","gamesPlayed":14,"gamesWon":4,"gamesTied":0,"gamesLost":7,"goalsFor":41,"goalsAgainst":54,"goalDifference":"-13","points":17},
-      {"tableRank":7,"teamLongname":"Okanagan Hockey Academy","gamesPlayed":14,"gamesWon":3,"gamesTied":0,"gamesLost":11,"goalsFor":29,"goalsAgainst":75,"goalDifference":"-46","points":9},
-      {"tableRank":8,"teamLongname":"Hiti Academy Bled Hawks","gamesPlayed":14,"gamesWon":2,"gamesTied":0,"gamesLost":10,"goalsFor":32,"goalsAgainst":64,"goalDifference":"-32","points":8},
-      {"tableRank":9,"teamLongname":"*Unassigned Team","gamesPlayed":0,"gamesWon":0,"gamesTied":0,"gamesLost":0,"goalsFor":0,"goalsAgainst":0,"goalDifference":"+0","points":0}
+      {"tableRank":1,"teamLongname":"EC IDM VSV","gamesPlayed":2,"gamesWon":2,"gamesTied":0,"gamesLost":0,"goalsFor":9,"goalsAgainst":4,"goalDifference":"+5","points":6},
+      {"tableRank":2,"teamLongname":"Nordic Hockey Academy","gamesPlayed":2,"gamesWon":2,"gamesTied":0,"gamesLost":0,"goalsFor":6,"goalsAgainst":3,"goalDifference":"+3","points":6},
+      {"tableRank":3,"teamLongname":"DVTK Jegesmedvek Jegkorong Sportakademia","gamesPlayed":2,"gamesWon":1,"gamesTied":0,"gamesLost":0,"goalsFor":9,"goalsAgainst":5,"goalDifference":"+4","points":5},
+      {"tableRank":4,"teamLongname":"HC TIWAG Innsbruck - Die Haie","gamesPlayed":2,"gamesWon":1,"gamesTied":0,"gamesLost":1,"goalsFor":6,"goalsAgainst":7,"goalDifference":"-1","points":3},
+      {"tableRank":5,"teamLongname":"Vasas SC","gamesPlayed":2,"gamesWon":1,"gamesTied":0,"gamesLost":1,"goalsFor":5,"goalsAgainst":5,"goalDifference":"+0","points":3},
+      {"tableRank":6,"teamLongname":"Hiti Academy Bled Hawks","gamesPlayed":2,"gamesWon":0,"gamesTied":0,"gamesLost":1,"goalsFor":4,"goalsAgainst":7,"goalDifference":"-3","points":1},
+      {"tableRank":7,"teamLongname":"EV Vienna Capitals","gamesPlayed":2,"gamesWon":0,"gamesTied":0,"gamesLost":2,"goalsFor":5,"goalsAgainst":9,"goalDifference":"-4","points":0},
+      {"tableRank":8,"teamLongname":"Okanagan Hockey Academy","gamesPlayed":2,"gamesWon":0,"gamesTied":0,"gamesLost":2,"goalsFor":2,"goalsAgainst":6,"goalDifference":"-4","points":0}
     ]
   }
 };
@@ -164,28 +146,25 @@ function renderTabelle(data) {
   const tbody = $("#tabelle");
   tbody.empty();
   data.data.rows.forEach(team => {
-    let zeilenKlasse = team.teamLongname.includes("HC TIWAG Innsbruck") ? "innsbruck-zeile" : "";
+    const innsbruck = team.teamLongname.includes("Innsbruck") ? "innsbruck-zeile" : "";
     tbody.append(`
-      <tr class="${zeilenKlasse}">
+      <tr class="${innsbruck}">
         <td data-label="Rang">${team.tableRank}</td>
         <td data-label="Team">${team.teamLongname}</td>
         <td data-label="Spiele">${team.gamesPlayed}</td>
         <td data-label="Siege">${team.gamesWon}</td>
-        <td data-label="Unentschieden">${team.gamesTied}</td>
-        <td data-label="Niederlagen">${team.gamesLost}</td>
+        <td data-label="Unentsch.">${team.gamesTied}</td>
+        <td data-label="Niederl.">${team.gamesLost}</td>
         <td data-label="Tore">${team.goalsFor}:${team.goalsAgainst}</td>
-        <td data-label="Tordifferenz">${team.goalDifference}</td>
+        <td data-label="Tordiff.">${team.goalDifference}</td>
         <td data-label="Punkte" class="punkte">${team.points}</td>
       </tr>
     `);
   });
 }
 
-// Init mit Backup-Daten
 renderTabelle(backupData);
 </script>
 
 </body>
 </html>
-
-
