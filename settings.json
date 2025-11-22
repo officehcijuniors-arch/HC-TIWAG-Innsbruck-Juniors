@@ -9,7 +9,7 @@
     "7":  { "enabled": true, "duration": 65, "title": "Spielerfotos" },
     "8":  { "enabled": true, "duration": 40, "title": "Tabellen" },
     "9":  { "enabled": true, "duration": 43, "title": "Laufschule" },
-    "10": { "enabled": true, "duration": 15, "title": "Gameday" }
+    "10": { "enabled": false, "duration": 15, "title": "Gameday" }
   },
   "reload": 120
 }
