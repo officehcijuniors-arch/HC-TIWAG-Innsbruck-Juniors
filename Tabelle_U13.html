@@ -38,7 +38,6 @@ body {
 header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; }
 h1 { font-size:2rem; font-weight:700; margin:0; color:#fff; }
 
-/* Tabelle */
 table { 
   width:100%; 
   border-collapse:collapse; 
@@ -62,13 +61,11 @@ tbody tr:nth-child(even){ background:#fafafa; }
 tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
 .punkte { font-weight:700; }
 
-/* Zeile für HC TIWAG Innsbruck */
 .innsbruck-zeile td {
     background-color: #E10600 !important;
     color: #000 !important;
 }
 
-/* Logo */
 #logo-unten {
   display: flex;
   justify-content: center;
@@ -83,7 +80,6 @@ tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
 }
 .logo-professionell:hover { transform: scale(1.05); }
 
-/* Responsive */
 @media (max-width:768px){
   table,thead,tbody,th,td,tr{display:block;}
   thead{display:none;}
@@ -98,7 +94,7 @@ tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
 </head>
 <body>
 
-<p id="letzteAktualisierung">Letzte Aktualisierung: 17.11.2025 – 00:59</p>
+<p id="letzteAktualisierung">Letzte Aktualisierung: 25.11.2025 – 00:34</p>
 
 <header>
   <h1>U13-Tabelle – HC Innsbruck</h1>
@@ -126,15 +122,14 @@ tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
 </div>
 
 <script>
-// U13-Daten
 const backupData = {
   "data": {
     "rows": [
-      {"tableRank":1,"teamLongname":"EC Lower Austria Stars","gamesPlayed":2,"gamesWon":2,"gamesTied":0,"gamesLost":0,"goalsFor":16,"goalsAgainst":6,"goalDifference":"+10","points":6},
-      {"tableRank":2,"teamLongname":"HC TIWAG Innsbruck - Die Haie","gamesPlayed":0,"gamesWon":0,"gamesTied":0,"gamesLost":0,"goalsFor":0,"goalsAgainst":0,"goalDifference":"+0","points":0},
-      {"tableRank":3,"teamLongname":"EV Zeltweg - Murtal Lions","gamesPlayed":0,"gamesWon":0,"gamesTied":0,"gamesLost":0,"goalsFor":0,"goalsAgainst":0,"goalDifference":"+0","points":0},
-      {"tableRank":4,"teamLongname":"KSV Eishockey - Juniors / Graz99 Juniors","gamesPlayed":1,"gamesWon":0,"gamesTied":0,"gamesLost":1,"goalsFor":3,"goalsAgainst":7,"goalDifference":"-4","points":0},
-      {"tableRank":5,"teamLongname":"EAC Junior Capitals","gamesPlayed":1,"gamesWon":0,"gamesTied":0,"gamesLost":1,"goalsFor":3,"goalsAgainst":9,"goalDifference":"-6","points":0}
+      {"tableRank":1,"teamLongname":"EC Lower Austria Stars","gamesPlayed":3,"gamesWon":2,"gamesTied":0,"gamesLost":1,"goalsFor":21,"goalsAgainst":12,"goalDifference":"+9","points":6},
+      {"tableRank":2,"teamLongname":"KSV Eishockey - Juniors / Graz99 Juniors","gamesPlayed":2,"gamesWon":1,"gamesTied":0,"gamesLost":1,"goalsFor":12,"goalsAgainst":10,"goalDifference":"+2","points":3},
+      {"tableRank":3,"teamLongname":"EAC Junior Capitals","gamesPlayed":2,"gamesWon":1,"gamesTied":0,"gamesLost":1,"goalsFor":9,"goalsAgainst":14,"goalDifference":"-5","points":3},
+      {"tableRank":4,"teamLongname":"HC TIWAG Innsbruck - Die Haie","gamesPlayed":0,"gamesWon":0,"gamesTied":0,"gamesLost":0,"goalsFor":0,"goalsAgainst":0,"goalDifference":"+0","points":0},
+      {"tableRank":5,"teamLongname":"EV Zeltweg - Murtal Lions","gamesPlayed":1,"gamesWon":0,"gamesTied":0,"gamesLost":1,"goalsFor":3,"goalsAgainst":9,"goalDifference":"-6","points":0}
     ]
   }
 };

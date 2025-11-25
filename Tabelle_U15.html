@@ -38,7 +38,6 @@ body {
 header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; }
 h1 { font-size:2rem; font-weight:700; margin:0; color:#fff; }
 
-/* Tabelle */
 table { 
   width:100%; 
   border-collapse:collapse; 
@@ -62,13 +61,11 @@ tbody tr:nth-child(even){ background:#fafafa; }
 tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
 .punkte { font-weight:700; }
 
-/* Zeile für HC TIWAG Innsbruck */
 .innsbruck-zeile td {
     background-color: #E10600 !important;
     color: #000 !important;
 }
 
-/* Logo */
 #logo-unten {
   display: flex;
   justify-content: center;
@@ -83,7 +80,6 @@ tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
 }
 .logo-professionell:hover { transform: scale(1.05); }
 
-/* Responsive */
 @media (max-width:768px){
   table,thead,tbody,th,td,tr{display:block;}
   thead{display:none;}
@@ -98,7 +94,7 @@ tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
 </head>
 <body>
 
-<p id="letzteAktualisierung">Letzte Aktualisierung: 17.11.2025 – 00:41</p>
+<p id="letzteAktualisierung">Letzte Aktualisierung: 25.11.2025 – 00:15</p>
 
 <header>
   <h1>U15-Tabelle – HC Innsbruck</h1>
@@ -126,19 +122,18 @@ tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
 </div>
 
 <script>
-// Deine neuen U15-Daten exakt übernommen
 const backupData = {
   "data": {
     "rows": [
-      {"tableRank":1,"teamLongname":"EC KAC","gamesPlayed":16,"gamesWon":12,"gamesTied":0,"gamesLost":1,"goalsFor":96,"goalsAgainst":35,"goalDifference":"+61","points":42},
+      {"tableRank":1,"teamLongname":"EC KAC","gamesPlayed":18,"gamesWon":14,"gamesTied":0,"gamesLost":1,"goalsFor":111,"goalsAgainst":38,"goalDifference":"+73","points":48},
       {"tableRank":2,"teamLongname":"EC IDM VSV","gamesPlayed":16,"gamesWon":13,"gamesTied":0,"gamesLost":2,"goalsFor":88,"goalsAgainst":37,"goalDifference":"+51","points":40},
-      {"tableRank":3,"teamLongname":"SPG OHA / LAS","gamesPlayed":18,"gamesWon":11,"gamesTied":0,"gamesLost":7,"goalsFor":118,"goalsAgainst":49,"goalDifference":"+69","points":33},
-      {"tableRank":4,"teamLongname":"Eishockey Akademie Steiermark","gamesPlayed":17,"gamesWon":10,"gamesTied":0,"gamesLost":5,"goalsFor":115,"goalsAgainst":57,"goalDifference":"+58","points":32},
-      {"tableRank":5,"teamLongname":"HC TIWAG Innsbruck - Die Haie","gamesPlayed":17,"gamesWon":9,"gamesTied":0,"gamesLost":8,"goalsFor":86,"goalsAgainst":74,"goalDifference":"+12","points":27},
-      {"tableRank":6,"teamLongname":"EC Red Bull Salzburg","gamesPlayed":17,"gamesWon":6,"gamesTied":0,"gamesLost":10,"goalsFor":80,"goalsAgainst":79,"goalDifference":"+1","points":20},
-      {"tableRank":7,"teamLongname":"EV Vienna Capitals","gamesPlayed":15,"gamesWon":6,"gamesTied":0,"gamesLost":8,"goalsFor":85,"goalsAgainst":57,"goalDifference":"+28","points":19},
-      {"tableRank":8,"teamLongname":"Steel Wings Linz","gamesPlayed":16,"gamesWon":2,"gamesTied":0,"gamesLost":14,"goalsFor":77,"goalsAgainst":113,"goalDifference":"-36","points":6},
-      {"tableRank":9,"teamLongname":"Ultras Spittal","gamesPlayed":14,"gamesWon":0,"gamesTied":0,"gamesLost":14,"goalsFor":12,"goalsAgainst":256,"goalDifference":"-244","points":0}
+      {"tableRank":3,"teamLongname":"SPG OHA / LAS","gamesPlayed":20,"gamesWon":13,"gamesTied":0,"gamesLost":7,"goalsFor":163,"goalsAgainst":50,"goalDifference":"+113","points":39},
+      {"tableRank":4,"teamLongname":"Eishockey Akademie Steiermark","gamesPlayed":19,"gamesWon":11,"gamesTied":0,"gamesLost":5,"goalsFor":126,"goalsAgainst":64,"goalDifference":"+62","points":36},
+      {"tableRank":5,"teamLongname":"HC TIWAG Innsbruck - Die Haie","gamesPlayed":19,"gamesWon":9,"gamesTied":0,"gamesLost":9,"goalsFor":93,"goalsAgainst":85,"goalDifference":"+8","points":29},
+      {"tableRank":6,"teamLongname":"EC Red Bull Salzburg","gamesPlayed":19,"gamesWon":7,"gamesTied":0,"gamesLost":10,"goalsFor":87,"goalsAgainst":82,"goalDifference":"+5","points":25},
+      {"tableRank":7,"teamLongname":"EV Vienna Capitals","gamesPlayed":17,"gamesWon":6,"gamesTied":0,"gamesLost":9,"goalsFor":88,"goalsAgainst":64,"goalDifference":"+24","points":20},
+      {"tableRank":8,"teamLongname":"Steel Wings Linz","gamesPlayed":18,"gamesWon":2,"gamesTied":0,"gamesLost":16,"goalsFor":80,"goalsAgainst":128,"goalDifference":"-48","points":6},
+      {"tableRank":9,"teamLongname":"Ultras Spittal","gamesPlayed":16,"gamesWon":0,"gamesTied":0,"gamesLost":16,"goalsFor":13,"goalsAgainst":301,"goalDifference":"-288","points":0}
     ]
   }
 };
