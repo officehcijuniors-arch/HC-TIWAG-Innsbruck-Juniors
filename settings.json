@@ -5,7 +5,7 @@
     "3":  { "enabled": true, "duration": 15 },
     "4":  { "enabled": true, "duration": 23 },
     "5":  { "enabled": true, "duration": 20 },
-    "6":  { "enabled": true, "duration": 40 },
+    "6":  { "enabled": false, "duration": 40 },
     "7":  { "enabled": true, "duration": 55 },
     "8":  { "enabled": true, "duration": 30 },
     "9":  { "enabled": true, "duration": 25 },
