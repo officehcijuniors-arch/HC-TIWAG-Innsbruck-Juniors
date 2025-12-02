@@ -8,7 +8,7 @@
 body { 
   font-family:"Inter",Arial,sans-serif; 
   margin:0; 
-  padding:2rem; 
+  padding:2rem;
   color:#222; 
   background: linear-gradient(-45deg, #E10600, #0047AB, #E10600, #0047AB); 
   background-size: 400% 400%;
@@ -94,7 +94,7 @@ tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
 </head>
 <body>
 
-<p id="letzteAktualisierung">Letzte Aktualisierung: 25.11.2025 – 00:15</p>
+<p id="letzteAktualisierung">Letzte Aktualisierung: 02.12.2025 – 19:36</p>
 
 <header>
   <h1>U15-Tabelle – HC Innsbruck</h1>
@@ -107,7 +107,8 @@ tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
       <th>Team</th>
       <th>Spiele</th>
       <th>Siege</th>
-      <th>Unentsch.</th>
+      <th>OT-Siege</th>
+      <th>OT-Niederl.</th>
       <th>Niederl.</th>
       <th>Tore</th>
       <th>Tordiff.</th>
@@ -125,15 +126,15 @@ tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
 const backupData = {
   "data": {
     "rows": [
-      {"tableRank":1,"teamLongname":"EC KAC","gamesPlayed":18,"gamesWon":14,"gamesTied":0,"gamesLost":1,"goalsFor":111,"goalsAgainst":38,"goalDifference":"+73","points":48},
-      {"tableRank":2,"teamLongname":"EC IDM VSV","gamesPlayed":16,"gamesWon":13,"gamesTied":0,"gamesLost":2,"goalsFor":88,"goalsAgainst":37,"goalDifference":"+51","points":40},
-      {"tableRank":3,"teamLongname":"SPG OHA / LAS","gamesPlayed":20,"gamesWon":13,"gamesTied":0,"gamesLost":7,"goalsFor":163,"goalsAgainst":50,"goalDifference":"+113","points":39},
-      {"tableRank":4,"teamLongname":"Eishockey Akademie Steiermark","gamesPlayed":19,"gamesWon":11,"gamesTied":0,"gamesLost":5,"goalsFor":126,"goalsAgainst":64,"goalDifference":"+62","points":36},
-      {"tableRank":5,"teamLongname":"HC TIWAG Innsbruck - Die Haie","gamesPlayed":19,"gamesWon":9,"gamesTied":0,"gamesLost":9,"goalsFor":93,"goalsAgainst":85,"goalDifference":"+8","points":29},
-      {"tableRank":6,"teamLongname":"EC Red Bull Salzburg","gamesPlayed":19,"gamesWon":7,"gamesTied":0,"gamesLost":10,"goalsFor":87,"goalsAgainst":82,"goalDifference":"+5","points":25},
-      {"tableRank":7,"teamLongname":"EV Vienna Capitals","gamesPlayed":17,"gamesWon":6,"gamesTied":0,"gamesLost":9,"goalsFor":88,"goalsAgainst":64,"goalDifference":"+24","points":20},
-      {"tableRank":8,"teamLongname":"Steel Wings Linz","gamesPlayed":18,"gamesWon":2,"gamesTied":0,"gamesLost":16,"goalsFor":80,"goalsAgainst":128,"goalDifference":"-48","points":6},
-      {"tableRank":9,"teamLongname":"Ultras Spittal","gamesPlayed":16,"gamesWon":0,"gamesTied":0,"gamesLost":16,"goalsFor":13,"goalsAgainst":301,"goalDifference":"-288","points":0}
+      {"tableRank":1,"teamLongname":"EC KAC","gamesPlayed":20,"gamesWon":16,"gamesWonInOt":3,"gamesLostInOt":0,"gamesTied":0,"gamesLost":1,"goalsFor":120,"goalsAgainst":40,"goalDifference":"+80","points":54},
+      {"tableRank":2,"teamLongname":"SPG OHA / LAS","gamesPlayed":22,"gamesWon":15,"gamesWonInOt":0,"gamesLostInOt":0,"gamesTied":0,"gamesLost":7,"goalsFor":183,"goalsAgainst":55,"goalDifference":"+128","points":45},
+      {"tableRank":3,"teamLongname":"EC IDM VSV","gamesPlayed":18,"gamesWon":14,"gamesWonInOt":0,"gamesLostInOt":1,"gamesTied":0,"gamesLost":3,"goalsFor":95,"goalsAgainst":42,"goalDifference":"+53","points":43},
+      {"tableRank":4,"teamLongname":"Eishockey Akademie Steiermark","gamesPlayed":21,"gamesWon":12,"gamesWonInOt":0,"gamesLostInOt":3,"gamesTied":0,"gamesLost":6,"goalsFor":131,"goalsAgainst":71,"goalDifference":"+60","points":39},
+      {"tableRank":5,"teamLongname":"HC TIWAG Innsbruck - Die Haie","gamesPlayed":19,"gamesWon":9,"gamesWonInOt":1,"gamesLostInOt":0,"gamesTied":0,"gamesLost":9,"goalsFor":93,"goalsAgainst":85,"goalDifference":"+8","points":29},
+      {"tableRank":6,"teamLongname":"EC Red Bull Salzburg","gamesPlayed":19,"gamesWon":7,"gamesWonInOt":2,"gamesLostInOt":0,"gamesTied":0,"gamesLost":10,"goalsFor":87,"goalsAgainst":82,"goalDifference":"+5","points":25},
+      {"tableRank":7,"teamLongname":"EV Vienna Capitals","gamesPlayed":19,"gamesWon":6,"gamesWonInOt":0,"gamesLostInOt":2,"gamesTied":0,"gamesLost":11,"goalsFor":90,"goalsAgainst":73,"goalDifference":"+17","points":20},
+      {"tableRank":8,"teamLongname":"Steel Wings Linz","gamesPlayed":20,"gamesWon":2,"gamesWonInOt":0,"gamesLostInOt":0,"gamesTied":0,"gamesLost":18,"goalsFor":85,"goalsAgainst":148,"goalDifference":"-63","points":6},
+      {"tableRank":9,"teamLongname":"Ultras Spittal","gamesPlayed":16,"gamesWon":0,"gamesWonInOt":0,"gamesLostInOt":0,"gamesTied":0,"gamesLost":16,"goalsFor":13,"goalsAgainst":301,"goalDifference":"-288","points":0}
     ]
   }
 };
@@ -149,7 +150,8 @@ function renderTabelle(data) {
         <td data-label="Team">${team.teamLongname}</td>
         <td data-label="Spiele">${team.gamesPlayed}</td>
         <td data-label="Siege">${team.gamesWon}</td>
-        <td data-label="Unentsch.">${team.gamesTied}</td>
+        <td data-label="OT-Siege">${team.gamesWonInOt}</td>
+        <td data-label="OT-Niederl.">${team.gamesLostInOt}</td>
         <td data-label="Niederl.">${team.gamesLost}</td>
         <td data-label="Tore">${team.goalsFor}:${team.goalsAgainst}</td>
         <td data-label="Tordiff.">${team.goalDifference}</td>
