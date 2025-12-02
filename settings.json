@@ -1,20 +1,16 @@
 {
   "pages": {
-    "1":  { "enabled": true, "duration": 10 },
-    "2":  { "enabled": true, "duration": 20 },
-    "3":  { "enabled": true, "duration": 15 },
-    "4":  { "enabled": true, "duration": 23 },
-    "5":  { "enabled": true, "duration": 20 },
-    "6":  { "enabled": true, "duration": 10 },
-    "7":  { "enabled": true, "duration": 55 },
-    "8":  { "enabled": true, "duration": 30 },
-    "9":  { "enabled": true, "duration": 25 },
-    "10": { "enabled": false, "duration": 15 },
-    "11": { "enabled": false, "duration": 10 }
+    "1":  { "enabled": true, "duration": 10, "name": "Startseite Social Media" },
+    "2":  { "enabled": true, "duration": 20, "name": "Kalender" },
+    "3":  { "enabled": true, "duration": 15, "name": "Organigramm" },
+    "4":  { "enabled": true, "duration": 23, "name": "Video: Fotoshooting" },
+    "5":  { "enabled": true, "duration": 20, "name": "Video: Fanshop" },
+    "6":  { "enabled": true, "duration": 10, "name": "Video: HC INW SP Präs" },
+    "7":  { "enabled": true, "duration": 55, "name": "Spielerfotos" },
+    "8":  { "enabled": true, "duration": 30, "name": "Tabellen-Rotation (U13–U20)" },
+    "9":  { "enabled": true, "duration": 25, "name": "Video: Laufschule" },
+    "10": { "enabled": false, "duration": 15, "name": "Gameday Grafik" },
+    "11": { "enabled": false, "duration": 10, "name": "Video: Spieltag" }
   },
   "reload": 120
 }
-
-
-
-
