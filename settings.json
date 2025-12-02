@@ -9,9 +9,10 @@
     "7":  { "enabled": true, "duration": 55, "name": "Spielerfotos" },
     "8":  { "enabled": true, "duration": 30, "name": "Tabellen-Rotation (U13–U20)" },
     "9":  { "enabled": true, "duration": 25, "name": "Video: Laufschule" },
-    "10": { "enabled": true, "duration": 15, "name": "Gameday Grafik" },
+    "10": { "enabled": false, "duration": 15, "name": "Gameday Grafik" },
     "11": { "enabled": false, "duration": 10, "name": "Video: Spieltag" }
   },
   "reload": 120
 }
+
 
