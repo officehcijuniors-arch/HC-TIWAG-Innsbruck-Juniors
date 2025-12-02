@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="de">
 <head>
 <meta charset="UTF-8">
@@ -8,7 +8,7 @@
 body { 
   font-family:"Inter",Arial,sans-serif; 
   margin:0; 
-  padding:2rem; 
+  padding:2rem;
   color:#222; 
   background: linear-gradient(-45deg, #E10600, #0047AB, #E10600, #0047AB); 
   background-size: 400% 400%;
@@ -38,7 +38,6 @@ body {
 header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; }
 h1 { font-size:2rem; font-weight:700; margin:0; color:#fff; }
 
-/* Tabelle */
 table { 
   width:100%; 
   border-collapse:collapse; 
@@ -62,13 +61,11 @@ tbody tr:nth-child(even){ background:#fafafa; }
 tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
 .punkte { font-weight:700; }
 
-/* HC Innsbruck Highlight */
 .innsbruck-zeile td {
     background-color: #E10600 !important;
     color: #000 !important;
 }
 
-/* Logo */
 #logo-unten {
   display: flex;
   justify-content: center;
@@ -83,7 +80,6 @@ tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
 }
 .logo-professionell:hover { transform: scale(1.05); }
 
-/* Responsive */
 @media (max-width:768px){
   table,thead,tbody,th,td,tr{display:block;}
   thead{display:none;}
@@ -98,7 +94,7 @@ tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
 </head>
 <body>
 
-<p id="letzteAktualisierung">Letzte Aktualisierung: 25.11.2025 – 00:13</p>
+<p id="letzteAktualisierung">Letzte Aktualisierung: 02.12.2025 – 19:36</p>
 
 <header>
   <h1>U17-Tabelle – HC Innsbruck</h1>
@@ -111,7 +107,8 @@ tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
       <th>Team</th>
       <th>Spiele</th>
       <th>Siege</th>
-      <th>Unentsch.</th>
+      <th>OT-Siege</th>
+      <th>OT-Niederl.</th>
       <th>Niederl.</th>
       <th>Tore</th>
       <th>Tordiff.</th>
@@ -126,17 +123,16 @@ tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
 </div>
 
 <script>
-// U17-Daten
 const backupData = {
   "data": {
     "rows": [
-      {"tableRank":1,"teamLongname":"Eishockey Akademie Oberösterreich","gamesPlayed":18,"gamesWon":15,"gamesTied":0,"gamesLost":1,"goalsFor":108,"goalsAgainst":34,"goalDifference":"+74","points":48},
-      {"tableRank":2,"teamLongname":"Okanagan Hockey Academy","gamesPlayed":16,"gamesWon":13,"gamesTied":0,"gamesLost":3,"goalsFor":108,"goalsAgainst":41,"goalDifference":"+67","points":39},
-      {"tableRank":3,"teamLongname":"EC Red Bull Salzburg","gamesPlayed":15,"gamesWon":12,"gamesTied":0,"gamesLost":2,"goalsFor":125,"goalsAgainst":25,"goalDifference":"+100","points":38},
-      {"tableRank":4,"teamLongname":"Eishockey Akademie Steiermark","gamesPlayed":16,"gamesWon":10,"gamesTied":0,"gamesLost":4,"goalsFor":77,"goalsAgainst":32,"goalDifference":"+45","points":32},
-      {"tableRank":5,"teamLongname":"HC TIWAG Innsbruck - Die Haie","gamesPlayed":17,"gamesWon":3,"gamesTied":0,"gamesLost":13,"goalsFor":47,"goalsAgainst":105,"goalDifference":"-58","points":11},
-      {"tableRank":6,"teamLongname":"Eishockey Leistungszentrum Vorarlberg","gamesPlayed":17,"gamesWon":2,"gamesTied":0,"gamesLost":15,"goalsFor":31,"goalsAgainst":117,"goalDifference":"-86","points":6},
-      {"tableRank":7,"teamLongname":"Hockey Club Ferlach","gamesPlayed":17,"gamesWon":0,"gamesTied":0,"gamesLost":17,"goalsFor":19,"goalsAgainst":161,"goalDifference":"-142","points":0}
+      {"tableRank":1,"teamLongname":"Eishockey Akademie Oberösterreich","gamesPlayed":20,"gamesWon":17,"gamesWonInOt":1,"gamesLostInOt":1,"gamesLost":1,"goalsFor":116,"goalsAgainst":36,"goalDifference":"+80","points":54},
+      {"tableRank":2,"teamLongname":"EC Red Bull Salzburg","gamesPlayed":17,"gamesWon":14,"gamesWonInOt":1,"gamesLostInOt":0,"gamesLost":2,"goalsFor":147,"goalsAgainst":29,"goalDifference":"+118","points":44},
+      {"tableRank":3,"teamLongname":"Okanagan Hockey Academy","gamesPlayed":18,"gamesWon":14,"gamesWonInOt":0,"gamesLostInOt":0,"gamesLost":4,"goalsFor":115,"goalsAgainst":47,"goalDifference":"+68","points":42},
+      {"tableRank":4,"teamLongname":"Eishockey Akademie Steiermark","gamesPlayed":17,"gamesWon":10,"gamesWonInOt":0,"gamesLostInOt":2,"gamesLost":5,"goalsFor":79,"goalsAgainst":37,"goalDifference":"+42","points":32},
+      {"tableRank":5,"teamLongname":"HC TIWAG Innsbruck - Die Haie","gamesPlayed":19,"gamesWon":3,"gamesWonInOt":1,"gamesLostInOt":0,"gamesLost":15,"goalsFor":50,"goalsAgainst":128,"goalDifference":"-78","points":11},
+      {"tableRank":6,"teamLongname":"Eishockey Leistungszentrum Vorarlberg","gamesPlayed":18,"gamesWon":3,"gamesWonInOt":0,"gamesLostInOt":0,"gamesLost":15,"goalsFor":38,"goalsAgainst":119,"goalDifference":"-81","points":9},
+      {"tableRank":7,"teamLongname":"Hockey Club Ferlach","gamesPlayed":19,"gamesWon":0,"gamesWonInOt":0,"gamesLostInOt":0,"gamesLost":19,"goalsFor":22,"goalsAgainst":171,"goalDifference":"-149","points":0}
     ]
   }
 };
@@ -152,7 +148,8 @@ function renderTabelle(data) {
         <td data-label="Team">${team.teamLongname}</td>
         <td data-label="Spiele">${team.gamesPlayed}</td>
         <td data-label="Siege">${team.gamesWon}</td>
-        <td data-label="Unentsch.">${team.gamesTied}</td>
+        <td data-label="OT-Siege">${team.gamesWonInOt}</td>
+        <td data-label="OT-Niederl.">${team.gamesLostInOt}</td>
         <td data-label="Niederl.">${team.gamesLost}</td>
         <td data-label="Tore">${team.goalsFor}:${team.goalsAgainst}</td>
         <td data-label="Tordiff.">${team.goalDifference}</td>
