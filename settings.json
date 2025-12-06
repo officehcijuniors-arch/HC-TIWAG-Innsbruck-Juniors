@@ -10,11 +10,12 @@
     "8":  { "enabled": true, "duration": 30, "name": "Tabellen-Rotation (U13–U20)" },
     "9":  { "enabled": true, "duration": 25, "name": "Video: Laufschule" },
     "10": { "enabled": true, "duration": 15, "name": "Gameday Grafik" },
-    "11": { "enabled": false, "duration": 18, "name": "Video: Spieltag" }
-    "12": { "enabled": false, "duration": 18, "name": "Gameday Grafik Spielvorschau" }
+    "11": { "enabled": true, "duration": 18, "name": "Video: Spieltag" }
+    "12": { "enabled": true, "duration": 18, "name": "Gameday Grafik Spielvorschau" }
   },
   "reload": 120
 }
+
 
 
 
