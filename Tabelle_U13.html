@@ -33,11 +33,14 @@ body {
   color:#fff;
   margin-bottom:1rem;
   font-weight:700;
-  text-align:left;
 }
 
-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; }
-h1 { font-size:2rem; font-weight:700; margin:0; color:#fff; }
+h1 {
+  font-size:2rem;
+  font-weight:700;
+  margin-bottom:1rem;
+  color:#fff;
+}
 
 table { 
   width:100%; 
@@ -46,64 +49,50 @@ table {
   border-radius:10px; 
   overflow:hidden; 
   box-shadow:0 12px 35px rgba(0,0,0,0.18); 
-  transition: transform 0.3s ease, box-shadow 0.3s ease; 
   font-size:1.2rem; 
   font-weight:700; 
   animation: glow 3s ease-in-out infinite alternate;
 }
-table:hover { 
-  transform: translateY(-6px); 
-  box-shadow:0 25px 50px rgba(0,0,0,0.25); 
+
+th, td {
+  padding:10px 6px;
+  text-align:center;
+  border-bottom:2px solid #ccc;
 }
 
-thead { background:#eaeaea; }
-th { font-weight:700; padding:10px 6px; text-align:center; color:#333; border-bottom:3px solid #ddd; }
-td { padding:8px 6px; text-align:center; border-bottom:2px solid #ccc; }
+thead {
+  background:#eaeaea;
+}
 
-tbody tr:nth-child(even){ background:#fafafa; }
-tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
-
-.punkte { font-weight:700; }
+tbody tr:nth-child(even){
+  background:#fafafa;
+}
 
 .innsbruck-zeile td {
-    background-color: #E10600 !important;
-    color: #000 !important;
+  background-color:#E10600 !important;
+  color:#000 !important;
 }
 
 #logo-unten {
-  display: flex;
-  justify-content: center;
-  margin-top: 2rem;
+  display:flex;
+  justify-content:center;
+  margin-top:2rem;
 }
-.logo-professionell {
-  max-width: 200px;
-  width: 100%;
-  height: auto;
-  opacity: 0.9;
-  transition: transform 0.3s ease;
-}
-.logo-professionell:hover { transform: scale(1.05); }
 
-@media (max-width:768px){
-  table,thead,tbody,th,td,tr{display:block;}
-  thead{display:none;}
-  tr{ background:#fff; margin-bottom:1rem; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.05); overflow:hidden; padding:0.5rem; }
-  td{ display:flex; justify-content:space-between; padding:6px 8px; border:none; border-bottom:2px solid #ccc; }
-  td:last-child{border-bottom:none;}
-  td::before{content:attr(data-label); font-weight:600; color:#444;}
+.logo-professionell {
+  max-width:200px;
+  width:100%;
 }
 </style>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
 
-<p id="letzteAktualisierung">Letzte Aktualisierung: 02.12.2025 – 19:50</p>
+<p id="letzteAktualisierung">
+Letzte Aktualisierung: 16.12.2025 – 07:09
+</p>
 
-<header>
-  <h1>U13-Tabelle – HC Innsbruck</h1>
-</header>
+<h1>U13-Tabelle – HC Innsbruck</h1>
 
 <table>
   <thead>
@@ -119,49 +108,72 @@ tbody tr:hover{ background:#f0f3f8; transition: background 0.3s ease; }
       <th>Punkte</th>
     </tr>
   </thead>
-  <tbody id="tabelle"></tbody>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>EC Lower Austria Stars</td>
+      <td>4</td>
+      <td>3</td>
+      <td>0</td>
+      <td>1</td>
+      <td>27:13</td>
+      <td>+14</td>
+      <td>9</td>
+    </tr>
+
+    <tr class="innsbruck-zeile">
+      <td>2</td>
+      <td>HC TIWAG Innsbruck – Die Haie</td>
+      <td>4</td>
+      <td>3</td>
+      <td>0</td>
+      <td>1</td>
+      <td>35:13</td>
+      <td>+22</td>
+      <td>9</td>
+    </tr>
+
+    <tr>
+      <td>3</td>
+      <td>KSV Eishockey – Juniors / Graz99 Juniors</td>
+      <td>4</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>23:20</td>
+      <td>+3</td>
+      <td>6</td>
+    </tr>
+
+    <tr>
+      <td>4</td>
+      <td>EAC Junior Capitals</td>
+      <td>3</td>
+      <td>1</td>
+      <td>0</td>
+      <td>2</td>
+      <td>13:20</td>
+      <td>-7</td>
+      <td>3</td>
+    </tr>
+
+    <tr>
+      <td>5</td>
+      <td>EV Zeltweg – Murtal Lions</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+      <td>6:38</td>
+      <td>-32</td>
+      <td>0</td>
+    </tr>
+  </tbody>
 </table>
 
 <div id="logo-unten">
   <img src="HAI.webp" alt="HC Innsbruck Logo" class="logo-professionell">
 </div>
-
-<script>
-const backupData = {
-  "data": {
-    "rows": [
-      {"tableRank":1,"teamLongname":"EC Lower Austria Stars","gamesPlayed":4,"gamesWon":3,"gamesTied":0,"gamesLost":1,"goalsFor":27,"goalsAgainst":13,"goalDifference":"+14","points":9},
-      {"tableRank":2,"teamLongname":"KSV Eishockey - Juniors / Graz99 Juniors","gamesPlayed":3,"gamesWon":2,"gamesTied":0,"gamesLost":1,"goalsFor":21,"goalsAgainst":12,"goalDifference":"+9","points":6},
-      {"tableRank":3,"teamLongname":"HC TIWAG Innsbruck - Die Haie","gamesPlayed":2,"gamesWon":1,"gamesTied":0,"gamesLost":1,"goalsFor":7,"goalsAgainst":10,"goalDifference":"-3","points":3},
-      {"tableRank":4,"teamLongname":"EAC Junior Capitals","gamesPlayed":3,"gamesWon":1,"gamesTied":0,"gamesLost":2,"goalsFor":13,"goalsAgainst":20,"goalDifference":"-7","points":3},
-      {"tableRank":5,"teamLongname":"EV Zeltweg - Murtal Lions","gamesPlayed":2,"gamesWon":0,"gamesTied":0,"gamesLost":2,"goalsFor":5,"goalsAgainst":18,"goalDifference":"-13","points":0}
-    ]
-  }
-};
-
-function renderTabelle(data) {
-  const tbody = $("#tabelle");
-  tbody.empty();
-  data.data.rows.forEach(team => {
-    const innsbruck = team.teamLongname.includes("Innsbruck") ? "innsbruck-zeile" : "";
-    tbody.append(`
-      <tr class="${innsbruck}">
-        <td data-label="Rang">${team.tableRank}</td>
-        <td data-label="Team">${team.teamLongname}</td>
-        <td data-label="Spiele">${team.gamesPlayed}</td>
-        <td data-label="Siege">${team.gamesWon}</td>
-        <td data-label="Unentsch.">${team.gamesTied}</td>
-        <td data-label="Niederl.">${team.gamesLost}</td>
-        <td data-label="Tore">${team.goalsFor}:${team.goalsAgainst}</td>
-        <td data-label="Tordiff.">${team.goalDifference}</td>
-        <td data-label="Punkte" class="punkte">${team.points}</td>
-      </tr>
-    `);
-  });
-}
-
-renderTabelle(backupData);
-</script>
 
 </body>
 </html>
