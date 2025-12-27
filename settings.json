@@ -13,8 +13,9 @@
     "11": { "enabled": false,  "duration": 18, "name": "Video: Spieltag" },
     "12": { "enabled": false,  "duration": 10, "name": "Gameday Grafik Spielvorschau" }
   },
-  "reload": 12
+  "reload": 1
 }
+
 
 
 
