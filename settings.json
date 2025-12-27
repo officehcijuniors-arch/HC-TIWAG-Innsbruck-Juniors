@@ -4,7 +4,7 @@
     "2":  { "enabled": true,  "duration": 20, "name": "Kalender" },
     "3":  { "enabled": true,  "duration": 15, "name": "Organigramm" },
     "4":  { "enabled": true,  "duration": 23, "name": "Video: Fotoshop" },
-    "5":  { "enabled": true,  "duration": 20, "name": "Video: Fanshop" },
+    "5":  { "enabled": false,  "duration": 20, "name": "Video: Fanshop" },
     "6":  { "enabled": false, "duration": 20, "name": "Video: HC INW SP Präsentation" },
     "7":  { "enabled": true,  "duration": 55, "name": "Spielerfotos" },
     "8":  { "enabled": false, "duration": 30, "name": "Tabellen-Rotation (U13–U20)" },
@@ -15,6 +15,7 @@
   },
   "reload": 120
 }
+
 
 
 
