@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="utf-8" />
-  <title>HC TIWAG Innsbruck Juniors - Infosäule (Bereinigt)</title>
+  <title>HC TIWAG Innsbruck Juniors – Infosäule</title>
 
   <style>
     @font-face {
@@ -61,80 +61,73 @@
       object-fit: contain;
     }
 
-    .signature {
+    .frame-page {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #003789 50%, #d42323 50%);
+      background-size: 200% 200%;
+      animation: gradientShift 120s ease-in-out infinite;
+    }
+
+    @keyframes gradientShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .frame {
+      width: 90vw;
+      height: 90vh;
+      border-radius: 20px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 20px 45px rgba(0,0,0,0.55);
+    }
+
+    footer {
       position: fixed;
       bottom: 8px;
       right: 12px;
       font-size: 0.9em;
       color: rgba(255,255,255,0.4);
       pointer-events: none;
-      z-index: 9999;
-    }
-
-    .frame-page {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(135deg, #003789 50%, #d42323 50%);
-        background-size: 200% 200%;
-        animation: gradientShift 120s ease-in-out infinite;
-    }
-
-    @keyframes gradientShift {
-        0%   { background-position: 0% 50%; }
-        50%  { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
-
-    .frame-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: 100%;
-    }
-
-    .frame {
-        border-radius: 20px;
-        overflow: hidden;
-        background: rgba(255,255,255,0.15);
-        backdrop-filter: blur(12px);
-        box-shadow: 0 20px 45px rgba(0,0,0,0.55);
-        width: 90vw;
-        height: 90vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        gap: 10px;
     }
   </style>
 </head>
+
 <body>
 
   <section class="page page-1 active">
-    <img src="SocialMedia.png" alt="Social Media Übersicht" style="object-fit:contain;">
+    <img src="SocialMedia.png" alt="Social Media" style="object-fit:contain;">
   </section>
 
-  <section class="page page-2"><iframe data-src="KALENDER.html" title="Kalender"></iframe></section>
-  <section class="page page-3"><iframe data-src="ORG.html" title="Organigramm"></iframe></section>
+  <section class="page page-2"><iframe data-src="KALENDER.html"></iframe></section>
+  <section class="page page-3"><iframe data-src="ORG.html"></iframe></section>
 
   <section class="page video-page page-4">
-    <video autoplay loop muted playsinline preload="auto"><source src="Fotoshop.mp4" type="video/mp4"></video>
-  </section>
-  <section class="page video-page page-5">
-    <video autoplay loop muted playsinline preload="auto"><source src="Fanshop.mp4" type="video/mp4"></video>
-  </section>
-  <section class="page video-page page-6">
-    <video autoplay loop muted playsinline preload="auto"><source src="HCINWSPPräs.mp4" type="video/mp4"></video>
+    <video autoplay loop muted playsinline preload="auto">
+      <source src="Fotoshop.mp4" type="video/mp4">
+    </video>
   </section>
 
-  <section class="page page-7"><iframe data-src="spielerfotos.html" title="Spielerfotos"></iframe></section>
+  <section class="page video-page page-5">
+    <video autoplay loop muted playsinline preload="auto">
+      <source src="Fanshop.mp4" type="video/mp4">
+    </video>
+  </section>
+
+  <section class="page video-page page-6">
+    <video autoplay loop muted playsinline preload="auto">
+      <source src="HCINWSPPräs.mp4" type="video/mp4">
+    </video>
+  </section>
+
+  <section class="page page-7"><iframe data-src="spielerfotos.html"></iframe></section>
 
   <section class="page frame-page page-8">
-    <div class="frame-container">
-      <div class="frame" id="table-frame"></div>
-    </div>
+    <div class="frame" id="table-frame"></div>
   </section>
 
   <section class="page video-page page-9">
@@ -144,7 +137,7 @@
   </section>
 
   <section class="page page-10">
-    <img src="Gameday.jpeg" alt="Gameday" style="object-fit:contain;">
+    <img src="Gameday.jpeg" style="object-fit:contain;">
   </section>
 
   <section class="page video-page page-11">
@@ -153,130 +146,94 @@
     </video>
   </section>
 
-  <!-- NEUE SEITE 12 (PNG-Datei) -->
   <section class="page page-12">
-    <img src="GamedayVorschau.png" alt="Gameday Vorschau" style="object-fit:contain;">
+    <img src="GamedayVorschau.png" style="object-fit:contain;">
   </section>
 
-  <footer class="signature">MS</footer>
+  <footer>MS</footer>
 
   <script>
-    window.addEventListener('DOMContentLoaded', async () => {
-      const pages = document.querySelectorAll('.page');
+    window.addEventListener("DOMContentLoaded", async () => {
+
+      const pages = document.querySelectorAll(".page");
       let current = 0;
       let settings;
 
+      const SETTINGS_URL =
+        "https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/settings.json";
+
       try {
-        const res = await fetch('https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/settings.json', {cache:"no-store"});
+        const res = await fetch(SETTINGS_URL, { cache: "no-store" });
+        if (!res.ok) throw new Error("Settings not reachable");
         settings = await res.json();
-      } catch(err) {
+      } catch (e) {
+        console.warn("Fallback settings active", e);
         settings = {
-          pages: {
-            1: { enabled: true, duration: 10 },
-            2: { enabled: true, duration: 20 },
-            3: { enabled: true, duration: 15 },
-            4: { enabled: true, duration: 23 },
-            5: { enabled: true, duration: 20 },
-            6: { enabled: true, duration: 10 },
-            7: { enabled: true, duration: 55 },
-            8: { enabled: true, duration: 30 },
-            9: { enabled: true, duration: 25 },
-            10: { enabled: true, duration: 15 },
-            11: { enabled: true, duration: 18 },
-            12: { enabled: true, duration: 10 }
-          },
+          pages: Object.fromEntries(
+            [...Array(pages.length)].map((_, i) => [
+              i + 1,
+              { enabled: true, duration: 15 }
+            ])
+          ),
           reload: 120
         };
       }
 
-      function getActivePages() {
-        const arr = [];
-        for (let i=1; i<=pages.length; i++)
-          if (settings.pages[i] && settings.pages[i].enabled) arr.push(i-1);
-        return arr;
+      function activePages() {
+        return [...pages.keys()].filter(i => settings.pages[i + 1]?.enabled);
       }
 
-      function getDurations() {
-        const d = {};
-        for (let i=1; i<=pages.length; i++)
-          if (settings.pages[i]) d[i-1] = settings.pages[i].duration * 1000;
-        return d;
-      }
-
-      function loadIframe(page) {
-        const iframe = page.querySelector('iframe');
-        if (!iframe) return;
-        if (!iframe.src && iframe.dataset.src) iframe.src = iframe.dataset.src;
-      }
-
-      function loadVideo(page) {
-        const video = page.querySelector('video');
-        if (!video) return;
-        video.load();
-        video.currentTime = 0;
-        video.play().catch(()=>{});
-      }
-
-      function showPage(index) {
-        pages.forEach((p,i)=>p.classList.toggle('active',i===index));
+      function show(index) {
+        pages.forEach((p, i) => p.classList.toggle("active", i === index));
         const page = pages[index];
-        if (page.classList.contains('video-page')) loadVideo(page);
-        else if (page.querySelector('iframe')) loadIframe(page);
+        const iframe = page.querySelector("iframe");
+        const video = page.querySelector("video");
+        if (iframe && !iframe.src) iframe.src = iframe.dataset.src;
+        if (video) {
+          video.currentTime = 0;
+          video.play().catch(() => {});
+        }
       }
 
-      function rotateToNext() {
-        const active = getActivePages();
-        const durations = getDurations();
-        if (active.length === 0) return;
-        let pos = active.indexOf(current);
-        if (pos === -1) pos = 0;
-        current = active[(pos+1) % active.length];
-        showPage(current);
-        setTimeout(rotateToNext, durations[current] || 8000);
+      function rotate() {
+        const active = activePages();
+        if (!active.length) return;
+        const pos = active.indexOf(current);
+        current = active[(pos + 1) % active.length];
+        show(current);
+        setTimeout(rotate, (settings.pages[current + 1].duration || 10) * 1000);
       }
 
-      current = 0;
-      showPage(current);
-      rotateToNext();
+      show(current);
+      rotate();
 
-      if (settings.reload && settings.reload > 0)
-        setInterval(()=>location.reload(), settings.reload * 60 * 1000);
+      if (settings.reload > 0) {
+        setInterval(
+          () => location.reload(),
+          settings.reload * 60 * 1000
+        );
+      }
 
-      const tableSequence = [
-        ["Tabelle_U13.html"],
-        ["Tabelle_U15.html"],
-        ["Tabelle_U17.html"],
-        ["Tabelle_U20.html"]
+      const tables = [
+        "Tabelle_U13.html",
+        "Tabelle_U15.html",
+        "Tabelle_U17.html",
+        "Tabelle_U20.html"
       ];
 
-      let index = 0;
       const frame = document.getElementById("table-frame");
+      let t = 0;
 
       if (frame) {
-        function createIframe(src) {
-          const iframe = document.createElement("iframe");
-          iframe.src = src;
-          iframe.title = src;
-          iframe.style.border = "0";
-          iframe.width = "100%";
-          iframe.height = "100%";
-          return iframe;
-        }
-
-        function rotateTables() {
-          const currentTables = tableSequence[index];
+        setInterval(() => {
           frame.innerHTML = "";
-          const iframe = createIframe(currentTables[0]);
-          frame.appendChild(iframe);
-          index = (index + 1) % tableSequence.length;
-        }
-
-        rotateTables();
-        setInterval(rotateTables, 10000);
+          const i = document.createElement("iframe");
+          i.src = tables[t];
+          frame.appendChild(i);
+          t = (t + 1) % tables.length;
+        }, 10000);
       }
-
     });
   </script>
 </body>
 </html>
-
