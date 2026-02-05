@@ -12,10 +12,11 @@
     "10": { "enabled": false,  "duration": 20, "name": "Gameday Grafik Fanshop" },
     "11": { "enabled": false, "duration": 18, "name": "Video: Spieltag" },
     "12": { "enabled": false, "duration": 10, "name": "Gameday Grafik Spielvorschau" },
-    "13": { "enabled": true,  "duration": 30, "name": "Tournify" }
+    "13": { "enabled": true,  "duration": 40, "name": "Tournify" }
   },
   "reload": 120
 }
+
 
 
 
