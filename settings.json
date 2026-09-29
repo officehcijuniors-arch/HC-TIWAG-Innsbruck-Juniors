@@ -26,7 +26,7 @@
       "name": "Video: Fanshop"
     },
     "6": {
-      "enabled": true,
+      "enabled": false,
       "duration": 20,
       "name": "Video: Organigramm"
     },
