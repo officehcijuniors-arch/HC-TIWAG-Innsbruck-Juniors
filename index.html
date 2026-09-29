@@ -155,6 +155,10 @@
     <iframe data-src="Tournify.html"></iframe>
   </section>
 
+  <section class="page page-14">
+    <iframe data-src="HCI-Organigramm-2026-27-animiert.html" data-restart="true" title="Organigramm 2026/27"></iframe>
+  </section>
+
   <footer>MS</footer>
 
   <script>
@@ -190,10 +194,17 @@
 
       function show(index) {
         pages.forEach((p, i) => p.classList.toggle("active", i === index));
+        // Entlade die Animation beim Verlassen, damit sie beim nächsten Besuch neu beginnt.
+        pages.forEach((p, i) => {
+          if (i !== index) {
+            const restartFrame = p.querySelector('iframe[data-restart="true"]');
+            if (restartFrame) restartFrame.removeAttribute("src");
+          }
+        });
         const page = pages[index];
         const iframe = page.querySelector("iframe");
         const video = page.querySelector("video");
-        if (iframe && !iframe.src) iframe.src = iframe.dataset.src;
+        if (iframe && !iframe.hasAttribute("src")) iframe.src = iframe.dataset.src;
         if (video) {
           video.currentTime = 0;
           video.play().catch(() => {});
