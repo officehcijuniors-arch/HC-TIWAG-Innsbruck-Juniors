@@ -4,129 +4,39 @@
   <meta charset="utf-8" />
   <title>HC TIWAG Innsbruck Juniors – Infosäule</title>
 
-  <style>
-    @font-face {
-      font-family: "Areno Serif";
-      src: url("fonts/areno-serif-webfont.woff2") format("woff2"),
-           url("fonts/areno-serif-webfont.woff") format("woff"),
-           url("fonts/Areno-Serif.otf") format("opentype");
-      font-weight: normal;
-      font-style: normal;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: "Areno Serif";
-      src: url("fonts/areno-serif-webfont.woff2") format("woff2"),
-           url("fonts/areno-serif-webfont.woff") format("woff"),
-           url("fonts/Areno-Serif.otf") format("opentype");
-      font-weight: 800;
-      font-style: normal;
-      font-display: swap;
-    }
-
-    html, body {
-      margin: 0;
-      height: 100%;
-      background: #000;
-      color: #fff;
-      font-family: "Areno Serif", serif;
-      overflow: hidden;
-    }
-
-    .page {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.8s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .page.active {
-      opacity: 1;
-      pointer-events: all;
-      z-index: 1;
-    }
-
-    iframe, video, img {
-      width: 100%;
-      height: 100%;
-      border: 0;
-      border-radius: 10px;
-      display: block;
-    }
-
-    .video-page video {
-      object-fit: contain;
-    }
-
-    .frame-page {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #003789 50%, #d42323 50%);
-      background-size: 200% 200%;
-      animation: gradientShift 120s ease-in-out infinite;
-    }
-
-    @keyframes gradientShift {
-      0%   { background-position: 0% 50%; }
-      50%  { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    .frame {
-      width: 90vw;
-      height: 90vh;
-      border-radius: 20px;
-      overflow: hidden;
-      background: rgba(255,255,255,0.15);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 20px 45px rgba(0,0,0,0.55);
-    }
-
-    footer {
-      position: fixed;
-      bottom: 8px;
-      right: 12px;
-      font-size: 0.9em;
-      color: rgba(255,255,255,0.4);
-      pointer-events: none;
-    }
-  </style>
+  <link rel="stylesheet" href="assets/css/index.css">
 </head>
 
 <body>
 
   <section class="page page-1 active">
-    <img src="SocialMedia.png" alt="Social Media" style="object-fit:contain;">
+    <img src="assets/images/SocialMedia.png" alt="Social Media" style="object-fit:contain;">
   </section>
 
-  <section class="page page-2"><iframe data-src="KALENDER.html"></iframe></section>
-  <section class="page page-3"><iframe data-src="ORG.html"></iframe></section>
+  <section class="page page-2"><iframe data-src="pages/KALENDER.html"></iframe></section>
+  <section class="page page-3"><iframe data-src="pages/ORG.html"></iframe></section>
 
   <section class="page video-page page-4">
     <video autoplay loop muted playsinline preload="auto">
-      <source src="Fotoshop.mp4" type="video/mp4">
+      <source src="assets/videos/Fotoshop.mp4" type="video/mp4">
     </video>
   </section>
 
   <section class="page video-page page-5">
     <video autoplay loop muted playsinline preload="auto">
-      <source src="Fanshop.mp4" type="video/mp4">
+      <source src="assets/videos/Fanshop.mp4" type="video/mp4">
     </video>
   </section>
 
   <section class="page video-page page-6">
     <video autoplay loop muted playsinline preload="auto">
-      <source src="HCI Organisationsstruktur 2026-27.mp4" type="video/mp4">
+      <source src="assets/videos/HCI Organisationsstruktur 2026-27.mp4" type="video/mp4">
     </video>
   </section>
 
   <section class="page page-7">
   <iframe
-    data-src="spielerfotos.html"
+    data-src="pages/spielerfotos.html"
     data-restart="true"
     title="Spielerfotos">
   </iframe>
@@ -138,124 +48,35 @@
 
   <section class="page video-page page-9">
     <video autoplay loop muted playsinline preload="auto">
-      <source src="Laufschule.mp4" type="video/mp4">
+      <source src="assets/videos/Laufschule.mp4" type="video/mp4">
     </video>
   </section>
 
   <section class="page page-10">
-    <img src="Gameday.jpeg" style="object-fit:contain;">
+    <img src="assets/images/Gameday.jpeg" style="object-fit:contain;">
   </section>
 
   <section class="page video-page page-11">
     <video autoplay loop muted playsinline preload="auto">
-      <source src="Spieltag Video.mp4" type="video/mp4">
+      <source src="assets/videos/Spieltag Video.mp4" type="video/mp4">
     </video>
   </section>
 
   <section class="page page-12">
-    <img src="GamedayVorschau.png" style="object-fit:contain;">
+    <img src="assets/images/GamedayVorschau.png" style="object-fit:contain;">
   </section>
 
   <!-- Neue Seite Tournify -->
   <section class="page page-13">
-    <iframe data-src="Tournify.html"></iframe>
+    <iframe data-src="pages/Tournify.html"></iframe>
   </section>
 
   <section class="page page-14">
-    <iframe data-src="HCI-Organigramm-2026-27-animiert.html" data-restart="true" title="Organigramm 2026/27"></iframe>
+    <iframe data-src="pages/HCI-Organigramm-2026-27-animiert.html" data-restart="true" title="Organigramm 2026/27"></iframe>
   </section>
 
   <footer>MS</footer>
 
-  <script>
-    window.addEventListener("DOMContentLoaded", async () => {
-
-      const pages = document.querySelectorAll(".page");
-      let current = 0;
-      let settings;
-
-      const SETTINGS_URL =
-        "https://raw.githubusercontent.com/officehcijuniors-arch/HC-TIWAG-Innsbruck-Juniors/main/settings.json";
-
-      try {
-        const res = await fetch(SETTINGS_URL, { cache: "no-store" });
-        if (!res.ok) throw new Error("Settings not reachable");
-        settings = await res.json();
-      } catch (e) {
-        console.warn("Fallback settings active", e);
-        settings = {
-          pages: Object.fromEntries(
-            [...Array(pages.length)].map((_, i) => [
-              i + 1,
-              { enabled: true, duration: 15 }
-            ])
-          ),
-          reload: 120
-        };
-      }
-
-      function activePages() {
-        return [...pages.keys()].filter(i => settings.pages[i + 1]?.enabled);
-      }
-
-      function show(index) {
-        pages.forEach((p, i) => p.classList.toggle("active", i === index));
-        // Entlade die Animation beim Verlassen, damit sie beim nächsten Besuch neu beginnt.
-        pages.forEach((p, i) => {
-          if (i !== index) {
-            const restartFrame = p.querySelector('iframe[data-restart="true"]');
-            if (restartFrame) restartFrame.removeAttribute("src");
-          }
-        });
-        const page = pages[index];
-        const iframe = page.querySelector("iframe");
-        const video = page.querySelector("video");
-        if (iframe && !iframe.hasAttribute("src")) iframe.src = iframe.dataset.src;
-        if (video) {
-          video.currentTime = 0;
-          video.play().catch(() => {});
-        }
-      }
-
-      function rotate() {
-        const active = activePages();
-        if (!active.length) return;
-        const pos = active.indexOf(current);
-        current = active[(pos + 1) % active.length];
-        show(current);
-        setTimeout(rotate, (settings.pages[current + 1].duration || 10) * 1000);
-      }
-
-      show(current);
-      rotate();
-
-      if (settings.reload > 0) {
-        setInterval(
-          () => location.reload(),
-          settings.reload * 60 * 1000
-        );
-      }
-
-      const tables = [
-        "Tabelle_U13.html",
-        "Tabelle_U15.html",
-        "Tabelle_U17.html",
-        "Tabelle_U20.html"
-      ];
-
-      const frame = document.getElementById("table-frame");
-      let t = 0;
-
-      if (frame) {
-        setInterval(() => {
-          frame.innerHTML = "";
-          const i = document.createElement("iframe");
-          i.src = tables[t];
-          frame.appendChild(i);
-          t = (t + 1) % tables.length;
-        }, 10000);
-      }
-    });
-  </script>
+  <script src="assets/js/index.js"></script>
 </body>
 </html>
