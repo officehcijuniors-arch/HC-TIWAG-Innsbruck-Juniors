@@ -1,0 +1,73 @@
+/* ===================================================
+     1. Grundlayout der Seite
+     =================================================== */
+  body { 
+      margin: 0;
+      font-family: "Areno Serif", serif; /* gleiche Schrift wie auf der Startseite */
+      overflow: hidden; /* verhindert Scrollbalken */
+      
+      /* Hintergrund mit Farbverlauf (Blau/Rot) */
+      background: linear-gradient(135deg, #003789 50%, #d42323 50%);
+      background-size: 200% 200%; /* Vergrößerte Fläche für Animation */
+      animation: gradientShift 180s ease infinite; /* langsame Farbverschiebung */
+  }
+
+  /* ===================================================
+     2. Animation des Hintergrunds
+     =================================================== */
+  @keyframes gradientShift { 
+      0%,100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+  }
+
+  /* ===================================================
+     3. Hauptbereich für den Kalender
+     =================================================== */
+  .calendar-page { 
+      position: relative; /* Eltern-Element für absolute Positionierung des Hais */
+      width: 100%;
+      height: 100vh; /* volle Höhe des Viewports */
+      display: flex;
+      justify-content: center; /* horizontal zentriert */
+      align-items: flex-start; /* oben ausgerichtet */
+      padding-top: 15px; /* kleiner Abstand nach oben */
+  }
+
+  /* ===================================================
+     4. Google-Kalender (iframe)
+     =================================================== */
+  .calendar-page iframe { 
+      z-index: 1; /* unter dem Hai-Overlay */
+      border-radius: 15px; /* abgerundete Ecken */
+      box-shadow: 0 15px 30px rgba(0,0,0,0.6); /* leichter Schatten für Tiefe */
+      border: 2px solid rgba(255,255,255,0.2); /* dezenter Rand */
+      width: 97%; /* fast volle Breite */
+      height: calc(100vh - 30px); /* volle Höhe minus Abstand oben */
+      transform: scale(0.97); /* leicht verkleinert für harmonische Wirkung */
+  }
+
+  /* ===================================================
+     5. Hai-Grafik (Overlay)
+     =================================================== */
+  .hai-image { 
+      position: absolute; /* frei über dem Kalender platzierbar */
+      bottom: 5%;         /* Abstand vom unteren Rand */
+      left: 50%;          /* horizontal zentriert */
+      transform: translateX(-50%); /* exakte Zentrierung */
+      width: 120px;
+      height: 120px;
+      background: url('../images/HAI.webp') no-repeat center;
+      background-size: contain; /* passt sich an, ohne Verzerrung */
+      pointer-events: none; /* Klicks gehen durch, Kalender bleibt interaktiv */
+      z-index: 2; /* über dem Kalender */
+      animation: float 4s ease-in-out infinite; /* Schwebe-Animation */
+      opacity: 0.25; /* leicht transparent */
+  }
+
+  /* ===================================================
+     6. Animation: Hai schwebt leicht auf/ab
+     =================================================== */
+  @keyframes float { 
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-10px); }
+  }
