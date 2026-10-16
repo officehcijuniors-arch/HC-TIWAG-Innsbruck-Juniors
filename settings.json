@@ -56,7 +56,7 @@
       "name": "Video: Spieltag"
     },
     "12": {
-      "enabled": false,
+      "enabled": true,
       "duration": 10,
       "name": "Gameday Grafik Spielvorschau"
     },
