@@ -21,8 +21,8 @@
       "name": "Video: Fotoshop"
     },
     "5": {
-      "enabled": false,
-      "duration": 20,
+      "enabled": true,
+      "duration": 10,
       "name": "Video: Fanshop"
     },
     "6": {
