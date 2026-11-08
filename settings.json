@@ -46,7 +46,7 @@
       "name": "Video: Laufschule"
     },
     "10": {
-      "enabled": true,
+      "enabled": false,
       "duration": 10,
       "name": "Gameday Grafik Fanshop"
     },
